@@ -8,6 +8,7 @@ public class Boid : MonoBehaviour {
     BoidSettings settings;
     bool isKoa = false;
     bool koaTargetWeight = false;
+    bool tranquilelaviebienouquoi = false;
     // State
     [HideInInspector]
     public Vector3 position;
