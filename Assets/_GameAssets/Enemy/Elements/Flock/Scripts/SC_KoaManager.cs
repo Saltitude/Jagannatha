@@ -66,7 +66,7 @@ public class SC_KoaManager : MonoBehaviour
         //Ajout du premier guide a la liste
         _guideList.Add(newGuide);
 
-        //Set le guide du koa au premier guide
+        //Set le guide du koa au premier guide 
         _curKoaGuide = newGuide;
 
         //Initialisation de tout les boids

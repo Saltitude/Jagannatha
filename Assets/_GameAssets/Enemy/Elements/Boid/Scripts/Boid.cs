@@ -2,13 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-//HEY EN FAIT BAH JE ME SUIS PAS FAIT DELETE C KOOL
 public class Boid : MonoBehaviour {
 
     BoidSettings settings;
     bool isKoa = false;
     bool koaTargetWeight = false;
-    bool tranquilelaviebienouquoi = false;
     // State
     [HideInInspector]
     public Vector3 position;
