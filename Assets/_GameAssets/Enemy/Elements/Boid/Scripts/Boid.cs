@@ -7,6 +7,7 @@ public class Boid : MonoBehaviour {
     BoidSettings settings;
     bool isKoa = false;
     bool koaTargetWeight = false;
+    public bool isActive = false;
     // State
     [HideInInspector]
     public Vector3 position;
@@ -55,6 +56,7 @@ public class Boid : MonoBehaviour {
         float startSpeed = (settings.minSpeed + settings.maxSpeed) / 2; //Vitesse d'initialisation
         velocity = transform.forward * startSpeed; //Stockage de la vélocité selon la vitesse de départ
 
+        isActive = true;
     }
     /// <summary>
     /// Changer la couleur de chaque boid |
@@ -70,59 +72,65 @@ public class Boid : MonoBehaviour {
     /// Appelé à chaque frame dans l'update du BoidManager
     /// </summary>
     public void UpdateBoid () {
-        Vector3 acceleration = Vector3.zero; //RaZ de l'accélération
 
-        if (target != null) //Absence de target
+        if(isActive)
         {
-            float curTargetWeight = settings.targetWeight;
-            if (isKoa && koaTargetWeight)
-            { 
-                curTargetWeight *= 3;
+            Vector3 acceleration = Vector3.zero; //RaZ de l'accélération
+
+            if (target != null) //Absence de target
+            {
+                float curTargetWeight = settings.targetWeight;
+                if (isKoa && koaTargetWeight)
+                {
+                    curTargetWeight *= 3;
+
+                }
+                Vector3 offsetToTarget = (target.position - position); //Calcul de la différence entre boid et Target
+                acceleration = SteerTowards(offsetToTarget) * curTargetWeight; //Acceleration = Résultat de SteerToward * Attraction de la Target 
 
             }
-            Vector3 offsetToTarget = (target.position - position); //Calcul de la différence entre boid et Target
-            acceleration = SteerTowards (offsetToTarget) * curTargetWeight; //Acceleration = Résultat de SteerToward * Attraction de la Target 
+
+            if (numPerceivedFlockmates != 0) //Si des mates sont dans la zone de détection
+            {
+                centreOfFlockmates /= numPerceivedFlockmates; //Position des autres flock / nombre de flock autour
+                Vector3 offsetToFlockmatesCentre = (centreOfFlockmates - position); //Offset selon position mate - position actuel
+
+                var alignmentForce = SteerTowards(avgFlockHeading) * settings.alignWeight; //Vector3 Alignement
+                var cohesionForce = SteerTowards(offsetToFlockmatesCentre) * settings.cohesionWeight; //Vector3 Cohesion
+                var seperationForce = SteerTowards(avgAvoidanceHeading) * settings.seperateWeight; //Vector3 separation
+
+                //Application des forces (Vector3)
+                acceleration += alignmentForce;
+                acceleration += cohesionForce;
+                acceleration += seperationForce;
+            }
+
+            //Detection de collision (return bool)
+            if (IsHeadingForCollision())
+            {
+                //Nouvelle direction pour éviter obstacle
+                Vector3 collisionAvoidDir = ObstacleRays();
+                //Nouveau déplacement selon la nouvelle direction
+                Vector3 collisionAvoidForce = SteerTowards(collisionAvoidDir) * settings.avoidCollisionWeight;
+                //Ajout de l'évitement dans le déplacement
+                acceleration += collisionAvoidForce;
+            }
+
+            velocity += acceleration * Time.deltaTime; //MaJ de la vélocité du boid
+            float speed = velocity.magnitude; //Récupère magnitude de la vélocité (longueur du vecteur)
+            Vector3 dir = velocity / speed; //Nouvelle direction car Velocité / magnitude : direction
+            speed = Mathf.Clamp(speed, settings.minSpeed, settings.maxSpeed); //Vélocité clampée entre les bornes (sécurité)
+            velocity = dir * speed; //MaJ de la vélocité
+
+            if (this != null)
+            {
+                cachedTransform.position += velocity * Time.deltaTime; //Position tampon MaJ
+                cachedTransform.forward = dir; //Orientation du Tampon selon direction
+                position = cachedTransform.position; //Position du boid MaJ selon tampon
+                forward = dir; //Orientation du boid MaJ selon direction Tampon
+            }
+        }
       
-        }
-
-        if (numPerceivedFlockmates != 0) //Si des mates sont dans la zone de détection
-        {
-            centreOfFlockmates /= numPerceivedFlockmates; //Position des autres flock / nombre de flock autour
-            Vector3 offsetToFlockmatesCentre = (centreOfFlockmates - position); //Offset selon position mate - position actuel
-
-            var alignmentForce = SteerTowards (avgFlockHeading) * settings.alignWeight; //Vector3 Alignement
-            var cohesionForce = SteerTowards (offsetToFlockmatesCentre) * settings.cohesionWeight; //Vector3 Cohesion
-            var seperationForce = SteerTowards (avgAvoidanceHeading) * settings.seperateWeight; //Vector3 separation
-
-            //Application des forces (Vector3)
-            acceleration += alignmentForce;
-            acceleration += cohesionForce;
-            acceleration += seperationForce;
-        }
-
-        //Detection de collision (return bool)
-        if (IsHeadingForCollision ()) {
-            //Nouvelle direction pour éviter obstacle
-            Vector3 collisionAvoidDir = ObstacleRays (); 
-            //Nouveau déplacement selon la nouvelle direction
-            Vector3 collisionAvoidForce = SteerTowards (collisionAvoidDir) * settings.avoidCollisionWeight;
-            //Ajout de l'évitement dans le déplacement
-            acceleration += collisionAvoidForce;
-        }
-
-        velocity += acceleration * Time.deltaTime; //MaJ de la vélocité du boid
-        float speed = velocity.magnitude; //Récupère magnitude de la vélocité (longueur du vecteur)
-        Vector3 dir = velocity / speed; //Nouvelle direction car Velocité / magnitude : direction
-        speed = Mathf.Clamp (speed, settings.minSpeed, settings.maxSpeed); //Vélocité clampée entre les bornes (sécurité)
-        velocity = dir * speed; //MaJ de la vélocité
-
-        if(this !=null)
-        {
-            cachedTransform.position += velocity * Time.deltaTime; //Position tampon MaJ
-            cachedTransform.forward = dir; //Orientation du Tampon selon direction
-            position = cachedTransform.position; //Position du boid MaJ selon tampon
-            forward = dir; //Orientation du boid MaJ selon direction Tampon
-        }
     }
 
     /// <summary>
@@ -175,7 +183,7 @@ public class Boid : MonoBehaviour {
     
     public void DestroyBoid()
     {
-        Destroy(this);
+        isActive = false;
     }
   
 

@@ -10,6 +10,12 @@ TagManager:
   - Mng_SyncVar
   - Mng_CheckList
   - MechBullets
+  - PlayerBullet
+  - Ennemi
+  - Web
+  - CircleSpline
+  - LineSpline
+  - Mng_Enemy
   layers:
   - Default
   - TransparentFX

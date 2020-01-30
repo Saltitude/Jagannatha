@@ -83,7 +83,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   travelMode: 1
   lookAt: 1
-  speed: 0
+  speed: 10
   rotationLerpModifier: 99
   m_normalizedT: 0
   onPathCompleted:

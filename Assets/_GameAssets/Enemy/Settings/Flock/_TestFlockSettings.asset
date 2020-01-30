@@ -16,6 +16,6 @@ MonoBehaviour:
   attackPlayer: 1
   pathPreference: 0
   timeBeforeAttack: 15
-  boidSpawn: 100
+  boidSpawn: 50
   maxBoid: 150
   regenerationRate: 2

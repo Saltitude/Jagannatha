@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -17,46 +18,31 @@ public class SC_BoidCompute : MonoBehaviour
 
     [SerializeField]
     ComputeShader compute;
-  
-    List<Boid> _boidsList; //Tableau contenant les boids
-    List<BoidSettings> _settingList; //Tableau contenant les boids
+
+    Boid[] _boidsTab; //Tableau contenant les boids
+
+    [SerializeField]
+    BoidSettings basiqueSettings; //Tableau contenant les boids
     Coroutine m_boidCor = null;
-    
 
-    void Start()
+
+
+    public void Initialize(Boid[] boidPool)
     {
-        _boidsList = new List<Boid>();
-        _settingList = new List<BoidSettings>();
+        _boidsTab = boidPool;
+
+
+        boidData = new BoidData[_boidsTab.Length];
+        boidBuffer = new ComputeBuffer(_boidsTab.Length, BoidData.Size);
+        m_boidCor = StartCoroutine(corBoid());
     }
 
-    public void AddNewBoids(List<Boid> newBoids, BoidSettings newSettings)
-    {
-        foreach(Boid b in newBoids)
-        {
-            _boidsList.Add(b);
-            _settingList.Add(newSettings);
-        }
-        
 
-        //Création du buffer | paramètre 1 count : nombre d'éléments | paramètre 2 stride (type de data en bit) : typage du data de BoidData
-        boidBuffer = new ComputeBuffer(_boidsList.Count, BoidData.Size);
-        m_boidCor = StartCoroutine(BoidTest());
-    }
 
-    public void ChangeSettings(List<Boid> boids, BoidSettings newSettings)
-    {
-
-    }
-
-    public void RemoveBoid(Boid boid)
-    {
-
-    }
-
-    IEnumerator BoidTest()
+    IEnumerator corBoid()
     {
         //Sécurité
-        if (_boidsList != null)
+        if (_boidsTab != null)
         {
 
             while (true)
@@ -65,16 +51,20 @@ public class SC_BoidCompute : MonoBehaviour
                 //Ajoute le Koa a la nuée avant les calcules de Flock 
                 //_boidsList.Add(_koa);
 
-
-                int numBoids = _boidsList.Count; //Conversion en int du nombres selon le nombre de boid
+                Array.Clear(boidData,0,boidData.Length);
                 //BURST ?
-                boidData = new BoidData[numBoids]; //Création d'un variable (Type BoidData) contenant un tableau avec le nombre d'éléments actuels
+                //Création d'un variable (Type BoidData) contenant un tableau avec le nombre d'éléments actuels
 
 
-                for (int i = 0; i < _boidsList.Count; i++)
+                for (int i = 0; i < _boidsTab.Length; i++)
                 {
-                    boidData[i].position = _boidsList[i].position; //Chaque élément déjà positionné est stocké
-                    boidData[i].direction = _boidsList[i].forward; //Stockage direction
+                    boidData[i].active = 0;
+                    if (_boidsTab[i].isActive)
+                    {
+                        boidData[i].active = 1;
+                        boidData[i].position = _boidsTab[i].position; //Chaque élément déjà positionné est stocké
+                        boidData[i].direction = _boidsTab[i].forward; //Stockage direction
+                    } 
                 }
 
                 boidBuffer.SetData(boidData);//Dans boidBuffer (type ComputeBuffer), stocakge data du tableau actuel
@@ -88,12 +78,12 @@ public class SC_BoidCompute : MonoBehaviour
                 compute.SetBuffer(0, "boids", boidBuffer);
 
                 //Configuration des variables du ComputeShader
-                compute.SetInt("numBoids", _boidsList.Count);
-                compute.SetFloat("viewRadius", _settingList[0].perceptionRadius);
-                compute.SetFloat("avoidRadius", _settingList[0].avoidanceRadius);
+                compute.SetInt("numBoids", _boidsTab.Length);
+                compute.SetFloat("viewRadius", basiqueSettings.perceptionRadius);
+                compute.SetFloat("avoidRadius", basiqueSettings.avoidanceRadius);
 
 
-                int threadGroups = Mathf.CeilToInt(numBoids / (float)threadGroupSize); //Nombre de groupe = nombre éléments / nombre tkt
+                int threadGroups = Mathf.CeilToInt(_boidsTab.Length / (float)threadGroupSize); //Nombre de groupe = nombre éléments / nombre tkt
                 compute.Dispatch(0, threadGroups, 1, 1); //Execute le Shader
 
                 yield return 0;
@@ -103,14 +93,18 @@ public class SC_BoidCompute : MonoBehaviour
                 boidBuffer.GetData(boidData); //Récupère le résultat du Shader
 
                 //Cf script Boid
-                for (int i = 0; i < _boidsList.Count; i++)
+                for (int i = 0; i < _boidsTab.Length; i++)
                 {
-                    _boidsList[i].avgFlockHeading = boidData[i].flockHeading; //Stockage pour chaque boid : moyenne devant lui
-                    _boidsList[i].centreOfFlockmates = boidData[i].flockCentre; //Stockage pour chaque boid : moyenne à côté
-                    _boidsList[i].avgAvoidanceHeading = boidData[i].avoidanceHeading; //Stockage pour chaque boid : moyenne des éléments à éviter
-                    _boidsList[i].numPerceivedFlockmates = boidData[i].numFlockmates; //Stockage pour chaque boid : nombre de mate autour
+                    if(_boidsTab[i].isActive)
+                    {
+                        _boidsTab[i].avgFlockHeading = boidData[i].flockHeading; //Stockage pour chaque boid : moyenne devant lui
+                        _boidsTab[i].centreOfFlockmates = boidData[i].flockCentre; //Stockage pour chaque boid : moyenne à côté
+                        _boidsTab[i].avgAvoidanceHeading = boidData[i].avoidanceHeading; //Stockage pour chaque boid : moyenne des éléments à éviter
+                        _boidsTab[i].numPerceivedFlockmates = boidData[i].numFlockmates; //Stockage pour chaque boid : nombre de mate autour
 
-                    _boidsList[i].UpdateBoid(); //Update les boidss
+                        _boidsTab[i].UpdateBoid(); //Update les boidss
+                    }
+
                 }
 
                 yield return 0;
@@ -124,6 +118,8 @@ public class SC_BoidCompute : MonoBehaviour
     /// </summary>
     public struct BoidData
     {
+        public int active;
+
         public Vector3 position;
         public Vector3 direction;
 
@@ -139,7 +135,7 @@ public class SC_BoidCompute : MonoBehaviour
         {
             get
             {
-                return sizeof(float) * 3 * 5 + sizeof(int);
+                return sizeof(float) * 3 * 5 + sizeof(int)*2;
             }
         }
     }
