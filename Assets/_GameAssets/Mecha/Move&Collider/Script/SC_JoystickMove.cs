@@ -47,8 +47,7 @@ public class SC_JoystickMove : MonoBehaviour, IF_BreakdownSystem
     float f_LerpRotZ = 1f;  
     public enum RotationMode { TSR, Torque, Normalize, Higher, Clamp }
     public RotationMode TypeRotationZ;
-    float f_TransImpulseZ;
-    float f_TorqueImpulseZ;
+    float f_TransImpulseZ;    
     Quaternion TargetRotY;
     public float CurImpulse = 0;
 
@@ -57,6 +56,7 @@ public class SC_JoystickMove : MonoBehaviour, IF_BreakdownSystem
     int n_JoyNumToUse;
     [SerializeField]
     bool[] tab_TorqueAxes;
+    public float f_TorqueImpulseZ;
 
     //Rotation Verticale
     [Header("Vertical Rotation Settings")]
@@ -145,6 +145,7 @@ public class SC_JoystickMove : MonoBehaviour, IF_BreakdownSystem
 
         }
         
+        //Other Method
         /*
         f_TorqueImpulseZ = 0;
 
