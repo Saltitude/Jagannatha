@@ -102,7 +102,7 @@ public class SC_JoystickMove : MonoBehaviour, IF_BreakdownSystem
         f_ImpulseX = Input.GetAxis("Vertical") * f_RotationSpeedX;
 
         //Horizontal Impulses
-        f_TorqueImpulseZ = Input.GetAxis("Torque") * f_CurRotationSpeedZ;
+        f_TorqueImpulseZ = Input.GetAxis("Torque_01") * f_CurRotationSpeedZ;
         f_TransImpulseZ = Input.GetAxis("Horizontal") * f_CurRotationSpeedZ;
 
         /*
@@ -110,6 +110,33 @@ public class SC_JoystickMove : MonoBehaviour, IF_BreakdownSystem
         Debug.Log("Torque = " + Input.GetAxis("Torque"));
         Debug.Log("TorqueAlt = " + Input.GetAxis("TorqueAlt"));
         */
+
+        if (Input.GetAxis("Horizontal") != null)
+            Debug.Log(Input.GetAxis("Horizontal"));
+
+        if (Input.GetAxis("Torque_01") != null)
+            Debug.Log(Input.GetAxis("Torque_01"));
+
+        if (Input.GetAxis("Torque_02") != null)
+            Debug.Log(Input.GetAxis("Torque_02"));
+
+        if (Input.GetAxis("Torque_03") != null)
+            Debug.Log(Input.GetAxis("Torque_03"));
+
+        if (Input.GetAxis("Torque_04") != null)
+            Debug.Log(Input.GetAxis("Torque_04"));
+
+        if (Input.GetAxis("Rotation_01") != null)
+            Debug.Log(Input.GetAxis("Rotation_01"));
+
+        if (Input.GetAxis("Rotation_02") != null)
+            Debug.Log(Input.GetAxis("Rotation_02"));
+
+        if (Input.GetAxis("Rotation_03") != null)
+            Debug.Log(Input.GetAxis("Rotation_03"));
+
+        if (Input.GetAxis("Rotation_04") != null)
+            Debug.Log(Input.GetAxis("Rotation_04"));
 
     }
 
