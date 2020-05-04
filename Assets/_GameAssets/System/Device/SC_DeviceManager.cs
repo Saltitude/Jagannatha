@@ -60,7 +60,15 @@ public class SC_DeviceManager : MonoBehaviour
     //preparer les axes
     void GetJoyStickName()
     {
+
         tab_Device = Input.GetJoystickNames();
+
+        for(int i = 0; i < tab_Device.Length; i++)
+        {
+            if (!tab_Device[i].Contains("OpenVR") && !tab_Device[i].Contains("UMDF Virtual hidmini device Product string"))
+                Debug.Log("Use Device " + i + " Joynum = " + i + 1);
+        }
+
     }
 
 }
