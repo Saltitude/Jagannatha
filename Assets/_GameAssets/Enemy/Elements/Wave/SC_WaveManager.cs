@@ -224,6 +224,7 @@ public class SC_WaveManager : MonoBehaviour
                 {
 
                     SC_EnemyManager.Instance.Progress.value += 100 * 1f / SC_KoaSpawn.Instance.nb_totalFlock;
+                    SC_EnemyManager.Instance.sendToSynchVar(SC_EnemyManager.Instance.Progress.value);
                 }
 
             }
