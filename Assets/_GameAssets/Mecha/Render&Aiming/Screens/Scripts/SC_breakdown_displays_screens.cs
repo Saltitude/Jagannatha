@@ -20,7 +20,6 @@ public class SC_breakdown_displays_screens : MonoBehaviour
     public Renderer[] tab_screens_renderers;
     public Material[] mat;
     GameObject Mng_SyncVar = null;
-    GameObject BreakDownAudioSource;
     SC_SyncVar_StateMecha_Display sc_syncvar_display;
 
     [Header("States")]
@@ -162,10 +161,7 @@ public class SC_breakdown_displays_screens : MonoBehaviour
     */
 
     public void PanneAll()
-    {
-
-        if(demarage == false)
-            BreakDownAudioSource = CustomSoundManager.Instance.PlaySound(gameObject, "SFX_p_breackdown_alarm", true, 0.1f);
+    {      
 
         for (int i = 0; i < tab_screens_renderers.Length; i++)
         {
@@ -181,11 +177,6 @@ public class SC_breakdown_displays_screens : MonoBehaviour
         {
             FirstPanneFinish();
             CustomSoundManager.Instance.PlaySound(gameObject, "SFX_p_ScreenActivated", false, 0.1f);
-        }
-
-        if(BreakDownAudioSource != null && BreakDownAudioSource.GetComponent<AudioSource>().isPlaying)
-        {
-            BreakDownAudioSource.GetComponent<AudioSource>().Stop();
         }
 
         for (int i = 0; i < tab_screens_renderers.Length; i++)

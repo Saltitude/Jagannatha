@@ -63,7 +63,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 014ddcb523ce5004183a1b2729c8195a, type: 3}
+  m_Sprite: {fileID: 21300000, guid: c5bd955706acb21498f508df550b4b62, type: 3}
   m_Type: 3
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1524,7 +1524,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 014ddcb523ce5004183a1b2729c8195a, type: 3}
+  m_Sprite: {fileID: 21300000, guid: c5bd955706acb21498f508df550b4b62, type: 3}
   m_Type: 3
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1596,7 +1596,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 014ddcb523ce5004183a1b2729c8195a, type: 3}
+  m_Sprite: {fileID: 21300000, guid: c5bd955706acb21498f508df550b4b62, type: 3}
   m_Type: 3
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1864,12 +1864,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Padding:
-    m_Left: 4
-    m_Right: 5
-    m_Top: 6
-    m_Bottom: 5
+    m_Left: 2
+    m_Right: 3
+    m_Top: 2
+    m_Bottom: 4
   m_ChildAlignment: 4
-  m_Spacing: 40.24
+  m_Spacing: 35.61
   m_ChildForceExpandWidth: 0
   m_ChildForceExpandHeight: 0
   m_ChildControlWidth: 1
@@ -3354,7 +3354,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Padding:
-    m_Left: 3
+    m_Left: 6
     m_Right: 2
     m_Top: 5
     m_Bottom: 5
@@ -4718,7 +4718,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Padding:
-    m_Left: 3
+    m_Left: 6
     m_Right: 2
     m_Top: 5
     m_Bottom: 5

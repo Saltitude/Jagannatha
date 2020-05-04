@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SC_KoaSettingsOP : MonoBehaviour, IF_KoaForOperator
+public class SC_KoaSettingsOP : MonoBehaviour, IF_KoaForOperator, IF_Hover
 {
     Vector3 sensibility;
     float timer;
@@ -25,6 +25,13 @@ public class SC_KoaSettingsOP : MonoBehaviour, IF_KoaForOperator
     Color32[] Tab_colorSpawn;
 
     public bool bSelected;
+    
+    public enum koaSelection
+    {
+        None,
+        Selected,
+        Hover
+    }
 
     int curBoidSettingsIndex;
 
@@ -42,6 +49,9 @@ public class SC_KoaSettingsOP : MonoBehaviour, IF_KoaForOperator
 
     koaState currentState;
 
+ 
+
+
     public void SetSensibility(Vector3 sensibility)
     {
         this.sensibility = sensibility;
@@ -55,9 +65,11 @@ public class SC_KoaSettingsOP : MonoBehaviour, IF_KoaForOperator
         timer = 0;
     }
 
+
     public void SetKoaType(int type)
     {
         this.type = type;
+        setMeshColor();
     }
 
     public void SetKoaID(string koaID)
@@ -129,7 +141,6 @@ public class SC_KoaSettingsOP : MonoBehaviour, IF_KoaForOperator
     {
         if(!spawn)
         {
-            SetColor();
             float scale = ((initialScale.x*factor / timeBeforeSpawn) * Time.deltaTime);
             float radius = ((initialRadius / factor / timeBeforeSpawn) * Time.deltaTime);
             transform.localScale += new Vector3(scale, scale, scale);
@@ -137,23 +148,33 @@ public class SC_KoaSettingsOP : MonoBehaviour, IF_KoaForOperator
             timer += Time.deltaTime;
             if (timer >= timeBeforeSpawn)
             {
+                setMeshColor();
                 spawn = true;
-                SetColor();
             }           
         }
     }
 
-    public void SetColor()
+    public void SetMaterial(koaSelection newSelction)
     {
-        Color32 newColor = Color.white;
-        if(bSelected)
+  
+
+        if(newSelction != koaSelection.Selected)
         {
-            GetComponent<MeshRenderer>().material = Tab_mat[1];
+            if(!bSelected)
+                GetComponent<MeshRenderer>().material = Tab_mat[(int)newSelction];
         }
         else
         {
-            GetComponent<MeshRenderer>().material = Tab_mat[0];
+            GetComponent<MeshRenderer>().material = Tab_mat[(int)newSelction];
         }
+        setMeshColor();
+    }
+
+
+
+    void setMeshColor()
+    {
+        Color32 newColor = Color.white;
 
         if (spawn)
             newColor = Tab_color[type];
@@ -161,11 +182,23 @@ public class SC_KoaSettingsOP : MonoBehaviour, IF_KoaForOperator
             newColor = Tab_colorSpawn[type];
 
         GetComponent<MeshRenderer>().material.color = newColor;
-        GetComponent<TrailRenderer>().material.color = newColor;
     }
 
-    public void Action()
+    public void HoverAction()
     {
+        SetMaterial(koaSelection.Hover);
+        StartCoroutine(EndCoroutine());
+    }
+
+    public void OutAction()
+    {
+        SetMaterial(koaSelection.None);
 
     }
+    IEnumerator EndCoroutine()
+    {
+        yield return new WaitForEndOfFrame();
+        OutAction();
+    }
+
 }

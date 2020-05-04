@@ -396,6 +396,8 @@ public class SC_KoaManager : MonoBehaviour
             if (powerPerCent > 0)
             {
                 KoaLife -= (int)((powerPerCent * maxLife) / 100) / 3;
+                if (KoaLife <= 0)
+                    KoaLife = 0;
                 syncVarKoa.SetCurLife(KoaLife);
                 if (KoaLife <= 0)
                 {

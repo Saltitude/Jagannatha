@@ -21,7 +21,7 @@ public class SC_BreakdownDisplayManager : MonoBehaviour, IF_BreakdownManager
 
     [Header("BreakDown Var")]
     [SerializeField]
-    int n_MaxBreakInterB4MaxBD = 5;
+    public int n_MaxBreakInterB4MaxBD = 5;
     public bool b_MaxBreakdown = false;
     public int CurNbOfBreakdown = 0;
 
@@ -84,6 +84,8 @@ public class SC_BreakdownDisplayManager : MonoBehaviour, IF_BreakdownManager
 
     #endregion Init
 
+    #region MainFunctions
+
     public void StartNewBreakdown(int nbBreakdown)
     {
 
@@ -140,20 +142,9 @@ public class SC_BreakdownDisplayManager : MonoBehaviour, IF_BreakdownManager
 
     public void CheckBreakdown()
     {
-        int n_BreakdownValue = 0;
-
-        for (int j = 0; j < interactible.Length; j++)
-        {
-
-            if (interactible[j].GetComponent<IInteractible>().isBreakdown())
-            {
-                n_BreakdownValue++;
-            }
-
-        }
 
         //on update le nombre de pannes
-        CurNbOfBreakdown = n_BreakdownValue;
+        CurNbOfBreakdown = NumberOfBreakdown();
         SC_SyncVar_DisplaySystem.Instance.f_CurNbOfBd = CurNbOfBreakdown;
 
         //Gestion temporaire du play/stop des fx de panne
@@ -162,37 +153,73 @@ public class SC_BreakdownDisplayManager : MonoBehaviour, IF_BreakdownManager
         else
             Play_Stop_All_Pannel_FX(false);
 
-
-        if (n_BreakdownValue >= n_MaxBreakInterB4MaxBD && !b_MaxBreakdown)
+        //MaxBreakDown
+        if (CurNbOfBreakdown >= n_MaxBreakInterB4MaxBD && !b_MaxBreakdown)
         {
             b_MaxBreakdown = true;
             SC_SyncVar_DisplaySystem.Instance.b_MaxBreakdown = true;
-            Mng_BreakdownMain.CheckBreakdown();
-        }   
-        
-        else if (n_BreakdownValue ==0 && b_MaxBreakdown)
-        {
-            b_MaxBreakdown = false;
-            SC_SyncVar_DisplaySystem.Instance.b_MaxBreakdown = false;
-            Mng_BreakdownMain.CheckBreakdown();
-
         }
+
+        /*
+        else if (CurNbOfBreakdown == 0 && b_MaxBreakdown)
+            EndBreakdown();
 
         //Permet de régler les demi-pannes d'écrans
-        else if (n_BreakdownValue == 0 && !b_MaxBreakdown && SC_main_breakdown_validation.Instance.isValidated)
-        {
-            sc_screens_controller.RepairAll();
-        }
-        if (CurNbOfBreakdown > 0)
-        {
-            SC_SyncVar_Main_Breakdown.Instance.onPanneDisplayChange(true);
-        }
+        else if (CurNbOfBreakdown == 0 && !b_MaxBreakdown && SC_main_breakdown_validation.Instance.isValidated)
+            EndBreakdown();
+        */
+
+        //Resolution
+        if (CurNbOfBreakdown == 0 && !SC_MainBreakDownManager.Instance.b_BreakEngine)
+            EndBreakdown();
+
         else
         {
-            SC_SyncVar_Main_Breakdown.Instance.onPanneDisplayChange(false);
+            SyncSystemState();
+            SC_MainBreakDownManager.Instance.CheckBreakdown();
         }
+
     }
 
+    public void EndBreakdown()
+    {
+
+        b_MaxBreakdown = false;
+        SC_SyncVar_DisplaySystem.Instance.b_MaxBreakdown = false;
+        sc_screens_controller.RepairAll();
+
+        SyncSystemState();
+        SC_MainBreakDownManager.Instance.CheckBreakdown();
+
+    }
+
+    #endregion MainFunctions
+
+    int NumberOfBreakdown()
+    {
+
+        int n_BreakdownValue = 0;
+
+        for (int j = 0; j < interactible.Length; j++)
+        {
+            if (interactible[j].GetComponent<IInteractible>().isBreakdown())
+            {
+                n_BreakdownValue++;
+            }
+        }
+
+        return n_BreakdownValue;
+
+    }
+
+    void SyncSystemState()
+    {
+        if (CurNbOfBreakdown > 0)
+            SC_SyncVar_Main_Breakdown.Instance.onPanneDisplayChange(true);
+        else
+            SC_SyncVar_Main_Breakdown.Instance.onPanneDisplayChange(false);
+    }
+    
     #region FX
     //Fonction jouant toutes les FX indiquant une panne sur le système,à échelonner plus tard)
     private void Play_Stop_All_Pannel_FX(bool startStop)

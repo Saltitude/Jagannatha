@@ -87,6 +87,7 @@ MonoBehaviour:
   mr_OP: {fileID: 7406684084623344483}
   curboidNumber: 0
   MaxboidNumber: 0
+  KoaID: 
 --- !u!114 &988403832985214203
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4975,7 +4976,7 @@ Transform:
   m_GameObject: {fileID: 4611968622286513941}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.15, y: 0.15, z: 0.15}
+  m_LocalScale: {x: 0.3559386, y: 0.3559386, z: 0.3559386}
   m_Children:
   - {fileID: 598266005155162187}
   - {fileID: 3340298729453683469}
@@ -5039,7 +5040,7 @@ SphereCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 14.71
+  m_Radius: 9.57
   m_Center: {x: -0.00000047683713, y: 0.0000004768373, z: -0.0000004768373}
 --- !u!1 &6089972395467275274
 GameObject:
@@ -5242,28 +5243,28 @@ MonoBehaviour:
   Tab_mat:
   - {fileID: 2100000, guid: ccbe4a5f7f0fb3d488bb660328277cca, type: 2}
   - {fileID: 2100000, guid: 1ee74b8ce26cf914687fe553a7478d0e, type: 2}
+  - {fileID: 2100000, guid: 2ea49d083d5dfac429e566719d5326c0, type: 2}
   Tab_color:
   - serializedVersion: 2
-    rgba: 4294948355
+    rgba: 4294771112
   - serializedVersion: 2
     rgba: 4278426367
   - serializedVersion: 2
     rgba: 4278273277
   - serializedVersion: 2
-    rgba: 4294771112
+    rgba: 4278190335
   Tab_colorSpawn:
   - serializedVersion: 2
-    rgba: 4294967040
+    rgba: 4294792872
   - serializedVersion: 2
     rgba: 4278435839
   - serializedVersion: 2
     rgba: 4278283261
   - serializedVersion: 2
-    rgba: 4294792872
+    rgba: 4281545215
   bSelected: 0
   VFX_koadeath: {fileID: 8764311545272859674, guid: fcc1029c7e5d57548a5bf37d5c374b01,
     type: 3}
-  trail: {fileID: 8949757320106051520}
 --- !u!135 &9208746028493815770
 SphereCollider:
   m_ObjectHideFlags: 0

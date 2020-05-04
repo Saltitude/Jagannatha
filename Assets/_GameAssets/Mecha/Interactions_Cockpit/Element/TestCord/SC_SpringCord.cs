@@ -17,7 +17,7 @@ public class SC_SpringCord : MonoBehaviour
 
     [Header("Parameters")]
     [SerializeField, Range(0, 1)]
-    float ConstraintRange = 0.7f;
+    float ResetRange = 0.73f;
     [SerializeField, Range(0, 0.5f)]
     float DeadZone = 0.15f;
     [SerializeField, Range(0, 0.5f)]
@@ -94,17 +94,17 @@ public class SC_SpringCord : MonoBehaviour
     void RangeEffect()
     {
 
-        if (f_CurDistance < ConstraintRange)
+        if (f_CurDistance < ResetRange)
             b_InRange = true;
 
-        if (f_CurDistance > ConstraintRange + DeadZone && b_InRange)
+        if (f_CurDistance > ResetRange + DeadZone && b_InRange)
         {
             b_Enable = !b_Enable;
             b_InRange = false;
             SetMaterial();
         }
 
-        if (f_CurDistance > ConstraintRange + AddMaxRange)
+        if (f_CurDistance > ResetRange + AddMaxRange)
             ReleaseObject();
 
     }

@@ -17,6 +17,7 @@ public class SC_DeviceManager : MonoBehaviour
     public bool b_IsVR = false;
     public bool b_IsFPS = false;
 
+    [SerializeField]
     string[] tab_Device;
 
     // Start is called before the first frame update
@@ -54,13 +55,18 @@ public class SC_DeviceManager : MonoBehaviour
         }
     }
 
+    //Notes pour corriger le bug du Torque
+    //Recuper l'index du JS dans le tableau et utilisé un axes avec un joynum correspondant
+    //preparer les axes
     void GetJoyStickName()
     {
+
         tab_Device = Input.GetJoystickNames();
 
         for(int i = 0; i < tab_Device.Length; i++)
         {
-            Debug.Log(tab_Device[i]);
+            if (!tab_Device[i].Contains("OpenVR") && !tab_Device[i].Contains("UMDF Virtual hidmini device Product string"))
+                Debug.Log("Use Device " + i + " Joynum = " + i + 1);
         }
 
     }

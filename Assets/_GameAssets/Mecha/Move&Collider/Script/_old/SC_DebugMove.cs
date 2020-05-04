@@ -35,6 +35,7 @@ public class SC_DebugMove : MonoBehaviour, IF_BreakdownSystem
     public Dir CurDir = Dir.None;
     public Dir TargetDir = Dir.None;
     public Dir CoroDir = Dir.Off;
+    public float CurImpulse = 0;
     [SerializeField]
     AnimationCurve Acceleration;
 
@@ -151,7 +152,7 @@ public class SC_DebugMove : MonoBehaviour, IF_BreakdownSystem
 
             Quaternion zQuaternion = new Quaternion();
             float MixImpulseZ;
-            float CurImpulse = 0;
+            
 
             //Calcul Selon Mode de Rotation
             switch (TypeRotationZ)
@@ -201,7 +202,6 @@ public class SC_DebugMove : MonoBehaviour, IF_BreakdownSystem
                     break;
 
             }
-
             //Direction
             if (CurImpulse > 0)
                 TargetDir = Dir.Right;
@@ -232,6 +232,7 @@ public class SC_DebugMove : MonoBehaviour, IF_BreakdownSystem
         //Pas de Direction
         else
         {
+            CurImpulse = 0;
             TargetDir = Dir.None;
             TargetRotY = this.transform.rotation;
             if (b_UseCoroutine && CurDir != TargetDir && CoroDir != TargetDir)

@@ -53,52 +53,60 @@ public class SC_RaycastOPMapPerspective : MonoBehaviour
         //Debug.Log(hit.textureCoord);
         if (Physics.Raycast(ray, out hit))
         {
-            //Debug.Log("Collider est " + hit.collider.name);
-            if(hit.collider.GetComponent<IF_KoaForOperator>() != null)
+            if (hit.collider.GetComponent<IF_Hover>() != null)
             {
-                if (hit.collider.GetComponent<SC_KoaSettingsOP>() != null)
+                hit.collider.GetComponent<IF_Hover>().HoverAction();
+            }
+            if (Input.GetMouseButtonDown(0))
+            {
+                if (hit.collider.GetComponent<IF_KoaForOperator>() != null)
                 {
-                    if (objectOnclic != null)
+                    if (hit.collider.GetComponent<SC_KoaSettingsOP>() != null)
                     {
-                        OldObjectClic = objectOnclic;
-                        var OldSelect = OldObjectClic.GetComponent<SC_KoaSettingsOP>();
-                        OldSelect.bSelected = false;
-                        OldSelect.SetColor();
-                        
+                        if (objectOnclic != null)
+                        {
+                            OldObjectClic = objectOnclic;
+                            var OldSelect = OldObjectClic.GetComponent<SC_KoaSettingsOP>();
+                            OldSelect.bSelected = false;
+                            OldSelect.SetMaterial(SC_KoaSettingsOP.koaSelection.None);
+                        }
+
+                        SC_UI_Display_MapInfos_KoaState.Instance.SetNewKoaSettings(hit.collider.GetComponent<SC_KoaSettingsOP>());
+
+                        objectOnclic = hit.collider.gameObject;
+                        var script = objectOnclic.GetComponent<SC_KoaSettingsOP>();
+                        script.bSelected = true;
+                        script.SetMaterial(SC_KoaSettingsOP.koaSelection.Selected);
+
                     }
-                        
-                    SC_UI_Display_MapInfos_KoaState.Instance.SetNewKoaSettings(hit.collider.GetComponent<SC_KoaSettingsOP>());
-                    
-                    objectOnclic = hit.collider.gameObject;
-                    var script = objectOnclic.GetComponent<SC_KoaSettingsOP>();
-                    script.bSelected = true;
-                    script.SetColor();
-                   
-                }
-         
 
-                //CHANGEMENT ETAT TUTO
-                //Debug.Log(SC_GameStates.Instance.CurState);
-                if (SC_GameStates.Instance.CurState == SC_GameStates.GameState.Tutorial2)
+
+                    //CHANGEMENT ETAT TUTO
+                    //Debug.Log(SC_GameStates.Instance.CurState);
+                    if (SC_GameStates.Instance.CurState == SC_GameStates.GameState.Tutorial2)
+                    {
+                        SC_instruct_op_manager.Instance.Deactivate(0);
+                        SC_instruct_op_manager.Instance.Activate(2);
+                        SC_instruct_op_manager.Instance.Activate(3);
+                        SC_instruct_op_manager.Instance.Deactivate(4);
+                        SC_instruct_op_manager.Instance.Deactivate(5);
+
+
+                        //Debug.Log("babar");
+                    }
+                    //Debug.Log("Sensi à " + sensi);
+                    //debugText.text = sensi.ToString();
+                }
+                else
                 {
-                    SC_instruct_op_manager.Instance.Deactivate(0);
-                    SC_instruct_op_manager.Instance.Activate(2);
-                    SC_instruct_op_manager.Instance.Activate(3);
-                    SC_instruct_op_manager.Instance.Deactivate(4);
-                    SC_instruct_op_manager.Instance.Deactivate(5);
-
-
-                    //Debug.Log("babar");
+                    //Debug.Log("Clic on nothing on Map");
+                    //objectOnclic = null;
+                    //SC_UI_Display_MapInfos_KoaState.Instance.activated = false;
                 }
-                //Debug.Log("Sensi à " + sensi);
-                //debugText.text = sensi.ToString();
             }
-            else
-            {
-                //Debug.Log("Clic on nothing on Map");
-                //objectOnclic = null;
-                //SC_UI_Display_MapInfos_KoaState.Instance.activated = false;
-            }
+            
+
+             
             
         }
         SC_UI_Display_MapInfos_StateManager.Instance.checkState();

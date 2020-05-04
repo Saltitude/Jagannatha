@@ -17,6 +17,9 @@ public class SC_GameStates : NetworkBehaviour
     public enum TutorialState { Tutorial1_1, Tutorial1_2, Tutorial1_3, Tutorial1_4, Tutorial1_5, Tutorial1_6, Tutorial1_7, Tutorial1_8, Tutorial1_9, Tutorial1_10, Tutorial1_11, Tutorial2_1, Tutorial2_2, Tutorial2_3, Tutorial2_4, Tutorial2_5, TutorialEnd}
     public GameState CurState;
     public TutorialState CurTutoState;
+    public bool Disp = false;
+    public bool Mov = false;
+    public bool Weap = false;
 
     void Awake()
     {
@@ -83,7 +86,7 @@ public class SC_GameStates : NetworkBehaviour
 
             case GameState.Tutorial:
                 //Descendre le Bouton Reboot au tuto
-                ChangeTutoGameState(TutorialState.Tutorial1_1);
+                ChangeTutoGameState(TutorialState.Tutorial1_2);
 
                 break;
 
@@ -162,6 +165,7 @@ public class SC_GameStates : NetworkBehaviour
             case TutorialState.Tutorial1_4:
                 if (!isServer)
                 {
+                    Disp = true;
                     SC_instruct_op_manager.Instance.Deactivate(7);
                     SC_instruct_op_manager.Instance.Deactivate(8);
                     SC_instruct_op_manager.Instance.Activate(9);
@@ -172,6 +176,7 @@ public class SC_GameStates : NetworkBehaviour
 
                 if (!isServer)
                 {
+                    Weap = true;
                     SC_instruct_op_manager.Instance.Deactivate(7);
                     SC_instruct_op_manager.Instance.Deactivate(8);
                     SC_instruct_op_manager.Instance.Activate(10);
@@ -181,6 +186,7 @@ public class SC_GameStates : NetworkBehaviour
             case TutorialState.Tutorial1_6:
                 if (!isServer)
                 {
+                    Mov = true;
                     SC_instruct_op_manager.Instance.Deactivate(7);
                     SC_instruct_op_manager.Instance.Deactivate(8);
                     SC_instruct_op_manager.Instance.Activate(11);
@@ -194,7 +200,12 @@ public class SC_GameStates : NetworkBehaviour
                     SC_instruct_op_manager.Instance.Deactivate(9);
                     SC_instruct_op_manager.Instance.Deactivate(10);
                     SC_instruct_op_manager.Instance.Deactivate(11);
-                    SC_instruct_op_manager.Instance.Activate(12);
+                    if(Disp == true)
+                        SC_instruct_op_manager.Instance.Activate(12);
+                    if(Weap == true)
+                        SC_instruct_op_manager.Instance.Activate(15);
+                    if(Mov == true)
+                        SC_instruct_op_manager.Instance.Activate(16);
                 }
 
                     break;
@@ -203,7 +214,12 @@ public class SC_GameStates : NetworkBehaviour
 
                 if(!isServer)
                 {
+                    Disp = false;
+                    Weap = false;
+                    Mov = false;
                     SC_instruct_op_manager.Instance.Deactivate(12);  
+                    SC_instruct_op_manager.Instance.Deactivate(15);  
+                    SC_instruct_op_manager.Instance.Deactivate(16);  
                 }
 
                 break;
