@@ -112,31 +112,31 @@ public class SC_JoystickMove : MonoBehaviour, IF_BreakdownSystem
         */
 
         if (Input.GetAxis("Horizontal") != 0)
-            Debug.Log(Input.GetAxis("Horizontal"));
+            Debug.Log("Horizontal");
 
         if (Input.GetAxis("Torque_01") != 0)
-            Debug.Log(Input.GetAxis("Torque_01"));
+            Debug.Log("Torque_01");
 
         if (Input.GetAxis("Torque_02") != 0)
-            Debug.Log(Input.GetAxis("Torque_02"));
+            Debug.Log("Torque_02");
 
         if (Input.GetAxis("Torque_03") != 0)
-            Debug.Log(Input.GetAxis("Torque_03"));
+            Debug.Log("Torque_03");
 
         if (Input.GetAxis("Torque_04") != 0)
-            Debug.Log(Input.GetAxis("Torque_04"));
+            Debug.Log("Torque_04");
 
         if (Input.GetAxis("Rotation_01") != 0)
-            Debug.Log(Input.GetAxis("Rotation_01"));
+            Debug.Log("Rotation_01");
 
         if (Input.GetAxis("Rotation_02") != 0)
-            Debug.Log(Input.GetAxis("Rotation_02"));
+            Debug.Log("Rotation_02");
 
         if (Input.GetAxis("Rotation_03") != 0)
-            Debug.Log(Input.GetAxis("Rotation_03"));
+            Debug.Log("Rotation_03");
 
         if (Input.GetAxis("Rotation_04") != 0)
-            Debug.Log(Input.GetAxis("Rotation_04"));
+            Debug.Log("Rotation_04");
 
     }
 
