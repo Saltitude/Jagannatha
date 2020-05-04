@@ -51,7 +51,12 @@ public class SC_JoystickMove : MonoBehaviour, IF_BreakdownSystem
     float f_TorqueImpulseZ;
     Quaternion TargetRotY;
     public float CurImpulse = 0;
+
+    [Header("Horizontal Rotation Infos")]
+    [SerializeField]
     int n_JoyNumToUse;
+    [SerializeField]
+    bool[] tab_TorqueAxes;
 
     //Rotation Verticale
     [Header("Vertical Rotation Settings")]
@@ -84,7 +89,7 @@ public class SC_JoystickMove : MonoBehaviour, IF_BreakdownSystem
 
     void Start()
     {
-        n_JoyNumToUse = SC_DeviceManager.Instance.n_JoyNumToUse;
+        CheckTorqueAxis();
     }
 
     // Update is called once per frame
@@ -101,6 +106,12 @@ public class SC_JoystickMove : MonoBehaviour, IF_BreakdownSystem
 
     #region Moves
 
+    void CheckTorqueAxis()
+    {
+        n_JoyNumToUse = SC_DeviceManager.Instance.n_JoyNumToUse;
+        tab_TorqueAxes = SC_DeviceManager.Instance.tab_TorqueAxesToUse;
+    }
+
     void GetImpulses()
     {
 
@@ -112,7 +123,7 @@ public class SC_JoystickMove : MonoBehaviour, IF_BreakdownSystem
 
         if(n_JoyNumToUse == null || n_JoyNumToUse == 0)
             n_JoyNumToUse = SC_DeviceManager.Instance.n_JoyNumToUse;
-
+     
         switch (n_JoyNumToUse)
         {
 
@@ -133,6 +144,43 @@ public class SC_JoystickMove : MonoBehaviour, IF_BreakdownSystem
                 break;
 
         }
+        
+        /*
+        f_TorqueImpulseZ = 0;
+
+        for (int i = 0; i < tab_TorqueAxes.Length; i++)
+        {
+
+            if (tab_TorqueAxes[i])
+            {
+
+                switch (i)
+                {
+
+                    case 0:
+                        f_TorqueImpulseZ += Input.GetAxis("Torque_01");
+                        break;
+
+                    case 1:
+                        f_TorqueImpulseZ += Input.GetAxis("Torque_02");
+                        break;
+
+                    case 2:
+                        f_TorqueImpulseZ += Input.GetAxis("Torque_03");
+                        break;
+
+                    case 3:
+                        f_TorqueImpulseZ += Input.GetAxis("Torque_04");
+                        break;
+
+                }
+
+            }                
+
+        }
+
+        f_TorqueImpulseZ *= f_CurRotationSpeedZ;
+        */
 
     }
 

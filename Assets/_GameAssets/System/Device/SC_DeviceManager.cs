@@ -26,7 +26,10 @@ public class SC_DeviceManager : MonoBehaviour
 
     [SerializeField]
     string[] tab_Device;
+
     public int n_JoyNumToUse;
+
+    public bool[] tab_TorqueAxesToUse;
 
     void Awake()
     {
@@ -85,12 +88,18 @@ public class SC_DeviceManager : MonoBehaviour
 
         tab_Device = Input.GetJoystickNames();
 
-        for(int i = 0; i < tab_Device.Length; i++)
+        tab_TorqueAxesToUse = new bool[tab_Device.Length];
+
+        for (int i = 0; i < tab_TorqueAxesToUse.Length; i++)
+            tab_TorqueAxesToUse[i] = false;
+
+        for (int i = 0; i < tab_Device.Length; i++)
         {
             if (!tab_Device[i].Contains("OpenVR") && !tab_Device[i].Contains("UMDF Virtual hidmini device Product string"))
             {
                 //Debug.Log("Use Device " + i + " Joynum = " + i + 1);
-                n_JoyNumToUse = i + 1;
+                n_JoyNumToUse = i+1;
+                tab_TorqueAxesToUse[i] = true;
             }
                 
         }
