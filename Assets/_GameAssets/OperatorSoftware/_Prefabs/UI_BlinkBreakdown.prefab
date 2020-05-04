@@ -43,3 +43,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e97069d04ca78cf40b8605a2ffa0ac1a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  matToBlink: {fileID: 2100000, guid: 115662f047c0c854da9dab7f01c8713d, type: 2}
