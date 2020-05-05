@@ -78,6 +78,9 @@ public class SC_Cord : MonoBehaviour
 
         #endif
 
+        if (Rb.isKinematic && b_Grabbing == false)
+            Rb.isKinematic = true;
+
     }
 
     void RangeEffect()
