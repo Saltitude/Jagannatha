@@ -246,6 +246,7 @@ public class SC_MainBreakDownManager : MonoBehaviour, IF_BreakdownManager
                             BreakDownAudioSource.GetComponent<AudioSource>().Stop();
                             SoundSourceNumb = 0; 
                         }
+
                         SC_BreakdownOnBreakdownAlert.Instance.StopGlobalAlert();
 
                         //protection pour les kamikazes en fin de wave
