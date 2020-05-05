@@ -7,6 +7,9 @@ public class ViveGripExample_Hand : MonoBehaviour {
   public Mesh primed;
   private float fadeSpeed = 3f;
 
+    public GameObject restHand;
+    public GameObject primedHand;
+
   void Start () {
     bool shadow = transform.childCount == 0;
     if (UnityEngine.XR.XRDevice.model.Contains("Rift") && !shadow) {
@@ -17,14 +20,20 @@ public class ViveGripExample_Hand : MonoBehaviour {
   }
 
   void ViveGripTouchStart() {
-    GetComponent<MeshFilter>().mesh = primed;
+        //GetComponent<MeshFilter>().mesh = primed;
+        restHand.SetActive(false);
+        primedHand.SetActive(true);
   }
 
   void ViveGripTouchStop(ViveGrip_GripPoint gripPoint) {
     // We might move out of touch range but still be holding something
     if (!gripPoint.HoldingSomething()) {
-      GetComponent<MeshFilter>().mesh = rest;
-    }
+            //GetComponent<MeshFilter>().mesh = rest;
+
+            restHand.SetActive(true);
+            primedHand.SetActive(false);
+
+        }
   }
 
   void ViveGripGrabStart() {

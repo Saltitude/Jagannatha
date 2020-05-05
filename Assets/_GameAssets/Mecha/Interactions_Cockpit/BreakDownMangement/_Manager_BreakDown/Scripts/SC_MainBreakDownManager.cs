@@ -131,17 +131,17 @@ public class SC_MainBreakDownManager : MonoBehaviour, IF_BreakdownManager
             CheckBreakdown();
         }
 
-        if (Input.GetKeyDown(KeyCode.P))
+        if (Input.GetKeyDown(KeyCode.LeftArrow))
         {
             CauseDamageOnSystem(FlockSettings.AttackFocus.Display, 1);
         }
 
-        if (Input.GetKeyDown(KeyCode.M))
+        if (Input.GetKeyDown(KeyCode.DownArrow))
         {
             CauseDamageOnSystem(FlockSettings.AttackFocus.Movement, 1);
         }
 
-        if (Input.GetKeyDown(KeyCode.O))
+        if (Input.GetKeyDown(KeyCode.RightArrow))
         {
             CauseDamageOnSystem(FlockSettings.AttackFocus.Weapon, 1);
         }

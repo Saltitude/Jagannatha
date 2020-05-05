@@ -47,8 +47,7 @@ public class SC_JoystickMove : MonoBehaviour, IF_BreakdownSystem
     float f_LerpRotZ = 1f;  
     public enum RotationMode { TSR, Torque, Normalize, Higher, Clamp }
     public RotationMode TypeRotationZ;
-    float f_TransImpulseZ;
-    float f_TorqueImpulseZ;
+    float f_TransImpulseZ;    
     Quaternion TargetRotY;
     public float CurImpulse = 0;
 
@@ -57,6 +56,7 @@ public class SC_JoystickMove : MonoBehaviour, IF_BreakdownSystem
     int n_JoyNumToUse;
     [SerializeField]
     bool[] tab_TorqueAxes;
+    public float f_TorqueImpulseZ;
 
     //Rotation Verticale
     [Header("Vertical Rotation Settings")]
@@ -145,6 +145,7 @@ public class SC_JoystickMove : MonoBehaviour, IF_BreakdownSystem
 
         }
         
+        //Other Method
         /*
         f_TorqueImpulseZ = 0;
 
@@ -413,23 +414,23 @@ public class SC_JoystickMove : MonoBehaviour, IF_BreakdownSystem
     {
 
         //Horizontal Impulses
-        if (Input.GetKey(KeyCode.Q))
+        if (Input.GetKey(KeyCode.Q) || Input.GetKey(KeyCode.K))
         {
             f_TorqueImpulseZ = -1 * f_CurRotationSpeedZ;
             f_TransImpulseZ = -1 * f_CurRotationSpeedZ;
         }
-        else if (Input.GetKey(KeyCode.D))
+        else if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.M))
         {
             f_TorqueImpulseZ = 1 * f_CurRotationSpeedZ;
             f_TransImpulseZ = 1 * f_CurRotationSpeedZ;
         }
 
         //Vertical Impulse
-        if (Input.GetKey(KeyCode.Z))
+        if (Input.GetKey(KeyCode.Z) || Input.GetKey(KeyCode.O))
         {
             f_ImpulseX = 1 * f_RotationSpeedX;
         }
-        else if (Input.GetKey(KeyCode.S))
+        else if (Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.L))
         {
             f_ImpulseX = -1 * f_RotationSpeedX;
         }
