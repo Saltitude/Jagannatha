@@ -24,9 +24,9 @@ public class SC_Flux_jaugeDisplay : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        FluxValue = FluxSlider.curValue + 1;
+        FluxValue = FluxSlider.curValue;
        
-        for (int i = 0; i < MaxNumbJauge; i++)
+        for (int i = 0; i <= MaxNumbJauge; i++)
         {
             if(i < FluxValue)
                 JaugeUnits [i].GetComponent<MeshRenderer>().enabled = true;
