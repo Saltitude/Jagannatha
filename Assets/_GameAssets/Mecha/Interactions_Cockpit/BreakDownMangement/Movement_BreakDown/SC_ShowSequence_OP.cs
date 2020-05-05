@@ -20,6 +20,14 @@ public class SC_ShowSequence_OP : MonoBehaviour
     GameObject[] SeqParts;
     [SerializeField] //Order is Circle Triangle Square
     Sprite[] tab_Sprites;
+    [SerializeField]
+    GameObject[] tab_Progress;
+    [SerializeField]
+    Material ProgressOn;
+    [SerializeField]
+    Material ProgressOff;
+    [SerializeField]
+    Material ProgressDisable;
 
     [Header("Debug References")]
     [SerializeField]
@@ -51,14 +59,22 @@ public class SC_ShowSequence_OP : MonoBehaviour
     public void DisplaySequence()
     {
 
+        int SequenceLenght = SC_SyncVar_MovementSystem.Instance.BreakdownList.Count;
+
+        for (int i = 0; i < tab_Progress.Length; i++)
+        {
+            if (i < SequenceLenght)
+                tab_Progress[i].GetComponent<Image>().material = ProgressOff;
+            else
+                tab_Progress[i].GetComponent<Image>().material = ProgressDisable;
+        }
+
         for (int i = 0; i < SeqParts.Length; i++)
-            SeqParts[i].SetActive(false);
+            SeqParts[i].SetActive(false);         
 
         if (b_UseDebugContent)
             for (int i = 0; i < DebugContents.Length; i++)
-                DebugContents[i].SetActive(false);
-
-        int SequenceLenght = SC_SyncVar_MovementSystem.Instance.BreakdownList.Count;
+                DebugContents[i].SetActive(false); 
 
         for (int i = 0; i < SequenceLenght; i++)
         {
@@ -74,6 +90,16 @@ public class SC_ShowSequence_OP : MonoBehaviour
             }
 
         }
+
+    }
+
+    public void DisplayProgression()
+    {
+
+        int PlayerSeqLenght = SC_SyncVar_MovementSystem.Instance.CurPilotSeqLenght;
+
+        for (int i = 0; i < PlayerSeqLenght; i++)
+                tab_Progress[i].GetComponent<Image>().material = ProgressOn;
 
     }
 

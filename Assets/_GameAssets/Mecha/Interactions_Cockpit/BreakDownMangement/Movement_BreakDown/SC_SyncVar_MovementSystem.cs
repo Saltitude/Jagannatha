@@ -75,6 +75,8 @@ public class SC_SyncVar_MovementSystem : NetworkBehaviour
     [SyncVar(hook = "OnSeqSync")]
     public bool b_SeqIsSync = false;
     public SyncListInt BreakdownList = new SyncListInt();
+    [SyncVar(hook = "OnPilotSeqSync")]
+    public int CurPilotSeqLenght = 0;
 
     void OnChangeBdLvl(int Target)
     {
@@ -109,6 +111,14 @@ public class SC_SyncVar_MovementSystem : NetworkBehaviour
     private void OnSequenceChanged(SyncListInt.Operation op, int index)
     {
         //Debug.Log("SyncListChange");
+    }
+
+    void OnPilotSeqSync(int Target)
+    {
+        CurPilotSeqLenght = Target;
+        UpdateOnClient();
+        if (!isServer)
+            SC_ShowSequence_OP.Instance.DisplayProgression();
     }
 
     #endregion Var SC_MovementBreakDown
