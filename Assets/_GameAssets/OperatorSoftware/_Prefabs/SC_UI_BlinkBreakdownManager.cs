@@ -12,6 +12,7 @@ public class SC_UI_BlinkBreakdownManager : MonoBehaviour
 
     #endregion
 
+    bool breakdown = false;
     private void Awake()
     {
         if (_instance != null && _instance != this)
@@ -41,10 +42,9 @@ public class SC_UI_BlinkBreakdownManager : MonoBehaviour
         All = FindObjectsOfType<Image>();
         foreach(Image b in All)
         {
-
             if (b.material == matToBlink)
             {
-                toAnimate.Add(b);             
+                toAnimate.Add(b);
             }
         }
         color = Color.white;
@@ -53,12 +53,27 @@ public class SC_UI_BlinkBreakdownManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        for (int i = 0; i<toAnimate.Count; i++)
+        if(breakdown)
+        for (int i = 0; i < toAnimate.Count; i++)
         {
             color = new Color(color.r, color.g, color.b, opacity);
             toAnimate[i].color = color;
-     
+
         }
 
     }
+
+    public void SetBreakdown(bool b)
+    {
+        breakdown = b;
+        if(b == false)
+        {
+            for (int i = 0; i < toAnimate.Count; i++)
+            {
+                color = new Color(color.r, color.g, color.b, 1);
+                toAnimate[i].color = color;
+            }
+        }
+    }
+
 }
