@@ -116,6 +116,8 @@ public class SC_FlockManager : MonoBehaviour
         isSpawning = true;
         _Player = GameObject.FindGameObjectWithTag("Player");
 
+
+        transform.position = spawnSpline.GetPoint(0);
         bezierWalkerTime.SetNewSpline(spawnSpline);
         bezierWalkerTime.NormalizedT = 0;
         bezierWalkerTime.travelTime = flockSettings.spawnTimer;
@@ -148,17 +150,13 @@ public class SC_FlockManager : MonoBehaviour
 
         for (int i = 0; i < flockSettings.splines.Length; i++)
         {
-           
                 if (flockSettings.splines[i] != null)
                 {
                     _splineTab[i] = Instantiate(flockSettings.splines[i]);
-
                 }
-            
         }
 
         Invoke("ActivateFlock", flockSettings.spawnTimer);
-        
     }
     #endregion
     //---------------------------------------------------------------------//
@@ -339,9 +337,11 @@ public class SC_FlockManager : MonoBehaviour
         {
             case PathType.Spawn:
                 StartNewBehavior((int)PathType.Spawn);
+
                 break;
 
             case PathType.Roam:
+
                 StartNewBehavior((int)PathType.Roam);
                 break;
 

@@ -91,6 +91,21 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &591806952306941846
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 193103924725184385}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 957bf3ca82f20a341ba910e325fe06c2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shakeDuration: 0
+  shakeAmount: 0.7
+  decreaseFactor: 1
 --- !u!1 &556462333826288888
 GameObject:
   m_ObjectHideFlags: 0
@@ -217,6 +232,7 @@ MonoBehaviour:
   f_MaxRotV: 30
   f_MaxRotT: 15
   TargetTRS: {fileID: 556462333826584798}
+  n_JoyNumToUse: 0
 --- !u!1 &556462333826288892
 GameObject:
   m_ObjectHideFlags: 0
@@ -771,13 +787,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3726523363411293002}
-  m_LocalRotation: {x: -0.5190095, y: 0.49787366, z: 0.4787477, w: 0.50353914}
-  m_LocalPosition: {x: 0.253, y: 0.008, z: -0.045}
+  m_LocalRotation: {x: -0.5017116, y: 0.5208371, z: 0.4805757, w: -0.49604553}
+  m_LocalPosition: {x: -0.1796, y: -0.1157, z: -0.0783}
   m_LocalScale: {x: 0.11832644, y: 0.11677486, z: 0.069173664}
   m_Children: []
   m_Father: {fileID: 5958715898808354912}
   m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: -88.007, y: 532.652, z: -445.284}
+  m_LocalEulerAnglesHint: {x: -0.164, y: 627.365, z: -448.013}
 --- !u!33 &3726523363412225866
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -2024,6 +2040,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Screens
       objectReference: {fileID: 0}
+    - target: {fileID: 7526933500874444014, guid: 590248691a86e9446b1bde67611440cd,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7707116412919485572, guid: 590248691a86e9446b1bde67611440cd,
         type: 3}
       propertyPath: screenPanneTexture.Array.size
@@ -2039,8 +2060,20 @@ PrefabInstance:
       propertyPath: screenPanneTexture.Array.data[1]
       value: 
       objectReference: {fileID: 2100000, guid: d3c1cf6f3bd731d419ca0b7f56c8739a, type: 2}
-    m_RemovedComponents: []
+    - target: {fileID: 8451044571495751503, guid: 590248691a86e9446b1bde67611440cd,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 8451044571495751503, guid: 590248691a86e9446b1bde67611440cd, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 590248691a86e9446b1bde67611440cd, type: 3}
+--- !u!1 &193103924725184385 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6884857613535326371, guid: 590248691a86e9446b1bde67611440cd,
+    type: 3}
+  m_PrefabInstance: {fileID: 6712025333153974050}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1900698561326297422 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5135585991333246572, guid: 590248691a86e9446b1bde67611440cd,
