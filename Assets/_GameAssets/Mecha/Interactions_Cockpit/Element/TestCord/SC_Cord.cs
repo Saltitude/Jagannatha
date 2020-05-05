@@ -67,6 +67,22 @@ public class SC_Cord : MonoBehaviour
 
     void ObjectStatus()
     {
+
+
+
+
+        //Ce truc veut dire que quand on launch en editeur ta seconde condition s'active tout le temps et l'objet est donc tout le temps en kinematic == false tant qu'aucune tirette n'est selectionnée.
+        //Mais en build les tirettes sont tout le temps en kinematic.
+
+        // pareil, commenté à la sauvage et forcé le kinematic pour le build. <3
+
+
+
+
+
+
+
+
         /*
         #if UNITY_EDITOR
 
@@ -76,10 +92,12 @@ public class SC_Cord : MonoBehaviour
         else if (UnityEditor.Selection.activeObject != this.gameObject && Rb.isKinematic)
             Rb.isKinematic = false;
 
-        #endif*/
+        #endif
+        
+         */
 
-        //if (Rb.isKinematic && b_Grabbing == false)
-            Rb.isKinematic = false;
+            if(Rb.isKinematic)
+                Rb.isKinematic = false;
 
     }
 
@@ -107,6 +125,13 @@ public class SC_Cord : MonoBehaviour
 
     void ReleaseObject()
     {
+
+
+
+        //wesh carrément commenté dans la pression de build mais tu peux décommenter je pense pas que ca impacte quoi que ce soit
+
+
+
         /*
         #if UNITY_EDITOR
 
@@ -118,6 +143,9 @@ public class SC_Cord : MonoBehaviour
     
     void SetMaterial(bool State)
     {
+
+        //ici j'ai un peu bidouillé pour que ca change l'emissive à la place de changer le mat, du coup ton tableau de mat sert plus à rien ;}
+
         if (!State)
             Renderer.material.SetColor("_EmissionColor", (Color.grey));
            // Renderer.material = tab_Materials[0];
