@@ -67,6 +67,8 @@ public class SC_SyncVar_DisplaySystem : NetworkBehaviour
 
     void OnChangeBreakEngine(bool Breakdown)
     {
+        if((int)SC_GameStates.Instance.CurState >= (int)SC_GameStates.GameState.Game)
+        SC_UI_BlinkBreakdownManager.Instance.SetBreakdown(Breakdown);
         b_BreakEngine = Breakdown;
         UpdateOnClient();
     }
