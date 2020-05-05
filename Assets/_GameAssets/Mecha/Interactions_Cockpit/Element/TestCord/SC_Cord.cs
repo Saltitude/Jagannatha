@@ -116,9 +116,12 @@ public class SC_Cord : MonoBehaviour
     void SetMaterial(bool State)
     {
         if (!State)
-            Renderer.material = tab_Materials[0];
+            Renderer.material.SetColor("_EmissionColor", (Color.grey));
+           // Renderer.material = tab_Materials[0];
+
         if (State)
-            Renderer.material = tab_Materials[1];
+            Renderer.material.SetColor("_EmissionColor", (Color.white));   
+        //Renderer.material = tab_Materials[1];
     }
 
     public void HandKinematic(bool state)
