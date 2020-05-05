@@ -91,6 +91,7 @@ public class SC_MovementBreakdown : MonoBehaviour, IF_BreakdownManager
 
         ResizeTab();
         CurPilotSeqLenght = 0;
+        SyncCurPilotSeqLenght();
         SetSequenceState(false);
 
         int oldrnd = 0;
@@ -136,6 +137,7 @@ public class SC_MovementBreakdown : MonoBehaviour, IF_BreakdownManager
             {
                 //Debug.Log("isCorrect Mov");
                 CurPilotSeqLenght = 0;
+                SyncCurPilotSeqLenght();
                 SetSequenceState(true);
                 //Ranger les Cords              
             }
@@ -204,6 +206,7 @@ public class SC_MovementBreakdown : MonoBehaviour, IF_BreakdownManager
         {
             tab_PilotSequence[CurPilotSeqLenght] = CordIndex;
             CurPilotSeqLenght++;
+            SyncCurPilotSeqLenght();
             CheckSequences(CurPilotSeqLenght);
         }
     }
