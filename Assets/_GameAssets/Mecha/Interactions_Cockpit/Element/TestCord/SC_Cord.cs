@@ -44,7 +44,7 @@ public class SC_Cord : MonoBehaviour
     void Start()
     {
         Rb = this.GetComponent<Rigidbody>();
-        SetMaterial();
+        SetMaterial(false);
     }
 
     // Update is called once per frame
@@ -83,14 +83,17 @@ public class SC_Cord : MonoBehaviour
     void RangeEffect()
     {
 
-        if (f_CurDistance < ConstraintRange)
+        if (f_CurDistance < ConstraintRange && !b_InRange)
+        {
             b_InRange = true;
+            SetMaterial(false);
+        }        
 
         if (f_CurDistance > ConstraintRange + DeadZone && b_InRange)
         {
             b_Enable = !b_Enable;
             b_InRange = false;
-            SetMaterial();
+            SetMaterial(true);
             SC_MovementBreakdown.Instance.AddToPilotSeq(n_Index);
         }
 
@@ -110,12 +113,15 @@ public class SC_Cord : MonoBehaviour
 
     }
     
-    void SetMaterial()
+    void SetMaterial(bool State)
     {
-        if (!b_Enable)
-            Renderer.material = tab_Materials[0];
-        if (b_Enable)
-            Renderer.material = tab_Materials[1];
+        if (!State)
+            Renderer.material.SetColor("_EmissionColor", (Color.grey));
+           // Renderer.material = tab_Materials[0];
+
+        if (State)
+            Renderer.material.SetColor("_EmissionColor", (Color.white));   
+        //Renderer.material = tab_Materials[1];
     }
 
     public void HandKinematic(bool state)
