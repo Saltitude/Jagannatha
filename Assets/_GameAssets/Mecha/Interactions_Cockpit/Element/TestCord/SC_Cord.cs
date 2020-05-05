@@ -131,6 +131,7 @@ public class SC_Cord : MonoBehaviour
     {
         Debug.Log("HandKinematic - " + state);
         Rb.isKinematic = state;
+        b_Grabbing = state;
     }
 
     public void CreateFixedJoint()
