@@ -187,6 +187,7 @@ public class SC_MainBreakDownManager : MonoBehaviour, IF_BreakdownManager
                 SC_WaveManager.Instance.b_nextWave = false;
                 SC_BreakdownOnBreakdownAlert.Instance.LaunchGlobalAlert();
                 SC_FogBreakDown.Instance.BreakDownDensity();
+                SC_LightAlarm.Instance.BreakDownLight();
                 if (SoundSourceNumb == 0)
                 {
                     BreakDownAudioSource = CustomSoundManager.Instance.PlaySound(gameObject, "SFX_p_breackdown_alarm", true, 0.1f);
@@ -228,6 +229,7 @@ public class SC_MainBreakDownManager : MonoBehaviour, IF_BreakdownManager
                         SC_GameStates.Instance.ChangeTutoGameState(SC_GameStates.TutorialState.Tutorial1_9);
 
                     SC_FogBreakDown.Instance.ClearDensity();
+                    SC_LightAlarm.Instance.ClearLight();
 
                 }
 
