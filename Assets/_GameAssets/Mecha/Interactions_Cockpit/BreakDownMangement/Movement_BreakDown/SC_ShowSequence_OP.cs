@@ -17,11 +17,13 @@ public class SC_ShowSequence_OP : MonoBehaviour
 
     [Header("References")]
     [SerializeField]
-    GameObject SeqPart01;
+    GameObject[] SeqParts;
     [SerializeField]
-    GameObject SeqPart02;
+    Sprite S_Circle;
     [SerializeField]
-    GameObject SeqPart03;
+    Sprite S_Square;
+    [SerializeField]
+    Sprite S_Triangle;
 
     [Header("Debug References")]
     [SerializeField]
@@ -53,17 +55,16 @@ public class SC_ShowSequence_OP : MonoBehaviour
     public void DisplaySequence()
     {
 
-        //Debug.Log("Aff Sequence 01");
+        for (int i = 0; i < SeqParts.Length; i++)
+            SeqParts[i].SetActive(false);
+
+        int SequenceLenght = SC_SyncVar_MovementSystem.Instance.BreakdownList.Count;
 
         if (b_UseDebugContent)
         {
 
-            //Debug.Log("Aff Sequence 02");
-
             for (int i = 0; i < DebugContents.Length; i++)
                 DebugContents[i].SetActive(false);
-
-            int SequenceLenght = SC_SyncVar_MovementSystem.Instance.BreakdownList.Count;
 
             for (int i = 0; i < SequenceLenght; i++)
             {
@@ -72,7 +73,7 @@ public class SC_ShowSequence_OP : MonoBehaviour
                 DebugContents[i].GetComponent<TextMeshPro>().text = curValue;
             }
 
-        }  
+        }   
 
     }
 
