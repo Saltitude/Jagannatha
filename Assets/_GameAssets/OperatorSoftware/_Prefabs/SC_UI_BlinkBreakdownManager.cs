@@ -26,9 +26,9 @@ public class SC_UI_BlinkBreakdownManager : MonoBehaviour
 
     [SerializeField]
     Material matToBlink;
-    Color32 color;
+    Color color;
 
-    [Range (0,1)]
+    [Range (0.2f,0.75f)]
     public float opacity;
 
    
@@ -41,25 +41,22 @@ public class SC_UI_BlinkBreakdownManager : MonoBehaviour
         All = FindObjectsOfType<Image>();
         foreach(Image b in All)
         {
-            if(b == matToBlink)
+
+            if (b.material == matToBlink)
             {
-                toAnimate.Add(b);
+                toAnimate.Add(b);             
             }
         }
-        color = matToBlink.color;
+        color = Color.white;
     }
 
     // Update is called once per frame
     void Update()
     {
-
-        for(int i = 0; i<toAnimate.Count; i++)
+        for (int i = 0; i<toAnimate.Count; i++)
         {
-            opacity *= 255;
-            byte opacityB = (byte)Mathf.RoundToInt(opacity);
-            Debug.Log(opacityB);
-
-            toAnimate[i].material.color = new Color32(color.r, color.g, color.b, opacityB);
+            color = new Color(color.r, color.g, color.b, opacity);
+            toAnimate[i].color = color;
      
         }
 
