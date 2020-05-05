@@ -260,6 +260,11 @@ public class SC_MovementBreakdown : MonoBehaviour, IF_BreakdownManager
 
     }
 
+    void SyncCurPilotSeqLenght()
+    {
+        SC_SyncVar_MovementSystem.Instance.CurPilotSeqLenght = CurPilotSeqLenght;
+    }
+
     #endregion SyncFunctions
 
     #region DebugMethod

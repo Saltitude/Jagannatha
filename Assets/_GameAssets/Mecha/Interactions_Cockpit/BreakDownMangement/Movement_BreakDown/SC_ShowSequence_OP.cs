@@ -17,11 +17,17 @@ public class SC_ShowSequence_OP : MonoBehaviour
 
     [Header("References")]
     [SerializeField]
-    GameObject SeqPart01;
+    GameObject[] SeqParts;
+    [SerializeField] //Order is Circle Triangle Square
+    Sprite[] tab_Sprites;
     [SerializeField]
-    GameObject SeqPart02;
+    GameObject[] tab_Progress;
     [SerializeField]
-    GameObject SeqPart03;
+    Material ProgressOn;
+    [SerializeField]
+    Material ProgressOff;
+    [SerializeField]
+    Material ProgressDisable;
 
     [Header("Debug References")]
     [SerializeField]
@@ -53,26 +59,47 @@ public class SC_ShowSequence_OP : MonoBehaviour
     public void DisplaySequence()
     {
 
-        //Debug.Log("Aff Sequence 01");
+        int SequenceLenght = SC_SyncVar_MovementSystem.Instance.BreakdownList.Count;
+
+        for (int i = 0; i < tab_Progress.Length; i++)
+        {
+            if (i < SequenceLenght)
+                tab_Progress[i].GetComponent<Image>().material = ProgressOff;
+            else
+                tab_Progress[i].GetComponent<Image>().material = ProgressDisable;
+        }
+
+        for (int i = 0; i < SeqParts.Length; i++)
+            SeqParts[i].SetActive(false);         
 
         if (b_UseDebugContent)
+            for (int i = 0; i < DebugContents.Length; i++)
+                DebugContents[i].SetActive(false); 
+
+        for (int i = 0; i < SequenceLenght; i++)
         {
 
-            //Debug.Log("Aff Sequence 02");
+            SeqParts[i].SetActive(true);
+            SeqParts[i].GetComponent<Image>().sprite = tab_Sprites[SC_SyncVar_MovementSystem.Instance.BreakdownList[i]-1];
 
-            for (int i = 0; i < DebugContents.Length; i++)
-                DebugContents[i].SetActive(false);
-
-            int SequenceLenght = SC_SyncVar_MovementSystem.Instance.BreakdownList.Count;
-
-            for (int i = 0; i < SequenceLenght; i++)
+            if (b_UseDebugContent)
             {
                 DebugContents[i].SetActive(true);
                 string curValue = SC_SyncVar_MovementSystem.Instance.BreakdownList[i].ToString();
                 DebugContents[i].GetComponent<TextMeshPro>().text = curValue;
             }
 
-        }  
+        }
+
+    }
+
+    public void DisplayProgression()
+    {
+
+        int PlayerSeqLenght = SC_SyncVar_MovementSystem.Instance.CurPilotSeqLenght;
+
+        for (int i = 0; i < PlayerSeqLenght; i++)
+                tab_Progress[i].GetComponent<Image>().material = ProgressOn;
 
     }
 
