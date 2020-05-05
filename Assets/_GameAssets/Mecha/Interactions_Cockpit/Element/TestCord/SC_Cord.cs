@@ -44,7 +44,7 @@ public class SC_Cord : MonoBehaviour
     void Start()
     {
         Rb = this.GetComponent<Rigidbody>();
-        SetMaterial();
+        SetMaterial(false);
     }
 
     // Update is called once per frame
