@@ -13,8 +13,8 @@ public class Sc_ScreenShake : MonoBehaviour
     #endregion
     // Transform of the camera to shake. Grabs the gameObject's transform
     // if null.
-    public Transform screenTransform;
-    public Transform screenBDTransform;
+    Transform screenTransform;
+    //public Transform screenBDTransform;
 
     // How long the object should shake for.
     public float shakeDuration = 0f;
@@ -38,14 +38,15 @@ public class Sc_ScreenShake : MonoBehaviour
         }
         if (screenTransform == null)
         {
-            screenTransform = GetComponent(typeof(Transform)) as Transform;
+            //screenTransform = GetComponent(typeof(Transform)) as Transform;
+            screenTransform = this.GetComponent<Transform>();
         }
     }
 
     void OnEnable()
     {
         originalPos = screenTransform.localPosition;
-        originalPosBD = screenBDTransform.localPosition;
+        //originalPosBD = screenBDTransform.localPosition;
     }
 
     public void ShakeIt(float amplitude, float duration)
@@ -59,7 +60,7 @@ public class Sc_ScreenShake : MonoBehaviour
         if (shakeDuration > 0)
         {
             screenTransform.localPosition = originalPos + Random.insideUnitSphere * shakeAmount;
-            screenBDTransform.localPosition = originalPosBD + Random.insideUnitSphere * shakeAmount;
+            //screenBDTransform.localPosition = originalPosBD + Random.insideUnitSphere * shakeAmount;
 
             shakeDuration -= Time.deltaTime * decreaseFactor;
         }
@@ -67,7 +68,7 @@ public class Sc_ScreenShake : MonoBehaviour
         {
             shakeDuration = 0f;
             screenTransform.localPosition = originalPos;
-            screenBDTransform.localPosition = originalPosBD;
+            //screenBDTransform.localPosition = originalPosBD;
         }
 
     }
