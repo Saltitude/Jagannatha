@@ -67,7 +67,7 @@ public class SC_Cord : MonoBehaviour
 
     void ObjectStatus()
     {
-
+        /*
         #if UNITY_EDITOR
 
         if (UnityEditor.Selection.activeObject == this.gameObject && !Rb.isKinematic)
@@ -76,9 +76,9 @@ public class SC_Cord : MonoBehaviour
         else if (UnityEditor.Selection.activeObject != this.gameObject && Rb.isKinematic)
             Rb.isKinematic = false;
 
-        #endif
+        #endif*/
 
-        if (Rb.isKinematic && b_Grabbing == false)
+        //if (Rb.isKinematic && b_Grabbing == false)
             Rb.isKinematic = false;
 
     }
@@ -107,13 +107,13 @@ public class SC_Cord : MonoBehaviour
 
     void ReleaseObject()
     {
-
+        /*
         #if UNITY_EDITOR
 
         UnityEditor.Selection.SetActiveObjectWithContext(null, null);
 
         #endif
-
+        */
     }
     
     void SetMaterial(bool State)
