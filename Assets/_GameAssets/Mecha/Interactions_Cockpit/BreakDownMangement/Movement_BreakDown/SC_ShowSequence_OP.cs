@@ -18,12 +18,8 @@ public class SC_ShowSequence_OP : MonoBehaviour
     [Header("References")]
     [SerializeField]
     GameObject[] SeqParts;
-    [SerializeField]
-    Sprite S_Circle;
-    [SerializeField]
-    Sprite S_Square;
-    [SerializeField]
-    Sprite S_Triangle;
+    [SerializeField] //Order is Circle Triangle Square
+    Sprite[] tab_Sprites;
 
     [Header("Debug References")]
     [SerializeField]
@@ -58,22 +54,26 @@ public class SC_ShowSequence_OP : MonoBehaviour
         for (int i = 0; i < SeqParts.Length; i++)
             SeqParts[i].SetActive(false);
 
-        int SequenceLenght = SC_SyncVar_MovementSystem.Instance.BreakdownList.Count;
-
         if (b_UseDebugContent)
-        {
-
             for (int i = 0; i < DebugContents.Length; i++)
                 DebugContents[i].SetActive(false);
 
-            for (int i = 0; i < SequenceLenght; i++)
+        int SequenceLenght = SC_SyncVar_MovementSystem.Instance.BreakdownList.Count;
+
+        for (int i = 0; i < SequenceLenght; i++)
+        {
+
+            SeqParts[i].SetActive(true);
+            SeqParts[i].GetComponent<Image>().sprite = tab_Sprites[SC_SyncVar_MovementSystem.Instance.BreakdownList[i]-1];
+
+            if (b_UseDebugContent)
             {
                 DebugContents[i].SetActive(true);
                 string curValue = SC_SyncVar_MovementSystem.Instance.BreakdownList[i].ToString();
                 DebugContents[i].GetComponent<TextMeshPro>().text = curValue;
             }
 
-        }   
+        }
 
     }
 

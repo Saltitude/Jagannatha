@@ -55,9 +55,10 @@ MonoBehaviour:
   - {fileID: 2029534009558985566}
   - {fileID: 8584565065868121574}
   - {fileID: 6681743288617691028}
-  S_Circle: {fileID: 21300000, guid: 042134779a720064a96ec8c4178503f6, type: 3}
-  S_Square: {fileID: 21300000, guid: 1e8b0193a8b76c44b96c82b85f7ebf00, type: 3}
-  S_Triangle: {fileID: 21300000, guid: 1e8c828f91ac00247a24898aa42c019f, type: 3}
+  tab_Sprites:
+  - {fileID: 21300000, guid: 042134779a720064a96ec8c4178503f6, type: 3}
+  - {fileID: 21300000, guid: 1e8c828f91ac00247a24898aa42c019f, type: 3}
+  - {fileID: 21300000, guid: 1e8b0193a8b76c44b96c82b85f7ebf00, type: 3}
   b_UseDebugContent: 0
   DebugContents:
   - {fileID: 9215133114186402406}
