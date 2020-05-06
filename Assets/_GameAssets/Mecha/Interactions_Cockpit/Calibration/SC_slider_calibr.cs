@@ -126,6 +126,20 @@ public class SC_slider_calibr : MonoBehaviour
         SliderPos = this.transform.position - LeftLimit.transform.position;
         SliderCurPos = SliderPos.magnitude;
 
+
+        //Limite ultime pour que ca sorte pas
+
+
+        if (this.transform.localPosition.y > RightLimit.transform.localPosition.y+0.01f)
+        {
+            this.transform.localPosition = new Vector3(_localX, RightLimit.transform.localPosition.y-0.01f, _localZ);
+        }
+        else if (this.transform.localPosition.y < LeftLimit.transform.localPosition.y + 0.01f)
+        {
+            this.transform.localPosition = new Vector3(_localX, LeftLimit.transform.localPosition.y + 0.01f, _localZ);
+        }
+
+
         SliderNewRatio = Ratio(SliderCurPos, SliderLenght, 0.45f, 0.0f, -0.45f);
 
 
