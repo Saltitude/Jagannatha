@@ -14,19 +14,19 @@ AnimatorController:
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: IsCalib
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: CalibValue
     m_Type: 3
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   m_AnimatorLayers:
   - serializedVersion: 5
     m_Name: Base Layer
@@ -1022,10 +1022,10 @@ AnimatorStateMachine:
     m_Position: {x: 348, y: 192, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 1102322217713532880}
-    m_Position: {x: 852, y: 60, z: 0}
+    m_Position: {x: 864, y: 0, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 1102537748456284448}
-    m_Position: {x: 456, y: -144, z: 0}
+    m_Position: {x: 456, y: -120, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 1102208732889381450}
     m_Position: {x: 720, y: -120, z: 0}
@@ -1034,7 +1034,7 @@ AnimatorStateMachine:
     m_Position: {x: 312, y: -276, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 1102299112188416432}
-    m_Position: {x: 672, y: -324, z: 0}
+    m_Position: {x: 720, y: -336, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 1102592578364878176}
     m_Position: {x: 1032, y: -156, z: 0}
