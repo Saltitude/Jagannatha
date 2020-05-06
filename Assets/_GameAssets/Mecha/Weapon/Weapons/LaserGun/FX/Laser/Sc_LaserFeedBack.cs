@@ -68,6 +68,11 @@ public class Sc_LaserFeedBack : MonoBehaviour
         GetComponentInChildren<Animator>().SetBool("IsFire", false);
     }
 
+    public void SetLaserSize(int value)
+    {
+        GetComponentInChildren<Animator>().SetInteger("CalibValue",value);
+    }
+
     public void SetColor(Color32 NewColor)
     {
 
