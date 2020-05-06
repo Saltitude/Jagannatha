@@ -129,7 +129,7 @@ public class SC_FlockDisplay : MonoBehaviour
         roamSettings = flockSettings.roamSettings;
         attackSettings = flockSettings.attackSettings;
         destructionSettings = flockSettings.destructionSettings;
-        reactionSettings = flockSettings.reactionSettings;
+        reactionSettings = flockSettings.getAwaySettings;
 
         _BoidSettings[0] = spawnSettings;
         _BoidSettings[1] = roamSettings;

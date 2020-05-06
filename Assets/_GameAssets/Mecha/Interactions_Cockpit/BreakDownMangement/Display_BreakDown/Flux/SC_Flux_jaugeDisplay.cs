@@ -14,6 +14,7 @@ public class SC_Flux_jaugeDisplay : MonoBehaviour
     {
         MaxNumbJauge = transform.childCount;
         JaugeUnits = new Transform [MaxNumbJauge];
+
         for(int i = 0; i < MaxNumbJauge; i ++)
         {
             JaugeUnits[i] = transform.GetChild(i);
@@ -25,13 +26,17 @@ public class SC_Flux_jaugeDisplay : MonoBehaviour
     void Update()
     {
         FluxValue = FluxSlider.curValue;
-       
-        for (int i = 0; i <= MaxNumbJauge; i++)
+        
+        for (int i = 0; i < MaxNumbJauge; i++)
         {
-            if(i < FluxValue)
+            if (i < FluxValue)
                 JaugeUnits [i].GetComponent<MeshRenderer>().enabled = true;
             else
                 JaugeUnits [i].GetComponent<MeshRenderer>().enabled = false;
+
+            if(FluxValue == 10)
+                JaugeUnits[i].GetComponent<MeshRenderer>().enabled = true;
+
         }
     }
 }

@@ -109,7 +109,7 @@ public class SC_FlockWeaponManager : MonoBehaviour
                 case FlockSettings.AttackType.Bullet: //Bullet
                     if(timer >= 1/flockSettings.fireRate )
                     {
-                        FireBullet();
+                        FireBullet(false);
                         timer = 0;
                         if(nbBulletFire >= flockSettings.nbBulletToShoot)
                         {
@@ -171,7 +171,7 @@ public class SC_FlockWeaponManager : MonoBehaviour
         }
     }
 
-    void FireBullet()
+    void FireBullet(bool superBullet)
     {
         Rigidbody rb = bulletPool[n_CurBullet].GetComponent<Rigidbody>();
 
@@ -182,9 +182,10 @@ public class SC_FlockWeaponManager : MonoBehaviour
         rb.isKinematic = false;
 
         //noise
-        Vector3 dir = new Vector3(transform.forward.x , transform.forward.y , transform.forward.z );
+        Vector3 dir = new Vector3(transform.forward.x , transform.forward.y , transform.forward.z);
 
         bulletPool[n_CurBullet].GetComponent<SC_BulletFlock>().b_IsFire = true;
+        bulletPool[n_CurBullet].GetComponent<SC_BulletFlock>().b_ReactionFire = superBullet;
         bulletPool[n_CurBullet].GetComponent<SC_BulletFlock>().flockSettings = flockSettings;
 
         rb.AddForce(dir * 24000);
@@ -195,6 +196,18 @@ public class SC_FlockWeaponManager : MonoBehaviour
             n_CurBullet = 0;
 
         nbBulletFire++;
+    }
+
+    public void FireSuperBullet()
+    {
+        switch (flockSettings.attackType)
+        {
+            case FlockSettings.AttackType.Bullet: //Bullet
+
+                FireBullet(true);
+
+                break;
+        }
     }
 
     #endregion

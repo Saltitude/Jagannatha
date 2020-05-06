@@ -262,8 +262,6 @@ public class SC_KoaManager : MonoBehaviour
                 y /= nbActive;
                 z /= nbActive;
 
-                
-
                 _koa.transform.position = Vector3.Lerp(_koa.transform.position, new Vector3(x, y, z), 5* Time.deltaTime);
           
          
@@ -387,7 +385,7 @@ public class SC_KoaManager : MonoBehaviour
 
             if (power < 0) power = 0;
             float powerPerCent = (power / 6) * 100;
-            Debug.Log(powerPerCent);
+            //Debug.Log(powerPerCent);
             Sc_LaserFeedBack.Instance.SetLaserSize(Mathf.FloorToInt(powerPerCent));
             if (SC_Debug_Mng.Instance.b_weapon_Cheatcode)
             {
@@ -407,6 +405,15 @@ public class SC_KoaManager : MonoBehaviour
                 SC_HitMarker.Instance.HitMark(SC_HitMarker.HitType.Koa);
 
                 vfx_Hit.Play();
+            }
+
+            if (powerPerCent >= curFlockSettings.flightReactionMinSensibility)
+            {
+                flockManager.ReactionFlock(SC_FlockManager.PathType.Flight);
+            }
+            if (powerPerCent < curFlockSettings.hitReactionMaxSensibility)
+            {
+                flockManager.ReactionFlock(SC_FlockManager.PathType.ReactionHit);
             }
 
             ///DEBUG
@@ -467,16 +474,20 @@ public class SC_KoaManager : MonoBehaviour
 
         if (power < 0) power = 0;
         float powerPerCent = (power / 6) * 100;
-        Debug.Log(powerPerCent);
+        //Debug.Log(powerPerCent);
         Sc_LaserFeedBack.Instance.SetLaserSize(Mathf.FloorToInt(powerPerCent));
         if (SC_Debug_Mng.Instance.b_weapon_Cheatcode)
         {
             powerPerCent = SC_Debug_Mng.Instance.powerPerCent;
         }
 
-        if (powerPerCent < curFlockSettings.maxReactionSensibilityPerCent)
+        if (powerPerCent >= curFlockSettings.flightReactionMinSensibility)
         {
-            flockManager.ReactionFlock();
+            flockManager.ReactionFlock(SC_FlockManager.PathType.Flight);
+        }
+        if(powerPerCent < curFlockSettings.hitReactionMaxSensibility)
+        {
+            flockManager.ReactionFlock(SC_FlockManager.PathType.ReactionHit);
         }
     }
 
