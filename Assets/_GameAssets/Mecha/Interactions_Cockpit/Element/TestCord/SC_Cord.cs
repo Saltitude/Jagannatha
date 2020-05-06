@@ -12,11 +12,9 @@ public class SC_Cord : MonoBehaviour
     [SerializeField]
     Material[] tab_Materials;
 
-    [Header("General Parameters")]
+    [Header("Parameters")]
     [SerializeField]
     int n_Index = 0;
-
-    [Header("Physical Parameters")]
     [SerializeField, Range(0, 1)]
     float ConstraintRange = 0.7f;
     [SerializeField, Range(0, 0.5f)]
@@ -26,13 +24,7 @@ public class SC_Cord : MonoBehaviour
     [SerializeField]
     float JointBeakFroce;
 
-    [Header("Graph Parameters")]
-    [SerializeField, Range(1, 10000f)]
-    float f_ColorFactor;
-
     [Header("Infos")]
-    [SerializeField]
-    bool b_InEditor = false;
     [SerializeField]
     float f_CurDistance;
     [SerializeField]
@@ -40,7 +32,7 @@ public class SC_Cord : MonoBehaviour
     [SerializeField]
     bool b_Enable = false;
     [SerializeField]
-    bool b_Grabbing = false;  
+    bool b_Grabbing = false;
 
     //Non Public Refs
     Rigidbody Rb;
@@ -53,14 +45,6 @@ public class SC_Cord : MonoBehaviour
     {
         Rb = this.GetComponent<Rigidbody>();
         SetMaterial(false);
-
-        #if UNITY_EDITOR
-            b_InEditor = true;
-        #endif
-
-        if (Rb.isKinematic && !b_InEditor)
-            Rb.isKinematic = false;
-
     }
 
     // Update is called once per frame
@@ -84,17 +68,36 @@ public class SC_Cord : MonoBehaviour
     void ObjectStatus()
     {
 
-        //A Commenté possiblement si build fonctionne pas.
-        if (b_InEditor)
-        {
 
-            if (UnityEditor.Selection.activeObject == this.gameObject && !Rb.isKinematic)
-                Rb.isKinematic = true;
 
-            else if (UnityEditor.Selection.activeObject != this.gameObject && Rb.isKinematic)
+
+        //Ce truc veut dire que quand on launch en editeur ta seconde condition s'active tout le temps et l'objet est donc tout le temps en kinematic == false tant qu'aucune tirette n'est selectionnée.
+        //Mais en build les tirettes sont tout le temps en kinematic.
+
+        // pareil, commenté à la sauvage et forcé le kinematic pour le build. <3
+
+
+
+
+
+
+
+
+        /*
+        #if UNITY_EDITOR
+
+        if (UnityEditor.Selection.activeObject == this.gameObject && !Rb.isKinematic)
+            Rb.isKinematic = true;
+
+        else if (UnityEditor.Selection.activeObject != this.gameObject && Rb.isKinematic)
+            Rb.isKinematic = false;
+
+        #endif
+        
+         */
+
+            if(Rb.isKinematic)
                 Rb.isKinematic = false;
-
-        }
 
     }
 
@@ -122,9 +125,20 @@ public class SC_Cord : MonoBehaviour
 
     void ReleaseObject()
     {
+
+
+
+        //wesh carrément commenté dans la pression de build mais tu peux décommenter je pense pas que ca impacte quoi que ce soit
+
+
+
+        /*
         #if UNITY_EDITOR
+
         UnityEditor.Selection.SetActiveObjectWithContext(null, null);
+
         #endif
+        */
     }
     
     void SetMaterial(bool State)
@@ -133,11 +147,12 @@ public class SC_Cord : MonoBehaviour
         //ici j'ai un peu bidouillé pour que ca change l'emissive à la place de changer le mat, du coup ton tableau de mat sert plus à rien ;}
 
         if (!State)
-            Renderer.material.SetColor("_EmissionColor", (Color.grey * f_ColorFactor));
+            Renderer.material.SetColor("_EmissionColor", (Color.grey));
+           // Renderer.material = tab_Materials[0];
 
         if (State)
-            Renderer.material.SetColor("_EmissionColor", (Color.white * f_ColorFactor));   
-
+            Renderer.material.SetColor("_EmissionColor", (Color.white));   
+        //Renderer.material = tab_Materials[1];
     }
 
     public void HandKinematic(bool state)
