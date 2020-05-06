@@ -1270,11 +1270,6 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1280220214639394410, guid: 5868590ac89dbe244a183448a01ec422,
-        type: 3}
-      propertyPath: orthographic size
-      value: 54
-      objectReference: {fileID: 0}
     - target: {fileID: 1280220214646620027, guid: 5868590ac89dbe244a183448a01ec422,
         type: 3}
       propertyPath: m_LocalScale.x
@@ -3900,6 +3895,11 @@ PrefabInstance:
       propertyPath: m_SizeDelta.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3996811657832368554, guid: 5868590ac89dbe244a183448a01ec422,
+        type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 3997092453797881347, guid: 5868590ac89dbe244a183448a01ec422,
         type: 3}
       propertyPath: m_AnchorMin.y
@@ -3928,6 +3928,21 @@ PrefabInstance:
     - target: {fileID: 3997092453797881347, guid: 5868590ac89dbe244a183448a01ec422,
         type: 3}
       propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3999990804769732332, guid: 5868590ac89dbe244a183448a01ec422,
+        type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3999990804769732332, guid: 5868590ac89dbe244a183448a01ec422,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3999990804769732332, guid: 5868590ac89dbe244a183448a01ec422,
+        type: 3}
+      propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4008618792102730333, guid: 5868590ac89dbe244a183448a01ec422,
@@ -4579,6 +4594,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_SizeDelta.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4801060408485155821, guid: 5868590ac89dbe244a183448a01ec422,
+        type: 3}
+      propertyPath: m_Mesh
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 4833256928129761731, guid: 5868590ac89dbe244a183448a01ec422,
         type: 3}
@@ -6589,6 +6609,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_SizeDelta.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7246817572911093642, guid: 5868590ac89dbe244a183448a01ec422,
+        type: 3}
+      propertyPath: m_Mesh
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 7253046880413193284, guid: 5868590ac89dbe244a183448a01ec422,
         type: 3}
