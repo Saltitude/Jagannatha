@@ -21,8 +21,12 @@ MonoBehaviour:
   chargingAttackTime: 1
   activeDuration: 1
   speedToTarget: 0.7
-  reactionDuration: 3
-  maxReactionSensibilityPerCent: 50
+  flightDuration: 3
+  hitReactionMaxSensibility: 50
+  hitReactionDelay: 2
+  flightReactionMinSensibility: 75
+  attackFocusHitReaction: 0
+  damageOnSystemHitReaction: 0
   spawnSettings:
   - {fileID: 11400000, guid: 8241a6c65e4b8e4488218c6992d4efdb, type: 2}
   roamSettings:
@@ -31,13 +35,16 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 8241a6c65e4b8e4488218c6992d4efdb, type: 2}
   destructionSettings:
   - {fileID: 11400000, guid: 7934150062f27ae4195cd71ff4af75f5, type: 2}
-  reactionSettings:
-  - {fileID: 11400000, guid: 7b15b8a0b9e9bf943be5e15e655266a5, type: 2}
+  getAwaySettings:
+  - {fileID: 11400000, guid: 8241a6c65e4b8e4488218c6992d4efdb, type: 2}
+  hitReactionSettings:
+  - {fileID: 11400000, guid: 8241a6c65e4b8e4488218c6992d4efdb, type: 2}
   splines:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 7590711955548368644, guid: 2d80bbddcfd75f74b968524747323c54, type: 3}
+  - {fileID: 0}
   - {fileID: 0}
   spawnTimer: 10
   boidSpawn: 50
