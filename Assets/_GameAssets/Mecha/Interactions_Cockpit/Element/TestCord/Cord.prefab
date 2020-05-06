@@ -568,6 +568,8 @@ MonoBehaviour:
   DeadZone: 0.15
   AddMaxRange: 0.3
   JointBeakFroce: 0
+  f_ColorFactor: 10
+  b_InEditor: 0
   f_CurDistance: 0
   b_InRange: 0
   b_Enable: 0

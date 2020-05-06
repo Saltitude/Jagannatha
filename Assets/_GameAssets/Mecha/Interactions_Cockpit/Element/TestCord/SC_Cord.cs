@@ -134,7 +134,7 @@ public class SC_Cord : MonoBehaviour
         //ici j'ai un peu bidouillé pour que ca change l'emissive à la place de changer le mat, du coup ton tableau de mat sert plus à rien ;}
 
         if (!State)
-            Renderer.material.SetColor("_EmissionColor", (Color.grey * f_ColorFactor));
+            Renderer.material.SetColor("_EmissionColor", (Color.grey));
 
         if (State)
             Renderer.material.SetColor("_EmissionColor", (Color.white * f_ColorFactor));   
