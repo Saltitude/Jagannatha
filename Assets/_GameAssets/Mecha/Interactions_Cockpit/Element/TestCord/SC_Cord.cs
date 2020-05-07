@@ -153,7 +153,7 @@ public class SC_Cord : MonoBehaviour
     public void HandKinematic(bool state)
     {
 
-        Debug.Log("HandKinematic - " + state);
+        //Debug.Log("HandKinematic - " + state);
 
         Rb.isKinematic = state;
         b_Grabbing = state;
@@ -163,7 +163,7 @@ public class SC_Cord : MonoBehaviour
     public void CreateFixedJoint()
     {
 
-        Debug.Log("CreateFixedJoint");
+        //Debug.Log("CreateFixedJoint");
 
         GameObject RightHand = SC_GetRightController.Instance.getGameObject();
 
@@ -177,7 +177,7 @@ public class SC_Cord : MonoBehaviour
         if (CurJoint != null)
         {
 
-            Debug.Log("DeleteFixedJoint");
+            //Debug.Log("DeleteFixedJoint");
 
             CurJoint.connectedBody = null;
             Destroy(CurJoint);
@@ -188,7 +188,7 @@ public class SC_Cord : MonoBehaviour
     private FixedJoint AddFixedJoint(GameObject Target)
     {
 
-        Debug.Log("AddFixedJoint");
+        //Debug.Log("AddFixedJoint");
 
         FixedJoint fx = Target.AddComponent<FixedJoint>();
         //fx.breakForce = JointBeakFroce;
