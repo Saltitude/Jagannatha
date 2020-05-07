@@ -1094,6 +1094,26 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
+    - target: {fileID: 6855421031027734558, guid: 7610f820af744d241a6d6f9e44189c89,
+        type: 3}
+      propertyPath: m_Center.x
+      value: 655000
+      objectReference: {fileID: 0}
+    - target: {fileID: 6855421031027734558, guid: 7610f820af744d241a6d6f9e44189c89,
+        type: 3}
+      propertyPath: m_Center.y
+      value: -135000
+      objectReference: {fileID: 0}
+    - target: {fileID: 6855421031027734558, guid: 7610f820af744d241a6d6f9e44189c89,
+        type: 3}
+      propertyPath: m_Size.x
+      value: 75000
+      objectReference: {fileID: 0}
+    - target: {fileID: 6855421031027734558, guid: 7610f820af744d241a6d6f9e44189c89,
+        type: 3}
+      propertyPath: m_Size.y
+      value: 75000
+      objectReference: {fileID: 0}
     - target: {fileID: 7118495803543032032, guid: 7610f820af744d241a6d6f9e44189c89,
         type: 3}
       propertyPath: m_Name
