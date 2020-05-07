@@ -25,7 +25,7 @@ public class SC_Cord : MonoBehaviour
     [SerializeField, Range(0, 0.5f)]
     float AddMaxRange = 0.3f;
     [SerializeField]
-    float JointBeakFroce;
+    float JointBeakFroce = 10000f;
 
     [Header("Graph Parameters")]
     [SerializeField, Range(1, 10000f)]
@@ -191,8 +191,8 @@ public class SC_Cord : MonoBehaviour
         Debug.Log("AddFixedJoint");
 
         FixedJoint fx = Target.AddComponent<FixedJoint>();
-        fx.breakForce = JointBeakFroce;
-        fx.breakTorque = JointBeakFroce;
+        //fx.breakForce = JointBeakFroce;
+        //fx.breakTorque = JointBeakFroce;
         return fx;
 
     }
