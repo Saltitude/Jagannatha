@@ -134,7 +134,7 @@ public class SC_KoaSpawn : MonoBehaviour
 
         float rndSphereScale = Random.Range(0.6f, 1.6f);
 
-        koa.transform.localScale = new Vector3(rndSphereScale, rndSphereScale, rndSphereScale);
+        koa.transform.localScale = new Vector3(koa.transform.localScale.x*rndSphereScale, koa.transform.localScale.y*rndSphereScale, koa.transform.localScale.z*rndSphereScale);
 
         float rndscale = Random.Range(1.0f, 2.0f);
         for (int i = 0; i<koa.transform.childCount;i++)
