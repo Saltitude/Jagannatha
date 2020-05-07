@@ -25,7 +25,7 @@ public class SC_Cord : MonoBehaviour
     [SerializeField, Range(0, 0.5f)]
     float AddMaxRange = 0.3f;
     [SerializeField]
-    float JointBeakFroce;
+    float JointBeakFroce = 10000f;
 
     [Header("Graph Parameters")]
     [SerializeField, Range(1, 10000f)]
@@ -52,15 +52,15 @@ public class SC_Cord : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+
         Rb = this.GetComponent<Rigidbody>();
         SetMaterial(false);
 
+        /*
         #if UNITY_EDITOR
             b_InEditor = true;
         #endif
-
-        if (Rb.isKinematic && !b_InEditor)
-            Rb.isKinematic = false;
+        */
 
     }
 
@@ -85,17 +85,24 @@ public class SC_Cord : MonoBehaviour
     void ObjectStatus()
     {
 
-        //A Commenté possiblement si build fonctionne pas.
-        //if (b_InEditor)
-        //{
+        //a commenté possiblement si build fonctionne pas.
+        /*
+        if (b_ineditor)
+        {
 
-        //    if (UnityEditor.Selection.activeObject == this.gameObject && !Rb.isKinematic)
-        //        Rb.isKinematic = true;
+            if (unityeditor.selection.activeobject == this.gameobject && !rb.iskinematic)
+                rb.iskinematic = true;
 
-        //    else if (UnityEditor.Selection.activeObject != this.gameObject && Rb.isKinematic)
-        //        Rb.isKinematic = false;
+            else if (unityeditor.selection.activeobject != this.gameobject && rb.iskinematic)
+                rb.iskinematic = false;
 
-        //}
+        }
+        */
+
+        /*
+        if (Rb.isKinematic && !b_InEditor)
+            Rb.isKinematic = false;
+        */
 
     }
 
@@ -123,9 +130,11 @@ public class SC_Cord : MonoBehaviour
 
     void ReleaseObject()
     {
-        //#if UNITY_EDITOR
-        //UnityEditor.Selection.SetActiveObjectWithContext(null, null);
-        //#endif
+        /*
+        #if UNITY_EDITOR
+            UnityEditor.Selection.SetActiveObjectWithContext(null, null);
+        #endif
+        */
     }
     
     void SetMaterial(bool State)
@@ -143,13 +152,18 @@ public class SC_Cord : MonoBehaviour
 
     public void HandKinematic(bool state)
     {
-        Debug.Log("HandKinematic - " + state);
+
+        //Debug.Log("HandKinematic - " + state);
+
         Rb.isKinematic = state;
         b_Grabbing = state;
+
     }
 
     public void CreateFixedJoint()
     {
+
+        //Debug.Log("CreateFixedJoint");
 
         GameObject RightHand = SC_GetRightController.Instance.getGameObject();
 
@@ -162,17 +176,25 @@ public class SC_Cord : MonoBehaviour
     {
         if (CurJoint != null)
         {
+
+            //Debug.Log("DeleteFixedJoint");
+
             CurJoint.connectedBody = null;
             Destroy(CurJoint);
+
         }
     }
 
     private FixedJoint AddFixedJoint(GameObject Target)
     {
+
+        //Debug.Log("AddFixedJoint");
+
         FixedJoint fx = Target.AddComponent<FixedJoint>();
-        fx.breakForce = JointBeakFroce;
-        fx.breakTorque = JointBeakFroce;
+        //fx.breakForce = JointBeakFroce;
+        //fx.breakTorque = JointBeakFroce;
         return fx;
+
     }
 
 }
