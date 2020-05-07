@@ -39,13 +39,13 @@ public class SC_WaveManager : MonoBehaviour
 
     float curBackupTimer = 0;
     bool backupSend;
-    
 
 
-    Vector3Int sensitivityA;
-    Vector3Int sensitivityB;
-    Vector3Int sensitivityC;
-    Vector3Int sensitivityD;
+
+    Vector3Int sensitivityA = new Vector3Int(0, 0, 0);
+    Vector3Int sensitivityB = new Vector3Int(0, 0, 0);
+    Vector3Int sensitivityC = new Vector3Int(0, 0, 0);
+    Vector3Int sensitivityD = new Vector3Int(0, 0, 0);
 
     #endregion
     //---------------------------------------------------------------------//
@@ -101,9 +101,6 @@ public class SC_WaveManager : MonoBehaviour
     #region Initialize New Wave
     public void InitializeWave(WaveSettings newWaveSettings)
     {
-            resetVariables();
-            _curWaveSettings = newWaveSettings;
-
         resetVariables();
         _curWaveSettings = newWaveSettings;
 
@@ -355,25 +352,49 @@ public class SC_WaveManager : MonoBehaviour
     //---------------------------SENSITIVITY-------------------------------//
     void GenerateNewSensitivity()
     {
-        int x;
-        int y;
-        int z;
 
-        x = Random.Range(0, 6);
-        y = Random.Range(0, 6);
-        z = Random.Range(0, 6);
+        Vector3Int newValueA = GenerateNewValue(sensitivityA);
+        Vector3Int newValueB = GenerateNewValue(sensitivityB);
 
-        sensitivityA = new Vector3Int(x, y, z);
 
-        x = Random.Range(0, 6);
-        y = Random.Range(0, 6);
-        z = Random.Range(0, 6);
-
-        sensitivityB = new Vector3Int(x, y, z);
-
-        sensitivityC = new Vector3Int(GetRangedValue(x), GetRangedValue(y), GetRangedValue(z));
+        sensitivityA = newValueA;
+        sensitivityB = newValueB;
+        sensitivityC = new Vector3Int(GetRangedValue(sensitivityB.x), GetRangedValue(sensitivityB.y), GetRangedValue(sensitivityB.z));
 
         sensitivityD = new Vector3Int(5, 5, 5);
+    }
+
+    Vector3Int GenerateNewValue(Vector3Int oldValue)
+    {
+
+        int newX;
+        int newY;
+        int newZ;
+
+        newX = Random.Range(0, 6);
+        newY = Random.Range(0, 6);
+        newZ = Random.Range(0, 6);
+
+        Vector3Int newValue = new Vector3Int(newX, newY, newZ);
+
+        float x = Mathf.Abs(newValue.x - oldValue.x);
+        float y = Mathf.Abs(newValue.y - oldValue.y);
+        float z = Mathf.Abs(newValue.z - oldValue.z);
+
+        float ecart = x + y + z;
+        if(ecart <=3)
+        {
+            newValue = GenerateNewValue(oldValue);
+        }
+        else
+        {
+            newValue = new Vector3Int(newX, newY, newZ);
+        }
+
+
+        return newValue;
+
+
     }
 
     int GetRangedValue(int baseValue)

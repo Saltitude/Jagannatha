@@ -48,6 +48,7 @@ MonoBehaviour:
   - {fileID: 8158630672628145991, guid: 2cbfe71a8ee1b8441859e94a965a85e1, type: 3}
   - {fileID: 0}
   - {fileID: 7590711955548368644, guid: 2d80bbddcfd75f74b968524747323c54, type: 3}
+  - {fileID: 0}
   spawnTimer: 10
   boidSpawn: 100
   maxBoid: 100

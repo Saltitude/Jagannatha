@@ -339,7 +339,7 @@ public class SC_KoaManager : MonoBehaviour
     public void SetBehavior(BoidSettings newSettings)
     {
 
-        curBoidSettings = newSettings; ;
+        curBoidSettings = newSettings; 
         for (int i = 0; i < _boidsTab.Length; i++)
         {
             _boidsTab[i].SetNewSettings(curBoidSettings);
@@ -468,8 +468,6 @@ public class SC_KoaManager : MonoBehaviour
         float z = Mathf.Abs((int)gunSensitivity.z - (int)sensitivity.z);
 
         float ecart = x + y + z;
-
-
         float power = 6 - ecart;
 
         if (power < 0) power = 0;

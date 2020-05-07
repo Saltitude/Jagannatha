@@ -86,16 +86,16 @@ public class SC_Cord : MonoBehaviour
     {
 
         //A Commenté possiblement si build fonctionne pas.
-        if (b_InEditor)
-        {
+        //if (b_InEditor)
+        //{
 
-            if (UnityEditor.Selection.activeObject == this.gameObject && !Rb.isKinematic)
-                Rb.isKinematic = true;
+        //    if (UnityEditor.Selection.activeObject == this.gameObject && !Rb.isKinematic)
+        //        Rb.isKinematic = true;
 
-            else if (UnityEditor.Selection.activeObject != this.gameObject && Rb.isKinematic)
-                Rb.isKinematic = false;
+        //    else if (UnityEditor.Selection.activeObject != this.gameObject && Rb.isKinematic)
+        //        Rb.isKinematic = false;
 
-        }
+        //}
 
     }
 
@@ -123,9 +123,9 @@ public class SC_Cord : MonoBehaviour
 
     void ReleaseObject()
     {
-        #if UNITY_EDITOR
-        UnityEditor.Selection.SetActiveObjectWithContext(null, null);
-        #endif
+        //#if UNITY_EDITOR
+        //UnityEditor.Selection.SetActiveObjectWithContext(null, null);
+        //#endif
     }
     
     void SetMaterial(bool State)
