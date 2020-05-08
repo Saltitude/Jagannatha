@@ -1,0 +1,55 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2f853b98b2e469d4682403b69d26ee96, type: 3}
+  m_Name: WaveKamikazeTkt
+  m_EditorClassIdentifier: 
+  initialSpawnFlock:
+  - {fileID: 11400000, guid: 016999d769f9bda47997e96bfc9fe43b, type: 2}
+  - {fileID: 11400000, guid: 016999d769f9bda47997e96bfc9fe43b, type: 2}
+  - {fileID: 11400000, guid: 016999d769f9bda47997e96bfc9fe43b, type: 2}
+  - {fileID: 11400000, guid: 016999d769f9bda47997e96bfc9fe43b, type: 2}
+  - {fileID: 11400000, guid: 016999d769f9bda47997e96bfc9fe43b, type: 2}
+  - {fileID: 11400000, guid: 016999d769f9bda47997e96bfc9fe43b, type: 2}
+  - {fileID: 11400000, guid: 016999d769f9bda47997e96bfc9fe43b, type: 2}
+  - {fileID: 11400000, guid: 016999d769f9bda47997e96bfc9fe43b, type: 2}
+  - {fileID: 11400000, guid: 016999d769f9bda47997e96bfc9fe43b, type: 2}
+  - {fileID: 11400000, guid: 016999d769f9bda47997e96bfc9fe43b, type: 2}
+  - {fileID: 11400000, guid: 016999d769f9bda47997e96bfc9fe43b, type: 2}
+  - {fileID: 11400000, guid: 016999d769f9bda47997e96bfc9fe43b, type: 2}
+  - {fileID: 11400000, guid: 016999d769f9bda47997e96bfc9fe43b, type: 2}
+  - {fileID: 11400000, guid: 016999d769f9bda47997e96bfc9fe43b, type: 2}
+  - {fileID: 11400000, guid: 016999d769f9bda47997e96bfc9fe43b, type: 2}
+  - {fileID: 11400000, guid: 016999d769f9bda47997e96bfc9fe43b, type: 2}
+  - {fileID: 11400000, guid: 016999d769f9bda47997e96bfc9fe43b, type: 2}
+  - {fileID: 11400000, guid: 016999d769f9bda47997e96bfc9fe43b, type: 2}
+  - {fileID: 11400000, guid: 016999d769f9bda47997e96bfc9fe43b, type: 2}
+  - {fileID: 11400000, guid: 016999d769f9bda47997e96bfc9fe43b, type: 2}
+  - {fileID: 11400000, guid: 016999d769f9bda47997e96bfc9fe43b, type: 2}
+  - {fileID: 11400000, guid: 016999d769f9bda47997e96bfc9fe43b, type: 2}
+  - {fileID: 11400000, guid: 016999d769f9bda47997e96bfc9fe43b, type: 2}
+  - {fileID: 11400000, guid: 016999d769f9bda47997e96bfc9fe43b, type: 2}
+  - {fileID: 11400000, guid: 016999d769f9bda47997e96bfc9fe43b, type: 2}
+  - {fileID: 11400000, guid: 016999d769f9bda47997e96bfc9fe43b, type: 2}
+  - {fileID: 11400000, guid: 016999d769f9bda47997e96bfc9fe43b, type: 2}
+  - {fileID: 11400000, guid: 016999d769f9bda47997e96bfc9fe43b, type: 2}
+  - {fileID: 11400000, guid: 016999d769f9bda47997e96bfc9fe43b, type: 2}
+  - {fileID: 11400000, guid: 016999d769f9bda47997e96bfc9fe43b, type: 2}
+  - {fileID: 11400000, guid: 016999d769f9bda47997e96bfc9fe43b, type: 2}
+  - {fileID: 11400000, guid: 016999d769f9bda47997e96bfc9fe43b, type: 2}
+  initialSpawnPosition: 0000000001000000020000000300000004000000050000000600000007000000000000000100000002000000030000000400000005000000060000000700000000000000010000000200000003000000040000000500000006000000070000000000000001000000020000000300000004000000050000000600000007000000
+  timeBetweenSpawnInitial: 5
+  backup: 0
+  timeBetweenSpawnBackup: 1
+  backupSpawnFlock: []
+  backupSpawnPosition: 
+  timeBeforeBackup: 0
+  flockLeftBeforeBackup: 0

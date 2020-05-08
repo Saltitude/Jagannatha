@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: WavesV3_1
   m_EditorClassIdentifier: 
   initialSpawnFlock:
-  - {fileID: 11400000, guid: c33ae65e541205d4d8efd8a85ca6dccf, type: 2}
+  - {fileID: 11400000, guid: e2539410742a3654494ab6ce864428da, type: 2}
   initialSpawnPosition: 02000000
   timeBetweenSpawnInitial: 0
   backup: 0
