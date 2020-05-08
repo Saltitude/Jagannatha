@@ -225,7 +225,8 @@ public class SC_FlockManager : MonoBehaviour
                 MultiGuideMovement();
 
 
-            //Si le flock n'est pas fusionné, déplace le main guide selon la spline actuel       
+            //Si le flock n'est pas fusionné, déplace le main guide selon la spline actuel      
+            if(curtype != PathType.ReactionHit && curtype != PathType.AttackPlayer)
             bezierWalkerSpeed.Execute(Time.deltaTime);
 
 
@@ -357,8 +358,8 @@ public class SC_FlockManager : MonoBehaviour
         {
             if(reactionTimer >0)
             {
-                reactionTimer -= Time.deltaTime;
-                koaMesh.SetFloat("SpeedFactor", -2);
+                reactionTimer -= 2*Time.deltaTime;
+                koaMesh.SetFloat("SpeedFactor", -4);
             }
             if(reactionTimer <0)
             {
@@ -573,6 +574,10 @@ public class SC_FlockManager : MonoBehaviour
         if(pathType != PathType.AttackPlayer && pathType != PathType.Death && pathType != PathType.Roam) 
         StartNewPath(pathType);
     }
+
+
+
+
 
     public void EndAttack()
     {

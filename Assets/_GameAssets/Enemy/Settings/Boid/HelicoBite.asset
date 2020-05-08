@@ -28,7 +28,6 @@ MonoBehaviour:
   avoidCollisionWeight: 0
   collisionAvoidDst: 0
   koaBehavior: 1
-  coverDistance: 0
   axisRotationSpeed: {x: 2, y: 2, z: 2}
   split: 1
   splitNumber: 100

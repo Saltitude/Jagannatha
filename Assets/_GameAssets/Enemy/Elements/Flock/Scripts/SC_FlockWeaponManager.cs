@@ -45,6 +45,7 @@ public class SC_FlockWeaponManager : MonoBehaviour
     int nbBulletFire;
 
     Animator animator;
+
     ////////////////////////////////////////////////////////
 
 
@@ -180,7 +181,7 @@ public class SC_FlockWeaponManager : MonoBehaviour
     {
         Rigidbody rb = bulletPool[n_CurBullet].GetComponent<Rigidbody>();
 
-        bulletPool[n_CurBullet].transform.position = transform.position;
+        bulletPool[n_CurBullet].transform.position = animator.transform.position;
         bulletPool[n_CurBullet].transform.rotation = transform.rotation;
 
         rb.isKinematic = true;

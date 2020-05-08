@@ -27,8 +27,7 @@ MonoBehaviour:
   boundsRadius: 1
   avoidCollisionWeight: 0
   collisionAvoidDst: 0
-  koaBehavior: 3
-  coverDistance: 0
+  koaBehavior: 1
   axisRotationSpeed: {x: 20, y: 10, z: 1}
   split: 1
   splitNumber: 1
