@@ -307,6 +307,7 @@ public class SC_FlockManager : MonoBehaviour
                 startAttackTimer = 0;
             }
         }
+        transform.LookAt(_Player.transform);
         koaMesh.transform.LookAt(_Player.transform);
     }
 
