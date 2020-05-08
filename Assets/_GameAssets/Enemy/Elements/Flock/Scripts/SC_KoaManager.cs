@@ -387,9 +387,9 @@ public class SC_KoaManager : MonoBehaviour
 
             if (power < 0) power = 0;
             float powerPerCent = (power / 6) * 100;
-            
-
-            if(SC_Debug_Mng.Instance.b_weapon_Cheatcode)
+            //Debug.Log(powerPerCent);
+            Sc_LaserFeedBack.Instance.SetLaserSize(Mathf.FloorToInt(powerPerCent));
+            if (SC_Debug_Mng.Instance.b_weapon_Cheatcode)
             {
                 powerPerCent = SC_Debug_Mng.Instance.powerPerCent;
             }
@@ -474,6 +474,8 @@ public class SC_KoaManager : MonoBehaviour
 
         if (power < 0) power = 0;
         float powerPerCent = (power / 6) * 100;
+        //Debug.Log(powerPerCent);
+        Sc_LaserFeedBack.Instance.SetLaserSize(Mathf.FloorToInt(powerPerCent));
         if (SC_Debug_Mng.Instance.b_weapon_Cheatcode)
         {
             powerPerCent = SC_Debug_Mng.Instance.powerPerCent;

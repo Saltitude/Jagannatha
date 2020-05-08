@@ -564,7 +564,7 @@ MonoBehaviour:
   - {fileID: 2100000, guid: 386c262a1b437a9428968985876ddfea, type: 2}
   - {fileID: 2100000, guid: 255cee9f476a1c640882f33a2b0aa075, type: 2}
   n_Index: 0
-  ConstraintRange: 0.7
+  ConstraintRange: 0.75
   DeadZone: 0.15
   AddMaxRange: 0.3
   JointBeakFroce: 0
@@ -619,7 +619,7 @@ MonoBehaviour:
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
-          m_BoolArgument: 1
+          m_BoolArgument: 0
         m_CallState: 2
       - m_Target: {fileID: 3760475043573785896}
         m_MethodName: CreateFixedJoint
