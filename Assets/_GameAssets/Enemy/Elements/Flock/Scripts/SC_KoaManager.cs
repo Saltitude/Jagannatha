@@ -85,6 +85,7 @@ public class SC_KoaManager : MonoBehaviour
         curRecoveryTimer = 0;
         recoveryDuration = 1.5f;
         flockManager = newGuide.GetComponent<SC_FlockManager>();
+   
         curFlockSettings = flockSettings;
         spawnCount = newSpawnCount;
 
@@ -137,6 +138,7 @@ public class SC_KoaManager : MonoBehaviour
             _koa = NetPSpawnKoa.SpawnKoa();
             _koa.transform.position = transform.position;
             _koa.GetComponent<SC_KoaCollider>().Initialize(this);
+            flockManager.koaMesh = _koa.transform.GetChild(0).GetComponent<Animator>();
             vfx_Hit = _koa.GetComponent<ParticleSystem>();
 
             syncVarKoa = _koa.GetComponent<SC_MoveKoaSync>();
