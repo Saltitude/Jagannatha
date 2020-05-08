@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
 
 /// <summary>
@@ -125,7 +126,6 @@ public class SC_FlockManager : MonoBehaviour
         isSpawning = true;
         _Player = GameObject.FindGameObjectWithTag("Player");
 
-
         transform.position = spawnSpline.GetPoint(0);
         bezierWalkerTime.SetNewSpline(spawnSpline);
         bezierWalkerTime.NormalizedT = 0;
@@ -155,7 +155,7 @@ public class SC_FlockManager : MonoBehaviour
         _KoaManager = Instantiate(_KoaPrefab, transform);//Instantiate Koa
         _SCKoaManager = _KoaManager.GetComponent<SC_KoaManager>(); //Récupère le Koa manager du koa instancié
         _SCKoaManager.Initialize(_mainGuide, flockSettings.boidSpawn, spawnSettings[0],newFlockSettings,sensitivity);//Initialise le Koa | paramètre : Guide a suivre <> Nombre de Boids a spawn <> Comportement des boids voulu
-        flockWeaponManager.Initialize(flockSettings);
+        flockWeaponManager.Initialize(flockSettings,koaMesh);
 
         _splineTab = new BezierSolution.BezierSpline[flockSettings.splines.Length];
 
@@ -190,8 +190,8 @@ public class SC_FlockManager : MonoBehaviour
 
         if(isActive && isSpawning)
         {
-            float speed = 0.75f;
-            int rndRangePilote = Random.Range(110, 150);
+            float speed = 0.9f;
+            int rndRangePilote = Random.Range(200, 250);
             Vector3 target = new Vector3(_Player.transform.position.x, rndRangePilote, _Player.transform.position.z);
             transform.position = Vector3.MoveTowards(transform.position, target, speed);
             if (transform.position.y >= 60)
@@ -215,10 +215,9 @@ public class SC_FlockManager : MonoBehaviour
 
             }
         }
-        if(isActive && !isSpawning)
+        if(isActive && !isSpawning && curtype!= PathType.Death)
         {
-                
-
+        
             AttackUpdate();
             ReactionUpdate();
             //Si le flock est split, déplace les guides
@@ -226,7 +225,8 @@ public class SC_FlockManager : MonoBehaviour
                 MultiGuideMovement();
 
 
-            //Si le flock n'est pas fusionné, déplace le main guide selon la spline actuel       
+            //Si le flock n'est pas fusionné, déplace le main guide selon la spline actuel      
+            if(curtype != PathType.ReactionHit && curtype != PathType.AttackPlayer)
             bezierWalkerSpeed.Execute(Time.deltaTime);
 
 
@@ -339,6 +339,7 @@ public class SC_FlockManager : MonoBehaviour
             if(timeBeforeEndReaction >= delayBeforeEndReaction)
             {
                 reactionHit = false;
+
             }
             reactionTimer += Time.deltaTime;
 
@@ -348,6 +349,8 @@ public class SC_FlockManager : MonoBehaviour
                 reactionTimer = 0;
                 flockWeaponManager.FireSuperBullet();
                 koaMesh.SetBool("Deploy", false);
+                StartNewPath(PathType.Roam);
+
             }
         }
 
@@ -355,12 +358,14 @@ public class SC_FlockManager : MonoBehaviour
         {
             if(reactionTimer >0)
             {
-                reactionTimer -= Time.deltaTime;
-                koaMesh.SetFloat("SpeedFactor", -2);
+                reactionTimer -= 2*Time.deltaTime;
+                koaMesh.SetFloat("SpeedFactor", -4);
             }
-            if(reactionTimer <=0)
+            if(reactionTimer <0)
             {
                 reactionTimer = 0;
+                StartNewPath(PathType.Roam);
+
             }
         }
     }
@@ -388,6 +393,8 @@ public class SC_FlockManager : MonoBehaviour
         {
 
             case PathType.AttackPlayer:
+                koaMesh.SetBool("Deploy", false);
+                koaMesh.SetBool("Flight", false);
 
                 flockWeaponManager.StartFire();
 
@@ -564,13 +571,20 @@ public class SC_FlockManager : MonoBehaviour
 
     public void ReactionFlock(PathType pathType)
     {
+        if(pathType != PathType.AttackPlayer && pathType != PathType.Death && pathType != PathType.Roam) 
         StartNewPath(pathType);
     }
+
+
+
+
 
     public void EndAttack()
     {
         inAttack = false;
         StartNewPath(PathType.Roam);
+        koaMesh.SetBool("Laser", false);
+        koaMesh.SetBool("Bullet", false);
     }
 
 
