@@ -10,17 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2f853b98b2e469d4682403b69d26ee96, type: 3}
-  m_Name: WavesV3_1
+  m_Name: Wave TestLaser
   m_EditorClassIdentifier: 
   initialSpawnFlock:
-  - {fileID: 11400000, guid: e2539410742a3654494ab6ce864428da, type: 2}
-  initialSpawnPosition: 02000000
+  - {fileID: 11400000, guid: c37a9f57959544f4f96e9b3412a91cb5, type: 2}
+  initialSpawnPosition: 00000000
   timeBetweenSpawnInitial: 0
   backup: 0
-  backupSpawnFlock:
-  - {fileID: 11400000, guid: e2539410742a3654494ab6ce864428da, type: 2}
-  - {fileID: 11400000, guid: e2539410742a3654494ab6ce864428da, type: 2}
-  backupSpawnPosition: 0100000003000000
-  timeBeforeBackup: 20
+  backupSpawnFlock: []
+  backupSpawnPosition: 
+  timeBeforeBackup: 0
   flockLeftBeforeBackup: 0
-  timeBetweenSpawnBackup: 0
+  timeBetweenSpawnBackup: 1
