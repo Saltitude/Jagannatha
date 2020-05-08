@@ -24,12 +24,20 @@ public class SC_MoveKoaSync : NetworkBehaviour
             mr_OP.GetComponent<SphereCollider>().enabled = false;
             mr_OP.GetComponent<MeshRenderer>().enabled = false;
             mr_OP.SetActive(false);
-            mr_P.GetComponent<MeshRenderer>().enabled = false;
             mr_P.GetComponent<SphereCollider>().enabled = false;
+
+            for (int i =0; i< mr_P.transform.childCount; i++)
+            {
+                mr_P.transform.GetChild(i).GetComponent<MeshRenderer>().enabled = false;
+            }
         }
         else if (!isServer)
         {
-            mr_P.GetComponent<MeshRenderer>().enabled = false;
+            for (int i = 0; i < mr_P.transform.childCount; i++)
+            {
+                mr_P.transform.GetChild(i).GetComponent<MeshRenderer>().enabled = false;
+            }
+            
             mr_OP.SetActive(true);
         }         
     }
@@ -39,7 +47,10 @@ public class SC_MoveKoaSync : NetworkBehaviour
         if(isServer)
         {
             mr_P.GetComponent<SphereCollider>().enabled = true;
-            mr_P.GetComponent<MeshRenderer>().enabled = true;
+            for (int i = 0; i < mr_P.transform.childCount; i++)
+            {
+                mr_P.transform.GetChild(i).GetComponent<MeshRenderer>().enabled = true;
+            }
         }
     }
 

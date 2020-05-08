@@ -1,6 +1,5 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using System.IO;
 using UnityEngine;
 
 /// <summary>
@@ -38,6 +37,7 @@ public class SC_FlockManager : MonoBehaviour
     BoidSettings[] hitReactionSettings;
 
     int curSettingsIndex;
+    public Animator koaMesh;
 
 
     BoidSettings _curBoidSetting; //Contient le settings actuel
@@ -296,7 +296,6 @@ public class SC_FlockManager : MonoBehaviour
 
     void AttackUpdate()
     {
-
         if (flockSettings.attackType != FlockSettings.AttackType.none && curtype != PathType.Flight && curtype != PathType.ReactionHit)
         {
             if (inAttack == false) startAttackTimer += Time.deltaTime;
@@ -309,49 +308,61 @@ public class SC_FlockManager : MonoBehaviour
             }
         }
         transform.LookAt(_Player.transform);
+        koaMesh.transform.LookAt(_Player.transform);
     }
 
     void ReactionUpdate()
     {
-        if(reactionHit)
+
+        if (curtype == PathType.Flight)
+        {
+            flightTimer += Time.deltaTime;
+            if (flightTimer >= flockSettings.flightDuration)
+            {
+                for (int i = 0; i < _splineTab.Length; i++)
+                {
+                    if (_splineTab[i] != null)
+                    {
+                        if (i != 4)
+                            _splineTab[i].transform.position = transform.position;
+                    }
+                }
+                koaMesh.SetBool("Flight", false);
+                StartNewPath(PathType.Roam);
+                flightTimer = 0;
+            }
+        }
+
+        if (reactionHit)
         {
             timeBeforeEndReaction += Time.deltaTime;
             if(timeBeforeEndReaction >= delayBeforeEndReaction)
             {
                 reactionHit = false;
             }
-        }
-        if(curtype == PathType.Flight)
-        {
-            flightTimer += Time.deltaTime;
-            if(flightTimer >= flockSettings.flightDuration)
-            {
-                for (int i = 0; i < _splineTab.Length; i++)
-                {
-                    if (_splineTab[i] != null)
-                    {
-                        if(i != 4)
-                        _splineTab[i].transform.position = transform.position;
-                    }
-                }
-                StartNewPath(PathType.Roam);
-                flightTimer = 0;
-            }
-        }
-        else if(curtype == PathType.ReactionHit && reactionHit)
-        {
             reactionTimer += Time.deltaTime;
-            if(reactionTimer >= flockSettings.hitReactionDelay)
-            {
 
+            if (reactionTimer >= flockSettings.hitReactionDelay)
+            {
                 reactionHit = false;
                 reactionTimer = 0;
                 flockWeaponManager.FireSuperBullet();
-
+                koaMesh.SetBool("Deploy", false);
             }
         }
 
-        
+        if(!reactionHit)
+        {
+            if(reactionTimer >0)
+            {
+                reactionTimer -= Time.deltaTime;
+                koaMesh.SetFloat("SpeedFactor", -2);
+            }
+            if(reactionTimer <=0)
+            {
+                reactionTimer = 0;
+            }
+        }
     }
 
 
@@ -367,7 +378,6 @@ public class SC_FlockManager : MonoBehaviour
 
     void StartNewPath(PathType pathType)
     {
-
         _SCKoaManager.ChangeKoaState((int)pathType);
         curtype = pathType;
 
@@ -386,8 +396,19 @@ public class SC_FlockManager : MonoBehaviour
 
             case PathType.ReactionHit:
 
-                reactionHit = true;
+                if(reactionHit != true)
+                {
+                    koaMesh.SetBool("Deploy", true);
+                    koaMesh.SetFloat("SpeedFactor", 2);
+                    reactionHit = true;
+                }
                 timeBeforeEndReaction = 0;
+
+                break;
+
+            case PathType.Flight:
+
+                koaMesh.SetBool("Flight", true);
 
                 break;
         }
