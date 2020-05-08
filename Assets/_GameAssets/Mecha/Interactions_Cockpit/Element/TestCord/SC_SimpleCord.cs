@@ -21,7 +21,7 @@ public class SC_SimpleCord : MonoBehaviour
     Material[] tab_Materials;
 
     [Header("Parameters")]
-    [SerializeField, Range(0,1)]
+    [SerializeField, Range(0,2)]
     float ConstraintRange = 0.7f;
     [SerializeField, Range(0, 0.5f)]
     float DeadZone = 0.15f;
@@ -114,7 +114,7 @@ public class SC_SimpleCord : MonoBehaviour
 
     #if UNITY_EDITOR
 
-        UnityEditor.Selection.SetActiveObjectWithContext(null, null);
+        //UnityEditor.Selection.SetActiveObjectWithContext(null, null);
 
     #endif
 
