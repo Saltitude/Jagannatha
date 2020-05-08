@@ -100,7 +100,8 @@ public class SC_MainBreakDownManager : MonoBehaviour, IF_BreakdownManager
 
     void Start()
     {       
-        UpdateSystemInfos();
+        //UpdateSystemInfos();
+        ForceUpdate();
     }
 
     #endregion Init
@@ -151,7 +152,8 @@ public class SC_MainBreakDownManager : MonoBehaviour, IF_BreakdownManager
     public void CheckBreakdown()
     {      
 
-        UpdateSystemInfos();
+        //UpdateSystemInfos();
+        ForceUpdate();
 
         SyncSystemStates();
 
@@ -470,6 +472,21 @@ public class SC_MainBreakDownManager : MonoBehaviour, IF_BreakdownManager
         float product = (inputValue - inputMin) / (inputMax - inputMin);
         float output = ((outputMax - outputMin) * product) + outputMin;
         return output;
-    } 
+    }
+
+    public void ForceUpdate()
+    {
+
+        n_MaxBreakInterB4MaxBD = SC_BreakdownDisplayManager.Instance.n_MaxBreakInterB4MaxBD;
+
+        NbOfBreakDisplay = SC_BreakdownDisplayManager.Instance.CurNbOfBreakdown;
+        NbOfBreakWeapon = SC_WeaponBreakdown.Instance.CurNbOfBreakdown;
+        MoveBreakLvl = SC_MovementBreakdown.Instance.n_BreakDownLvl;
+
+        ScreensMaxBreak = SC_BreakdownDisplayManager.Instance.b_MaxBreakdown;
+        WeaponMaxBreak = SC_WeaponBreakdown.Instance.b_MaxBreakdown;
+        MoveMaxBreak = SC_MovementBreakdown.Instance.b_MaxBreakdown;
+
+    }
 
 }

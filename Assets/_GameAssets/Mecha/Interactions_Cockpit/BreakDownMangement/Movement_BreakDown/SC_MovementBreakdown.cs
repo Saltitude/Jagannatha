@@ -310,4 +310,11 @@ public class SC_MovementBreakdown : MonoBehaviour, IF_BreakdownManager
 
     #endregion DebugMethod
 
+    public void ForceUpdate()
+    {
+        SyncCurPilotSeqLenght();
+        SyncSystemState();
+        SendSequences();
+    }
+
 }

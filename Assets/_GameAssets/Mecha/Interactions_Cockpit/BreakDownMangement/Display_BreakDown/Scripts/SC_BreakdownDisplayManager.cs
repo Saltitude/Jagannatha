@@ -273,5 +273,12 @@ public class SC_BreakdownDisplayManager : MonoBehaviour, IF_BreakdownManager
 
     #endregion DebugMethod
 
+    public void ForceUpdate()
+    {
+        SC_SyncVar_DisplaySystem.Instance.b_MaxBreakdown = b_MaxBreakdown;
+        SC_SyncVar_DisplaySystem.Instance.f_CurNbOfBd = CurNbOfBreakdown;
+        SyncSystemState();
+    }
+
 }
 
