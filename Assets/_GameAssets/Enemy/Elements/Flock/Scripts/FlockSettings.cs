@@ -49,22 +49,21 @@ public class FlockSettings : ScriptableObject
     [Header("Kamikaze")]
     public float speedToTarget;
 
-
     [Header("Reaction")]
 
     [Tooltip("in second")]
     public float flightDuration = 3;
-    [Tooltip("Pourcentage de sensibilité a partir duquel le flock ne réagit plus au tir")]
-    public int hitReactionMaxSensibility = 50;
-
-    [Tooltip("in second")]
-    public float hitReactionDelay = 2;
     [Tooltip("Pourcentage de sensibilité a partir duquel le flock réagit au tir")]
     public int flightReactionMinSensibility = 75;
 
+    [Tooltip("in second")]
+    public float hitReactionDelay = 2;
+    [Tooltip("Pourcentage de sensibilité a partir duquel le flock ne réagit plus au tir")]
+    public int hitReactionMaxSensibility = 50;
+
     public AttackFocus attackFocusHitReaction = AttackFocus.Display;
     public int damageOnSystemHitReaction = 5;
-
+    public float laserDurationHitReaction = 2;
 
 
     [Header("Boids")]
@@ -78,12 +77,9 @@ public class FlockSettings : ScriptableObject
     public BoidSettings[] getAwaySettings;
     public BoidSettings[] hitReactionSettings;
 
-
     public BezierSolution.BezierSpline[] splines;
 
-
     public int spawnTimer = 10;
-
 
     [Range(10,200)]
     public int boidSpawn;
@@ -93,6 +89,4 @@ public class FlockSettings : ScriptableObject
 
     [Tooltip("boids per min")]
     public int regenerationRate;
-
-
 }

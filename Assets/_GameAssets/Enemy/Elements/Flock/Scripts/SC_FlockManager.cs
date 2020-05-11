@@ -349,6 +349,7 @@ public class SC_FlockManager : MonoBehaviour
                 reactionHit = false;
                 reactionTimer = 0;
                 flockWeaponManager.FireSuperBullet();
+                if(flockSettings.attackType != FlockSettings.AttackType.Laser )
                 KoaMainAnimator.SetBool("Deploy", false);
                 StartNewPath(PathType.Roam);
 
@@ -359,8 +360,8 @@ public class SC_FlockManager : MonoBehaviour
         {
             if(reactionTimer >0)
             {
-                reactionTimer -= 2*Time.deltaTime;
-                KoaMainAnimator.SetFloat("SpeedFactor", -4);
+                reactionTimer -= Time.deltaTime;
+                KoaMainAnimator.SetFloat("SpeedFactor", -2);
             }
             if(reactionTimer <0)
             {
@@ -573,13 +574,12 @@ public class SC_FlockManager : MonoBehaviour
 
     public void ReactionFlock(PathType pathType)
     {
-        if(pathType != PathType.AttackPlayer && pathType != PathType.Death && pathType != PathType.Roam) 
-        StartNewPath(pathType);
+        if(curtype != PathType.AttackPlayer && curtype != PathType.Death)
+        {
+            StartNewPath(pathType);
+        }
+        
     }
-
-
-
-
 
     public void EndAttack()
     {
