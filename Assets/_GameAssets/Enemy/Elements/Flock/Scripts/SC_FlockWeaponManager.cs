@@ -44,8 +44,10 @@ public class SC_FlockWeaponManager : MonoBehaviour
     int n_CurBullet;
     int nbBulletFire;
 
-    Animator animator;
+    Animator mainAnimator;
+    Animator emissiveAnimator;
 
+    bool animation = false;
     ////////////////////////////////////////////////////////
 
 
@@ -61,7 +63,7 @@ public class SC_FlockWeaponManager : MonoBehaviour
         
         target = GameObject.FindGameObjectWithTag("Player").transform;
     }
-    public void Initialize(FlockSettings curFlockSettings,Animator animator)
+    public void Initialize(FlockSettings curFlockSettings,Animator mainAnimator, Animator emissiveAnimator)
     {
         flockSettings = curFlockSettings;
         switch (flockSettings.attackType)
@@ -74,7 +76,8 @@ public class SC_FlockWeaponManager : MonoBehaviour
                 InitLaser();
                 break;
         }
-        this.animator = animator;
+        this.mainAnimator = mainAnimator;
+        this.emissiveAnimator = emissiveAnimator;
     }
 
     void GetReferences()
@@ -89,6 +92,12 @@ public class SC_FlockWeaponManager : MonoBehaviour
     {
         isFiring = true;
         startLaser = true;
+        animation = false;
+        if (flockSettings.attackType == FlockSettings.AttackType.Laser)
+        {
+            emissiveAnimator.SetBool("LaserCharge", true);
+
+        }
     }
 
     // Update is called once per frame
@@ -112,7 +121,7 @@ public class SC_FlockWeaponManager : MonoBehaviour
             {
                 case FlockSettings.AttackType.Bullet: //Bullet
 
-                    animator.SetBool("Bullet", true);
+                    mainAnimator.SetBool("Bullet", true);
                     if (timer >= 1/flockSettings.fireRate )
                     {
                         FireBullet(false);
@@ -128,12 +137,22 @@ public class SC_FlockWeaponManager : MonoBehaviour
 
                     if(!laserFire)
                     {
-                        laserFx.transform.position = animator.transform.position;
+                        laserFx.transform.position = mainAnimator.transform.position;
                         float scale = (Time.deltaTime / flockSettings.chargingAttackTime)*5;
                         laserFx.transform.localScale += new Vector3 (scale,scale,scale);
                     }
                     if(timer >= flockSettings.chargingAttackTime -1f)
-                    animator.SetBool("Laser", true);
+                    {
+                        if(!animation)
+                        {
+                            emissiveAnimator.SetBool("Laser", true);
+                            mainAnimator.SetBool("Laser", true);
+                            StartCoroutine(ResetBool());
+                            animation = true;
+                        }
+
+                        
+                    }
 
                     if (timer >= flockSettings.chargingAttackTime)
                     {
@@ -159,7 +178,14 @@ public class SC_FlockWeaponManager : MonoBehaviour
             }
         }
     }
-
+    IEnumerator ResetBool()
+    {
+        yield return 0;
+        emissiveAnimator.SetBool("LaserCharge", false);
+        emissiveAnimator.SetBool("Laser", false);
+        mainAnimator.SetBool("Laser", false);
+        StopAllCoroutines();
+    }
     #region Bullet
     void InitBulletPool()
     {
@@ -181,7 +207,7 @@ public class SC_FlockWeaponManager : MonoBehaviour
     {
         Rigidbody rb = bulletPool[n_CurBullet].GetComponent<Rigidbody>();
 
-        bulletPool[n_CurBullet].transform.position = animator.transform.position;
+        bulletPool[n_CurBullet].transform.position = mainAnimator.transform.position;
         bulletPool[n_CurBullet].transform.rotation = transform.rotation;
 
         rb.isKinematic = true;
@@ -228,17 +254,22 @@ public class SC_FlockWeaponManager : MonoBehaviour
     }
 
 
+
     void FireLaser()
     {
         laserFire = true;
         if(startLaser)
         {
+
             Sc_ScreenShake.Instance.ShakeIt(0.025f, flockSettings.activeDuration);
             SC_CockpitShake.Instance.ShakeIt(0.025f, flockSettings.activeDuration);
             SC_HitDisplay.Instance.Hit(transform.position);
             SC_MainBreakDownManager.Instance.CauseDamageOnSystem(flockSettings.attackFocus, flockSettings.damageOnSystem);
 
             startLaser = false;
+
+       
+
         }
 
 
@@ -246,7 +277,7 @@ public class SC_FlockWeaponManager : MonoBehaviour
         float scale = (Time.deltaTime / flockSettings.activeDuration);
         laserFx.transform.localScale -= new Vector3(scale*5, scale*5, scale*5);
         //Positionne le laser a la base de l'arme (GunPos) et l'oriente dans la direction du point visée par le joueur
-        laser.transform.position = Vector3.Lerp(animator.transform.position, target.position, .5f);
+        laser.transform.position = Vector3.Lerp(mainAnimator.transform.position, target.position, .5f);
         laser.transform.LookAt(new Vector3(target.position.x,target.position.y-5,target.position.z));
 
         //Scale en Z le laser pour l'agrandir jusqu'a ce qu'il touche le point visée par le joueur (C STYLE TAHU)

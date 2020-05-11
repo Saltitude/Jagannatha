@@ -43,6 +43,7 @@ public class SC_KoaManager : MonoBehaviour
     float curRecoveryTimer;
 
     GameObject _koa; //Koa du 
+    Animator koaEmissiveAnimator;
 
     /// <summary>
     /// Current BoidSettings
@@ -138,7 +139,12 @@ public class SC_KoaManager : MonoBehaviour
             _koa = NetPSpawnKoa.SpawnKoa();
             _koa.transform.position = transform.position;
             _koa.GetComponent<SC_KoaCollider>().Initialize(this);
-            flockManager.koaMesh = _koa.transform.GetChild(0).GetComponent<Animator>();
+
+            flockManager.KoaMainAnimator = _koa.transform.GetChild(0).GetComponent<Animator>();
+
+            koaEmissiveAnimator  = _koa.transform.GetChild(0).GetChild(0).GetComponent<Animator>();
+            flockManager.KoaEmissiveAnimator = koaEmissiveAnimator;
+
             vfx_Hit = _koa.GetComponent<ParticleSystem>();
 
             syncVarKoa = _koa.GetComponent<SC_MoveKoaSync>();
@@ -489,6 +495,18 @@ public class SC_KoaManager : MonoBehaviour
         {
             flockManager.ReactionFlock(SC_FlockManager.PathType.ReactionHit);
         }
+        else
+        {
+            koaEmissiveAnimator.SetBool("Hit", true);
+            StartCoroutine(ResetBool("Hit", false));
+        }
+    }   
+
+    IEnumerator ResetBool(string boolReset,bool statut)
+    {
+        yield return new WaitForEndOfFrame();
+        koaEmissiveAnimator.SetBool(boolReset, statut);
+        StopAllCoroutines();
     }
 
     public void ChangeKoaState(int state)
