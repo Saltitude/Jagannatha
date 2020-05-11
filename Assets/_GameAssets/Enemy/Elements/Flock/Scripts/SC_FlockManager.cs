@@ -366,6 +366,7 @@ public class SC_FlockManager : MonoBehaviour
             {
                 reactionTimer = 0;
                 StartNewPath(PathType.Roam);
+                KoaMainAnimator.SetBool("Deploy", false);
 
             }
         }

@@ -135,12 +135,7 @@ public class SC_FlockWeaponManager : MonoBehaviour
 
                 case FlockSettings.AttackType.Laser: //Laser
 
-                    if(!laserFire)
-                    {
-                        laserFx.transform.position = mainAnimator.transform.position;
-                        float scale = (Time.deltaTime / flockSettings.chargingAttackTime)*5;
-                        laserFx.transform.localScale += new Vector3 (scale,scale,scale);
-                    }
+                    
                     if(timer >= flockSettings.chargingAttackTime -1f)
                     {
                         if(!animation)
@@ -239,6 +234,11 @@ public class SC_FlockWeaponManager : MonoBehaviour
                 FireBullet(true);
 
                 break;
+            case FlockSettings.AttackType.Laser:
+
+
+
+                break;
         }
     }
 
@@ -267,9 +267,6 @@ public class SC_FlockWeaponManager : MonoBehaviour
             SC_MainBreakDownManager.Instance.CauseDamageOnSystem(flockSettings.attackFocus, flockSettings.damageOnSystem);
 
             startLaser = false;
-
-       
-
         }
 
 

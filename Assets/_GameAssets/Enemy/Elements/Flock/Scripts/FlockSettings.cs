@@ -85,10 +85,10 @@ public class FlockSettings : ScriptableObject
     public int spawnTimer = 10;
 
 
-    [Range(10,100)]
+    [Range(10,200)]
     public int boidSpawn;
 
-    [Range(10,100)]
+    [Range(10,200)]
     public int maxBoid;
 
     [Tooltip("boids per min")]

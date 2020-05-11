@@ -197,7 +197,7 @@ public class SC_KoaManager : MonoBehaviour
                 if (respawnTimer > (60f / curFlockSettings.regenerationRate))
                 {
                     respawnTimer = 0;
-                    //GenerateNewBoid();
+                    GenerateNewBoid();
                 }
             }
             if (!regeneration)
