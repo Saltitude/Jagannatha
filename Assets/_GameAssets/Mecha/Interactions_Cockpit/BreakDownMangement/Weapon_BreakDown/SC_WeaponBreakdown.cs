@@ -342,4 +342,10 @@ public class SC_WeaponBreakdown : MonoBehaviour, IF_BreakdownManager
 
     #endregion DebugMethod
 
+    public void ForceUpdate()
+    {
+        SyncSystemState();
+        SC_SyncVar_WeaponSystem.Instance.b_MaxBreakdown = b_MaxBreakdown;
+    }
+
 }

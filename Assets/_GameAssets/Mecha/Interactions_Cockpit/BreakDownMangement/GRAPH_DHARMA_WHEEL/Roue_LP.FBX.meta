@@ -4,11 +4,20 @@ ModelImporter:
   serializedVersion: 23
   fileIDToRecycleName:
     100000: //RootNode
+    100002: Cylinder001
+    100004: Object001
     400000: //RootNode
+    400002: Cylinder001
+    400004: Object001
     2100000: No Name
     2300000: //RootNode
+    2300002: Cylinder001
+    2300004: Object001
     3300000: //RootNode
+    3300002: Cylinder001
+    3300004: Object001
     4300000: Cylinder001
+    4300002: Object001
   externalObjects: {}
   materials:
     importMaterials: 1
