@@ -6,7 +6,28 @@ using UnityEngine.Networking;
 public class SC_NetPlayerInit_OP : NetworkBehaviour
 {
 
+    #region Singleton
+
+    private static SC_NetPlayerInit_OP _instance;
+    public static SC_NetPlayerInit_OP Instance { get { return _instance; } }
+
+    #endregion
+
     GameObject Mng_CheckList = null;
+
+    void Awake()
+    {
+
+        if (_instance != null && _instance != this)
+        {
+            Destroy(gameObject);
+        }
+        else
+        {
+            _instance = this;
+        }
+
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -37,4 +58,12 @@ public class SC_NetPlayerInit_OP : NetworkBehaviour
 
         }
     }
+
+    [Command]
+    public void CmdSendForceUpdate()
+    {
+        if(isServer)
+            SC_MainBreakDownManager.Instance.ForceUpdate();
+    }
+
 }

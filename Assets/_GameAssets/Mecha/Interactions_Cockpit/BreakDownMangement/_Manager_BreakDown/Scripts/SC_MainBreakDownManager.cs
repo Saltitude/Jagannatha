@@ -101,6 +101,7 @@ public class SC_MainBreakDownManager : MonoBehaviour, IF_BreakdownManager
     void Start()
     {       
         UpdateSystemInfos();
+        //ForceUpdate();
     }
 
     #endregion Init
@@ -152,6 +153,7 @@ public class SC_MainBreakDownManager : MonoBehaviour, IF_BreakdownManager
     {      
 
         UpdateSystemInfos();
+        //ForceUpdate();
 
         SyncSystemStates();
 
@@ -470,6 +472,15 @@ public class SC_MainBreakDownManager : MonoBehaviour, IF_BreakdownManager
         float product = (inputValue - inputMin) / (inputMax - inputMin);
         float output = ((outputMax - outputMin) * product) + outputMin;
         return output;
-    } 
+    }
+
+    public void ForceUpdate()
+    {
+        UpdateSystemInfos();
+        SyncSystemsLifes();
+        SC_BreakdownDisplayManager.Instance.ForceUpdate();
+        SC_MovementBreakdown.Instance.ForceUpdate();
+        SC_WeaponBreakdown.Instance.ForceUpdate();
+    }
 
 }

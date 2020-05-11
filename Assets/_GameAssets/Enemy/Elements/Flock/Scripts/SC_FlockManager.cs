@@ -38,7 +38,8 @@ public class SC_FlockManager : MonoBehaviour
     BoidSettings[] hitReactionSettings;
 
     int curSettingsIndex;
-    public Animator koaMesh;
+    public Animator KoaMainAnimator;
+    public Animator KoaEmissiveAnimator;
 
 
     BoidSettings _curBoidSetting; //Contient le settings actuel
@@ -155,7 +156,7 @@ public class SC_FlockManager : MonoBehaviour
         _KoaManager = Instantiate(_KoaPrefab, transform);//Instantiate Koa
         _SCKoaManager = _KoaManager.GetComponent<SC_KoaManager>(); //Récupère le Koa manager du koa instancié
         _SCKoaManager.Initialize(_mainGuide, flockSettings.boidSpawn, spawnSettings[0],newFlockSettings,sensitivity);//Initialise le Koa | paramètre : Guide a suivre <> Nombre de Boids a spawn <> Comportement des boids voulu
-        flockWeaponManager.Initialize(flockSettings,koaMesh);
+        flockWeaponManager.Initialize(flockSettings,KoaMainAnimator,KoaEmissiveAnimator);
 
         _splineTab = new BezierSolution.BezierSpline[flockSettings.splines.Length];
 
@@ -308,7 +309,7 @@ public class SC_FlockManager : MonoBehaviour
             }
         }
         transform.LookAt(_Player.transform);
-        koaMesh.transform.LookAt(_Player.transform);
+        KoaMainAnimator.transform.LookAt(_Player.transform);
     }
 
     void ReactionUpdate()
@@ -327,7 +328,7 @@ public class SC_FlockManager : MonoBehaviour
                             _splineTab[i].transform.position = transform.position;
                     }
                 }
-                koaMesh.SetBool("Flight", false);
+                KoaMainAnimator.SetBool("Flight", false);
                 StartNewPath(PathType.Roam);
                 flightTimer = 0;
             }
@@ -348,7 +349,7 @@ public class SC_FlockManager : MonoBehaviour
                 reactionHit = false;
                 reactionTimer = 0;
                 flockWeaponManager.FireSuperBullet();
-                koaMesh.SetBool("Deploy", false);
+                KoaMainAnimator.SetBool("Deploy", false);
                 StartNewPath(PathType.Roam);
 
             }
@@ -359,12 +360,13 @@ public class SC_FlockManager : MonoBehaviour
             if(reactionTimer >0)
             {
                 reactionTimer -= 2*Time.deltaTime;
-                koaMesh.SetFloat("SpeedFactor", -4);
+                KoaMainAnimator.SetFloat("SpeedFactor", -4);
             }
             if(reactionTimer <0)
             {
                 reactionTimer = 0;
                 StartNewPath(PathType.Roam);
+                KoaMainAnimator.SetBool("Deploy", false);
 
             }
         }
@@ -393,8 +395,8 @@ public class SC_FlockManager : MonoBehaviour
         {
 
             case PathType.AttackPlayer:
-                koaMesh.SetBool("Deploy", false);
-                koaMesh.SetBool("Flight", false);
+                KoaMainAnimator.SetBool("Deploy", false);
+                KoaMainAnimator.SetBool("Flight", false);
 
                 flockWeaponManager.StartFire();
 
@@ -405,8 +407,8 @@ public class SC_FlockManager : MonoBehaviour
 
                 if(reactionHit != true)
                 {
-                    koaMesh.SetBool("Deploy", true);
-                    koaMesh.SetFloat("SpeedFactor", 2);
+                    KoaMainAnimator.SetBool("Deploy", true);
+                    KoaMainAnimator.SetFloat("SpeedFactor", 2);
                     reactionHit = true;
                 }
                 timeBeforeEndReaction = 0;
@@ -415,7 +417,7 @@ public class SC_FlockManager : MonoBehaviour
 
             case PathType.Flight:
 
-                koaMesh.SetBool("Flight", true);
+                KoaMainAnimator.SetBool("Flight", true);
 
                 break;
         }
@@ -583,8 +585,8 @@ public class SC_FlockManager : MonoBehaviour
     {
         inAttack = false;
         StartNewPath(PathType.Roam);
-        koaMesh.SetBool("Laser", false);
-        koaMesh.SetBool("Bullet", false);
+        KoaMainAnimator.SetBool("Laser", false);
+        KoaMainAnimator.SetBool("Bullet", false);
     }
 
 
