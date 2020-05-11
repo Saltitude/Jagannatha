@@ -31,7 +31,7 @@ ModelImporter:
     4300004: Armor2
     4300006: Armor3
     4300008: Armor4
-    7400000: Deplay
+    7400000: Deploy
     7400002: Flight
     7400004: Bullet
     7400006: Laser
@@ -65,7 +65,7 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: Deplay
+      name: Deploy
       takeName: Take 001
       firstFrame: 0
       lastFrame: 90
