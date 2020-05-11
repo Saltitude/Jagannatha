@@ -63,6 +63,7 @@ public class SC_SceneManager : NetworkBehaviour
     void LoadTutoLobbyOpe()
     {
         SceneManager.LoadScene(2);
+        SC_NetPlayerInit_OP.Instance.CmdSendForceUpdate();
     }
 
     void LoadTutoPilot()
