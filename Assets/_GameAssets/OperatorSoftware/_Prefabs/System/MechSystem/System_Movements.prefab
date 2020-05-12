@@ -57,9 +57,9 @@ MonoBehaviour:
   - {fileID: 8584565065868121574}
   - {fileID: 6681743288617691028}
   tab_Sprites:
-  - {fileID: 21300000, guid: 042134779a720064a96ec8c4178503f6, type: 3}
-  - {fileID: 21300000, guid: 1e8c828f91ac00247a24898aa42c019f, type: 3}
-  - {fileID: 21300000, guid: 1e8b0193a8b76c44b96c82b85f7ebf00, type: 3}
+  - {fileID: 21300000, guid: bad69780c83535541beb55b868b0a8d3, type: 3}
+  - {fileID: 21300000, guid: 0b3d2de25b8eb2542aa2c8189bf067ba, type: 3}
+  - {fileID: 21300000, guid: da1fdde2967e9ed48996576b0aa9b9a5, type: 3}
   tab_Progress:
   - {fileID: 7864277803548191667}
   - {fileID: 7217665433109992701}
