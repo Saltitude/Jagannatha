@@ -349,9 +349,8 @@ public class SC_FlockManager : MonoBehaviour
                 reactionHit = false;
                 reactionTimer = 0;
                 flockWeaponManager.FireSuperBullet();
-                if(flockSettings.attackType != FlockSettings.AttackType.Laser )
-                KoaMainAnimator.SetBool("Deploy", false);
-                StartNewPath(PathType.Roam);
+                if (flockSettings.attackType != FlockSettings.AttackType.Laser)
+                    EndReaction();
 
             }
         }
@@ -365,9 +364,7 @@ public class SC_FlockManager : MonoBehaviour
             }
             if(reactionTimer <0)
             {
-                reactionTimer = 0;
-                StartNewPath(PathType.Roam);
-                KoaMainAnimator.SetBool("Deploy", false);
+                EndReaction();
 
             }
         }
@@ -430,6 +427,20 @@ public class SC_FlockManager : MonoBehaviour
         isActive = true;
         
         _SCKoaManager.ActivateKoa();
+
+    }
+
+    public void EndReaction()
+    {
+        KoaMainAnimator.SetBool("Deploy", false);
+        KoaMainAnimator.SetBool("Flight", false);
+        KoaMainAnimator.SetBool("Laser", false);
+        KoaMainAnimator.SetBool("Bullet", false);
+        reactionHit = false;
+        reactionTimer = 0;
+        timeBeforeEndReaction = 0;
+
+        StartNewPath(PathType.Roam);
 
     }
 
@@ -580,7 +591,7 @@ public class SC_FlockManager : MonoBehaviour
         }
         
     }
-
+    
     public void EndAttack()
     {
         inAttack = false;

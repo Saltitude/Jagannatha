@@ -72,6 +72,10 @@ public class SC_FlockWeaponManager : MonoBehaviour
                 InitBulletPool();
                 break;
 
+            case FlockSettings.AttackType.none: //Bullet
+                InitBulletPool();
+                break;
+
             case FlockSettings.AttackType.Laser: //Laser
                 InitLaser();
                 break;
@@ -234,6 +238,11 @@ public class SC_FlockWeaponManager : MonoBehaviour
                 FireBullet(true);
 
                 break;
+            case FlockSettings.AttackType.none: //Bullet
+
+                FireBullet(true);
+
+                break;
             case FlockSettings.AttackType.Laser:
 
                 Reset();
@@ -279,8 +288,8 @@ public class SC_FlockWeaponManager : MonoBehaviour
             if (laserTimer >= flockSettings.laserDurationHitReaction)
             {
                 DestroyFx();
-                EndOfAttack();
-                mainAnimator.SetBool("Deploy", false);
+                GetComponent<SC_FlockManager>().EndReaction();
+
 
                 StopCoroutine(superLaserCoro);
             }
@@ -335,6 +344,7 @@ public class SC_FlockWeaponManager : MonoBehaviour
         {
             DestroyFx();
             EndOfAttack();
+
         }
 
         //INSERT LASER SHIT
