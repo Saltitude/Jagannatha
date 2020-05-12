@@ -39,6 +39,8 @@ public class SC_UI_Display_MapInfos_KoaState : MonoBehaviour
     //[SerializeField]
     //Text optiWeapon;
 
+
+
     enum KoaState
     {
         Spawn = 0,
@@ -117,8 +119,8 @@ public class SC_UI_Display_MapInfos_KoaState : MonoBehaviour
             if (activated)
             {
                 curfKoaLife = fKoaLife;
+
                 //_triangle.b_Init = true;
-                
 
                 //sensi[0].text = (koaSensibility.x + 1).ToString();
                 //sensi[1].text = (koaSensibility.y + 1).ToString();
@@ -157,6 +159,8 @@ public class SC_UI_Display_MapInfos_KoaState : MonoBehaviour
                     boidSettings = newBoidsettings;
                     SC_UI_Display_Flock.Instance.StartNewBehavior(boidSettings);
                 }
+
+                SC_UI_Display_Flock.Instance.SetAnimationBool(curKoaScriptKoaSettings.GetDeploy(), curKoaScriptKoaSettings.GetFlight(), curKoaScriptKoaSettings.GetBullet(), curKoaScriptKoaSettings.GetLaser(), curKoaScriptKoaSettings.GetSpeedFactor());
                 
             }
             else

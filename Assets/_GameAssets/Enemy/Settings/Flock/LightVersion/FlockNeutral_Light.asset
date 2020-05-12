@@ -51,6 +51,6 @@ MonoBehaviour:
   - {fileID: 7590711955548368644, guid: 2d80bbddcfd75f74b968524747323c54, type: 3}
   - {fileID: 0}
   spawnTimer: 1
-  boidSpawn: 50
-  maxBoid: 50
+  boidSpawn: 200
+  maxBoid: 200
   regenerationRate: 50

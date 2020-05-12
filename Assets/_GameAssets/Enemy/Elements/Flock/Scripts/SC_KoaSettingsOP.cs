@@ -25,7 +25,14 @@ public class SC_KoaSettingsOP : MonoBehaviour, IF_KoaForOperator, IF_Hover
     Color32[] Tab_colorSpawn;
 
     public bool bSelected;
-    
+
+    //Animation
+    bool deploy;
+    bool flight;
+    bool bullet;
+    bool laser;
+    float speedFactor;
+
     public enum koaSelection
     {
         None,
@@ -48,9 +55,6 @@ public class SC_KoaSettingsOP : MonoBehaviour, IF_KoaForOperator, IF_Hover
     }
 
     koaState currentState;
-
- 
-
 
     public void SetSensibility(Vector3 sensibility)
     {
@@ -135,6 +139,35 @@ public class SC_KoaSettingsOP : MonoBehaviour, IF_KoaForOperator, IF_Hover
     public int GetKoaState()
     {
         return (int) currentState;
+    }
+
+    public void SetBoolAnimation(bool deploy, bool flight, bool bullet, bool laser, float speedFactor)
+    {
+        this.deploy = deploy;
+        this.flight = flight;
+        this.bullet = bullet;
+        this.laser = laser;
+        this.speedFactor = speedFactor;
+    }
+    public bool GetDeploy()
+    {
+        return deploy;
+    }
+    public bool GetFlight()
+    {
+        return flight;
+    }
+    public bool GetBullet()
+    {
+        return bullet;
+    }
+    public bool GetLaser()
+    {
+        return laser;
+    }
+    public float GetSpeedFactor()
+    {
+        return speedFactor;
     }
 
     void Update()
