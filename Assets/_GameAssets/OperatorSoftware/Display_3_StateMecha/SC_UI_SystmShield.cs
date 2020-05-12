@@ -42,7 +42,7 @@ public class SC_UI_SystmShield : MonoBehaviour
     void displayBar()
     {
         fRatioValue = Mathf.Lerp(fRatioValue, ratio(simpleValue, 1, nbImage - 1, 0, 0), Time.deltaTime * speedBar);
-        int ratioValue = Mathf.RoundToInt(fRatioValue);
+        int ratioValue = Mathf.FloorToInt(fRatioValue);
         if (ratioValue != 0)
         {
             for (int i = ratioValue; i >= 0; i--)
