@@ -248,7 +248,7 @@ public class SC_KoaManager : MonoBehaviour
                     {
                         
 
-                        if (Vector3.Distance(_boidsTab[i].transform.position, flockManager.transform.position)<150)
+                        if (Vector3.Distance(_boidsTab[i].transform.position, flockManager.transform.position)<200)
                         {
                             nbActive++;
                             x += _boidsTab[i].transform.position.x;
@@ -285,7 +285,6 @@ public class SC_KoaManager : MonoBehaviour
     }
     void GetReferences()
     {
-
         if (NetPlayerP == null)
             NetPlayerP = SC_CheckList.Instance.NetworkPlayerPilot;
 

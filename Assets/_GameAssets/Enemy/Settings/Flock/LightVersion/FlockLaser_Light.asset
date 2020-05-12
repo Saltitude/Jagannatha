@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d89286e30a111f14cbdde113f04bc4aa, type: 3}
-  m_Name: FlockLaserDEMO
+  m_Name: FlockLaser_Light
   m_EditorClassIdentifier: 
   attackType: 1
   attackFocus: 1
   damageOnSystem: 10
-  timeBetweenAttacks: 6
+  timeBetweenAttacks: 20
   fireRate: 3
   nbBulletToShoot: 0
   chargingAttackTime: 4
@@ -51,7 +51,7 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 7590711955548368644, guid: 2d80bbddcfd75f74b968524747323c54, type: 3}
   - {fileID: 0}
-  spawnTimer: 10
-  boidSpawn: 200
-  maxBoid: 200
+  spawnTimer: 1
+  boidSpawn: 50
+  maxBoid: 50
   regenerationRate: 400

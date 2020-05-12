@@ -54,7 +54,7 @@ public class SC_WeaponLaserGun : MonoBehaviour, IF_Weapon, IF_BreakdownSystem
     int n_CurBullet; //Permet de stocker la prochaine balle a tirer dans le chargeur
     Vector3Int sensitivity;
 
-    
+    float weaponZaxes = 0.0f;
 
     #endregion Variables
 
@@ -157,6 +157,7 @@ public class SC_WeaponLaserGun : MonoBehaviour, IF_Weapon, IF_BreakdownSystem
         else
         {
             LaserFB.DiseableLaser();
+            weaponZaxes = 0.0f;
         }
 
     }
@@ -171,11 +172,11 @@ public class SC_WeaponLaserGun : MonoBehaviour, IF_Weapon, IF_BreakdownSystem
 
     void Fire()
     {
-
+        weaponZaxes += Time.deltaTime * 500;
         BulletSC.DisplayLaser(helper_startPos, Target, b_DebugLaser, CurColor);
 
-        LaserDir = Target.transform.position - helper_startPos.transform.position;       
-
+        LaserDir = Target.transform.position - helper_startPos.transform.position;
+        transform.GetChild(1).localRotation = Quaternion.Lerp(transform.GetChild(1).localRotation, Quaternion.Euler(0,0,weaponZaxes), Time.time * 0.1f);
         if (Physics.Raycast(helper_startPos.transform.position, LaserDir.normalized, out LaserHit, 2000f, layerMask))
         {
 
