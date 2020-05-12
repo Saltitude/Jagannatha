@@ -54,7 +54,9 @@ public class SC_WeaponLaserGun : MonoBehaviour, IF_Weapon, IF_BreakdownSystem
     int n_CurBullet; //Permet de stocker la prochaine balle a tirer dans le chargeur
     Vector3Int sensitivity;
 
-    float weaponZaxes = 0.0f;
+    [SerializeField]
+    float speedW = 0f;
+    bool trig = false;
 
     #endregion Variables
 
@@ -94,7 +96,17 @@ public class SC_WeaponLaserGun : MonoBehaviour, IF_Weapon, IF_BreakdownSystem
 
         if (Input.GetKeyDown(KeyCode.L))
             b_DebugLaser = !b_DebugLaser;
+        if (!SC_WeaponBreakdown.Instance.CanFire() || trig ==false)
+        {
+            if (!SC_WeaponBreakdown.Instance.CanFire())
+            {
+                StartCoroutine(weaponBreak());
 
+            }
+            speedW = Mathf.Lerp(speedW, 0f, 0.1f);
+            GetComponent<Animator>().SetFloat("rotateSpeed", speedW);
+        }
+        Debug.Log(trig);
     }
 
     #region BulletCreation
@@ -146,18 +158,20 @@ public class SC_WeaponLaserGun : MonoBehaviour, IF_Weapon, IF_BreakdownSystem
 
     public void Trigger()
     {
-
         SC_SyncVar_WeaponSystem.Instance.f_curEnergyLevel = SC_WeaponBreakdown.Instance.f_EnergyValue;
 
         if (SC_WeaponBreakdown.Instance.CanFire())
         {
-            Fire();          
+            Fire();
+            speedW = Mathf.Lerp(speedW, 1f, 0.1f);
+            trig = true;
+            GetComponent<Animator>().SetFloat("rotateSpeed", speedW);
         }
 
         else
         {
+
             LaserFB.DiseableLaser();
-            weaponZaxes = 0.0f;
         }
 
     }
@@ -168,15 +182,14 @@ public class SC_WeaponLaserGun : MonoBehaviour, IF_Weapon, IF_BreakdownSystem
         Bullet.GetComponent<SC_BulletLaserGun>().ResetPos();
         SC_AimHit.b_OnFire = false;
         LaserFB.DiseableLaser();
+        trig = false;
     }
 
     void Fire()
     {
-        weaponZaxes += Time.deltaTime * 500;
-        BulletSC.DisplayLaser(helper_startPos, Target, b_DebugLaser, CurColor);
 
+        BulletSC.DisplayLaser(helper_startPos, Target, b_DebugLaser, CurColor);
         LaserDir = Target.transform.position - helper_startPos.transform.position;
-        transform.GetChild(1).localRotation = Quaternion.Lerp(transform.GetChild(1).localRotation, Quaternion.Euler(0,0,weaponZaxes), Time.time * 0.1f);
         if (Physics.Raycast(helper_startPos.transform.position, LaserDir.normalized, out LaserHit, 2000f, layerMask))
         {
 
@@ -188,6 +201,22 @@ public class SC_WeaponLaserGun : MonoBehaviour, IF_Weapon, IF_BreakdownSystem
                 
         }
 
+    }
+
+    IEnumerator weaponBreak()
+    {
+
+        speedW = 0.5f;
+        GetComponent<Animator>().SetFloat("rotateSpeed", speedW);
+        yield return new WaitForSeconds(0.1f);
+        speedW = 0f;
+        GetComponent<Animator>().SetFloat("rotateSpeed", speedW);
+        yield return new WaitForSeconds(0.1f);
+        speedW = -0.5f;
+        GetComponent<Animator>().SetFloat("rotateSpeed", speedW);
+        yield return new WaitForSeconds(0.1f);
+        speedW = 0f;
+        GetComponent<Animator>().SetFloat("rotateSpeed", speedW);
     }
 
     void Hit()
