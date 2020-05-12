@@ -21,7 +21,6 @@ public class ViveGripExample_Button : MonoBehaviour {
     void ViveGripInteractionStop(ViveGrip_GripPoint gripPoint)
     {
         gripPoint.grabber.ForceStopGripGrab(gripPoint);
-        gripPoint.ForceDestroy();
     }
 
     IEnumerator Move() {
