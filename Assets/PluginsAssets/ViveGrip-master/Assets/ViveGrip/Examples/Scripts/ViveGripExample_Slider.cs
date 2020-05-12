@@ -256,7 +256,6 @@ public class ViveGripExample_Slider : MonoBehaviour, IInteractible {
         LocalBreakdownMng.GetComponent<IF_BreakdownManager>().CheckBreakdown();
     }
 
-
     public bool testAgainstOdds()
     {
         float rand = Random.Range(0f, 1f);
@@ -269,12 +268,16 @@ public class ViveGripExample_Slider : MonoBehaviour, IInteractible {
 
     }
 
-
-
     float Ratio(float inputValue, float inputMax, float outputMax, float inputMin = 0.0f, float outputMin = 0.0f)
     {
         float product = (inputValue - inputMin) / (inputMax - inputMin);
         float output = ((outputMax - outputMin) * product) + outputMin;
         return output;
     }
+
+    public void ForceSync()
+    {
+        sendToSynchVar(-Mathf.Round(Ratio(gameObject.transform.localPosition.x, limit, 0.45f, -limit, -0.45f) * 100) / 100);
+    }
+
 }
