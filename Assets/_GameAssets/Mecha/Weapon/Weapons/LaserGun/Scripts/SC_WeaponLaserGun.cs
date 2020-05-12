@@ -106,7 +106,6 @@ public class SC_WeaponLaserGun : MonoBehaviour, IF_Weapon, IF_BreakdownSystem
             speedW = Mathf.Lerp(speedW, 0f, 0.1f);
             GetComponent<Animator>().SetFloat("rotateSpeed", speedW);
         }
-        Debug.Log(trig);
     }
 
     #region BulletCreation
