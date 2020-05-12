@@ -18,15 +18,6 @@ public class ViveGrip_Grabber : MonoBehaviour {
     Destroy(jointObject);
   }
 
-
-//Is it dangerous?
-    public void ForceStopGripGrab(ViveGrip_GripPoint gripPoint)
-    {
-        if (!this.enabled) { return; }
-        Destroy(jointObject);
-
-    }
-
   void GrabWith(ViveGrip_GripPoint gripPoint) {
     Rigidbody desiredBody = gripPoint.TouchedObject().GetComponent<Rigidbody>();
     desiredBody.gameObject.GetComponent<ViveGrip_Grabbable>().GrabFrom(transform.position);
