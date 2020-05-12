@@ -98,9 +98,7 @@ public class SC_WeaponBreakdown : MonoBehaviour, IF_BreakdownManager
                 for (int j = 0; j < interactible.Length; j++)
                 {
 
-                    if (!interactible[j].GetComponent<
-                        
-                        >().isBreakdown())
+                    if (!interactible[j].GetComponent<IInteractible>().isBreakdown())
                     {
                         noBreakdown++;
                     }

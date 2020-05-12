@@ -256,7 +256,6 @@ public class ViveGripExample_Slider : MonoBehaviour, IInteractible {
         LocalBreakdownMng.GetComponent<IF_BreakdownManager>().CheckBreakdown();
     }
 
-
     public bool testAgainstOdds()
     {
         float rand = Random.Range(0f, 1f);
@@ -268,8 +267,6 @@ public class ViveGripExample_Slider : MonoBehaviour, IInteractible {
 
 
     }
-
-
 
     float Ratio(float inputValue, float inputMax, float outputMax, float inputMin = 0.0f, float outputMin = 0.0f)
     {
