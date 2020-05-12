@@ -10,6 +10,11 @@ public class SC_MoveDummy : NetworkBehaviour
     private MeshRenderer mr;
     [SerializeField]
     GameObject Mesh_OP;
+    [SerializeField]
+    GameObject CannonImg;
+    [SerializeField]
+    GameObject Cannon;
+    GameObject CannonTarget = null;
 
     // Start is called before the first frame update
     void Start()
@@ -28,6 +33,7 @@ public class SC_MoveDummy : NetworkBehaviour
         if (isServer)
         {
             SyncPos();
+            SyncCannon();
             SendRpc();
         }
     }
@@ -37,6 +43,7 @@ public class SC_MoveDummy : NetworkBehaviour
         if (isServer)
         {
             Mesh_OP.SetActive(false);
+            CannonImg.SetActive(false);
         }
     }
 
@@ -51,6 +58,19 @@ public class SC_MoveDummy : NetworkBehaviour
             mr.enabled = false;
         else
             Debug.LogWarning("Can't Find MeshRenderer");
+    }
+
+    void SyncCannon()
+    {
+
+        if (CannonTarget == null)
+            CannonTarget = SC_CheckList_Weapons.Instance.AimIndicator;
+
+        else if (CannonTarget != null)
+        {
+            Cannon.transform.LookAt(CannonTarget.transform);
+        }
+
     }
 
     void SyncPos()
@@ -69,6 +89,7 @@ public class SC_MoveDummy : NetworkBehaviour
     {
         RpcSendVt3Position(gameObject, transform.position);
         RpcSendQtnRotation(gameObject, transform.rotation);
+        RpcSendCannonRotation(Cannon.transform.rotation);
     }
 
     /// <summary>
@@ -89,6 +110,13 @@ public class SC_MoveDummy : NetworkBehaviour
     {
         if (!isServer)
             Target.transform.rotation = qtn_Rotation;
+    }
+
+    [ClientRpc]
+    public void RpcSendCannonRotation(Quaternion qtn_Rotation)
+    {
+        if (!isServer)
+            Cannon.transform.rotation = qtn_Rotation;
     }
 
 }
