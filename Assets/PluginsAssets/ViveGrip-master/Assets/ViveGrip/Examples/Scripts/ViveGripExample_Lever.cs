@@ -188,4 +188,9 @@ public class ViveGripExample_Lever : MonoBehaviour, IInteractible
         return true;
     }
 
+    public void ForceSync()
+    {
+        sendToSynchVar(curState);
+    }
+
 }

@@ -98,7 +98,9 @@ public class SC_WeaponBreakdown : MonoBehaviour, IF_BreakdownManager
                 for (int j = 0; j < interactible.Length; j++)
                 {
 
-                    if (!interactible[j].GetComponent<IInteractible>().isBreakdown())
+                    if (!interactible[j].GetComponent<
+                        
+                        >().isBreakdown())
                     {
                         noBreakdown++;
                     }
@@ -344,8 +346,17 @@ public class SC_WeaponBreakdown : MonoBehaviour, IF_BreakdownManager
 
     public void ForceUpdate()
     {
+
         SyncSystemState();
         SC_SyncVar_WeaponSystem.Instance.b_MaxBreakdown = b_MaxBreakdown;
+
+        /*
+        for (int j = 0; j < interactible.Length; j++)
+        {
+            interactible[j].GetComponent<IInteractible>().ForceSync();
+        }
+        */
+
     }
 
 }

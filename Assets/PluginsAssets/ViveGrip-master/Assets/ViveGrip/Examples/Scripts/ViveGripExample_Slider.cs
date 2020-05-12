@@ -277,4 +277,10 @@ public class ViveGripExample_Slider : MonoBehaviour, IInteractible {
         float output = ((outputMax - outputMin) * product) + outputMin;
         return output;
     }
+
+    public void ForceSync()
+    {
+        sendToSynchVar(-Mathf.Round(Ratio(gameObject.transform.localPosition.x, limit, 0.45f, -limit, -0.45f) * 100) / 100);
+    }
+
 }

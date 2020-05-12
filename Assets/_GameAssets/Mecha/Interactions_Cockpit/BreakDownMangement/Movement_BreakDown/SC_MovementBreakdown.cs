@@ -315,6 +315,12 @@ public class SC_MovementBreakdown : MonoBehaviour, IF_BreakdownManager
         SyncCurPilotSeqLenght();
         SyncSystemState();
         SendSequences();
+
+        for (int j = 0; j < interactible.Length; j++)
+        {
+            interactible[j].GetComponent<IInteractible>().ForceSync();
+        }
+
     }
 
 }
