@@ -299,6 +299,10 @@ public class ViveGripExample_Dial : MonoBehaviour, IInteractible
 
     }
 
+    public void ForceSync()
+    {
+
+    }
 
 }
 */

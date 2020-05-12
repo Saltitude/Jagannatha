@@ -232,4 +232,9 @@ public class ViveGripExample_Switch : MonoBehaviour, IInteractible
         
     }
 
+    public void ForceSync()
+    {
+        sendToSynchVar(curState);
+    }
+
 }

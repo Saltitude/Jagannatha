@@ -222,4 +222,9 @@ public class SC_tourbilol : MonoBehaviour, IInteractible
 
     #endregion DebugMethods
 
+    public void ForceSync()
+    {
+        sendToSynchVar(Mathf.Floor(totalAngle / 90));
+    }
+
 }
