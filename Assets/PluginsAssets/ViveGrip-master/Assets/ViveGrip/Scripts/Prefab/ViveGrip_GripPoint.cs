@@ -71,6 +71,15 @@ public class ViveGrip_GripPoint : MonoBehaviour {
     firmlyGrabbed = false;
     Message("ViveGripGrabStop", HeldObject());
   }
+    //is it dangerous?
+    public void ForceDestroy()
+    {
+        firmlyGrabbed = false;
+        Message("ViveGripGrabStop", HeldObject());
+        Message("ViveGripInteractionStop", lastInteractedObject);
+        lastInteractedObject = null;
+
+    }
 
   void HandleFumbling() {
     if (grabber.HoldingSomething()) {
