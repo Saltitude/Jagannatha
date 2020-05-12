@@ -18,13 +18,7 @@ public class ViveGripExample_Button : MonoBehaviour {
     StartCoroutine("Move");
   }
 
-    void ViveGripInteractionStop(ViveGrip_GripPoint gripPoint)
-    {
-        Debug.Log("INTERACTION STOP");
-        gripPoint = null;
-    }
-
-    IEnumerator Move() {
+  IEnumerator Move() {
     while (distance > 0) {
       Increment();
       yield return null;
