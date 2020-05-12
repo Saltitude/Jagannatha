@@ -14,7 +14,7 @@ public class ViveGripExample_Button : MonoBehaviour {
 
   void ViveGripInteractionStart(ViveGrip_GripPoint gripPoint) {
     gripPoint.controller.Vibrate(VIBRATION_DURATION_IN_MILLISECONDS, VIBRATION_STRENGTH);
-    GetComponent<ViveGrip_Interactable>().enabled = false;
+    //GetComponent<ViveGrip_Interactable>().enabled = false;
     StartCoroutine("Move");
   }
 
@@ -35,7 +35,7 @@ public class ViveGripExample_Button : MonoBehaviour {
     }
     direction *= -1;
     ResetDistance();
-    GetComponent<ViveGrip_Interactable>().enabled = true;
+    //GetComponent<ViveGrip_Interactable>().enabled = true;
   }
 
   void Increment() {
