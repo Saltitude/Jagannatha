@@ -40,10 +40,10 @@ public class SC_NetPlayerInit_OP : NetworkBehaviour
 
         Mng_CheckList = GameObject.FindGameObjectWithTag("Mng_CheckList");
 
-        if (!isServer && isLocalPlayer)
+        if (isServer && !isLocalPlayer)
             Mng_CheckList.GetComponent<SC_CheckList>().NetworkPlayerOperator = this.gameObject;
 
-        if (!isServer && !isLocalPlayer)
+        if (!isServer && isLocalPlayer)
             Mng_CheckList.GetComponent<SC_CheckList>().NetworkPlayerPilot = this.gameObject;
 
     }
