@@ -15,7 +15,9 @@ public class SC_MoveDummy : NetworkBehaviour
     [SerializeField]
     GameObject Cannon;
     GameObject CannonTarget = null;
-
+    [SerializeField]
+    GameObject guide;
+    Vector3 guideCannon = Vector3.zero;
     // Start is called before the first frame update
     void Start()
     {
@@ -44,6 +46,7 @@ public class SC_MoveDummy : NetworkBehaviour
         {
             Mesh_OP.SetActive(false);
             CannonImg.SetActive(false);
+            guide.SetActive(false);
         }
     }
 
@@ -68,7 +71,8 @@ public class SC_MoveDummy : NetworkBehaviour
 
         else if (CannonTarget != null)
         {
-            Cannon.transform.LookAt(CannonTarget.transform);
+            //Cannon.transform.LookAt(CannonTarget.transform);
+            guideCannon = CannonTarget.transform.position;
         }
 
     }
@@ -90,6 +94,7 @@ public class SC_MoveDummy : NetworkBehaviour
         RpcSendVt3Position(gameObject, transform.position);
         RpcSendQtnRotation(gameObject, transform.rotation);
         RpcSendCannonRotation(Cannon.transform.rotation);
+        RpcSendCannonGuide(guideCannon);
     }
 
     /// <summary>
@@ -117,6 +122,13 @@ public class SC_MoveDummy : NetworkBehaviour
     {
         if (!isServer)
             Cannon.transform.rotation = qtn_Rotation;
+    }
+
+    [ClientRpc]
+    public void RpcSendCannonGuide(Vector3 vt3_Position)
+    {
+        if (!isServer)
+            guide.transform.position = new Vector3(vt3_Position.x, guide.transform.position.y,vt3_Position.z);
     }
 
 }
