@@ -11,8 +11,8 @@ public class SC_UI_StateMecha_CheckDisplay : MonoBehaviour
     Image curImage;
 
     Color32 curColor;
-    //[SerializeField]
-    Color32 breakdownColor = new Color32 (255,0,0,255);
+    [SerializeField]
+    Color32 breakdownColor;
 
     public int index;
     // Start is called before the first frame update

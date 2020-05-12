@@ -1462,7 +1462,7 @@ MonoBehaviour:
     rgba: 4294967295
   breakdownColor:
     serializedVersion: 2
-    rgba: 4278190335
+    rgba: 4278205900
   GeneralOffState: {fileID: 4984192042231010267}
   ConnectedOffState: {fileID: 3415749534631175076}
   InitializeOffState: {fileID: 7922396323933809466}
