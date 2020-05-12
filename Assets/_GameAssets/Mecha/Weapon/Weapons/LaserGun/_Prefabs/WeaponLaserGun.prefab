@@ -120,7 +120,7 @@ GameObject:
   - component: {fileID: 147850931238125559}
   - component: {fileID: 2210348525288903360}
   - component: {fileID: 2676181716841152618}
-  - component: {fileID: 1842754191072437241}
+  - component: {fileID: 6471229298707132432}
   m_Layer: 0
   m_Name: WeaponLaserGun
   m_TagString: Untagged
@@ -225,7 +225,7 @@ MonoBehaviour:
   EliceDark: {fileID: 9061922979335405752}
   WeapMainSC: {fileID: 0}
   Kahme: {fileID: 9061922980616211153}
---- !u!95 &1842754191072437241
+--- !u!95 &6471229298707132432
 Animator:
   serializedVersion: 3
   m_ObjectHideFlags: 0
