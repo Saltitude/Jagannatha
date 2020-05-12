@@ -79,6 +79,9 @@ public class SC_WeaponBreakdown : MonoBehaviour, IF_BreakdownManager
     {
         BreakDownTimer();
     }
+
+    #region MainFunctions
+
     public void StartNewBreakdown(int nbBreakdown)
     {
 
@@ -143,17 +146,6 @@ public class SC_WeaponBreakdown : MonoBehaviour, IF_BreakdownManager
 
     }  
 
-    public void SetNewBreakdown(int percent, float frequency = 25)
-    {
-
-        offPercentage += percent;
-        if (offPercentage > 50)
-            offPercentage = 50;
-
-        this.frequency = frequency;
-
-    }
-
     public void CheckBreakdown()
     {
 
@@ -173,55 +165,76 @@ public class SC_WeaponBreakdown : MonoBehaviour, IF_BreakdownManager
         CurNbOfBreakdown = n_BreakdownValue;
         SC_SyncVar_WeaponSystem.Instance.f_CurNbOfBd = n_BreakdownValue;
 
+        //Lvl 01
         if (n_BreakdownValue == 1)
-        {
-
             offPercentage = 25 * CurNbOfBreakdown;
 
-
-        }
-
+        //Lvl 02
         else if (n_BreakdownValue > 1)
         {
-
             offPercentage = 25 * CurNbOfBreakdown;
-
             b_MaxBreakdown = true;
             SC_SyncVar_WeaponSystem.Instance.b_MaxBreakdown = true;
-
         }
 
+        //Old Resolution
+        /*       
         else if (n_BreakdownValue == 0 && b_MaxBreakdown)
         {
-
-            EndBreakdown();
             b_MaxBreakdown = false;
             SC_SyncVar_WeaponSystem.Instance.b_MaxBreakdown = false;
-
         }
-
+         
         //Permet de régler les demi-pannes 
         else if (n_BreakdownValue == 0 && !b_MaxBreakdown && SC_main_breakdown_validation.Instance.isValidated)
-        {
             EndBreakdown();
-        }
+        */
 
-        if (CurNbOfBreakdown > 0)
-        {
-            
-            SC_SyncVar_Main_Breakdown.Instance.onPanneWeaponChange(true);
-        }
+        //Resolution
+        if (n_BreakdownValue == 0 && !SC_MainBreakDownManager.Instance.b_BreakEngine)
+            EndBreakdown();
         else
         {
-
-            SC_SyncVar_Main_Breakdown.Instance.onPanneWeaponChange(false);
+            SyncSystemState();
+            SC_MainBreakDownManager.Instance.CheckBreakdown();
         }
-        SC_MainBreakDownManager.Instance.CheckBreakdown();
+
     }
 
     public void EndBreakdown()
     {
+
+        b_MaxBreakdown = false;
+        SC_SyncVar_WeaponSystem.Instance.b_MaxBreakdown = false;
         offPercentage = 0;
+
+        SyncSystemState();
+        SC_MainBreakDownManager.Instance.CheckBreakdown();
+
+    }
+
+    //Old EndBd
+    /*
+    public void EndBreakdown()
+    {
+        offPercentage = 0;
+        SyncSystemState();
+    }
+    */
+
+    #endregion MainFunctions
+
+    #region OtherFunctions
+
+    public void SetNewBreakdown(int percent, float frequency = 25)
+    {
+
+        offPercentage += percent;
+        if (offPercentage > 50)
+            offPercentage = 50;
+
+        this.frequency = frequency;
+
     }
 
     void BreakDownTimer()
@@ -285,6 +298,16 @@ public class SC_WeaponBreakdown : MonoBehaviour, IF_BreakdownManager
         return bCanFire;
     }
 
+    #endregion OtherFunctions
+
+    void SyncSystemState()
+    {
+        if (CurNbOfBreakdown > 0)
+            SC_SyncVar_Main_Breakdown.Instance.onPanneWeaponChange(true);
+        else
+            SC_SyncVar_Main_Breakdown.Instance.onPanneWeaponChange(false);
+    }
+
     #region DebugMethod
 
     /// <summary>
@@ -318,5 +341,11 @@ public class SC_WeaponBreakdown : MonoBehaviour, IF_BreakdownManager
     }
 
     #endregion DebugMethod
+
+    public void ForceUpdate()
+    {
+        SyncSystemState();
+        SC_SyncVar_WeaponSystem.Instance.b_MaxBreakdown = b_MaxBreakdown;
+    }
 
 }

@@ -27,7 +27,7 @@ MonoBehaviour:
   boundsRadius: 0.1
   avoidCollisionWeight: 60.54
   collisionAvoidDst: 43.16
-  koaBehavior: 0
+  koaBehavior: 1
   axisRotationSpeed: {x: 0, y: 0, z: 0}
   split: 1
   splitNumber: 100
@@ -144,4 +144,4 @@ MonoBehaviour:
   invert: 1
   invertAxis: {x: 1, y: 1, z: 1}
   speedOnSpline: 25
-  spline: {fileID: 8158630672628145991, guid: 5015585d87110ab4ab929574d666d6b8, type: 3}
+  settingDuration: 0

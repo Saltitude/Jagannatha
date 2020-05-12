@@ -132,13 +132,17 @@ public class SC_KoaSpawn : MonoBehaviour
         int rndy = Random.Range(100, 800);
         int rndz = Random.Range(-400,400);
 
+        float rndSphereScale = Random.Range(0.6f, 1.6f);
 
+        koa.transform.localScale = new Vector3(koa.transform.localScale.x*rndSphereScale, koa.transform.localScale.y*rndSphereScale, koa.transform.localScale.z*rndSphereScale);
 
-        int rndscale = Random.Range(0, 250);
+        float rndscale = Random.Range(1.0f, 2.0f);
         for (int i = 0; i<koa.transform.childCount;i++)
         {
-            koa.transform.GetChild(i).transform.localScale = new Vector3(1,1,rndscale);
+            koa.transform.GetChild(i).transform.localScale = new Vector3(1,1, koa.transform.GetChild(i).transform.localScale.z*rndscale);
         }
+
+        
 
         koa.transform.position = splineSpawn[spawnPoint].GetPoint(1);
         koa.transform.LookAt(Player.transform);

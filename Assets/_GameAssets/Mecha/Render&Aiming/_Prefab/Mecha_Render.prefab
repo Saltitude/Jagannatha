@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 8146274502570544954}
   - component: {fileID: 8146274502570544953}
   - component: {fileID: 6828529470131184935}
+  - component: {fileID: 5009617512678414807}
   m_Layer: 0
   m_Name: Cam_Render
   m_TagString: MainCamera
@@ -137,6 +138,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Target: {fileID: 0}
+--- !u!114 &5009617512678414807
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8146274502570544957}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 926aaae03f5367d41823b57310a4f2ce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fog: 1
+  fogColor: {r: 0.09411765, g: 0.06666667, b: 0.007843138, a: 0}
+  fogDensity: 0.001
+  fogStart: 0
+  fogEnd: 900
+  fogMode: 2
 --- !u!1 &8146274502873430609
 GameObject:
   m_ObjectHideFlags: 0

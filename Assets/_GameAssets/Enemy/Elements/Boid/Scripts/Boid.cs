@@ -13,11 +13,14 @@ public class Boid : MonoBehaviour {
     float curTimer;
     int TotalFlick =1;
     int curFlick;
-
+    
 
     SC_KoaManager koaManager;
 
     Vector3 initScale;
+
+    Material baseMat;
+
 
     [SerializeField]
     Material[] M_tabHit;
@@ -62,6 +65,7 @@ public class Boid : MonoBehaviour {
         cachedTransform = transform; //Position tampon
         initScale = transform.localScale;
         meshRenderer = transform.GetChild(0).GetComponent<MeshRenderer>();
+        baseMat = meshRenderer.material;
     }
     public void SetNewSettings(BoidSettings newSettings, bool koaTargetWeight = false)
     {
@@ -89,6 +93,7 @@ public class Boid : MonoBehaviour {
         velocity = transform.forward * startSpeed; //Stockage de la vélocité selon la vitesse de départ
         destructionTimer = 1f;
         curTimer = 0;
+        meshRenderer.material = baseMat;
         isActive = true;
     }
     /// <summary>
@@ -138,7 +143,7 @@ public class Boid : MonoBehaviour {
             {
                 centreOfFlockmates /= numPerceivedFlockmates; //Position des autres flock / nombre de flock autour
                 Vector3 offsetToFlockmatesCentre = (centreOfFlockmates - position); //Offset selon position mate - position actuel
-
+                
                 var alignmentForce = SteerTowards(avgFlockHeading) * settings.alignWeight; //Vector3 Alignement
                 var cohesionForce = SteerTowards(offsetToFlockmatesCentre) * settings.cohesionWeight; //Vector3 Cohesion
                 var seperationForce = SteerTowards(avgAvoidanceHeading) * settings.seperateWeight; //Vector3 separation

@@ -22,13 +22,6 @@ public class SC_UI_Display_MapInfos_KoaState : MonoBehaviour
 
     public bool activated;
 
-    public GameObject Amplitude;
-    public GameObject Frequence;
-    public GameObject Phase;
-
-    [SerializeField]
-    Text[] sensi = new Text[3];
-
     [SerializeField]
     Text type;
 
@@ -37,6 +30,9 @@ public class SC_UI_Display_MapInfos_KoaState : MonoBehaviour
 
     [SerializeField]
     SC_UI_SystmShield life;
+
+    [SerializeField]
+    SC_Triangle_Parameters _triangle;
 
     [SerializeField]
     Text koaStateTxt;
@@ -93,9 +89,7 @@ public class SC_UI_Display_MapInfos_KoaState : MonoBehaviour
         curKoaScriptKoaSettings = newSettings;
         koaSensibility = new Vector3(curKoaScriptKoaSettings.GetSensibility().x, curKoaScriptKoaSettings.GetSensibility().y, curKoaScriptKoaSettings.GetSensibility().z);
         boidSettings = fixedData.GetBoidSettings(curKoaScriptKoaSettings.GetBoidSettingsIndex());
-   
-
-        activated = true;
+       activated = true;
     }
 
     void GetReferences()
@@ -123,42 +117,19 @@ public class SC_UI_Display_MapInfos_KoaState : MonoBehaviour
             if (activated)
             {
                 curfKoaLife = fKoaLife;
+                //_triangle.b_Init = true;
                 
-                for (int i = 0; i < 6; i++)
-                {
 
-                    if (i == koaSensibility.x)
-                    {
-                        Amplitude.transform.GetChild(i).GetComponent<Image>().enabled = true;
-                    }
-                    else
-                        Amplitude.transform.GetChild(i).GetComponent<Image>().enabled = false;
-                }
-                for (int i = 0; i < 6; i++)
-                {
+                //sensi[0].text = (koaSensibility.x + 1).ToString();
+                //sensi[1].text = (koaSensibility.y + 1).ToString();
+                //sensi[2].text = (koaSensibility.z + 1).ToString();
 
-                    if (i == koaSensibility.y)
-                    {
-                        Frequence.transform.GetChild(i).GetComponent<Image>().enabled = true;
-                    }
-                    else
-                        Frequence.transform.GetChild(i).GetComponent<Image>().enabled = false;
-                }
-                for (int i = 0; i < 6; i++)
-                {
+                _triangle.amplitudeValue = (koaSensibility.x + 1);
+                _triangle.frequenceValue = (koaSensibility.y + 1);
+                _triangle.phaseValue = (koaSensibility.z + 1);
+                
 
-                    if (i == koaSensibility.z)
-                    {
-                        Phase.transform.GetChild(i).GetComponent<Image>().enabled = true;
-                    }
-                    else
-                        Phase.transform.GetChild(i).GetComponent<Image>().enabled = false;
-                }
-
-                sensi [0].text = (koaSensibility.x + 1).ToString();
-                sensi[1].text = (koaSensibility.y + 1).ToString();
-                sensi[2].text = (koaSensibility.z + 1).ToString();
-
+                _triangle.b_Init = false;
 
                 fKoaLife = (curKoaScriptKoaSettings.GetCurKoaLife() / curKoaScriptKoaSettings.GetMaxKoaLife()) * 100;
 
@@ -187,6 +158,11 @@ public class SC_UI_Display_MapInfos_KoaState : MonoBehaviour
                     SC_UI_Display_Flock.Instance.StartNewBehavior(boidSettings);
                 }
                 
+            }
+            else
+            {
+                
+                _triangle.b_Init = true;
             }
 
         }

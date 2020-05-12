@@ -23,14 +23,14 @@ public class ViveGripExample_Switch : MonoBehaviour, IInteractible
     public enum TargetSystem { Display, Movement }
     public TargetSystem MovementState = TargetSystem.Display;
 
-
+    [SerializeField]
+    GameObject gem;
+    float limitOfGemmeZ;
+    float intervalle;
     void Start() {
-
-        
         GetReferences();
-
-        
-
+        limitOfGemmeZ = gem.transform.localPosition.z;
+        intervalle = Mathf.Abs(limitOfGemmeZ / 5);
     }
 
     void GetReferences()
@@ -77,32 +77,53 @@ public class ViveGripExample_Switch : MonoBehaviour, IInteractible
     public void Flip()
     {
 
-        Vector3 rotation = transform.localEulerAngles;
-        rotation.x *= -1;
-        transform.localEulerAngles = rotation;
+        //Vector3 rotation = transform.localEulerAngles;
+        //rotation.x *= -1;
+        //transform.localEulerAngles = rotation;
+
 
         curState = !curState;
         sendToSynchVar(curState);
-
-
-
-
-
+        StartCoroutine(animGemme());
 
         //SON
         if (curState == false)
         {
             CustomSoundManager.Instance.PlaySound(gameObject, "SFX_p_click_button_1", false, 1, true,0.05f, 0.5f);
+
         }
         else
         {
             CustomSoundManager.Instance.PlaySound(gameObject, "SFX_p_click_button_2", false, 1, true, 0.05f, 0.4f);
+
         }
         
 
 
   }
 
+    IEnumerator animGemme()
+    {
+        bool isOnAnim = true;
+        while(isOnAnim)
+        {
+            gem.transform.localPosition -= new Vector3(0, 0,Time.deltaTime*0.1f);
+            yield return new WaitForSeconds(0);
+            if(gem.transform.localPosition.z < -0.02f)
+            {
+                isOnAnim = false;
+            }
+        }
+        while(!isOnAnim)
+        {
+            gem.transform.localPosition += new Vector3(0, 0, Time.deltaTime* 0.1f);
+            yield return new WaitForSeconds(0);
+            if (gem.transform.localPosition.z >= 0)
+            {
+                StopAllCoroutines();
+            }
+        }
+    }
 
 
     public bool isBreakdown()

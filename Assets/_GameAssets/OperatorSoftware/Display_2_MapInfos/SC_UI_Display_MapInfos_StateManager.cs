@@ -55,12 +55,14 @@ public class SC_UI_Display_MapInfos_StateManager : MonoBehaviour
         {
             curState = StateOfCanvas.neutral;
             checkChild(0);
+            SC_UI_Display_MapInfos_KoaState.Instance.activated = false;
             SC_UI_Display_Flock.Instance.desactivateRender();
         }
         else if(scriptRaycast.objectOnclic.tag == "Koa")
         {
             curState = StateOfCanvas.koaView;
             checkChild(1);
+            SC_UI_Display_MapInfos_KoaState.Instance.activated = true;
             SC_UI_Display_Flock.Instance.activateRender();
         }
     }

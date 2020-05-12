@@ -43,6 +43,7 @@ public class SC_KoaManager : MonoBehaviour
     float curRecoveryTimer;
 
     GameObject _koa; //Koa du 
+    Animator koaEmissiveAnimator;
 
     /// <summary>
     /// Current BoidSettings
@@ -85,6 +86,7 @@ public class SC_KoaManager : MonoBehaviour
         curRecoveryTimer = 0;
         recoveryDuration = 1.5f;
         flockManager = newGuide.GetComponent<SC_FlockManager>();
+   
         curFlockSettings = flockSettings;
         spawnCount = newSpawnCount;
 
@@ -137,6 +139,12 @@ public class SC_KoaManager : MonoBehaviour
             _koa = NetPSpawnKoa.SpawnKoa();
             _koa.transform.position = transform.position;
             _koa.GetComponent<SC_KoaCollider>().Initialize(this);
+
+            flockManager.KoaMainAnimator = _koa.transform.GetChild(0).GetComponent<Animator>();
+
+            koaEmissiveAnimator  = _koa.transform.GetChild(0).GetChild(0).GetComponent<Animator>();
+            flockManager.KoaEmissiveAnimator = koaEmissiveAnimator;
+
             vfx_Hit = _koa.GetComponent<ParticleSystem>();
 
             syncVarKoa = _koa.GetComponent<SC_MoveKoaSync>();
@@ -189,7 +197,7 @@ public class SC_KoaManager : MonoBehaviour
                 if (respawnTimer > (60f / curFlockSettings.regenerationRate))
                 {
                     respawnTimer = 0;
-                    //GenerateNewBoid();
+                    GenerateNewBoid();
                 }
             }
             if (!regeneration)
@@ -261,8 +269,6 @@ public class SC_KoaManager : MonoBehaviour
                 x /= nbActive;
                 y /= nbActive;
                 z /= nbActive;
-
-                
 
                 _koa.transform.position = Vector3.Lerp(_koa.transform.position, new Vector3(x, y, z), 5* Time.deltaTime);
           
@@ -341,7 +347,7 @@ public class SC_KoaManager : MonoBehaviour
     public void SetBehavior(BoidSettings newSettings)
     {
 
-        curBoidSettings = newSettings; ;
+        curBoidSettings = newSettings; 
         for (int i = 0; i < _boidsTab.Length; i++)
         {
             _boidsTab[i].SetNewSettings(curBoidSettings);
@@ -387,8 +393,9 @@ public class SC_KoaManager : MonoBehaviour
 
             if (power < 0) power = 0;
             float powerPerCent = (power / 6) * 100;
-            
-            if(SC_Debug_Mng.Instance.b_weapon_Cheatcode)
+            //Debug.Log(powerPerCent);
+            Sc_LaserFeedBack.Instance.SetLaserSize(Mathf.FloorToInt(powerPerCent));
+            if (SC_Debug_Mng.Instance.b_weapon_Cheatcode)
             {
                 powerPerCent = SC_Debug_Mng.Instance.powerPerCent;
             }
@@ -396,6 +403,8 @@ public class SC_KoaManager : MonoBehaviour
             if (powerPerCent > 0)
             {
                 KoaLife -= (int)((powerPerCent * maxLife) / 100) / 3;
+                if (KoaLife <= 0)
+                    KoaLife = 0;
                 syncVarKoa.SetCurLife(KoaLife);
                 if (KoaLife <= 0)
                 {
@@ -404,6 +413,15 @@ public class SC_KoaManager : MonoBehaviour
                 SC_HitMarker.Instance.HitMark(SC_HitMarker.HitType.Koa);
 
                 vfx_Hit.Play();
+            }
+
+            if (powerPerCent >= curFlockSettings.flightReactionMinSensibility)
+            {
+                flockManager.ReactionFlock(SC_FlockManager.PathType.Flight);
+            }
+            if (powerPerCent < curFlockSettings.hitReactionMaxSensibility)
+            {
+                flockManager.ReactionFlock(SC_FlockManager.PathType.ReactionHit);
             }
 
             ///DEBUG
@@ -458,21 +476,37 @@ public class SC_KoaManager : MonoBehaviour
         float z = Mathf.Abs((int)gunSensitivity.z - (int)sensitivity.z);
 
         float ecart = x + y + z;
-
-
         float power = 6 - ecart;
 
         if (power < 0) power = 0;
         float powerPerCent = (power / 6) * 100;
+        //Debug.Log(powerPerCent);
+        Sc_LaserFeedBack.Instance.SetLaserSize(Mathf.FloorToInt(powerPerCent));
         if (SC_Debug_Mng.Instance.b_weapon_Cheatcode)
         {
             powerPerCent = SC_Debug_Mng.Instance.powerPerCent;
         }
 
-        if (powerPerCent < curFlockSettings.maxReactionSensibilityPerCent)
+        if (powerPerCent >= curFlockSettings.flightReactionMinSensibility)
         {
-            flockManager.ReactionFlock();
+            flockManager.ReactionFlock(SC_FlockManager.PathType.Flight);
         }
+        if(powerPerCent < curFlockSettings.hitReactionMaxSensibility)
+        {
+            flockManager.ReactionFlock(SC_FlockManager.PathType.ReactionHit);
+        }
+        else
+        {
+            koaEmissiveAnimator.SetBool("Hit", true);
+            StartCoroutine(ResetBool("Hit", false));
+        }
+    }   
+
+    IEnumerator ResetBool(string boolReset,bool statut)
+    {
+        yield return new WaitForEndOfFrame();
+        koaEmissiveAnimator.SetBool(boolReset, statut);
+        StopAllCoroutines();
     }
 
     public void ChangeKoaState(int state)

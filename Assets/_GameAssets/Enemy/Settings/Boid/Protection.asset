@@ -144,4 +144,4 @@ MonoBehaviour:
   invert: 1
   invertAxis: {x: 1, y: 1, z: 1}
   speedOnSpline: 25
-  spline: {fileID: 8158630672628145991, guid: 2cbfe71a8ee1b8441859e94a965a85e1, type: 3}
+  settingDuration: 0

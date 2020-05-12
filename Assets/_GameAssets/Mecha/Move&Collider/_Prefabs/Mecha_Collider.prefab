@@ -293,9 +293,11 @@ MonoBehaviour:
     m_RotationOrder: 4
   f_RotationSpeedZ: 1
   f_LerpRotZ: 1
-  TypeRotationZ: 3
+  TypeRotationZ: 0
+  CurImpulse: 0
   b_InvertAxe: 1
   TargetTRS: {fileID: 1283266316766246386}
   f_RotationSpeedX: 0.5
   f_LerpRotX: 1
   f_MaxRotUpX: 0.3
+  f_ImpulseX: 0

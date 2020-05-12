@@ -58,7 +58,7 @@ public class SC_PhaseManager : MonoBehaviour
         curWaveIndex++;
         if (curWaveIndex<waves.Length)
         {
-            if (SC_WaveManager.Instance.nextWave == true)
+            if (SC_WaveManager.Instance.b_nextWave == true)
             {
                 SC_WaveManager.Instance.InitializeWave(waves [curWaveIndex]);
                 //SC_EnemyManager.Instance.Progress.value = curWaveIndex * 10f;

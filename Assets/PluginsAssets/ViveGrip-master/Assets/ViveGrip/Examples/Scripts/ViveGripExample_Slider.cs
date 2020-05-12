@@ -120,10 +120,13 @@ public class ViveGripExample_Slider : MonoBehaviour, IInteractible {
 
         //on envoie la valeur à la syncvar si celle ci a changé
         if (newX != oldX) sendToSynchVar(-Mathf.Round(Ratio(gameObject.transform.localPosition.x,limit,0.45f,-limit,-0.45f)*100)/100);
-
-        if(text_value_display != null)
+        //if (newX != oldX) sendToSynchVar(-Mathf.FloorToInt(Ratio(gameObject.transform.localPosition.x, limit, 0.45f, -limit, -0.45f)));
+        //Debug.Log(gameObject.transform.localPosition.x);
+        if (text_value_display != null)
         {
-            curValue = Mathf.RoundToInt(Ratio(-Mathf.Round(Ratio(gameObject.transform.localPosition.x, limit, 0.45f, -limit, -0.45f) * 100) / 100, 0.4f, 10, -0.4f, 0));
+            //curValue = Mathf.FloorToInt(Ratio(-Mathf.Round(Ratio(gameObject.transform.localPosition.x, limit, 0.45f, -limit, -0.45f) * 100) / 100, 0.4f, 10, -0.4f, 0.1f));
+            curValue = Mathf.FloorToInt(Ratio(gameObject.transform.localPosition.x,-limit,10,limit,1));
+            
             text_value_display.text = curValue.ToString();
 
         }

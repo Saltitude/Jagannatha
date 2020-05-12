@@ -342,13 +342,15 @@ GameObject:
   - component: {fileID: 469762398250868386}
   - component: {fileID: 7400837652994378656}
   - component: {fileID: 5204749097931584452}
+  - component: {fileID: 4199147801106235055}
+  - component: {fileID: 3056862077979343846}
   m_Layer: 0
   m_Name: Cam_FPS
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &585186678404155582
 Transform:
   m_ObjectHideFlags: 0
@@ -401,7 +403,7 @@ Camera:
   m_HDR: 1
   m_AllowMSAA: 1
   m_AllowDynamicResolution: 0
-  m_ForceIntoRT: 0
+  m_ForceIntoRT: 1
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
@@ -549,6 +551,43 @@ MonoBehaviour:
   blendDistance: 0
   weight: 1
   priority: 0
+--- !u!114 &4199147801106235055
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 585186678404155583}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 926aaae03f5367d41823b57310a4f2ce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fog: 1
+  fogColor: {r: 0.21960661, g: 0.990566, b: 1, a: 0}
+  fogDensity: 0.001
+  fogStart: 0
+  fogEnd: 0
+  fogMode: 0
+--- !u!95 &3056862077979343846
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 585186678404155583}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 2135c422253a93a488d55f4597039975, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &1074306742712292816
 GameObject:
   m_ObjectHideFlags: 0
@@ -809,6 +848,55 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!95 &2503041113498875816
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1968953837789670148}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 2135c422253a93a488d55f4597039975, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &4266580798175266842
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1968953837789670148}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3bb08a921701cc4499af7674f7f4eb42, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &5056170283913671307
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1968953837789670148}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 926aaae03f5367d41823b57310a4f2ce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fog: 1
+  fogColor: {r: 0.21960661, g: 0.990566, b: 1, a: 0}
+  fogDensity: 0.001
+  fogStart: 0
+  fogEnd: 0
+  fogMode: 0
 --- !u!1 &2077781949293134658
 GameObject:
   m_ObjectHideFlags: 0
@@ -2019,6 +2107,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1b1cf3ff32a2e17409d29b8a686b0887, type: 3}
+--- !u!1 &69246509247809666 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 135184, guid: 1b1cf3ff32a2e17409d29b8a686b0887,
+    type: 3}
+  m_PrefabInstance: {fileID: 69246509247682706}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1968953837789810298
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2134,6 +2228,11 @@ PrefabInstance:
       propertyPath: vertices.Array.data[7].x
       value: 1.65
       objectReference: {fileID: 0}
+    - target: {fileID: 2278597665005722071, guid: 4d293c8e162f3874b982baadd71153d2,
+        type: 3}
+      propertyPath: GripPoint
+      value: 
+      objectReference: {fileID: 69246509247809666}
     - target: {fileID: 4659942585861908964, guid: 4d293c8e162f3874b982baadd71153d2,
         type: 3}
       propertyPath: m_RootOrder
@@ -2148,15 +2247,15 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1968953837789810298}
   m_PrefabAsset: {fileID: 0}
---- !u!20 &1968953837788416346 stripped
-Camera:
-  m_CorrespondingSourceObject: {fileID: 2082592, guid: 4d293c8e162f3874b982baadd71153d2,
+--- !u!4 &1968953837790006948 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 458974, guid: 4d293c8e162f3874b982baadd71153d2,
     type: 3}
   m_PrefabInstance: {fileID: 1968953837789810298}
   m_PrefabAsset: {fileID: 0}
---- !u!4 &1968953837790020404 stripped
+--- !u!4 &1968953837789948536 stripped
 Transform:
-  m_CorrespondingSourceObject: {fileID: 478542, guid: 4d293c8e162f3874b982baadd71153d2,
+  m_CorrespondingSourceObject: {fileID: 402434, guid: 4d293c8e162f3874b982baadd71153d2,
     type: 3}
   m_PrefabInstance: {fileID: 1968953837789810298}
   m_PrefabAsset: {fileID: 0}
@@ -2172,15 +2271,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d37c2cf88f7c59f4c8cf5d3812568143, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!4 &1968953837789948536 stripped
+--- !u!4 &1968953837790020404 stripped
 Transform:
-  m_CorrespondingSourceObject: {fileID: 402434, guid: 4d293c8e162f3874b982baadd71153d2,
+  m_CorrespondingSourceObject: {fileID: 478542, guid: 4d293c8e162f3874b982baadd71153d2,
     type: 3}
   m_PrefabInstance: {fileID: 1968953837789810298}
   m_PrefabAsset: {fileID: 0}
---- !u!4 &1968953837790006948 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 458974, guid: 4d293c8e162f3874b982baadd71153d2,
+--- !u!20 &1968953837788416346 stripped
+Camera:
+  m_CorrespondingSourceObject: {fileID: 2082592, guid: 4d293c8e162f3874b982baadd71153d2,
+    type: 3}
+  m_PrefabInstance: {fileID: 1968953837789810298}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1968953837789670148 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 189822, guid: 4d293c8e162f3874b982baadd71153d2,
     type: 3}
   m_PrefabInstance: {fileID: 1968953837789810298}
   m_PrefabAsset: {fileID: 0}

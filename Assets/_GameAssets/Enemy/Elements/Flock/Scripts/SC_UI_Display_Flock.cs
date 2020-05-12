@@ -159,6 +159,7 @@ public class SC_UI_Display_Flock : MonoBehaviour
     public void desactivateRender()
     {
         windowActive = false;
+        if(_boidsTab != null)
         for (int i = 0; i < _boidsTab.Length; i++)
         {
             _boidsTab[i].transform.GetChild(0).GetComponent<MeshRenderer>().enabled = false;

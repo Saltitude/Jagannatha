@@ -94,6 +94,8 @@ GameObject:
   - component: {fileID: 554944554131170163}
   - component: {fileID: 554944554131170154}
   - component: {fileID: 554944554131170157}
+  - component: {fileID: 6406596591376279290}
+  - component: {fileID: 5704663702815774745}
   m_Layer: 9
   m_Name: Interactible
   m_TagString: Untagged
@@ -332,6 +334,7 @@ MonoBehaviour:
   ConstraintRange: 0.7
   DeadZone: 0.15
   AddMaxRange: 0.3
+  JointBeakFroce: 0
   f_CurDistance: 0
   b_InRange: 0
   b_Enable: 0
@@ -355,6 +358,82 @@ MonoBehaviour:
   rotation:
     mode: 1
     localOrientation: {x: 0, y: 0, z: 0}
+--- !u!114 &6406596591376279290
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 554944554131170165}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1298835dfdb33454989f0e490b2eb6dc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  viveGripEvent: 2
+  attachedFunction:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 554944554131170154}
+        m_MethodName: HandKinematic
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 554944554131170154}
+        m_MethodName: CreateFixedJoint
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+--- !u!114 &5704663702815774745
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 554944554131170165}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1298835dfdb33454989f0e490b2eb6dc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  viveGripEvent: 3
+  attachedFunction:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 554944554131170154}
+        m_MethodName: HandKinematic
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 554944554131170154}
+        m_MethodName: DeleteFixedJoint
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &554944554954656716
 GameObject:
   m_ObjectHideFlags: 0

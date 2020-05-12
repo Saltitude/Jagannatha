@@ -82,7 +82,7 @@ public class SC_Weapon_MechState : MonoBehaviour
     void CheckState()
     {
 
-        if (SC_passwordLock.Instance.b_IsConnected)
+        if ( (SC_GameStates.Instance.CurState == SC_GameStates.GameState.Tutorial && SC_passwordLock.Instance.b_IsConnected) || (SC_GameStates.Instance.CurState != SC_GameStates.GameState.Tutorial && !SC_SyncVar_WeaponSystem.Instance.b_BreakEngine) )
         {
 
             CurState = SystemState.Connected;

@@ -18,6 +18,7 @@ public class SC_MainBreakDownManager : MonoBehaviour, IF_BreakdownManager
     public GameObject Mng_Checklist;
     public GameObject Mng_BreakDownAlert;
     public GameObject screenController;
+    GameObject BreakDownAudioSource;
     private SC_breakdown_displays_screens sc_screens_controller;
 
     [Header("References breakDown SC")]
@@ -31,17 +32,38 @@ public class SC_MainBreakDownManager : MonoBehaviour, IF_BreakdownManager
     public SC_MovementBreakdown MovementBreakdownSC;
     GameObject MoveSystem;
 
-    [Header("System Lifes")]
+    [Header("Breakdown Infos")]
     public int nbOfBreakDownBeforeTotalBreak;
+    public bool b_BreakEngine = false;
+    int SoundSourceNumb = 0;
+
+
+    [Header("Display System Infos")]
     [SerializeField, Range(0,10)]
     int Displaylife = 10;
+    [SerializeField]
+    int n_MaxBreakInterB4MaxBD = 0;
+    [SerializeField]
+    bool ScreensMaxBreak = false;
+    [SerializeField]
+    int NbOfBreakDisplay = 0;
+
+    [Header("Weapon System Infos")]
     [SerializeField, Range(0, 10)]
     int WeaponLife = 10;
+    [SerializeField]
+    bool WeaponMaxBreak = false;
+    [SerializeField]
+    int NbOfBreakWeapon = 0;
+
+    [Header("Movement System Infos")]
     [SerializeField, Range(0, 10)]
     int MovementLife = 10;
+    [SerializeField]
+    bool MoveMaxBreak = false;
+    [SerializeField]
+    int MoveBreakLvl = 0;    
 
-    [Header("Systems States")]
-    public bool b_BreakEngine = false;
     /*
     public bool b_BreakMove = false;
     public bool b_BreakScreen = false;
@@ -78,16 +100,8 @@ public class SC_MainBreakDownManager : MonoBehaviour, IF_BreakdownManager
 
     void Start()
     {       
-        GetReferences();
-    }
-
-    void GetReferences()
-    {
-
-        //get du script qui gere l'affichage des ecrans de panne
-        if (screenController != null && sc_screens_controller == null)
-            sc_screens_controller = screenController.GetComponent<SC_breakdown_displays_screens>();
-        
+        UpdateSystemInfos();
+        //ForceUpdate();
     }
 
     #endregion Init
@@ -107,27 +121,28 @@ public class SC_MainBreakDownManager : MonoBehaviour, IF_BreakdownManager
             SC_WeaponBreakdown.Instance.CheckBreakdown();
             Debug.Log("weapon : " +SC_WeaponBreakdown.Instance.CurNbOfBreakdown);
             SC_MovementBreakdown.Instance.CheckBreakdown();
-            Debug.Log("movement" +SC_MovementBreakdown.Instance.n_InteractibleInBreakDown);
+            Debug.Log("movement" +SC_MovementBreakdown.Instance.n_BreakDownLvl);
         }
 
         if (Input.GetKeyDown(KeyCode.R))
         {
-            DisplayBreakdownSC.RepairBreakdownDebug();
-            WeaponBreakdownSC.RepairBreakdownDebug();
-            MovementBreakdownSC.RepairBreakdownDebug();
+            SC_BreakdownDisplayManager.Instance.RepairBreakdownDebug();
+            SC_WeaponBreakdown.Instance.RepairBreakdownDebug();
+            SC_MovementBreakdown.Instance.RepairBreakdownDebug();
+            CheckBreakdown();
         }
 
-        if (Input.GetKeyDown(KeyCode.P))
+        if (Input.GetKeyDown(KeyCode.LeftArrow))
         {
             CauseDamageOnSystem(FlockSettings.AttackFocus.Display, 1);
         }
 
-        if (Input.GetKeyDown(KeyCode.M))
+        if (Input.GetKeyDown(KeyCode.DownArrow))
         {
             CauseDamageOnSystem(FlockSettings.AttackFocus.Movement, 1);
         }
 
-        if (Input.GetKeyDown(KeyCode.O))
+        if (Input.GetKeyDown(KeyCode.RightArrow))
         {
             CauseDamageOnSystem(FlockSettings.AttackFocus.Weapon, 1);
         }
@@ -135,155 +150,163 @@ public class SC_MainBreakDownManager : MonoBehaviour, IF_BreakdownManager
     }
 
     public void CheckBreakdown()
-    {
+    {      
 
-        
-        if(sc_screens_controller == null)
-            GetReferences();
-        
-        #region Verif si chaque system est en panne
+        UpdateSystemInfos();
+        //ForceUpdate();
 
-        if (SC_BreakdownDisplayManager.Instance.CurNbOfBreakdown > 0)
-        {
-            SC_SyncVar_Main_Breakdown.Instance.onPanneDisplayChange(true);
-        }
-        else
-        {
-            SC_SyncVar_Main_Breakdown.Instance.onPanneDisplayChange(false);
-        }
+        SyncSystemStates();
 
-        if (SC_WeaponBreakdown.Instance.CurNbOfBreakdown > 0)
+        //Si on est pas encore en panne Generale
+        //Ici on additionne toutes les pannes des sytemes pour savoir si on déclanche la Generale
+        if (!b_BreakEngine && SC_BreakdownDisplayManager.Instance.CurNbOfBreakdown + SC_WeaponBreakdown.Instance.CurNbOfBreakdown + SC_MovementBreakdown.Instance.n_BreakDownLvl >= nbOfBreakDownBeforeTotalBreak)
         {
-            SC_SyncVar_Main_Breakdown.Instance.onPanneWeaponChange(true);
-        }
-        else
-        {
-            SC_SyncVar_Main_Breakdown.Instance.onPanneWeaponChange(false);
-        }
+
+            //Debug.Log("CheckBd - ToBd");
+
+            //On s'assure que chaque system ai au moins une panne
+            //important doit etre avant le changement de booleen puisque checké dans le lancement de panne locale
+
+            if (SC_WeaponBreakdown.Instance.CurNbOfBreakdown == 0)
+                SC_WeaponBreakdown.Instance.StartNewBreakdown(1);
+
+            if (SC_MovementBreakdown.Instance.n_BreakDownLvl == 0)
+                SC_MovementBreakdown.Instance.StartNewBreakdown(1);
+
+            if (SC_BreakdownDisplayManager.Instance.CurNbOfBreakdown == 0)
+                SC_BreakdownDisplayManager.Instance.StartNewBreakdown(1);
+
+            //
+
+            b_BreakEngine = true;
+
+            //On met en pause les Wave
             
 
-        if (SC_MovementBreakdown.Instance.n_InteractibleInBreakDown > 0)
-        {
-            SC_SyncVar_Main_Breakdown.Instance.onPanneMovementChange(true);
-        }
-        else
-        {
-            SC_SyncVar_Main_Breakdown.Instance.onPanneMovementChange(false);
-        }
-
-        #endregion
-
-        //Ici on additionne toutes les pannes des sytemes pour savoir si on déclanche une panne complete
-        if (SC_BreakdownDisplayManager.Instance.CurNbOfBreakdown + SC_WeaponBreakdown.Instance.CurNbOfBreakdown + SC_MovementBreakdown.Instance.n_InteractibleInBreakDown >= nbOfBreakDownBeforeTotalBreak)
-        {
-
-            //Si on est pas encore en panne totale
-            if (!b_BreakEngine)
-            {
-
-                ///////important doit etre avant le changement de booleen puisque checké dans le lancement de panne locale
-
-                if (SC_WeaponBreakdown.Instance.CurNbOfBreakdown == 0)
-                    SC_WeaponBreakdown.Instance.StartNewBreakdown(1);
-
-                if (SC_MovementBreakdown.Instance.n_BreakDownLvl == 0)
-                    SC_MovementBreakdown.Instance.StartNewBreakdown(1);
-
-                //cequi n'arrivera sans doute jamais kek
-                if (SC_BreakdownDisplayManager.Instance.CurNbOfBreakdown == 0)
-                    SC_BreakdownDisplayManager.Instance.StartNewBreakdown(1);
-
-                ///////
-
-                b_BreakEngine = true;
-                SC_WaveManager.Instance.nextWave = false;
-
-                if (SC_GameStates.Instance.CurState == SC_GameStates.GameState.Game)
-                    SC_BreakdownOnBreakdownAlert.Instance.LaunchGlobalAlert();
-
-                //on fout tous les systemes en panne à balle
-                sc_screens_controller.PanneAll();
-
-                //descendre le bouton de validation
-                if (SC_GameStates.Instance.CurState == SC_GameStates.GameState.Game)
-                {
-                    SC_main_breakdown_validation.Instance.isValidated = false;
-                    SC_main_breakdown_validation.Instance.textStopBlink();
-                    SC_main_breakdown_validation.Instance.bringDown();
-                }
-
-
-            }
-
-        }
-
-        else if (SC_BreakdownDisplayManager.Instance.CurNbOfBreakdown == 0 && SC_WeaponBreakdown.Instance.CurNbOfBreakdown == 0 && SC_MovementBreakdown.Instance.n_InteractibleInBreakDown == 0 && !SC_main_breakdown_validation.Instance.isValidated)
-        {
-            //Fait clignoter le Text du bouton
-            SC_main_breakdown_validation.Instance.textBlink();
-            //Désactive le timer
-            SC_BreakdownOnBreakdownAlert.Instance.StopAllCoroutines();
-            if(SC_GameStates.Instance.CurTutoState == SC_GameStates.TutorialState.Tutorial1_8)
-                SC_GameStates.Instance.ChangeTutoGameState(SC_GameStates.TutorialState.Tutorial1_9);
-
-        }
-
-        //on additionne tout et on regarde si ya plus de panne et que le bouton de validation a été set par le joueur
-        else if (SC_BreakdownDisplayManager.Instance.CurNbOfBreakdown == 0 && SC_WeaponBreakdown.Instance.CurNbOfBreakdown == 0 && SC_MovementBreakdown.Instance.n_InteractibleInBreakDown  == 0 && SC_main_breakdown_validation.Instance.isValidated)
-        {
-
+            //FB Alert
             if (SC_GameStates.Instance.CurState == SC_GameStates.GameState.Game)
             {
-                SC_BreakdownOnBreakdownAlert.Instance.StopGlobalAlert();
-                //protection pour les kamikazes en fin de wave
-                if (SC_WaveManager.Instance.nextWave == false)
+                SC_WaveManager.Instance.b_nextWave = false;
+                SC_BreakdownOnBreakdownAlert.Instance.LaunchGlobalAlert();
+                SC_FogBreakDown.Instance.BreakDownDensity();
+                SC_LightAlarm.Instance.BreakDownLight();
+                if (SoundSourceNumb == 0)
                 {
-                    SC_WaveManager.Instance.nextWave = true;
-                    if (SC_WaveManager.Instance.waveEnded == true)
-                        SC_PhaseManager.Instance.EndWave();
+                    BreakDownAudioSource = CustomSoundManager.Instance.PlaySound(gameObject, "SFX_p_breackdown_alarm", true, 0.1f);
+                    SoundSourceNumb += 1;
                 }
             }
-            //on répare touuuus les systemes
-            sc_screens_controller.RepairAll();
-            SC_WeaponBreakdown.Instance.EndBreakdown();
-            SC_MovementBreakdown.Instance.EndBreakdown();
 
-            //remonter le bouton de validation
-            SC_main_breakdown_validation.Instance.bringUp();
+            //on fout tous les systemes en panne à balle
+            SC_breakdown_displays_screens.Instance.PanneAll();
 
-            b_BreakEngine = false;
-
-            //changement de state du tuto
-            if (SC_GameStates.Instance.CurState == SC_GameStates.GameState.Tutorial)
-                SC_GameStates.Instance.ChangeGameState(SC_GameStates.GameState.Tutorial2);
+            //descendre le bouton de validation
+            SC_main_breakdown_validation.Instance.isValidated = false;
+            SC_main_breakdown_validation.Instance.textStopBlink();
+            SC_main_breakdown_validation.Instance.bringDown();
 
         }
-        if(SC_GameStates.Instance.CurTutoState == SC_GameStates.TutorialState.Tutorial1_4 && SC_BreakdownDisplayManager.Instance.CurNbOfBreakdown == 0)
+
+        //Si on est en panne Generale
+        else if (b_BreakEngine)
         {
-            SC_GameStates.Instance.ChangeTutoGameState(SC_GameStates.TutorialState.Tutorial1_7);
+
+            //Les System ont été reparé
+            if(SC_BreakdownDisplayManager.Instance.CurNbOfBreakdown == 0 && SC_WeaponBreakdown.Instance.CurNbOfBreakdown == 0 && SC_MovementBreakdown.Instance.b_SeqIsCorrect)
+            {
+
+                //En Attente de Reboot (Validation)
+                if (!SC_main_breakdown_validation.Instance.isValidated)
+                {
+
+                    //Debug.Log("CheckBd - WaitValid");
+
+                    //Fait clignoter le Text du bouton
+                    SC_main_breakdown_validation.Instance.textBlink();
+
+                    //Désactive le timer
+                    SC_BreakdownOnBreakdownAlert.Instance.StopAllCoroutines();
+
+                    if (SC_GameStates.Instance.CurTutoState == SC_GameStates.TutorialState.Tutorial1_8)
+                        SC_GameStates.Instance.ChangeTutoGameState(SC_GameStates.TutorialState.Tutorial1_9);
+
+                    SC_FogBreakDown.Instance.ClearDensity();
+                    SC_LightAlarm.Instance.ClearLight();
+
+                }
+
+                //Reboot (Validation)
+                else if (SC_main_breakdown_validation.Instance.isValidated)
+                {
+
+                    //Debug.Log("CheckBd - IsValid");
+                    //SC_main_breakdown_validation.Instance.isValidated = false;
+
+                    if (SC_GameStates.Instance.CurState == SC_GameStates.GameState.Game)
+                    {
+                        if (BreakDownAudioSource.GetComponent<AudioSource>() != null && BreakDownAudioSource.GetComponent<AudioSource>().isPlaying)
+                        {
+                            //Debug.Log(BreakDownAudioSource.GetComponent<AudioClip>().name);
+                            BreakDownAudioSource.GetComponent<AudioSource>().Stop();
+                            SoundSourceNumb = 0; 
+                        }
+
+                        SC_BreakdownOnBreakdownAlert.Instance.StopGlobalAlert();
+
+                        //protection pour les kamikazes en fin de wave
+                        if (SC_WaveManager.Instance.b_nextWave == false)
+                        {
+
+                            SC_WaveManager.Instance.b_nextWave = true;
+
+                            if (SC_WaveManager.Instance.waveEnded == true)
+                                SC_PhaseManager.Instance.EndWave();
+
+                        }
+
+                    }
+
+                    //Sortie de la Panne Globale
+                    b_BreakEngine = false;
+
+                    //remonter le bouton de validation
+                    SC_main_breakdown_validation.Instance.bringUp();
+
+                    //on répare touuuus les systemes
+                    SC_BreakdownDisplayManager.Instance.EndBreakdown();
+                    SC_WeaponBreakdown.Instance.EndBreakdown();
+                    SC_MovementBreakdown.Instance.EndBreakdown();
+
+                    //changement de state du tuto
+                    if (SC_GameStates.Instance.CurState == SC_GameStates.GameState.Tutorial)
+                        SC_GameStates.Instance.ChangeGameState(SC_GameStates.GameState.Tutorial2);
+
+                }
+
+            }
+
         }
-        else if (SC_GameStates.Instance.CurTutoState == SC_GameStates.TutorialState.Tutorial1_5 && SC_WeaponBreakdown.Instance.CurNbOfBreakdown == 0)
-        {
-            SC_GameStates.Instance.ChangeTutoGameState(SC_GameStates.TutorialState.Tutorial1_7);
-        }
-        else if (SC_GameStates.Instance.CurTutoState == SC_GameStates.TutorialState.Tutorial1_6 && SC_MovementBreakdown.Instance.n_InteractibleInBreakDown == 0)
-        {
-            SC_GameStates.Instance.ChangeTutoGameState(SC_GameStates.TutorialState.Tutorial1_7);
-        }
+
+        if(SC_GameStates.Instance.CurState == SC_GameStates.GameState.Tutorial || SC_GameStates.Instance.CurState == SC_GameStates.GameState.Tutorial2)
+        SetTutoState();
 
         SyncSystemsLifes();
 
     }
 
+    /// <summary>
+    /// Fonction de prise de dommage | 
+    /// </summary>
+    /// <param name="attackFocus">System Visé</param>
+    /// <param name="DmgValue">Quantitée de Degats</param>
     public void CauseDamageOnSystem(FlockSettings.AttackFocus attackFocus, int DmgValue)
     {
 
         SC_BreakdownDisplayManager.Instance.CheckBreakdown();
         SC_WeaponBreakdown.Instance.CheckBreakdown();
         SC_MovementBreakdown.Instance.CheckBreakdown();
-
         
-        if ((SC_BreakdownDisplayManager.Instance.CurNbOfBreakdown + SC_WeaponBreakdown.Instance.CurNbOfBreakdown + SC_MovementBreakdown.Instance.n_InteractibleInBreakDown) < nbOfBreakDownBeforeTotalBreak && !b_BreakEngine)
+        if ((SC_BreakdownDisplayManager.Instance.CurNbOfBreakdown + SC_WeaponBreakdown.Instance.CurNbOfBreakdown + SC_MovementBreakdown.Instance.n_BreakDownLvl) < nbOfBreakDownBeforeTotalBreak && !b_BreakEngine)
         {
 
             switch (attackFocus)
@@ -294,16 +317,16 @@ public class SC_MainBreakDownManager : MonoBehaviour, IF_BreakdownManager
 
                     if (!SC_BreakdownDisplayManager.Instance.b_MaxBreakdown)
                         Displaylife -= DmgValue;
+
                     else
                     {
 
                         int rnd;
                         rnd = Random.Range(0, 2);
 
-                        if (rnd == 0)
+                        if (rnd == 0 && !SC_MovementBreakdown.Instance.b_MaxBreakdown)
                             CauseDamageOnSystem(FlockSettings.AttackFocus.Movement, DmgValue);
-
-                        else
+                        else if (rnd != 0 || !SC_WeaponBreakdown.Instance.b_MaxBreakdown)
                             CauseDamageOnSystem(FlockSettings.AttackFocus.Weapon, DmgValue);
 
                     }
@@ -321,9 +344,15 @@ public class SC_MainBreakDownManager : MonoBehaviour, IF_BreakdownManager
 
                     if (!SC_MovementBreakdown.Instance.b_MaxBreakdown)
                         MovementLife -= DmgValue;
-                    else
-                        CauseDamageOnSystem(FlockSettings.AttackFocus.Display, DmgValue);
 
+                    else
+                    {
+                        if (!SC_BreakdownDisplayManager.Instance.b_MaxBreakdown)
+                            CauseDamageOnSystem(FlockSettings.AttackFocus.Display, DmgValue);
+                        else if (!SC_WeaponBreakdown.Instance.b_MaxBreakdown)
+                            CauseDamageOnSystem(FlockSettings.AttackFocus.Weapon, DmgValue);
+                    }
+                        
                     if (MovementLife <= 0)
                     {
                         SC_MovementBreakdown.Instance.StartNewBreakdown(1);
@@ -337,8 +366,14 @@ public class SC_MainBreakDownManager : MonoBehaviour, IF_BreakdownManager
 
                     if (!SC_WeaponBreakdown.Instance.b_MaxBreakdown)
                         WeaponLife -= DmgValue;
+
                     else
-                        CauseDamageOnSystem(FlockSettings.AttackFocus.Display, DmgValue);
+                    {
+                        if (!SC_BreakdownDisplayManager.Instance.b_MaxBreakdown)
+                            CauseDamageOnSystem(FlockSettings.AttackFocus.Display, DmgValue);
+                        else if (!SC_MovementBreakdown.Instance.b_MaxBreakdown)
+                            CauseDamageOnSystem(FlockSettings.AttackFocus.Movement, DmgValue);
+                    }                       
 
                     if (WeaponLife <= 0)
                     {
@@ -356,6 +391,39 @@ public class SC_MainBreakDownManager : MonoBehaviour, IF_BreakdownManager
 
     }
 
+    /// <summary>
+    /// Syncronis l'etat des Sytems | 
+    /// En Panne ou Non |
+    /// FONCTION A UTILITE DOUTEUSE | Marche mais peut etre qu'on peut la delete, a voir avec au moment d'une potentielle seconde croisade sur les breakdown
+    /// </summary>
+    void SyncSystemStates()
+    {
+        
+        //Display
+        if (SC_BreakdownDisplayManager.Instance.CurNbOfBreakdown > 0)
+            SC_SyncVar_Main_Breakdown.Instance.onPanneDisplayChange(true);
+
+        else
+            SC_SyncVar_Main_Breakdown.Instance.onPanneDisplayChange(false);
+
+        //Weapon
+        if (SC_WeaponBreakdown.Instance.CurNbOfBreakdown > 0)
+            SC_SyncVar_Main_Breakdown.Instance.onPanneWeaponChange(true);
+
+        else
+            SC_SyncVar_Main_Breakdown.Instance.onPanneWeaponChange(false);
+
+        //Movement
+        if (!SC_MovementBreakdown.Instance.b_SeqIsCorrect)
+            SC_SyncVar_Main_Breakdown.Instance.onPanneMovementChange(true);
+
+        else
+            SC_SyncVar_Main_Breakdown.Instance.onPanneMovementChange(false);
+
+  
+
+    }
+
     void SyncSystemsLifes()
     {
         SC_SyncVar_DisplaySystem.Instance.f_Displaylife = Ratio(Displaylife, 10, 1);
@@ -366,11 +434,53 @@ public class SC_MainBreakDownManager : MonoBehaviour, IF_BreakdownManager
         SC_SyncVar_WeaponSystem.Instance.b_BreakEngine = b_BreakEngine;
     }
 
+    public void UpdateSystemInfos()
+    {
+
+        n_MaxBreakInterB4MaxBD = SC_BreakdownDisplayManager.Instance.n_MaxBreakInterB4MaxBD;
+
+        NbOfBreakDisplay = SC_BreakdownDisplayManager.Instance.CurNbOfBreakdown;
+        NbOfBreakWeapon = SC_WeaponBreakdown.Instance.CurNbOfBreakdown;
+        MoveBreakLvl = SC_MovementBreakdown.Instance.n_BreakDownLvl;
+
+        ScreensMaxBreak = SC_BreakdownDisplayManager.Instance.b_MaxBreakdown;
+        WeaponMaxBreak = SC_WeaponBreakdown.Instance.b_MaxBreakdown;
+        MoveMaxBreak = SC_MovementBreakdown.Instance.b_MaxBreakdown;
+
+    }
+
+    void SetTutoState()
+    {
+        if (SC_GameStates.Instance.CurTutoState == SC_GameStates.TutorialState.Tutorial1_4 && SC_BreakdownDisplayManager.Instance.CurNbOfBreakdown == 0)
+        {
+            SC_GameStates.Instance.ChangeTutoGameState(SC_GameStates.TutorialState.Tutorial1_7);
+        }
+
+        else if (SC_GameStates.Instance.CurTutoState == SC_GameStates.TutorialState.Tutorial1_5 && SC_WeaponBreakdown.Instance.CurNbOfBreakdown == 0)
+        {
+            SC_GameStates.Instance.ChangeTutoGameState(SC_GameStates.TutorialState.Tutorial1_7);
+        }
+
+        else if (SC_GameStates.Instance.CurTutoState == SC_GameStates.TutorialState.Tutorial1_6 && SC_MovementBreakdown.Instance.n_InteractibleInBreakDown == 0)
+        {
+            SC_GameStates.Instance.ChangeTutoGameState(SC_GameStates.TutorialState.Tutorial1_7);
+        }
+    }
+
     float Ratio(float inputValue, float inputMax, float outputMax, float inputMin = 0.0f, float outputMin = 0.0f)
     {
         float product = (inputValue - inputMin) / (inputMax - inputMin);
         float output = ((outputMax - outputMin) * product) + outputMin;
         return output;
+    }
+
+    public void ForceUpdate()
+    {
+        UpdateSystemInfos();
+        SyncSystemsLifes();
+        SC_BreakdownDisplayManager.Instance.ForceUpdate();
+        SC_MovementBreakdown.Instance.ForceUpdate();
+        SC_WeaponBreakdown.Instance.ForceUpdate();
     }
 
 }

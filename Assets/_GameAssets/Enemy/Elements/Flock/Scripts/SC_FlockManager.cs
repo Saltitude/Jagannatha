@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
 
 /// <summary>
@@ -33,9 +34,12 @@ public class SC_FlockManager : MonoBehaviour
     BoidSettings[] roamSettings;
     BoidSettings[] attackSettings;
     BoidSettings[] destructionSettings;
-    BoidSettings[] reactionSettings;
+    BoidSettings[] getAwaySettings;
+    BoidSettings[] hitReactionSettings;
 
     int curSettingsIndex;
+    public Animator KoaMainAnimator;
+    public Animator KoaEmissiveAnimator;
 
 
     BoidSettings _curBoidSetting; //Contient le settings actuel
@@ -74,16 +78,23 @@ public class SC_FlockManager : MonoBehaviour
 
     float startAttackTimer = 0;
 
-    enum PathType
+    public enum PathType
     {
         Spawn = 0,
         Roam = 1,
         AttackPlayer = 2,
         Death = 3,
-        Reaction = 4
+        Flight = 4,
+        ReactionHit = 5
+
     }
 
+    float flightTimer = 0;
     float reactionTimer = 0;
+    bool reactionHit = false;
+
+    float delayBeforeEndReaction = 1f;
+    float timeBeforeEndReaction = 0f;
 
     PathType curtype;
 
@@ -116,6 +127,7 @@ public class SC_FlockManager : MonoBehaviour
         isSpawning = true;
         _Player = GameObject.FindGameObjectWithTag("Player");
 
+        transform.position = spawnSpline.GetPoint(0);
         bezierWalkerTime.SetNewSpline(spawnSpline);
         bezierWalkerTime.NormalizedT = 0;
         bezierWalkerTime.travelTime = flockSettings.spawnTimer;
@@ -125,40 +137,38 @@ public class SC_FlockManager : MonoBehaviour
         _GuideList = new List<Transform>();//Instanciation de la guide list
         _curCurveDistanceList = new List<Vector3>(); // Instanciation de la list de distance sur les courbes pour chaque guide
 
-        _BoidSettings = new BoidSettings[5][];
+        _BoidSettings = new BoidSettings[6][];
 
         spawnSettings = flockSettings.spawnSettings;
         roamSettings = flockSettings.roamSettings;
         attackSettings = flockSettings.attackSettings;
         destructionSettings = flockSettings.destructionSettings;
-        reactionSettings = flockSettings.reactionSettings;
+        getAwaySettings = flockSettings.getAwaySettings;
+        hitReactionSettings = flockSettings.hitReactionSettings;
 
         _BoidSettings[0] = spawnSettings;
         _BoidSettings[1] = roamSettings;
         _BoidSettings[2] = attackSettings;
         _BoidSettings[3] = destructionSettings;
-        _BoidSettings[4] = reactionSettings;
+        _BoidSettings[4] = getAwaySettings;
+        _BoidSettings[5] = hitReactionSettings;
 
         _KoaManager = Instantiate(_KoaPrefab, transform);//Instantiate Koa
         _SCKoaManager = _KoaManager.GetComponent<SC_KoaManager>(); //Récupère le Koa manager du koa instancié
         _SCKoaManager.Initialize(_mainGuide, flockSettings.boidSpawn, spawnSettings[0],newFlockSettings,sensitivity);//Initialise le Koa | paramètre : Guide a suivre <> Nombre de Boids a spawn <> Comportement des boids voulu
-        flockWeaponManager.Initialize(flockSettings);
+        flockWeaponManager.Initialize(flockSettings,KoaMainAnimator,KoaEmissiveAnimator);
 
         _splineTab = new BezierSolution.BezierSpline[flockSettings.splines.Length];
 
         for (int i = 0; i < flockSettings.splines.Length; i++)
         {
-           
                 if (flockSettings.splines[i] != null)
                 {
                     _splineTab[i] = Instantiate(flockSettings.splines[i]);
-
                 }
-            
         }
 
         Invoke("ActivateFlock", flockSettings.spawnTimer);
-        
     }
     #endregion
     //---------------------------------------------------------------------//
@@ -170,6 +180,7 @@ public class SC_FlockManager : MonoBehaviour
     #region Update
     void Update()
     {
+
         if (isActive && _curBoidSetting != null)
             transform.Rotate(new Vector3(_curBoidSetting.axisRotationSpeed.x, _curBoidSetting.axisRotationSpeed.y, _curBoidSetting.axisRotationSpeed.z));
 
@@ -180,8 +191,8 @@ public class SC_FlockManager : MonoBehaviour
 
         if(isActive && isSpawning)
         {
-            float speed = 0.75f;
-            int rndRangePilote = Random.Range(110, 150);
+            float speed = 0.9f;
+            int rndRangePilote = Random.Range(200, 250);
             Vector3 target = new Vector3(_Player.transform.position.x, rndRangePilote, _Player.transform.position.z);
             transform.position = Vector3.MoveTowards(transform.position, target, speed);
             if (transform.position.y >= 60)
@@ -205,8 +216,9 @@ public class SC_FlockManager : MonoBehaviour
 
             }
         }
-        if(isActive && !isSpawning)
+        if(isActive && !isSpawning && curtype!= PathType.Death)
         {
+        
             AttackUpdate();
             ReactionUpdate();
             //Si le flock est split, déplace les guides
@@ -214,7 +226,8 @@ public class SC_FlockManager : MonoBehaviour
                 MultiGuideMovement();
 
 
-            //Si le flock n'est pas fusionné, déplace le main guide selon la spline actuel       
+            //Si le flock n'est pas fusionné, déplace le main guide selon la spline actuel      
+            if(curtype != PathType.ReactionHit && curtype != PathType.AttackPlayer)
             bezierWalkerSpeed.Execute(Time.deltaTime);
 
 
@@ -284,8 +297,7 @@ public class SC_FlockManager : MonoBehaviour
 
     void AttackUpdate()
     {
-
-        if (flockSettings.attackType != FlockSettings.AttackType.none && curtype != PathType.Reaction)
+        if (flockSettings.attackType != FlockSettings.AttackType.none && curtype != PathType.Flight && curtype != PathType.ReactionHit)
         {
             if (inAttack == false) startAttackTimer += Time.deltaTime;
 
@@ -297,25 +309,65 @@ public class SC_FlockManager : MonoBehaviour
             }
         }
         transform.LookAt(_Player.transform);
+        KoaMainAnimator.transform.LookAt(_Player.transform);
     }
 
     void ReactionUpdate()
     {
-        if(curtype == PathType.Reaction)
+
+        if (curtype == PathType.Flight)
         {
-            reactionTimer += Time.deltaTime;
-            if(reactionTimer > flockSettings.reactionDuration)
+            flightTimer += Time.deltaTime;
+            if (flightTimer >= flockSettings.flightDuration)
             {
                 for (int i = 0; i < _splineTab.Length; i++)
                 {
                     if (_splineTab[i] != null)
                     {
-                        if(i != 4)
-                        _splineTab[i].transform.position = transform.position;
+                        if (i != 4)
+                            _splineTab[i].transform.position = transform.position;
                     }
                 }
+                KoaMainAnimator.SetBool("Flight", false);
                 StartNewPath(PathType.Roam);
+                flightTimer = 0;
+            }
+        }
+
+        if (reactionHit)
+        {
+            timeBeforeEndReaction += Time.deltaTime;
+            if(timeBeforeEndReaction >= delayBeforeEndReaction)
+            {
+                reactionHit = false;
+
+            }
+            reactionTimer += Time.deltaTime;
+
+            if (reactionTimer >= flockSettings.hitReactionDelay)
+            {
+                reactionHit = false;
                 reactionTimer = 0;
+                flockWeaponManager.FireSuperBullet();
+                KoaMainAnimator.SetBool("Deploy", false);
+                StartNewPath(PathType.Roam);
+
+            }
+        }
+
+        if(!reactionHit)
+        {
+            if(reactionTimer >0)
+            {
+                reactionTimer -= 2*Time.deltaTime;
+                KoaMainAnimator.SetFloat("SpeedFactor", -4);
+            }
+            if(reactionTimer <0)
+            {
+                reactionTimer = 0;
+                StartNewPath(PathType.Roam);
+                KoaMainAnimator.SetBool("Deploy", false);
+
             }
         }
     }
@@ -335,33 +387,37 @@ public class SC_FlockManager : MonoBehaviour
     {
         _SCKoaManager.ChangeKoaState((int)pathType);
         curtype = pathType;
+
+        StartNewBehavior((int)pathType);
+
+
         switch (pathType)
         {
-            case PathType.Spawn:
-                StartNewBehavior((int)PathType.Spawn);
-                break;
-
-            case PathType.Roam:
-                StartNewBehavior((int)PathType.Roam);
-                break;
-
 
             case PathType.AttackPlayer:
+                KoaMainAnimator.SetBool("Deploy", false);
+                KoaMainAnimator.SetBool("Flight", false);
 
-                StartNewBehavior((int)PathType.AttackPlayer);
                 flockWeaponManager.StartFire();
 
                 break;
 
-            case PathType.Death:
 
+            case PathType.ReactionHit:
 
-                StartNewBehavior((int)PathType.Death);
+                if(reactionHit != true)
+                {
+                    KoaMainAnimator.SetBool("Deploy", true);
+                    KoaMainAnimator.SetFloat("SpeedFactor", 2);
+                    reactionHit = true;
+                }
+                timeBeforeEndReaction = 0;
+
                 break;
 
-            case PathType.Reaction:
+            case PathType.Flight:
 
-                StartNewBehavior((int)PathType.Reaction);
+                KoaMainAnimator.SetBool("Flight", true);
 
                 break;
         }
@@ -502,7 +558,6 @@ public class SC_FlockManager : MonoBehaviour
 
         _SCKoaManager.Split(_GuideList);
     }
-
     
     public void AnimDestroy()
     {
@@ -516,15 +571,22 @@ public class SC_FlockManager : MonoBehaviour
         Destroy(this.gameObject);
     }
 
-    public void ReactionFlock()
+    public void ReactionFlock(PathType pathType)
     {
-        StartNewPath(PathType.Reaction);
+        if(pathType != PathType.AttackPlayer && pathType != PathType.Death && pathType != PathType.Roam) 
+        StartNewPath(pathType);
     }
+
+
+
+
 
     public void EndAttack()
     {
         inAttack = false;
         StartNewPath(PathType.Roam);
+        KoaMainAnimator.SetBool("Laser", false);
+        KoaMainAnimator.SetBool("Bullet", false);
     }
 
 
@@ -543,6 +605,7 @@ public class SC_FlockManager : MonoBehaviour
 
         return new Vector3(x * radius, 80, y*radius);
     }
+
     #endregion
     //---------------------------------------------------------------------//
 

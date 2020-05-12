@@ -25,6 +25,7 @@ public class SC_SwitchChangeColor : MonoBehaviour
     }
     IEnumerator SwichBlink(float duration)
     {
+        Debug.Log("Switch Blink");
         gameObject.GetComponent<Renderer>().material.EnableKeyword("_EMISSION");
         yield return new WaitForSeconds(duration);
         gameObject.GetComponent<Renderer>().material.DisableKeyword("_EMISSION");

@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3347709283173845446}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: LineIntHelper
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -467,9 +467,8 @@ GameObject:
   - component: {fileID: 5595634256061625703}
   - component: {fileID: 5595634256061625699}
   - component: {fileID: 5595634256061625696}
-  - component: {fileID: 5595634256061625726}
   - component: {fileID: 5595634256061625700}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: Interactible
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -662,26 +661,6 @@ ConfigurableJoint:
   m_EnablePreprocessing: 1
   m_MassScale: 1
   m_ConnectedMassScale: 1
---- !u!114 &5595634256061625726
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5595634256061625702}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8358f884a38ccba48ae76ffd8f8864fc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  highlightEffect:
-    _classRef: ViveGrip_TintEffect, Assembly-CSharp
-  anchor:
-    enabled: 0
-    localPosition: {x: 0, y: 0, z: 0}
-  rotation:
-    mode: 1
-    localOrientation: {x: 0, y: 0, z: 0}
 --- !u!114 &5595634256061625700
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -700,7 +679,7 @@ MonoBehaviour:
   tab_Materials:
   - {fileID: 2100000, guid: 386c262a1b437a9428968985876ddfea, type: 2}
   - {fileID: 2100000, guid: 255cee9f476a1c640882f33a2b0aa075, type: 2}
-  ConstraintRange: 0.7
+  ResetRange: 0.73
   DeadZone: 0.15
   AddMaxRange: 0.3
   f_CurDistance: 0
@@ -720,7 +699,8 @@ GameObject:
   - component: {fileID: 8872791685238316289}
   - component: {fileID: 8872791685238316288}
   - component: {fileID: 8872791685238316291}
-  m_Layer: 0
+  - component: {fileID: 9215797353950516469}
+  m_Layer: 9
   m_Name: Hand
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -815,3 +795,23 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &9215797353950516469
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8872791685238316293}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8358f884a38ccba48ae76ffd8f8864fc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  highlightEffect:
+    _classRef: ViveGrip_TintEffect, Assembly-CSharp
+  anchor:
+    enabled: 0
+    localPosition: {x: 0, y: 0, z: 0}
+  rotation:
+    mode: 1
+    localOrientation: {x: 0, y: 0, z: 0}

@@ -23,6 +23,9 @@ public class SC_JoystickRenderMove : MonoBehaviour
     [SerializeField]
     Transform TargetTRS;
 
+    [SerializeField]
+    int n_JoyNumToUse;
+
     void Update()
     {
         GetRotation();
@@ -34,7 +37,7 @@ public class SC_JoystickRenderMove : MonoBehaviour
 
         f_TransImpulseZ = Input.GetAxis("Horizontal");
         f_ImpulseX = Input.GetAxis("Vertical");
-        f_TorqueImpulseZ = Input.GetAxis("Torque");
+        f_TorqueImpulseZ = SC_JoystickMove.Instance.f_TorqueImpulseZ;
 
         f_CurRotH = (Mathf.Abs(f_TransImpulseZ) * f_MaxRotH / 1) * Mathf.Sign(f_TransImpulseZ);
         f_CurRotT = (Mathf.Abs(f_TorqueImpulseZ) * f_MaxRotT / 1) * Mathf.Sign(f_TorqueImpulseZ);

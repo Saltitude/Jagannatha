@@ -94,7 +94,7 @@ public class SC_BreakdownOnBreakdownAlert : MonoBehaviour
                 Sc_ScreenShake.Instance.ShakeIt(0.02f, 1f);
             }
 
-            Debug.Log("Damage/shake/FX");
+            //Debug.Log("Damage/shake/FX");
 
             for (int i = 0; i < 4; i++)
             {

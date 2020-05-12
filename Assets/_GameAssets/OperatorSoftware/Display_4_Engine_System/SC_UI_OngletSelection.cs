@@ -12,7 +12,11 @@ public class SC_UI_OngletSelection : MonoBehaviour, IF_clicableAction, IF_Hover
 
     [SerializeField]
     GameObject animated;
+    [SerializeField]
+    GameObject additionalAnimated;
+
     Animator animator;
+    Animator additionalAnimator;
 
     [SerializeField]
     int[] wireIndex;
@@ -25,19 +29,23 @@ public class SC_UI_OngletSelection : MonoBehaviour, IF_clicableAction, IF_Hover
         ongletContainer = SC_UI_OngletContainer.Instance;
         if(animated != null)
         animator = animated.GetComponent<Animator>();
+        if(additionalAnimated != null)
+        additionalAnimator = additionalAnimated.GetComponent<Animator>();
         wireBlink = GetComponentInParent<SC_UI_WireBlink>();
+#if UNITY_EDITOR
+        if(index == 3 || index == 4 || index == 5)
+        {
+            this.GetComponent<BoxCollider>().center = new Vector3(-11.49976f, 4.058487f, -22.14557f);
+            this.GetComponent<BoxCollider>().size = new Vector3(162.1187f, 163.5854f, 54.29114f);
+        }
 
+#endif
 
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (animator != null)
-        {
-            animator.SetBool("Hover", false);
-            animator.SetBool("Clic", false);
-        }
     }
 
     public void Action()
@@ -61,12 +69,52 @@ public class SC_UI_OngletSelection : MonoBehaviour, IF_clicableAction, IF_Hover
         }
         ongletContainer.ChangeWindow(newWindow);
         OnClicAnimation();
+        #region AnimIn&Out
+        
+        if(index == 0)
+        {
+         //   if (animator.GetBool("ClicDisplay") == true)
+            ongletContainer.DisplayIn();
+            animator.SetBool("ActivateDisplay", true);
+        }
+        if (index == 1)
+        {
+          //  if (animator.GetBool("ClicWeapon") == true)
+                ongletContainer.WeaponIn();
+                animator.SetBool("ActivateWeapon", true);
+        }
+        if (index == 2)
+        {
+          //  if (animator.GetBool("ClicMove") == true)
+                ongletContainer.MoveIn();
+                animator.SetBool("ActivateMove", true);
+        }
+
+
+
+        if (index == 3)
+        {
+            ongletContainer.DisplayOut();
+            additionalAnimator.SetBool("ActivateDisplay", false);
+        }
+        if (index == 4)
+        {
+            ongletContainer.WeaponOut();
+            additionalAnimator.SetBool("ActivateWeapon", false);
+        }
+        if (index == 5)
+        {
+            ongletContainer.MoveOut();
+            additionalAnimator.SetBool("ActivateMove", false);
+        }
+        #endregion
     }
 
     public void HoverAction()
     {
         IsHover();
     }
+
 
     public void isBreakdownSystem(bool state)
     {
@@ -83,16 +131,61 @@ public class SC_UI_OngletSelection : MonoBehaviour, IF_clicableAction, IF_Hover
     {
         if (animator != null)
         {
-            animator.SetBool("Hover", true);
+          
+                animator.SetBool("Hover", true);
+               StartCoroutine(EndCoroutine("Hover"));
+            
+            //if (index == 0)
+            //{
+            //    animator.SetBool("HoverDisplay", true);
+            //    StartCoroutine(EndCoroutine("HoverDisplay"));
+            //}
+            //if (index == 1)
+            //{
+            //    animator.SetBool("HoverWeapon", true);
+            //    StartCoroutine(EndCoroutine("HoverWeapon"));
+            //}
+            //if (index == 2)
+            //{
+            //    animator.SetBool("HoverMove", true);
+            //    StartCoroutine(EndCoroutine("HoverMove"));
+            //}
+
         }
 
     }
+ 
 
     void OnClicAnimation()
     {
-        if (animator != null)
-        {
+       /*
             animator.SetBool("Clic", true);
-        }
+            StartCoroutine(EndCoroutine("Clic"));*/
+        
+        //if (animator != null)
+        //{
+        //    if (index == 0)
+        //    {
+        //        animator.SetBool("ClicDisplay", true);
+        //        StartCoroutine(EndCoroutine("ClicDisplay"));
+        //    }
+        //    if (index == 1)
+        //    {
+        //        animator.SetBool("ClicWeapon", true);
+        //        StartCoroutine(EndCoroutine("ClicWeapon"));
+        //    }
+        //    if (index == 2)
+        //    {
+        //        animator.SetBool("ClicMove", true);
+        //        StartCoroutine(EndCoroutine("ClicMove"));
+        //    }
+
+        //}
+    }
+
+    IEnumerator EndCoroutine(string Bool)
+    {
+        yield return new WaitForEndOfFrame();
+        animator.SetBool(Bool, false);
     }
 }

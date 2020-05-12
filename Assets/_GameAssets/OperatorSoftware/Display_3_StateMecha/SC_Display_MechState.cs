@@ -54,7 +54,7 @@ public class SC_Display_MechState : MonoBehaviour
     void CheckState()
     {
 
-        if (SC_passwordLock.Instance.b_IsConnected)
+        if ( (SC_GameStates.Instance.CurState == SC_GameStates.GameState.Tutorial && SC_passwordLock.Instance.b_IsConnected) || (SC_GameStates.Instance.CurState != SC_GameStates.GameState.Tutorial && !SC_SyncVar_DisplaySystem.Instance.b_BreakEngine) )
         {
 
             CurState = SystemState.Connected;

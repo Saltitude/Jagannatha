@@ -47,9 +47,16 @@ public class SC_JoystickMove : MonoBehaviour, IF_BreakdownSystem
     float f_LerpRotZ = 1f;  
     public enum RotationMode { TSR, Torque, Normalize, Higher, Clamp }
     public RotationMode TypeRotationZ;
-    float f_TransImpulseZ;
-    float f_TorqueImpulseZ;
+    float f_TransImpulseZ;    
     Quaternion TargetRotY;
+    public float CurImpulse = 0;
+
+    [Header("Horizontal Rotation Infos")]
+    [SerializeField]
+    int n_JoyNumToUse;
+    [SerializeField]
+    bool[] tab_TorqueAxes;
+    public float f_TorqueImpulseZ;
 
     //Rotation Verticale
     [Header("Vertical Rotation Settings")]
@@ -63,7 +70,7 @@ public class SC_JoystickMove : MonoBehaviour, IF_BreakdownSystem
     public float f_LerpRotX = 1f;
     [Range(0.0f, 0.3f)]
     public float f_MaxRotUpX;
-    float f_ImpulseX;
+    public float f_ImpulseX;
     Quaternion xQuaternion;
 
     #endregion Variables
@@ -80,6 +87,11 @@ public class SC_JoystickMove : MonoBehaviour, IF_BreakdownSystem
         }
     }
 
+    void Start()
+    {
+        CheckTorqueAxis();
+    }
+
     // Update is called once per frame
     void FixedUpdate()
     {
@@ -94,6 +106,12 @@ public class SC_JoystickMove : MonoBehaviour, IF_BreakdownSystem
 
     #region Moves
 
+    void CheckTorqueAxis()
+    {
+        n_JoyNumToUse = SC_DeviceManager.Instance.n_JoyNumToUse;
+        tab_TorqueAxes = SC_DeviceManager.Instance.tab_TorqueAxesToUse;
+    }
+
     void GetImpulses()
     {
 
@@ -101,8 +119,69 @@ public class SC_JoystickMove : MonoBehaviour, IF_BreakdownSystem
         f_ImpulseX = Input.GetAxis("Vertical") * f_RotationSpeedX;
 
         //Horizontal Impulses
-        f_TorqueImpulseZ = Input.GetAxis("Torque") * f_CurRotationSpeedZ;
         f_TransImpulseZ = Input.GetAxis("Horizontal") * f_CurRotationSpeedZ;
+
+        if(n_JoyNumToUse == null || n_JoyNumToUse == 0)
+            n_JoyNumToUse = SC_DeviceManager.Instance.n_JoyNumToUse;
+     
+        switch (n_JoyNumToUse)
+        {
+
+            case 1:
+                f_TorqueImpulseZ = Input.GetAxis("Torque_01") * f_CurRotationSpeedZ;
+                break;
+
+            case 2:
+                f_TorqueImpulseZ = Input.GetAxis("Torque_02") * f_CurRotationSpeedZ;
+                break;
+
+            case 3:
+                f_TorqueImpulseZ = Input.GetAxis("Torque_03") * f_CurRotationSpeedZ;
+                break;
+
+            case 4:
+                f_TorqueImpulseZ = Input.GetAxis("Torque_04") * f_CurRotationSpeedZ;
+                break;
+
+        }
+        
+        //Other Method
+        /*
+        f_TorqueImpulseZ = 0;
+
+        for (int i = 0; i < tab_TorqueAxes.Length; i++)
+        {
+
+            if (tab_TorqueAxes[i])
+            {
+
+                switch (i)
+                {
+
+                    case 0:
+                        f_TorqueImpulseZ += Input.GetAxis("Torque_01");
+                        break;
+
+                    case 1:
+                        f_TorqueImpulseZ += Input.GetAxis("Torque_02");
+                        break;
+
+                    case 2:
+                        f_TorqueImpulseZ += Input.GetAxis("Torque_03");
+                        break;
+
+                    case 3:
+                        f_TorqueImpulseZ += Input.GetAxis("Torque_04");
+                        break;
+
+                }
+
+            }                
+
+        }
+
+        f_TorqueImpulseZ *= f_CurRotationSpeedZ;
+        */
 
     }
 
@@ -151,7 +230,7 @@ public class SC_JoystickMove : MonoBehaviour, IF_BreakdownSystem
 
             Quaternion zQuaternion = new Quaternion();
             float MixImpulseZ;
-            float CurImpulse = 0;
+            
 
             //Calcul Selon Mode de Rotation
             switch (TypeRotationZ)
@@ -236,6 +315,7 @@ public class SC_JoystickMove : MonoBehaviour, IF_BreakdownSystem
             TargetRotY = this.transform.rotation;
             if (b_UseCoroutine && CurDir != TargetDir && CoroDir != TargetDir)
                 CheckDir();
+            CurImpulse = 0; 
         }
 
     }
@@ -334,23 +414,23 @@ public class SC_JoystickMove : MonoBehaviour, IF_BreakdownSystem
     {
 
         //Horizontal Impulses
-        if (Input.GetKey(KeyCode.Q))
+        if (Input.GetKey(KeyCode.Q) || Input.GetKey(KeyCode.K))
         {
             f_TorqueImpulseZ = -1 * f_CurRotationSpeedZ;
             f_TransImpulseZ = -1 * f_CurRotationSpeedZ;
         }
-        else if (Input.GetKey(KeyCode.D))
+        else if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.M))
         {
             f_TorqueImpulseZ = 1 * f_CurRotationSpeedZ;
             f_TransImpulseZ = 1 * f_CurRotationSpeedZ;
         }
 
         //Vertical Impulse
-        if (Input.GetKey(KeyCode.Z))
+        if (Input.GetKey(KeyCode.Z) || Input.GetKey(KeyCode.O))
         {
             f_ImpulseX = 1 * f_RotationSpeedX;
         }
-        else if (Input.GetKey(KeyCode.S))
+        else if (Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.L))
         {
             f_ImpulseX = -1 * f_RotationSpeedX;
         }
