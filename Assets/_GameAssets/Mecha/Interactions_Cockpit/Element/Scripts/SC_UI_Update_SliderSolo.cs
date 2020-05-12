@@ -94,9 +94,9 @@ public class SC_UI_Update_SliderSolo : MonoBehaviour
     void updateSliderSolo()
     {
 
-        textValue.text = Mathf.RoundToInt(ratio(sc_syncvar.SL_sliders[index].value, 0.45f, 9, -0.45f, 1)).ToString();
-        Bar.GetComponent<SC_UI_SystmShield>().simpleValue = ratio(sc_syncvar.SL_sliders[index].value, 0.45f, 1, -0.45f, 0.1f);
-        
+        textValue.text = Mathf.FloorToInt(ratio(sc_syncvar.SL_sliders[index].value, 0.45f, 10, -0.45f, 1)).ToString();
+        //Bar.GetComponent<SC_UI_SystmShield>().simpleValue = ratio(sc_syncvar.SL_sliders[index].value, 0.45f, 1, -0.45f, 0.1f);
+        Bar.GetComponent<SC_UI_SystmShield>().simpleValue = Mathf.FloorToInt(ratio(sc_syncvar.SL_sliders[index].value, 0.45f, 10, -0.45f, 1));
     }
 
     float ratio(float inputValue, float inputMax, float outputMax, float inputMin = 0.0f, float outputMin = 0.0f)
