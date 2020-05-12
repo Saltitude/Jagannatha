@@ -22,11 +22,12 @@ MonoBehaviour:
   activeDuration: 2
   speedToTarget: 0
   flightDuration: 3
-  hitReactionMaxSensibility: 50
-  hitReactionDelay: 2
   flightReactionMinSensibility: 75
+  hitReactionDelay: 2
+  hitReactionMaxSensibility: 50
   attackFocusHitReaction: 0
-  damageOnSystemHitReaction: 0
+  damageOnSystemHitReaction: 3
+  laserDurationHitReaction: 1
   spawnSettings:
   - {fileID: 11400000, guid: 92fa29393aafc504b94e48142541942b, type: 2}
   roamSettings:
@@ -49,7 +50,7 @@ MonoBehaviour:
   - {fileID: 8158630672628145991, guid: 5015585d87110ab4ab929574d666d6b8, type: 3}
   - {fileID: 0}
   - {fileID: 7590711955548368644, guid: 2d80bbddcfd75f74b968524747323c54, type: 3}
-  - {fileID: 7590711955548368644, guid: 2d80bbddcfd75f74b968524747323c54, type: 3}
+  - {fileID: 0}
   spawnTimer: 10
   boidSpawn: 200
   maxBoid: 200

@@ -22,11 +22,12 @@ MonoBehaviour:
   activeDuration: 2
   speedToTarget: 0
   flightDuration: 3
-  hitReactionMaxSensibility: 50
-  hitReactionDelay: 2
   flightReactionMinSensibility: 75
+  hitReactionDelay: 2
+  hitReactionMaxSensibility: 50
   attackFocusHitReaction: 0
-  damageOnSystemHitReaction: 0
+  damageOnSystemHitReaction: 3
+  laserDurationHitReaction: 1
   spawnSettings:
   - {fileID: 11400000, guid: 92fa29393aafc504b94e48142541942b, type: 2}
   roamSettings:

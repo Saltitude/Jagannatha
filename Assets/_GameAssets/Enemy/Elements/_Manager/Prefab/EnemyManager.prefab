@@ -51,7 +51,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   waveStarted: 0
   waveEnded: 0
-  nextWave: 0
+  b_nextWave: 0
   _FlockPrefab: {fileID: 1285113734633859291, guid: 910b952a48e857745a177dafbadeb074,
     type: 3}
   _MultiFlockManagerPrefab: {fileID: 9056552577588628467, guid: c37bc0c8e7177054f99afb6768b9de5f,
