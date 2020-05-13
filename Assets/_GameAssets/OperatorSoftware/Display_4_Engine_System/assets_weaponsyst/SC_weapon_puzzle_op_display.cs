@@ -46,6 +46,8 @@ public class SC_weapon_puzzle_op_display : MonoBehaviour
     Quaternion CoroAngleMain;
     Quaternion[] CoroAngleBar;
 
+    [SerializeField]
+    float valueTest;
     #endregion Variables
 
     private void Awake()
@@ -143,14 +145,14 @@ public class SC_weapon_puzzle_op_display : MonoBehaviour
 
         oldAngleMain = this.transform.rotation;
         oldDirMain = this.transform.rotation * Vector3.forward;
-
+        Debug.Log("SyncVar1 = " + SC_SyncVar_BreakdownWeapon.Instance.SL_Tourbilols[1].value);
         switch (SC_SyncVar_BreakdownWeapon.Instance.SL_Tourbilols[1].value)
         {
 
             //solution1
             case -4:
 
-                newAngleMain = Quaternion.Euler(0, init_rot_cylindre, 0);
+                newAngleMain = Quaternion.Euler(0, init_rot_cylindre + 255 , 0);
 
                 break;
 
@@ -163,7 +165,7 @@ public class SC_weapon_puzzle_op_display : MonoBehaviour
             //solution2
             case -2:
 
-                newAngleMain = Quaternion.Euler(0, 70, 0);
+                newAngleMain = Quaternion.Euler(0, 135, 0);
 
                 break;
 
@@ -181,7 +183,7 @@ public class SC_weapon_puzzle_op_display : MonoBehaviour
             //solution3 
             case 1:
 
-                newAngleMain = Quaternion.Euler(0, 178, 0);
+                newAngleMain = Quaternion.Euler(0, valueTest, 0);
 
                 break;
 
