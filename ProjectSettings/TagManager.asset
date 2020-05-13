@@ -27,6 +27,7 @@ TagManager:
   - projectile
   - mech_dummy
   - ProgressBar
+  - VisionCone
   layers:
   - Default
   - TransparentFX
