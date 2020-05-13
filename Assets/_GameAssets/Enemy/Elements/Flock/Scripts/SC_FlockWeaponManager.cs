@@ -125,6 +125,7 @@ public class SC_FlockWeaponManager : MonoBehaviour
             {
                 case FlockSettings.AttackType.Bullet: //Bullet
 
+                    emissiveAnimator.SetBool("Bullet", true);
                     mainAnimator.SetBool("Bullet", true);
                     if (timer >= 1/flockSettings.fireRate )
                     {

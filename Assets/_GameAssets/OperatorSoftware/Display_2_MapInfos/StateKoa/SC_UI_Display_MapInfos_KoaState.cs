@@ -91,7 +91,7 @@ public class SC_UI_Display_MapInfos_KoaState : MonoBehaviour
         curKoaScriptKoaSettings = newSettings;
         koaSensibility = new Vector3(curKoaScriptKoaSettings.GetSensibility().x, curKoaScriptKoaSettings.GetSensibility().y, curKoaScriptKoaSettings.GetSensibility().z);
         boidSettings = fixedData.GetBoidSettings(curKoaScriptKoaSettings.GetBoidSettingsIndex());
-       activated = true;
+        activated = true;
     }
 
     void GetReferences()
@@ -160,7 +160,7 @@ public class SC_UI_Display_MapInfos_KoaState : MonoBehaviour
                     SC_UI_Display_Flock.Instance.StartNewBehavior(boidSettings);
                 }
 
-                SC_UI_Display_Flock.Instance.SetAnimationBool(curKoaScriptKoaSettings.GetDeploy(), curKoaScriptKoaSettings.GetFlight(), curKoaScriptKoaSettings.GetBullet(), curKoaScriptKoaSettings.GetLaser(), curKoaScriptKoaSettings.GetSpeedFactor());
+                SC_UI_Display_Flock.Instance.SetAnimationBool(curKoaScriptKoaSettings.GetDeploy(), curKoaScriptKoaSettings.GetFlight(), curKoaScriptKoaSettings.GetBullet(), curKoaScriptKoaSettings.GetLaser(), curKoaScriptKoaSettings.GetSpeedFactor(), curKoaScriptKoaSettings.GetChargeLaser());
                 
             }
             else

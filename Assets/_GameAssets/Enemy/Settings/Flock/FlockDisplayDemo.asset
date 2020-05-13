@@ -13,20 +13,29 @@ MonoBehaviour:
   m_Name: FlockDisplayDemo
   m_EditorClassIdentifier: 
   attackType: 2
+  attackFocus: 0
+  damageOnSystem: 0
   timeBetweenAttacks: 0
   fireRate: 5
   nbBulletToShoot: 50
   chargingAttackTime: 1
   activeDuration: 1
-  boidSettings:
-  - {fileID: 11400000, guid: 867f544dcc2ed6c4486e2817fa7c1516, type: 2}
-  - {fileID: 11400000, guid: 62b4e09d19efe5b449cf908138a9bddc, type: 2}
-  - {fileID: 11400000, guid: 790db41fbac060d41964033b3867d415, type: 2}
-  - {fileID: 11400000, guid: a544aac7cc2dcf2419bbf0ba6fbad032, type: 2}
-  - {fileID: 11400000, guid: 7934150062f27ae4195cd71ff4af75f5, type: 2}
+  speedToTarget: 0
+  flightDuration: 3
+  flightReactionMinSensibility: 75
+  hitReactionDelay: 3
+  hitReactionMaxSensibility: 50
+  attackFocusHitReaction: 0
+  damageOnSystemHitReaction: 5
+  laserDurationHitReaction: 2
+  spawnSettings: []
+  roamSettings: []
+  attackSettings: []
+  destructionSettings: []
+  getAwaySettings: []
+  hitReactionSettings: []
+  splines: []
   spawnTimer: 1
-  spawnRandom: 0
-  SpawnPosition: {x: 0, y: 0, z: 0}
   boidSpawn: 2
   maxBoid: 200
   regenerationRate: 800
