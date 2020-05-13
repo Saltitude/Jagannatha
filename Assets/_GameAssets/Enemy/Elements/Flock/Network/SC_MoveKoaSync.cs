@@ -110,6 +110,13 @@ public class SC_MoveKoaSync : NetworkBehaviour
         }
     }
 
+    [ClientRpc]
+    public void RpcSendAnimationBool(GameObject Target,bool deploy, bool flight, bool bullet, bool laser, float speedFactor)
+    {
+        SC_KoaSettingsOP sc_KoaSettings = Target.transform.GetChild(1).GetComponent<SC_KoaSettingsOP>();
+        sc_KoaSettings.SetBoolAnimation(deploy, flight, bullet, laser, speedFactor);
+    }
+
     public void InitOPKoaSettings(Vector3 sensibility, int timeBeforeSpawn, string KoaID,int curLife, int maxLife, int type, Transform guide)
     {
         if (isServer)
@@ -135,4 +142,9 @@ public class SC_MoveKoaSync : NetworkBehaviour
     }
 
 
+    public void SetAnimationBool(bool deploy,bool flight, bool bullet,bool laser,float speedFactor )
+    {
+
+        RpcSendAnimationBool(gameObject ,deploy, flight, bullet, laser, speedFactor);
+    }
 }

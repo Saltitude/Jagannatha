@@ -27,6 +27,7 @@ public class SC_FlockManager : MonoBehaviour
 
     GameObject _Player;
 
+    public SC_MoveKoaSync moveKoaSync;
 
     BoidSettings[][] _BoidSettings;
 
@@ -231,7 +232,13 @@ public class SC_FlockManager : MonoBehaviour
             bezierWalkerSpeed.Execute(Time.deltaTime);
 
 
-        }    
+        }
+
+        if(isActive)
+        {
+            moveKoaSync.SetAnimationBool(KoaMainAnimator.GetBool("Deploy"), KoaMainAnimator.GetBool("Flight"), KoaMainAnimator.GetBool("Bullet"), KoaMainAnimator.GetBool("Laser"), KoaMainAnimator.GetFloat("speedFactor"));
+        }
+        
     }
 
     /// <summary>
