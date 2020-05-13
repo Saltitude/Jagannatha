@@ -62,6 +62,8 @@ public class SC_Cord : MonoBehaviour
         #endif
         */
 
+        SyncParam();
+
     }
 
     // Update is called once per frame
@@ -73,6 +75,8 @@ public class SC_Cord : MonoBehaviour
         ObjectStatus();
 
         RangeEffect();
+
+        SyncCord();
 
     }
 
@@ -194,6 +198,35 @@ public class SC_Cord : MonoBehaviour
         //fx.breakForce = JointBeakFroce;
         //fx.breakTorque = JointBeakFroce;
         return fx;
+
+    }
+
+    void SyncParam()
+    {
+        SC_SyncVar_MovementSystem.Instance.ConstraintRange = ConstraintRange;
+        SC_SyncVar_MovementSystem.Instance.DeadZone = DeadZone;
+        SC_SyncVar_MovementSystem.Instance.AddMaxRange = AddMaxRange;
+    }
+
+    void SyncCord()
+    {
+
+        switch (n_Index)
+        {
+
+            case 0:
+                SC_SyncVar_MovementSystem.Instance.CordLenght01 = f_CurDistance;
+                break;
+
+            case 1:
+                SC_SyncVar_MovementSystem.Instance.CordLenght02 = f_CurDistance;
+                break;
+
+            case 2:
+                SC_SyncVar_MovementSystem.Instance.CordLenght03 = f_CurDistance;
+                break;
+
+        }
 
     }
 
