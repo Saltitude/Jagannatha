@@ -10574,6 +10574,11 @@ PrefabInstance:
       propertyPath: m_Color.b
       value: 0.09019608
       objectReference: {fileID: 0}
+    - target: {fileID: 754912567185610909, guid: fd6ca9e382de6c84ca6409e7237d6332,
+        type: 3}
+      propertyPath: offsetMano
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 1383118479215039955, guid: fd6ca9e382de6c84ca6409e7237d6332,
         type: 3}
       propertyPath: ongletContainer
@@ -10828,6 +10833,21 @@ PrefabInstance:
     - target: {fileID: 4978459200488308206, guid: bf2c74096defbfc40aec3dcab80df2c0,
         type: 3}
       propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5100507264090992869, guid: bf2c74096defbfc40aec3dcab80df2c0,
+        type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5100507264090992869, guid: bf2c74096defbfc40aec3dcab80df2c0,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5100507264090992869, guid: bf2c74096defbfc40aec3dcab80df2c0,
+        type: 3}
+      propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5251731307112216821, guid: bf2c74096defbfc40aec3dcab80df2c0,

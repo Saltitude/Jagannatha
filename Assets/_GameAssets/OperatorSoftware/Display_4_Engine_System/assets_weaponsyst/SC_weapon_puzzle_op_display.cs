@@ -41,6 +41,8 @@ public class SC_weapon_puzzle_op_display : MonoBehaviour
     //Angles
     Quaternion oldAngleMain;
     Quaternion newAngleMain;
+    Vector3 oldDirMain;
+    Vector3 newDirMain;
     Quaternion CoroAngleMain;
     Quaternion[] CoroAngleBar;
 
@@ -92,6 +94,7 @@ public class SC_weapon_puzzle_op_display : MonoBehaviour
             tableau_new_rot[i] = Quaternion.Euler(-90, 0, tableau_init_rot_z[i] + SC_SyncVar_BreakdownWeapon.Instance.SL_Tourbilols[0].value * 22.5f + 22.5f);
             tableau_old_rot[i] = tableau_barres[i].transform.localRotation;
 
+
             //Old Method
             tableau_barres[i].transform.localEulerAngles = Vector3.Slerp(tableau_old_rot[i].eulerAngles, tableau_new_rot[i].eulerAngles, 0.25f);
  
@@ -139,6 +142,7 @@ public class SC_weapon_puzzle_op_display : MonoBehaviour
     {
 
         oldAngleMain = this.transform.rotation;
+        oldDirMain = this.transform.rotation * Vector3.forward;
 
         switch (SC_SyncVar_BreakdownWeapon.Instance.SL_Tourbilols[1].value)
         {
@@ -197,20 +201,12 @@ public class SC_weapon_puzzle_op_display : MonoBehaviour
 
         //Old Method
         //C'EST LUI LE BATARD QUAND -4 EST IMPLIQUER
-        this.transform.eulerAngles = Vector3.Slerp(oldAngleMain.eulerAngles, newAngleMain.eulerAngles, 0.25f);
 
-        /*
-        //Coroutine Method       
-        if (newAngleMain != oldAngleMain && newAngleMain != CoroAngleMain)
-        {
-
-            if (CurAngleMainCoro != null)
-                StopCoroutine(CurAngleMainCoro);
-
-            CurAngleMainCoro = StartCoroutine(GoTargetRotMainAngle(f_AngleMainCorDuration, newAngleMain));
-
-        }
-        */
+        //this.transform.eulerAngles = Vector3.Slerp(oldAngleMain.eulerAngles, newAngleMain.eulerAngles, 0.25f);
+        newDirMain = newAngleMain * Vector3.forward;
+        Quaternion newRot = Quaternion.FromToRotation(oldDirMain, newDirMain);
+        this.transform.rotation = Quaternion.Slerp(this.transform.rotation, newRot, 0.25f);
+        
 
     }
 
