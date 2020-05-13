@@ -19,7 +19,7 @@ public class SC_JoystickMove : MonoBehaviour, IF_BreakdownSystem
     [SerializeField]
     bool b_InBreakdown = false;
     [SerializeField]
-    bool b_BreakEngine = false;
+    public bool b_BreakEngine = false;
     [SerializeField, Range(0, 3)]
     int n_BreakDownLvl = 0;
     public enum Dir { None, Left, Right, Off }

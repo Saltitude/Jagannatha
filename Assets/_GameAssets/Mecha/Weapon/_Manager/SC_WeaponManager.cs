@@ -11,9 +11,12 @@ public class SC_WeaponManager : MonoBehaviour, IF_BreakdownSystem
 
     #endregion
 
+    [Header("Infos")]
+    [SerializeField]
     bool b_InBreakdown = false;
-    bool b_BreakEngine = false;
-
+    [SerializeField]
+    public bool b_BreakEngine = false;
+    [SerializeField]
     bool b_OnFire = false;
 
     bool b_AlreadyCheck = false;
