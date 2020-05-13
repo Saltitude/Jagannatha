@@ -234,9 +234,9 @@ public class SC_FlockManager : MonoBehaviour
 
         }
 
-        if(isActive)
+        if(isActive && curtype != PathType.Death)
         {
-            moveKoaSync.SetAnimationBool(KoaMainAnimator.GetBool("Deploy"), KoaMainAnimator.GetBool("Flight"), KoaMainAnimator.GetBool("Bullet"), KoaMainAnimator.GetBool("Laser"), KoaMainAnimator.GetFloat("speedFactor"));
+            moveKoaSync.SetAnimationBool(KoaMainAnimator.GetBool("Deploy"), KoaMainAnimator.GetBool("Flight"), KoaMainAnimator.GetBool("Bullet"), KoaMainAnimator.GetBool("Laser"), KoaMainAnimator.GetFloat("SpeedFactor"), KoaEmissiveAnimator.GetBool("LaserCharge"));
         }
         
     }
@@ -336,6 +336,7 @@ public class SC_FlockManager : MonoBehaviour
                     }
                 }
                 KoaMainAnimator.SetBool("Flight", false);
+                KoaEmissiveAnimator.SetBool("Flight", false);
                 StartNewPath(PathType.Roam);
                 flightTimer = 0;
             }
@@ -367,7 +368,8 @@ public class SC_FlockManager : MonoBehaviour
             if(reactionTimer >0)
             {
                 reactionTimer -= Time.deltaTime;
-                KoaMainAnimator.SetFloat("SpeedFactor", -2);
+                KoaMainAnimator.SetFloat("SpeedFactor", -1);
+                KoaEmissiveAnimator.SetFloat("SpeedFactor", -1);
             }
             if(reactionTimer <0)
             {
@@ -401,7 +403,10 @@ public class SC_FlockManager : MonoBehaviour
 
             case PathType.AttackPlayer:
                 KoaMainAnimator.SetBool("Deploy", false);
+                KoaEmissiveAnimator.SetBool("Deploy", false);
+
                 KoaMainAnimator.SetBool("Flight", false);
+                KoaEmissiveAnimator.SetBool("Flight", false);
 
                 flockWeaponManager.StartFire();
 
@@ -413,7 +418,9 @@ public class SC_FlockManager : MonoBehaviour
                 if(reactionHit != true)
                 {
                     KoaMainAnimator.SetBool("Deploy", true);
-                    KoaMainAnimator.SetFloat("SpeedFactor", 2);
+                    KoaEmissiveAnimator.SetBool("Deploy", true);
+                    KoaMainAnimator.SetFloat("SpeedFactor", 1);
+                    KoaEmissiveAnimator.SetFloat("SpeedFactor", 1);
                     reactionHit = true;
                 }
                 timeBeforeEndReaction = 0;
@@ -423,6 +430,7 @@ public class SC_FlockManager : MonoBehaviour
             case PathType.Flight:
 
                 KoaMainAnimator.SetBool("Flight", true);
+                KoaEmissiveAnimator.SetBool("Flight", true);
 
                 break;
         }
@@ -439,6 +447,11 @@ public class SC_FlockManager : MonoBehaviour
 
     public void EndReaction()
     {
+        KoaEmissiveAnimator.SetBool("Deploy", false);
+        KoaEmissiveAnimator.SetBool("Flight", false);
+        KoaEmissiveAnimator.SetBool("Laser", false);
+        KoaEmissiveAnimator.SetBool("LaserCharge", false);
+        KoaEmissiveAnimator.SetBool("Bullet", false);
         KoaMainAnimator.SetBool("Deploy", false);
         KoaMainAnimator.SetBool("Flight", false);
         KoaMainAnimator.SetBool("Laser", false);
@@ -605,6 +618,7 @@ public class SC_FlockManager : MonoBehaviour
         StartNewPath(PathType.Roam);
         KoaMainAnimator.SetBool("Laser", false);
         KoaMainAnimator.SetBool("Bullet", false);
+        KoaEmissiveAnimator.SetBool("Bullet", false);
     }
 
 

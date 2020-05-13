@@ -32,6 +32,7 @@ public class SC_KoaSettingsOP : MonoBehaviour, IF_KoaForOperator, IF_Hover
     bool bullet;
     bool laser;
     float speedFactor;
+    bool chargeLaser;
 
     public enum koaSelection
     {
@@ -141,13 +142,14 @@ public class SC_KoaSettingsOP : MonoBehaviour, IF_KoaForOperator, IF_Hover
         return (int) currentState;
     }
 
-    public void SetBoolAnimation(bool deploy, bool flight, bool bullet, bool laser, float speedFactor)
+    public void SetBoolAnimation(bool deploy, bool flight, bool bullet, bool laser, float speedFactor, bool chargeLaser)
     {
         this.deploy = deploy;
         this.flight = flight;
         this.bullet = bullet;
         this.laser = laser;
         this.speedFactor = speedFactor;
+        this.chargeLaser = chargeLaser;
     }
     public bool GetDeploy()
     {
@@ -168,6 +170,10 @@ public class SC_KoaSettingsOP : MonoBehaviour, IF_KoaForOperator, IF_Hover
     public float GetSpeedFactor()
     {
         return speedFactor;
+    } 
+    public bool GetChargeLaser()
+    {
+        return chargeLaser;
     }
 
     void Update()

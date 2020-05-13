@@ -21,8 +21,13 @@ MonoBehaviour:
   chargingAttackTime: 1
   activeDuration: 1
   speedToTarget: 0
-  reactionDuration: 3
-  maxReactionSensibilityPerCent: 50
+  flightDuration: 3
+  flightReactionMinSensibility: 75
+  hitReactionDelay: 3
+  hitReactionMaxSensibility: 50
+  attackFocusHitReaction: 0
+  damageOnSystemHitReaction: 5
+  laserDurationHitReaction: 2
   spawnSettings:
   - {fileID: 11400000, guid: a4b11c1104243ec49a2b9be25c09ae2b, type: 2}
   - {fileID: 11400000, guid: e296a302f05e8a343841bc22be4c0709, type: 2}
@@ -37,11 +42,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: d3c572fec02531c44b912e8a21604db6, type: 2}
   - {fileID: 11400000, guid: a544aac7cc2dcf2419bbf0ba6fbad032, type: 2}
   - {fileID: 11400000, guid: 62b4e09d19efe5b449cf908138a9bddc, type: 2}
-  reactionSettings:
-  - {fileID: 11400000, guid: d81b9143f2cd6c6408308f9bf5f61e3e, type: 2}
-  - {fileID: 11400000, guid: 7934150062f27ae4195cd71ff4af75f5, type: 2}
-  - {fileID: 11400000, guid: ee712d4740f201d4da7d91c136b5b6f8, type: 2}
-  - {fileID: 11400000, guid: 7934150062f27ae4195cd71ff4af75f5, type: 2}
+  getAwaySettings: []
+  hitReactionSettings: []
   splines: []
   spawnTimer: 1
   boidSpawn: 50
