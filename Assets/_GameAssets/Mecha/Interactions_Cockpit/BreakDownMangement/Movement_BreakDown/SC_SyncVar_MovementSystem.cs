@@ -149,6 +149,7 @@ public class SC_SyncVar_MovementSystem : NetworkBehaviour
 
     #region SC_Cord
 
+    [Header("Var SC_Cord")]
     [SyncVar]
     public float CordLenght01;
     [SyncVar]

@@ -12,6 +12,7 @@ public class SC_CordViewver : MonoBehaviour
 
     #endregion
 
+    [Header("Basics Infos")]
     [SerializeField]
     float ConstraintRange;
     [SerializeField]
@@ -19,6 +20,7 @@ public class SC_CordViewver : MonoBehaviour
     [SerializeField]
     float AddMaxRange;
 
+    [Header("Ratio Infos")]
     [SerializeField]
     float CordRatio01;
     [SerializeField]
