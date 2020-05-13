@@ -1252,6 +1252,7 @@ MonoBehaviour:
   breakdownMat: {fileID: 2100000, guid: 97e03cbd94065564ea4d3417797d06e4, type: 2}
   warning: {fileID: 1088212967967876223}
   sparkle: {fileID: 5924465883678737442}
+  SReboot: {fileID: 4937397997871983983}
 --- !u!1 &5971105819087256075
 GameObject:
   m_ObjectHideFlags: 0
