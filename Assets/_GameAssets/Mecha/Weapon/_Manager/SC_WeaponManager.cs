@@ -68,10 +68,10 @@ public class SC_WeaponManager : MonoBehaviour, IF_BreakdownSystem
     void Update()
     {
 
-        if ((Input.GetKey(KeyCode.Space) || Input.GetAxis("Fire1") > 0) && !b_BreakEngine)
+        if (((Input.GetKey(KeyCode.Space) || Input.GetAxis("Fire1") > 0)) && !b_BreakEngine)
             Fire();
 
-        if ((Input.GetKeyUp(KeyCode.Space) || Input.GetAxis("Fire1") == 0 ) && b_OnFire && !b_BreakEngine)
+        if (((Input.GetKeyUp(KeyCode.Space) || Input.GetAxis("Fire1") == 0 )) && b_OnFire)
             StopFire();
 
     }
