@@ -3742,6 +3742,11 @@ PrefabInstance:
       propertyPath: text_value_display
       value: 
       objectReference: {fileID: 8656753548267181286}
+    - target: {fileID: 4810773184695967814, guid: 41c650aeb33755a409328243629ed028,
+        type: 3}
+      propertyPath: isFLUX
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7446395581097780282, guid: 41c650aeb33755a409328243629ed028,
         type: 3}
       propertyPath: m_Name

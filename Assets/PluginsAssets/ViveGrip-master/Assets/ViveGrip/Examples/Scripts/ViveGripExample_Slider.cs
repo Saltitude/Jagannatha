@@ -39,6 +39,9 @@ public class ViveGripExample_Slider : MonoBehaviour, IInteractible {
 
     private SC_SyncVar_BreakdownDisplay sc_syncvar;
 
+    [SerializeField]
+    bool isFLUX = false;
+
 
     [Range(0, 1)]
     public float probability = 1;
@@ -125,7 +128,7 @@ public class ViveGripExample_Slider : MonoBehaviour, IInteractible {
         if (text_value_display != null)
         {
             //curValue = Mathf.FloorToInt(Ratio(-Mathf.Round(Ratio(gameObject.transform.localPosition.x, limit, 0.45f, -limit, -0.45f) * 100) / 100, 0.4f, 10, -0.4f, 0.1f));
-            curValue = Mathf.FloorToInt(Ratio(gameObject.transform.localPosition.x,-limit,10,limit,1));
+            curValue = Mathf.FloorToInt(Ratio(sc_syncvar.SL_sliders[index].value, 0.45f, 10, -0.45f, 1));
             
             text_value_display.text = curValue.ToString();
 
@@ -200,8 +203,31 @@ public class ViveGripExample_Slider : MonoBehaviour, IInteractible {
 
     public void IsValueOk()
     {
+        if (isFLUX && Mathf.FloorToInt(Ratio(sc_syncvar.SL_sliders[index].value, 0.45f, 10, -0.45f, 1)) == Mathf.FloorToInt(Ratio(sc_syncvar.SL_sliders[index].valueWanted, 0.45f, 10, -0.45f, 1)))
+        {
+            if (isEnPanne)
+            {
+                SetIsEnPanne(false);
 
-        if (gameObject.transform.localPosition.x >= desiredValue - precision && gameObject.transform.localPosition.x <= desiredValue + precision)
+
+
+                if (sc_syncvar == null)
+                {
+
+                    GetReferences();
+                }
+                else
+                {
+
+                    sc_syncvar.SliderChangeIsPanne(index, false);
+
+                }
+            }
+
+
+
+        }
+        else if (!isFLUX && gameObject.transform.localPosition.x >= desiredValue - precision && gameObject.transform.localPosition.x <= desiredValue + precision)
         {
 
             if (isEnPanne)
@@ -279,5 +305,7 @@ public class ViveGripExample_Slider : MonoBehaviour, IInteractible {
     {
         sendToSynchVar(-Mathf.Round(Ratio(gameObject.transform.localPosition.x, limit, 0.45f, -limit, -0.45f) * 100) / 100);
     }
+
+
 
 }
