@@ -331,7 +331,7 @@ public class SC_UI_Display_Flock : MonoBehaviour
             mainAnim.SetBool("Flight", flight);
             mainAnim.SetBool("Bullet", bullet);
             mainAnim.SetBool("Laser", laser);
-            mainAnim.SetFloat("speedFactor", speedFactor);
+            mainAnim.SetFloat("SpeedFactor", speedFactor);
             
         }
     }
