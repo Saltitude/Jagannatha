@@ -415,7 +415,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1435697660202361021}
   m_LocalRotation: {x: -0, y: 0.013513581, z: -0, w: 0.9999087}
-  m_LocalPosition: {x: 0, y: 0, z: 0.529}
+  m_LocalPosition: {x: 0, y: 0, z: 0.552}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 7039809007355003007}
@@ -916,18 +916,18 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3847336418238969074}
-  m_LocalRotation: {x: 0.42877412, y: -0.0022545496, z: 0.004750172, w: 0.9033965}
-  m_LocalPosition: {x: 0, y: 0, z: 0.008000008}
-  m_LocalScale: {x: 0.0032071013, y: 0.00400189, z: 0.00400189}
+  m_LocalRotation: {x: 0.42595652, y: 0.0036694454, z: 0.010415205, w: 0.9046763}
+  m_LocalPosition: {x: 0, y: 0, z: -0.022}
+  m_LocalScale: {x: 0.0034266582, y: 0.0052088597, z: 0.00400189}
   m_Children:
   - {fileID: 7510127524845389144}
   - {fileID: 7310672564447357090}
   m_Father: {fileID: 3896749563128980967}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 50.780003, y: 0, z: 0.60300004}
+  m_LocalEulerAnglesHint: {x: 50.410004, y: 1.3950001, z: 1.9760001}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.015000403, y: 0.4860229}
+  m_AnchoredPosition: {x: -0.0197, y: 0.4889}
   m_SizeDelta: {x: 160, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &8606313581294634913
@@ -1355,7 +1355,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7632076086821448957}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: -0.8}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 7310672564447357090}
@@ -1363,7 +1363,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: -0, y: -0}
   m_SizeDelta: {x: 10, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5800040838187066783
@@ -1387,7 +1387,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.500623, g: 0.8490566, b: 0.8490566, a: 1}
+  m_Color: {r: 0, g: 1, b: 0.8781085, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -1458,7 +1458,7 @@ MonoBehaviour:
   m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 2100000, guid: 52fb2454fa7c62f479c87eadcb271256, type: 2}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
