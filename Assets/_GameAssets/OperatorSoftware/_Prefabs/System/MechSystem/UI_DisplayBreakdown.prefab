@@ -1301,7 +1301,7 @@ GameObject:
   - component: {fileID: 347618062021758815}
   - component: {fileID: 828754606002440747}
   - component: {fileID: 1109631284280770517}
-  - component: {fileID: 8178821805280063338}
+  - component: {fileID: 7501798778691608604}
   m_Layer: 5
   m_Name: Gauge
   m_TagString: Untagged
@@ -1371,7 +1371,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 74ec2d4486d1655478a68e66d6910ef0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &8178821805280063338
+--- !u!114 &7501798778691608604
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1380,10 +1380,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1330346869296871269}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1ecc44641ed411e4597170487aa177ab, type: 3}
+  m_Script: {fileID: 11500000, guid: 3f3d8de7d2048294a9b5e2c700039016, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  simpleValue: 0.306
+  simpleValue: 0
   speedBar: 2
 --- !u!1 &1574929222635527955
 GameObject:
