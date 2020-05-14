@@ -23,4 +23,7 @@ public class WaveSettings : ScriptableObject
 
     public float timeBetweenSpawnBackup;
 
+    [Header("Timer Before Next Wave")]
+    public int timeBeforeNextWave;
+
 }

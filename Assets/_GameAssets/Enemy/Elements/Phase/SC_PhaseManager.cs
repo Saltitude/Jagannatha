@@ -55,12 +55,18 @@ public class SC_PhaseManager : MonoBehaviour
            
     public void EndWave()
     {
+        Invoke("EndWaveTimer", waves[curWaveIndex].timeBeforeNextWave);
+    }
+
+    void EndWaveTimer()
+    {
+        
         curWaveIndex++;
-        if (curWaveIndex<waves.Length)
+        if (curWaveIndex < waves.Length)
         {
             if (SC_WaveManager.Instance.b_nextWave == true)
             {
-                SC_WaveManager.Instance.InitializeWave(waves [curWaveIndex]);
+                SC_WaveManager.Instance.InitializeWave(waves[curWaveIndex]);
                 //SC_EnemyManager.Instance.Progress.value = curWaveIndex * 10f;
             }
             else

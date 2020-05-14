@@ -3867,7 +3867,7 @@ PrefabInstance:
     - target: {fileID: 3318517326145213509, guid: 6664ff07623a3af4ea5842af17a6983f,
         type: 3}
       propertyPath: probability
-      value: 0.5
+      value: 0.8
       objectReference: {fileID: 0}
     - target: {fileID: 3318517326145213509, guid: 6664ff07623a3af4ea5842af17a6983f,
         type: 3}
@@ -3992,7 +3992,7 @@ PrefabInstance:
     - target: {fileID: 3318517326145213509, guid: 6664ff07623a3af4ea5842af17a6983f,
         type: 3}
       propertyPath: probability
-      value: 0.5
+      value: 0.8
       objectReference: {fileID: 0}
     - target: {fileID: 3318517326145213509, guid: 6664ff07623a3af4ea5842af17a6983f,
         type: 3}
@@ -5463,7 +5463,7 @@ PrefabInstance:
     - target: {fileID: 3318517326145213509, guid: 6664ff07623a3af4ea5842af17a6983f,
         type: 3}
       propertyPath: probability
-      value: 0.5
+      value: 0.8
       objectReference: {fileID: 0}
     - target: {fileID: 3318517326145213509, guid: 6664ff07623a3af4ea5842af17a6983f,
         type: 3}
