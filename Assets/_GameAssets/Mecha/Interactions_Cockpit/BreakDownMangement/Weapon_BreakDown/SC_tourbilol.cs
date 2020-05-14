@@ -88,7 +88,6 @@ public class SC_tourbilol : MonoBehaviour, IInteractible
             _handle1_grabbable.Vibrate(100, 2f);
             _handle2_grabbable.Vibrate(100, 2f);
 
-            Debug.Log("cran");
 
         }
 

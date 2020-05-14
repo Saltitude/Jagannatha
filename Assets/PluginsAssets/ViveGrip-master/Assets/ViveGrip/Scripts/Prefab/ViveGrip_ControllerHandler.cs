@@ -140,7 +140,14 @@ public class ViveGrip_ControllerHandler : MonoBehaviour {
   // strength is a value from 0-1
   public void Vibrate(int milliseconds, float strength) {
     float seconds = milliseconds / 1000f;
-    StartCoroutine(LongVibration(seconds, strength));
+
+        if (!Application.isEditor)
+        {
+            strength *= 10;
+        }
+
+
+        StartCoroutine(LongVibration(seconds, strength));
   }
 
   IEnumerator LongVibration(float length, float strength) {
