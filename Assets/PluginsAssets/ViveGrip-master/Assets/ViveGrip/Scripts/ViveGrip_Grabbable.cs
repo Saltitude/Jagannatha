@@ -94,5 +94,7 @@ public class ViveGrip_Grabbable : ViveGrip_Object {
     {
         if (controller != null)
             controller.Vibrate(millisec, strength);
+
+        Debug.Log(controller);
     }
 }
