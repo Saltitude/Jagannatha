@@ -265,7 +265,7 @@ public class SC_FlockWeaponManager : MonoBehaviour
 
                 Sc_ScreenShake.Instance.ShakeIt(0.025f, flockSettings.laserDurationHitReaction);
                 SC_CockpitShake.Instance.ShakeIt(0.025f, flockSettings.laserDurationHitReaction);
-                SC_HitDisplay.Instance.Hit(transform.position);
+                //SC_HitDisplay.Instance.Hit(transform.position);
                 SC_MainBreakDownManager.Instance.CauseDamageOnSystem(flockSettings.attackFocusHitReaction, flockSettings.damageOnSystemHitReaction);
 
                 startLaser = false;
@@ -320,7 +320,7 @@ public class SC_FlockWeaponManager : MonoBehaviour
 
             Sc_ScreenShake.Instance.ShakeIt(0.025f, flockSettings.activeDuration);
             SC_CockpitShake.Instance.ShakeIt(0.025f, flockSettings.activeDuration);
-            SC_HitDisplay.Instance.Hit(transform.position);
+            //SC_HitDisplay.Instance.Hit(transform.position);
             SC_MainBreakDownManager.Instance.CauseDamageOnSystem(flockSettings.attackFocus, flockSettings.damageOnSystem);
 
             startLaser = false;
