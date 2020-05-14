@@ -3742,6 +3742,11 @@ PrefabInstance:
       propertyPath: text_value_display
       value: 
       objectReference: {fileID: 8656753548267181286}
+    - target: {fileID: 4810773184695967814, guid: 41c650aeb33755a409328243629ed028,
+        type: 3}
+      propertyPath: isFLUX
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7446395581097780282, guid: 41c650aeb33755a409328243629ed028,
         type: 3}
       propertyPath: m_Name
@@ -3862,7 +3867,7 @@ PrefabInstance:
     - target: {fileID: 3318517326145213509, guid: 6664ff07623a3af4ea5842af17a6983f,
         type: 3}
       propertyPath: probability
-      value: 0.5
+      value: 0.8
       objectReference: {fileID: 0}
     - target: {fileID: 3318517326145213509, guid: 6664ff07623a3af4ea5842af17a6983f,
         type: 3}
@@ -3987,7 +3992,7 @@ PrefabInstance:
     - target: {fileID: 3318517326145213509, guid: 6664ff07623a3af4ea5842af17a6983f,
         type: 3}
       propertyPath: probability
-      value: 0.5
+      value: 0.8
       objectReference: {fileID: 0}
     - target: {fileID: 3318517326145213509, guid: 6664ff07623a3af4ea5842af17a6983f,
         type: 3}
@@ -5458,7 +5463,7 @@ PrefabInstance:
     - target: {fileID: 3318517326145213509, guid: 6664ff07623a3af4ea5842af17a6983f,
         type: 3}
       propertyPath: probability
-      value: 0.5
+      value: 0.8
       objectReference: {fileID: 0}
     - target: {fileID: 3318517326145213509, guid: 6664ff07623a3af4ea5842af17a6983f,
         type: 3}
