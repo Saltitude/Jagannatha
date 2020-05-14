@@ -5,8 +5,10 @@ public class ViveGripExample_Button : MonoBehaviour {
   private const float SPEED = 0.1f;
   private float distance;
   private int direction = 1;
+    [SerializeField]
   private int VIBRATION_DURATION_IN_MILLISECONDS = 25;
-  private float VIBRATION_STRENGTH = 0.4f;
+    [SerializeField]
+private float VIBRATION_STRENGTH = 2f;
 
   void Start () {
     ResetDistance();
