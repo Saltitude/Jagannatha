@@ -19,6 +19,12 @@ public class SC_tourbilol : MonoBehaviour, IInteractible
 
     private float desiredValue = 0f;
 
+    [SerializeField]
+    ViveGrip_Grabbable _handle1_grabbable;
+
+    [SerializeField]
+    ViveGrip_Grabbable _handle2_grabbable;
+
     enum tourbiType { tourbiFirst, tourbiSecond }
 
     [SerializeField]
@@ -63,7 +69,22 @@ public class SC_tourbilol : MonoBehaviour, IInteractible
         if (oldRot != curRot)
         {
             sendToSynchVar(Mathf.Floor(totalAngle / 90));
+
+            //vibrate
+            _handle1_grabbable.Vibrate(50, 0.1f);
+            _handle2_grabbable.Vibrate(50, 0.1f);
+
             IsValueOk();
+        }
+
+        if (Mathf.Floor(oldRot / 90) != Mathf.Floor(curRot / 90))
+        {
+            //vibrate
+            _handle1_grabbable.Vibrate(50, 0.5f);
+            _handle2_grabbable.Vibrate(50, 0.5f);
+
+            Debug.Log("cran");
+
         }
 
         oldRot = curRot;
