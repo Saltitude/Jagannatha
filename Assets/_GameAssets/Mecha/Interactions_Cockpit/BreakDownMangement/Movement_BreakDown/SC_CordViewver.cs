@@ -75,17 +75,17 @@ public class SC_CordViewver : MonoBehaviour
         CordRatio02 = SC_SyncVar_MovementSystem.Instance.CordLenght02 / (ConstraintRange + DeadZone + AddMaxRange);
         CordRatio03 = SC_SyncVar_MovementSystem.Instance.CordLenght03 / (ConstraintRange + DeadZone + AddMaxRange);
 
-        if (CordRatio01 > (ConstraintRange + DeadZone) && !b_Cord01Valid)
+        if (SC_SyncVar_MovementSystem.Instance.CordLenght01 > (ConstraintRange + DeadZone) && !b_Cord01Valid)
             b_Cord01Valid = true;
         else if(b_Cord01Valid)
             b_Cord01Valid = false;
 
-        if (CordRatio02 > (ConstraintRange + DeadZone) && !b_Cord02Valid)
+        if (SC_SyncVar_MovementSystem.Instance.CordLenght02 > (ConstraintRange + DeadZone) && !b_Cord02Valid)
             b_Cord02Valid = true;
         else if (b_Cord01Valid)
             b_Cord02Valid = false;
 
-        if (CordRatio03 > (ConstraintRange + DeadZone) && !b_Cord03Valid)
+        if (SC_SyncVar_MovementSystem.Instance.CordLenght03 > (ConstraintRange + DeadZone) && !b_Cord03Valid)
             b_Cord03Valid = true;
         else if (b_Cord03Valid)
             b_Cord03Valid = false;
