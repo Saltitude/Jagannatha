@@ -15,7 +15,7 @@ MonoBehaviour:
   attackType: 2
   attackFocus: 2
   damageOnSystem: 10
-  timeBetweenAttacks: 0
+  timeBetweenAttacks: 5
   fireRate: 5
   nbBulletToShoot: 50
   chargingAttackTime: 1
@@ -48,6 +48,6 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   spawnTimer: 1
-  boidSpawn: 200
-  maxBoid: 200
+  boidSpawn: 50
+  maxBoid: 50
   regenerationRate: 0
