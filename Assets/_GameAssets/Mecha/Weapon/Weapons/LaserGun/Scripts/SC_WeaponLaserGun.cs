@@ -32,7 +32,7 @@ public class SC_WeaponLaserGun : MonoBehaviour, IF_Weapon, IF_BreakdownSystem
     MeshRenderer mrBullet;
     SC_BulletLaserGun BulletSC;
     [SerializeField]
-    Color CurColor;
+    public Color CurColor;
 
     [Header("Breakdown Infos")]
     [SerializeField]
@@ -56,7 +56,7 @@ public class SC_WeaponLaserGun : MonoBehaviour, IF_Weapon, IF_BreakdownSystem
 
     [SerializeField]
     float speedW = 0f;
-    bool trig = false;
+    public bool trig = false;
 
     #endregion Variables
 
