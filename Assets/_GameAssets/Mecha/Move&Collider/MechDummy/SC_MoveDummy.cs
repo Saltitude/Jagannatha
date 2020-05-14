@@ -43,7 +43,7 @@ public class SC_MoveDummy : NetworkBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (isServer)
+        if (isServer && SC_GameStates.Instance.CurState != SC_GameStates.GameState.Lobby)
         {
             SyncPos();
             SyncCannon();
@@ -156,7 +156,7 @@ public class SC_MoveDummy : NetworkBehaviour
                 mshRend.enabled = true;
                 meshLaser.transform.localScale = new Vector3(meshLaser.transform.localScale.x, meshLaser.transform.localScale.y, curTempPosL.magnitude);
                 meshLaser.transform.position = new Vector3(vt3_Position.x/2, meshLaser.transform.position.y, vt3_Position.z/2);
-                mat_Laser.color = targetColor;
+                //mat_Laser.color = targetColor;
             }
             else
             {
