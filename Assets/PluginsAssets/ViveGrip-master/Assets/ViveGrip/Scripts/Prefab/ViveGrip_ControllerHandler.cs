@@ -143,7 +143,7 @@ public class ViveGrip_ControllerHandler : MonoBehaviour {
 
         if (!Application.isEditor)
         {
-            strength *= 10;
+            strength *= 100;
         }
 
 

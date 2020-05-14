@@ -41,7 +41,17 @@ public class SC_Cord : MonoBehaviour
     [SerializeField]
     bool b_Enable = false;
     [SerializeField]
-    bool b_Grabbing = false;  
+    bool b_Grabbing = false;
+
+    //controller
+    private ViveGrip_ControllerHandler controller;
+
+    //Vibrations
+    [SerializeField]
+    private int _vibrationMilliSec = 10;
+    [SerializeField]
+    private float _vibrationStrength = 5f;
+
 
     //Non Public Refs
     Rigidbody Rb;
@@ -75,6 +85,22 @@ public class SC_Cord : MonoBehaviour
         RangeEffect();
 
     }
+
+
+    //Mise à jour controller
+
+    void ViveGripGrabStart(ViveGrip_GripPoint gripPoint)
+    {
+        controller = gripPoint.controller;
+    }
+
+    //appelé quand lache l'objet
+    void ViveGripGrabStop(ViveGrip_GripPoint gripPoint)
+    {
+        controller = null;
+    }
+
+
 
     void CalculateDistance()
     {
@@ -113,6 +139,9 @@ public class SC_Cord : MonoBehaviour
         {
             b_InRange = true;
             SetMaterial(false);
+
+            //vibration constante en focntion de la distance
+            controller.Vibrate(_vibrationMilliSec, _vibrationStrength * f_CurDistance*5);
         }        
 
         if (f_CurDistance > ConstraintRange + DeadZone && b_InRange)
@@ -121,10 +150,19 @@ public class SC_Cord : MonoBehaviour
             b_InRange = false;
             SetMaterial(true);
             SC_MovementBreakdown.Instance.AddToPilotSeq(n_Index);
+
+            //cran de vibration
+            controller.Vibrate(_vibrationMilliSec*10, _vibrationStrength *10);
         }
 
         if (f_CurDistance > ConstraintRange + AddMaxRange)
+        {
+
             ReleaseObject();
+
+            controller.Vibrate(_vibrationMilliSec * 5, _vibrationStrength * 100);
+
+        }
 
     }
 

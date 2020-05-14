@@ -32,7 +32,7 @@ public class ViveGrip_Grabbable : ViveGrip_Object {
     private HashSet<ViveGrip_GripPoint> attachedGripPoints;
 
 
-    //A TESTER
+    //Controller
     private ViveGrip_ControllerHandler controller;
 
 
