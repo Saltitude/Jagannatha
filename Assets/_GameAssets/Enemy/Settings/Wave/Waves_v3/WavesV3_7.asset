@@ -28,3 +28,4 @@ MonoBehaviour:
   timeBeforeBackup: -1
   flockLeftBeforeBackup: 2
   timeBetweenSpawnBackup: 2
+  timeBeforeNextWave: 5
