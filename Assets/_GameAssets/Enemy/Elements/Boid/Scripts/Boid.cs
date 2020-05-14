@@ -109,7 +109,7 @@ public class Boid : MonoBehaviour {
         {
             Sc_ScreenShake.Instance.ShakeIt(0.010f, 0.1f);
             SC_CockpitShake.Instance.ShakeIt(0.0075f, 0.1f);
-            SC_HitDisplay.Instance.Hit(transform.position);
+            //SC_HitDisplay.Instance.Hit(transform.position);
 
             DestroyBoid(DestructionType.Solo);
         }
