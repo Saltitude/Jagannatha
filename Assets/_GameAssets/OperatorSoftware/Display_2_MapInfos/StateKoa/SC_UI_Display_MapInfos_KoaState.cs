@@ -40,14 +40,15 @@ public class SC_UI_Display_MapInfos_KoaState : MonoBehaviour
     //Text optiWeapon;
 
 
-
+    string[] StringState = { "Spawning", "Roaming", "Attacking", "Death", "Fleeing", "Absorbing" };
     enum KoaState
     {
-        Spawn = 0,
+        Spawning = 0,
         Roam = 1,
         AttackPlayer = 2,
         Death = 3,
-        Reaction = 4
+        Flight = 4,
+        Absorbtion = 5
     }
 
     KoaState curState;
@@ -142,8 +143,8 @@ public class SC_UI_Display_MapInfos_KoaState : MonoBehaviour
 
                 displayOptiBar();
                 type.text = "Type " + curKoaScriptKoaSettings.GetKoaID().ToString();
-                curState = (KoaState) curKoaScriptKoaSettings.GetKoaState();
-                koaStateTxt.text = curState.ToString().ToUpper();
+                koaStateTxt.text = StringState[curKoaScriptKoaSettings.GetKoaState()].ToUpper();
+                //koaStateTxt.text = curState.ToString().ToUpper();
 
                 if (curfKoaLife != fKoaLife)
                 {
