@@ -141,7 +141,7 @@ public class SC_Cord : MonoBehaviour
             SetMaterial(false);
 
             //vibration constante en focntion de la distance
-            controller.Vibrate(_vibrationMilliSec, _vibrationStrength * f_CurDistance*5);
+            controller.Vibrate(_vibrationMilliSec, _vibrationStrength * f_CurDistance);
         }        
 
         if (f_CurDistance > ConstraintRange + DeadZone && b_InRange)
@@ -157,10 +157,10 @@ public class SC_Cord : MonoBehaviour
 
         if (f_CurDistance > ConstraintRange + AddMaxRange)
         {
+            if (controller != null)
+                controller.Vibrate(_vibrationMilliSec * 5, _vibrationStrength * 100);
 
             ReleaseObject();
-
-            controller.Vibrate(_vibrationMilliSec * 5, _vibrationStrength * 100);
 
         }
 
