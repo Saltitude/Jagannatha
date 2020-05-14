@@ -71,8 +71,8 @@ public class SC_tourbilol : MonoBehaviour, IInteractible
             sendToSynchVar(Mathf.Floor(totalAngle / 90));
 
             //vibrate
-            _handle1_grabbable.Vibrate(500, 0.2f);
-            _handle2_grabbable.Vibrate(500, 0.2f);
+            _handle1_grabbable.Vibrate(10, 0.05f);
+            _handle2_grabbable.Vibrate(10, 0.05f);
 
             IsValueOk();
         }
@@ -80,8 +80,8 @@ public class SC_tourbilol : MonoBehaviour, IInteractible
         if (Mathf.Floor(oldRot / 90) != Mathf.Floor(curRot / 90))
         {
             //vibrate
-            _handle1_grabbable.Vibrate(50, 0.2f);
-            _handle2_grabbable.Vibrate(50, 0.2f);
+            _handle1_grabbable.Vibrate(50, 0.5f);
+            _handle2_grabbable.Vibrate(50, 0.5f);
 
             Debug.Log("cran");
 
