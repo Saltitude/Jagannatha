@@ -127,8 +127,8 @@ public class SC_UI_Display_MapInfos_KoaState : MonoBehaviour
                 //sensi[1].text = (koaSensibility.y + 1).ToString();
                 //sensi[2].text = (koaSensibility.z + 1).ToString();
 
-                _triangle.amplitudeValue = (koaSensibility.x + 1);
-                _triangle.frequenceValue = (koaSensibility.y + 1);
+                _triangle.amplitudeValue = (koaSensibility.y + 1);
+                _triangle.frequenceValue = (koaSensibility.x + 1);
                 _triangle.phaseValue = (koaSensibility.z + 1);
                 
 
