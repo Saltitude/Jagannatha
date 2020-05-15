@@ -121,35 +121,36 @@ public class SC_Triangle_Parameters : MonoBehaviour
 
     void animTriangle()
     {
-            vertexPos[0] = new Vector3(-frequenceValue * 0.86f, -frequenceValue / 2, 0);
-            vertexPos[1] = new Vector3(0, amplitudeValue, 0);
+            vertexPos[1] = new Vector3(-frequenceValue * 0.86f, -frequenceValue / 2, 0);
+            vertexPos[0] = new Vector3(0, amplitudeValue, 0);
             vertexPos[2] = new Vector3(phaseValue * 0.86f, -phaseValue / 2, 0);
 
 
             for (int i = 0; i < vertexPos.Length; i++)
             {
-                    if(Vector3.Distance(vertex[0], vertexPos[0]) > precision)
+                if (Vector3.Distance(vertex[0], vertexPos[0]) > precision)
+                {
+                    if (vertex[0].magnitude > vertexPos[0].magnitude)
                     {
-                        if (vertex[0].magnitude > vertexPos[0].magnitude)
-                        {
-                            vertex[0] += new Vector3(Time.deltaTime * speed * 0.86f, (Time.deltaTime * speed) / 2, 0);
-                        }
-                        else
-                        {
-                            vertex[0] -= new Vector3(Time.deltaTime * speed * 0.86f, (Time.deltaTime * speed) / 2, 0);
-                        }
+                        vertex[0] -= new Vector3(0, (Time.deltaTime * speed), 0);
                     }
-                    if (Vector3.Distance(vertex[1], vertexPos[1]) > precision)
+                    else
+                    {
+                        vertex[0] += new Vector3(0, (Time.deltaTime * speed), 0);
+                    }
+                }
+                if (Vector3.Distance(vertex[1], vertexPos[1]) > precision)
                     {
                         if (vertex[1].magnitude > vertexPos[1].magnitude)
                         {
-                            vertex[1] -= new Vector3(0, (Time.deltaTime * speed), 0);
+                            vertex[1] += new Vector3(Time.deltaTime * speed * 0.86f, (Time.deltaTime * speed) / 2, 0);
                         }
                         else
                         {
-                            vertex[1] += new Vector3(0, (Time.deltaTime * speed), 0);
+                            vertex[1] -= new Vector3(Time.deltaTime * speed * 0.86f, (Time.deltaTime * speed) / 2, 0);
                         }
                     }
+                    
                 if (Vector3.Distance(vertex[2], vertexPos[2]) > precision)
                 {
                     if (vertex[2].magnitude > vertexPos[2].magnitude)
@@ -163,7 +164,7 @@ public class SC_Triangle_Parameters : MonoBehaviour
                 }
                 sensiTxt[i].text = Mathf.Round (vertex[i].magnitude).ToString();
                 animText();
-            }   
+                }   
 
         triangleMesh.vertices = vertex;
         triangleMesh.triangles = triangles;
@@ -172,28 +173,29 @@ public class SC_Triangle_Parameters : MonoBehaviour
 
     void animText()
     {
-        
         if (sensiTxt[0].text != (SC_UI_Display_MapInfos_KoaState.Instance.koaSensibility.y + 1).ToString())
         {
-            //sensiTxt[0].font = sanskritFont;
-            coroutine[0] =  StartCoroutine(multipleLetter(0));
+            //sensiTxt[1].font = sanskritFont;
+            coroutine[0] = StartCoroutine(multipleLetter(0));
+
         }
         else
         {
             StopCoroutine(coroutine[0]);
             sensiTxt[0].font = ArialFont;
         }
+
         if (sensiTxt[1].text != (SC_UI_Display_MapInfos_KoaState.Instance.koaSensibility.x + 1).ToString())
         {
-            //sensiTxt[1].font = sanskritFont;
-            coroutine[1] = StartCoroutine(multipleLetter(1));
-
+            //sensiTxt[0].font = sanskritFont;
+            coroutine[1] =  StartCoroutine(multipleLetter(1));
         }
         else
         {
             StopCoroutine(coroutine[1]);
             sensiTxt[1].font = ArialFont;
         }
+        
         if (sensiTxt[2].text != (SC_UI_Display_MapInfos_KoaState.Instance.koaSensibility.z + 1).ToString())
         {
             //sensiTxt[2].font = sanskritFont;
