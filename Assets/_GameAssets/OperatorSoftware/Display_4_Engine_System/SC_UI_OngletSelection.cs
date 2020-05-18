@@ -51,43 +51,47 @@ public class SC_UI_OngletSelection : MonoBehaviour, IF_clicableAction, IF_Hover
     public void Action()
     {
         SC_UI_OngletContainer.Window newWindow = (SC_UI_OngletContainer.Window)index;
-        if(index == 0 && SC_GameStates.Instance.CurTutoState == SC_GameStates.TutorialState.Tutorial1_3)
+        if(index == 0 && SC_GameStates.Instance.CurTutoState == SC_GameStates.TutorialState.RepairDisplay)
         {
-                SC_CheckList.Instance.NetworkPlayerPilot.GetComponent<SC_Net_Player_TutoState>().CmdChangeTutoState(SC_GameStates.TutorialState.Tutorial1_4);
-        }
-        else if (index == 1 && SC_GameStates.Instance.CurTutoState == SC_GameStates.TutorialState.Tutorial1_3)
-        {
-                SC_CheckList.Instance.NetworkPlayerPilot.GetComponent<SC_Net_Player_TutoState>().CmdChangeTutoState(SC_GameStates.TutorialState.Tutorial1_5);
-        }
-        else if (index == 2 && SC_GameStates.Instance.CurTutoState == SC_GameStates.TutorialState.Tutorial1_3)
-        {
-                SC_CheckList.Instance.NetworkPlayerPilot.GetComponent<SC_Net_Player_TutoState>().CmdChangeTutoState(SC_GameStates.TutorialState.Tutorial1_6);
-        }
-        if(index == 3 && SC_GameStates.Instance.CurTutoState == SC_GameStates.TutorialState.Tutorial1_7)
-        {
-            SC_CheckList.Instance.NetworkPlayerPilot.GetComponent<SC_Net_Player_TutoState>().CmdChangeTutoState(SC_GameStates.TutorialState.Tutorial1_8);
-        }
-        ongletContainer.ChangeWindow(newWindow);
-        OnClicAnimation();
-        #region AnimIn&Out
-        
-        if(index == 0)
-        {
-         //   if (animator.GetBool("ClicDisplay") == true)
+            // SC_CheckList.Instance.NetworkPlayerPilot.GetComponent<SC_Net_Player_TutoState>().CmdChangeTutoState(SC_GameStates.TutorialState.Tutorial1_4);
             ongletContainer.DisplayIn();
             animator.SetBool("ActivateDisplay", true);
         }
-        if (index == 1)
+        else if (index == 1 && SC_GameStates.Instance.CurTutoState == SC_GameStates.TutorialState.RepairWeapon)
         {
-          //  if (animator.GetBool("ClicWeapon") == true)
+            //SC_CheckList.Instance.NetworkPlayerPilot.GetComponent<SC_Net_Player_TutoState>().CmdChangeTutoState(SC_GameStates.TutorialState.Tutorial1_5);
+
+            ongletContainer.WeaponIn();
+            animator.SetBool("ActivateWeapon", true);
+        }
+        else if (index == 2 && SC_GameStates.Instance.CurTutoState == SC_GameStates.TutorialState.RepairDisplay)
+        {
+            //SC_CheckList.Instance.NetworkPlayerPilot.GetComponent<SC_Net_Player_TutoState>().CmdChangeTutoState(SC_GameStates.TutorialState.Tutorial1_6);
+            ongletContainer.MoveIn();
+            animator.SetBool("ActivateMove", true);
+        }
+
+        ongletContainer.ChangeWindow(newWindow);
+        #region AnimIn&Out
+        
+        if(SC_GameStates.Instance.CurState == SC_GameStates.GameState.Game)
+        {
+            if (index == 0)
+            {
+                ongletContainer.DisplayIn();
+                animator.SetBool("ActivateDisplay", true);
+            }
+            if (index == 1)
+            {
                 ongletContainer.WeaponIn();
                 animator.SetBool("ActivateWeapon", true);
-        }
-        if (index == 2)
-        {
-          //  if (animator.GetBool("ClicMove") == true)
+            }
+            if (index == 2)
+            {
                 ongletContainer.MoveIn();
                 animator.SetBool("ActivateMove", true);
+            }
+
         }
 
 
@@ -112,7 +116,10 @@ public class SC_UI_OngletSelection : MonoBehaviour, IF_clicableAction, IF_Hover
 
     public void HoverAction()
     {
-        IsHover();
+        if (SC_GameStates.Instance.CurState == SC_GameStates.GameState.Game)
+            IsHover();
+        else
+            IsHoverTuto();
     }
 
 
@@ -131,57 +138,37 @@ public class SC_UI_OngletSelection : MonoBehaviour, IF_clicableAction, IF_Hover
     {
         if (animator != null)
         {
-          
+            animator.SetBool("Hover", true);
+            StartCoroutine(EndCoroutine("Hover"));
+        }
+
+    } 
+    void IsHoverTuto()
+    {
+        if (animator != null)
+        {
+
+            if ((index == 0 || index == 3)&& SC_GameStates.Instance.CurTutoState == SC_GameStates.TutorialState.RepairDisplay)
+            {
                 animator.SetBool("Hover", true);
-               StartCoroutine(EndCoroutine("Hover"));
-            
-            //if (index == 0)
-            //{
-            //    animator.SetBool("HoverDisplay", true);
-            //    StartCoroutine(EndCoroutine("HoverDisplay"));
-            //}
-            //if (index == 1)
-            //{
-            //    animator.SetBool("HoverWeapon", true);
-            //    StartCoroutine(EndCoroutine("HoverWeapon"));
-            //}
-            //if (index == 2)
-            //{
-            //    animator.SetBool("HoverMove", true);
-            //    StartCoroutine(EndCoroutine("HoverMove"));
-            //}
+                StartCoroutine(EndCoroutine("Hover"));
+            }
+            if ((index == 1 || index == 4)&& SC_GameStates.Instance.CurTutoState == SC_GameStates.TutorialState.RepairWeapon)
+            {
+                animator.SetBool("Hover", true);
+                StartCoroutine(EndCoroutine("Hover"));
+            }
+            if ((index == 2 || index == 5)&& SC_GameStates.Instance.CurTutoState == SC_GameStates.TutorialState.RepairMotion)
+            {
+                animator.SetBool("Hover", true);
+                StartCoroutine(EndCoroutine("Hover"));
+            }
+         
 
         }
 
     }
  
-
-    void OnClicAnimation()
-    {
-       /*
-            animator.SetBool("Clic", true);
-            StartCoroutine(EndCoroutine("Clic"));*/
-        
-        //if (animator != null)
-        //{
-        //    if (index == 0)
-        //    {
-        //        animator.SetBool("ClicDisplay", true);
-        //        StartCoroutine(EndCoroutine("ClicDisplay"));
-        //    }
-        //    if (index == 1)
-        //    {
-        //        animator.SetBool("ClicWeapon", true);
-        //        StartCoroutine(EndCoroutine("ClicWeapon"));
-        //    }
-        //    if (index == 2)
-        //    {
-        //        animator.SetBool("ClicMove", true);
-        //        StartCoroutine(EndCoroutine("ClicMove"));
-        //    }
-
-        //}
-    }
 
     IEnumerator EndCoroutine(string Bool)
     {

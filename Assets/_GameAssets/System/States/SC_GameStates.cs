@@ -14,7 +14,7 @@ public class SC_GameStates : NetworkBehaviour
     #endregion
 
     public enum GameState {Lobby, Tutorial, Tutorial2, Game, GameEnd }
-    public enum TutorialState { Tutorial1_1, Tutorial1_2, Tutorial1_3, Tutorial1_4, Tutorial1_5, Tutorial1_6, Tutorial1_7, Tutorial1_8, Tutorial1_9, Tutorial1_10, Tutorial1_11, Tutorial2_1, Tutorial2_2, Tutorial2_3, Tutorial2_4, Tutorial2_5, TutorialEnd}
+    public enum TutorialState { Tutorial1_1, StartTutorial, RepairDisplay, RepairWeapon, RepairMotion, Reboot, Tutorial1_4, Tutorial1_5, Tutorial1_6, Tutorial1_7, Tutorial1_8, Tutorial1_9, Tutorial1_10, Tutorial1_11, Tutorial2_1, Tutorial2_2, Tutorial2_3, Tutorial2_4, Tutorial2_5, TutorialEnd}
     public GameState CurState;
     public TutorialState CurTutoState;
     public bool Disp = false;
@@ -86,7 +86,7 @@ public class SC_GameStates : NetworkBehaviour
 
             case GameState.Tutorial:
                 //Descendre le Bouton Reboot au tuto
-                ChangeTutoGameState(TutorialState.Tutorial1_2);
+                ChangeTutoGameState(TutorialState.StartTutorial);
 
                 break;
 
@@ -128,18 +128,7 @@ public class SC_GameStates : NetworkBehaviour
         
         switch (TargetTutoState)
         {
-            case TutorialState.Tutorial1_1:
-                if(!isServer)
-                {
-                    SC_instruct_op_manager.Instance.Activate(6);
-                    SC_instruct_op_manager.Instance.Deactivate(0);
-                    SC_instruct_op_manager.Instance.Deactivate(2);
-                }
-                 
-
-                break;
-
-            case TutorialState.Tutorial1_2:
+            case TutorialState.StartTutorial:
                 if (isServer)
                 {
                     SC_main_breakdown_validation.Instance.isValidated = false;
@@ -148,33 +137,60 @@ public class SC_GameStates : NetworkBehaviour
                 }
                 if(!isServer)
                 {
-                    SC_instruct_op_manager.Instance.Deactivate(0);
-                    SC_instruct_op_manager.Instance.Deactivate(2);
-                    SC_instruct_op_manager.Instance.Deactivate(6);
+
+
                 }
-                StartCoroutine(Swichtuto(0.4f, TutorialState.Tutorial1_3));
+                StartCoroutine(Swichtuto(0.4f, TutorialState.RepairDisplay));
 
                 break;
 
-            case TutorialState.Tutorial1_3:
+            case TutorialState.RepairDisplay:
                 if(!isServer)
                 {
-                    SC_instruct_op_manager.Instance.Deactivate(0);
-                    SC_instruct_op_manager.Instance.Deactivate(2);
-                    SC_instruct_op_manager.Instance.Activate(7);
-                    SC_instruct_op_manager.Instance.Activate(8);
+                    Debug.Log("RepairDisplay");
+                    //Debut Display
+
+
                 }
+                break;
 
+            case TutorialState.RepairWeapon:
+                if(!isServer)
+                {
+                    Debug.Log("RepairWeapon");
+                    //Fin Display
 
+                    //Debut Weapon
+                }
+                break;
+            
+            case TutorialState.RepairMotion:
+                if(!isServer)
+                {
+                    Debug.Log("RepairMotion");
+                    //Fin Weapon
+
+                    //Debut Motion
+
+                }
+                break;    
+            
+            case TutorialState.Reboot:
+                if(!isServer)
+                {
+                    Debug.Log("RepairMotion");
+                    //Fin Motion
+
+                    //Debut Reboot
+
+                }
                 break;     
 
             case TutorialState.Tutorial1_4:
                 if (!isServer)
                 {
-                    Disp = true;
-                    SC_instruct_op_manager.Instance.Deactivate(7);
-                    SC_instruct_op_manager.Instance.Deactivate(8);
-                    SC_instruct_op_manager.Instance.Activate(9);
+                    
+                    Debug.Log("Tutorial1_4");
                 }
                 break;
 
@@ -182,20 +198,16 @@ public class SC_GameStates : NetworkBehaviour
 
                 if (!isServer)
                 {
-                    Weap = true;
-                    SC_instruct_op_manager.Instance.Deactivate(7);
-                    SC_instruct_op_manager.Instance.Deactivate(8);
-                    SC_instruct_op_manager.Instance.Activate(10);
+                    Debug.Log("Tutorial1_5");
+
                 }
                 break;
 
             case TutorialState.Tutorial1_6:
                 if (!isServer)
                 {
-                    Mov = true;
-                    SC_instruct_op_manager.Instance.Deactivate(7);
-                    SC_instruct_op_manager.Instance.Deactivate(8);
-                    SC_instruct_op_manager.Instance.Activate(11);
+                    Debug.Log("Tutorial1_6");
+
                 }
 
                 break;
@@ -203,15 +215,7 @@ public class SC_GameStates : NetworkBehaviour
             case TutorialState.Tutorial1_7:
                 if (!isServer)
                 {
-                    SC_instruct_op_manager.Instance.Deactivate(9);
-                    SC_instruct_op_manager.Instance.Deactivate(10);
-                    SC_instruct_op_manager.Instance.Deactivate(11);
-                    if(Disp == true)
-                        SC_instruct_op_manager.Instance.Activate(12);
-                    if(Weap == true)
-                        SC_instruct_op_manager.Instance.Activate(15);
-                    if(Mov == true)
-                        SC_instruct_op_manager.Instance.Activate(16);
+                    Debug.Log("Tutorial1_7");
                 }
 
                     break;
@@ -220,12 +224,8 @@ public class SC_GameStates : NetworkBehaviour
 
                 if(!isServer)
                 {
-                    Disp = false;
-                    Weap = false;
-                    Mov = false;
-                    SC_instruct_op_manager.Instance.Deactivate(12);  
-                    SC_instruct_op_manager.Instance.Deactivate(15);  
-                    SC_instruct_op_manager.Instance.Deactivate(16);  
+                    Debug.Log("Tutorial1_8");
+
                 }
 
                 break;
@@ -234,7 +234,7 @@ public class SC_GameStates : NetworkBehaviour
 
                 if (!isServer)
                 {
-                    SC_instruct_op_manager.Instance.Activate(13);
+                    Debug.Log("Tutorial1_9");
                     
                 }
                 StartCoroutine(Swichtuto(0.8f, TutorialState.Tutorial1_10));
@@ -246,7 +246,8 @@ public class SC_GameStates : NetworkBehaviour
 
                 if (!isServer)
                 {
-                    SC_instruct_op_manager.Instance.Activate(14);
+                    Debug.Log("Tutorial1_10");
+
                 }
 
                 break;
@@ -267,9 +268,12 @@ public class SC_GameStates : NetworkBehaviour
 
                 break;
 
-            case TutorialState.Tutorial2_2:
-                SC_instruct_op_manager.Instance.Activate(2);
-                SC_instruct_op_manager.Instance.Deactivate(0);
+            case TutorialState.Tutorial2_2: 
+                if(!isServer)
+                {
+                    SC_instruct_op_manager.Instance.Activate(2);
+                    SC_instruct_op_manager.Instance.Deactivate(0);
+                }
 
                 break;
 

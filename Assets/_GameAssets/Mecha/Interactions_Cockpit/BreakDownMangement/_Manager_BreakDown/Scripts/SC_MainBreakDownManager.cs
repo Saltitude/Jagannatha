@@ -460,18 +460,19 @@ public class SC_MainBreakDownManager : MonoBehaviour, IF_BreakdownManager
 
     void SetTutoState()
     {
-        if (SC_GameStates.Instance.CurTutoState == SC_GameStates.TutorialState.Tutorial1_4 && SC_BreakdownDisplayManager.Instance.CurNbOfBreakdown == 0)
+        if (SC_GameStates.Instance.CurTutoState == SC_GameStates.TutorialState.RepairDisplay && SC_BreakdownDisplayManager.Instance.CurNbOfBreakdown == 0)
         {
-            SC_GameStates.Instance.ChangeTutoGameState(SC_GameStates.TutorialState.Tutorial1_7);
+            SC_GameStates.Instance.ChangeTutoGameState(SC_GameStates.TutorialState.RepairWeapon);
         }
 
-        else if (SC_GameStates.Instance.CurTutoState == SC_GameStates.TutorialState.Tutorial1_5 && SC_WeaponBreakdown.Instance.CurNbOfBreakdown == 0)
+        else if (SC_GameStates.Instance.CurTutoState == SC_GameStates.TutorialState.RepairWeapon && SC_WeaponBreakdown.Instance.CurNbOfBreakdown == 0)
         {
-            SC_GameStates.Instance.ChangeTutoGameState(SC_GameStates.TutorialState.Tutorial1_7);
+            SC_GameStates.Instance.ChangeTutoGameState(SC_GameStates.TutorialState.RepairMotion);
         }
 
-        else if (SC_GameStates.Instance.CurTutoState == SC_GameStates.TutorialState.Tutorial1_6 && SC_MovementBreakdown.Instance.n_InteractibleInBreakDown == 0)
+        else if (SC_GameStates.Instance.CurTutoState == SC_GameStates.TutorialState.RepairMotion && SC_MovementBreakdown.Instance.n_InteractibleInBreakDown == 0)
         {
+            //ICI ROMAIN 
             SC_GameStates.Instance.ChangeTutoGameState(SC_GameStates.TutorialState.Tutorial1_7);
         }
     }
