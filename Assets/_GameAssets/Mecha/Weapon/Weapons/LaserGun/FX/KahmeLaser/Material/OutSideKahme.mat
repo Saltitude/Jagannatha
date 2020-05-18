@@ -81,7 +81,7 @@ Material:
     - _DepthPower: 1
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
-    - _Emission: 1.48
+    - _Emission: 6
     - _Fresnel: 1
     - _FresnelEmission: 1
     - _GlossMapScale: 1

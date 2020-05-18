@@ -201,6 +201,7 @@ MonoBehaviour:
   frequency: 8
   n_BulletMagazine: 1
   speedW: 0
+  trig: 0
 --- !u!114 &2676181716841152618
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -295,6 +296,31 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalPosition.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3085659846932578892, guid: c10e83375715eeb4e95f77f947c50cc5,
+        type: 3}
+      propertyPath: m_RenderMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3440788542859393580, guid: c10e83375715eeb4e95f77f947c50cc5,
+        type: 3}
+      propertyPath: InitialModule.startSize.scalar
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5432117335814629620, guid: c10e83375715eeb4e95f77f947c50cc5,
+        type: 3}
+      propertyPath: InitialModule.startSize.scalar
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5432117335814629620, guid: c10e83375715eeb4e95f77f947c50cc5,
+        type: 3}
+      propertyPath: RotationModule.enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5432117335814629620, guid: c10e83375715eeb4e95f77f947c50cc5,
+        type: 3}
+      propertyPath: RotationModule.curve.scalar
+      value: 15.707963
       objectReference: {fileID: 0}
     - target: {fileID: 6637968395455256136, guid: c10e83375715eeb4e95f77f947c50cc5,
         type: 3}
