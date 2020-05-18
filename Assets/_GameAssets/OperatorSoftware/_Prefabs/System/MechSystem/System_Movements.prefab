@@ -844,6 +844,7 @@ MonoBehaviour:
   - {fileID: 789536965871063031}
   BarMaxLenght: 825
   BarValidLenght: 650
+  RatioFactor: 0.93
   ConstraintRange: 0
   DeadZone: 0
   AddMaxRange: 0
