@@ -210,14 +210,11 @@ public class SC_SyncVar_MovementSystem : NetworkBehaviour
 
             SC_Movement_MechState.Instance.UpdateVar();
 
-            //Debug.Log("UpdateOnClient b_SeqIsSync " + b_SeqIsSync);
-
             if (b_SeqIsSync)
-            {
-                //Debug.Log("UpdateOnClient b_SeqIsSync IN");
                 SC_ShowSequence_OP.Instance.DisplaySequence();
-            }
-                
+
+            if(b_SeqIsCorrect)
+                SC_ShowSequence_OP.Instance.HideSequence();
 
         }
             
