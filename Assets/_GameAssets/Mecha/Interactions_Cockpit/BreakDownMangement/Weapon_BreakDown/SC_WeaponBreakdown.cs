@@ -24,7 +24,7 @@ public class SC_WeaponBreakdown : MonoBehaviour, IF_BreakdownManager
     float curTimer;
     float offTime;
     float onTime;
-    bool bCanFire;
+    public bool bCanFire;
 
     public float f_EnergyValue;
 

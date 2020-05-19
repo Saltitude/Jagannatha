@@ -77,8 +77,46 @@ public class SC_UI_Cockpit_FrequenceLine : MonoBehaviour
         curFrequence = ratio(sc_syncvar.CalibrInts[1], 6, 0.33f, 0, 0.05f);
         curPhase = ratio(sc_syncvar.CalibrInts[2], 6, 20, 0, 0);
 
-        curColor.b = (byte)ratio(sc_syncvar.CalibrInts[2], 6, 255, 0, 0);
-        curColor.r = (byte)(255 - curColor.b);
+        //curColor.b = (byte)ratio(sc_syncvar.CalibrInts[2], 6, 255, 0, 0);
+        //curColor.r = (byte)(255 - curColor.b);
+
+        if(sc_syncvar.CalibrInts [2] == 1)
+        {
+            curColor.r = 255;
+            curColor.g = 199;
+            curColor.b = 64;
+        }
+        else if (sc_syncvar.CalibrInts [2] == 2)
+        {
+            curColor.r = 0;
+            curColor.g = 255;
+            curColor.b = 255;
+        }
+        else if (sc_syncvar.CalibrInts [2] == 3)
+        {
+            curColor.r = 91;
+            curColor.g = 192;
+            curColor.b = 0;
+        }
+        else if (sc_syncvar.CalibrInts [2] == 4)
+        {
+            curColor.r = 166;
+            curColor.g = 19;
+            curColor.b = 0;
+        }
+        else if (sc_syncvar.CalibrInts [2] == 5)
+        {
+            curColor.r = 166;
+            curColor.g = 0;
+            curColor.b = 152;
+        }
+        else
+        {
+            curColor.r = 56;
+            curColor.g = 0;
+            curColor.b = 166;
+        }
+
 
         line.positionCount = 300; //Configuration du nombre 
         for (int i = 0; i < line.positionCount; i++)

@@ -254,15 +254,15 @@ public class SC_Cord : MonoBehaviour
         switch (n_Index)
         {
 
-            case 0:
+            case 1:
                 SC_SyncVar_MovementSystem.Instance.CordLenght01 = f_CurDistance;
                 break;
 
-            case 1:
+            case 2:
                 SC_SyncVar_MovementSystem.Instance.CordLenght02 = f_CurDistance;
                 break;
 
-            case 2:
+            case 3:
                 SC_SyncVar_MovementSystem.Instance.CordLenght03 = f_CurDistance;
                 break;
 

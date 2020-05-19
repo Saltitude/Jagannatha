@@ -62,7 +62,7 @@ public class SC_BulletLaserGun : NetworkBehaviour
         {
 
             if (!mr.enabled)
-                mr.enabled = true;
+                mr.enabled = false;
 
             if (Mat.color != targetColor)
                 Mat.color = targetColor;
