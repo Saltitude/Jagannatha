@@ -85,6 +85,24 @@ public class SC_tourbilol : MonoBehaviour, IInteractible
 
         sendToSynchVar(normalizedAngle);
 
+        ///////////vibration pti crancrans
+        if (Mathf.Abs(Mathf.Abs(oldRot) - Mathf.Abs(curRot)) > 2)
+        {
+            //vibrate
+            _handle1_grabbable.Vibrate(10, 0.02f);
+            _handle2_grabbable.Vibrate(10, 0.02f);
+        }
+
+
+        // vibrate quand on atteint le bout
+
+        if (Mathf.Abs(normalizedAngle) == 1)
+        {
+            _handle1_grabbable.Vibrate(10, 2f);
+            _handle2_grabbable.Vibrate(10, 2f);
+        }
+
+
         oldRot = curRot;
 
         IsValueOk();
