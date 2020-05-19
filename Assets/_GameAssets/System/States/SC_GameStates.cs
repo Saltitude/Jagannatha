@@ -153,7 +153,7 @@ public class SC_GameStates : NetworkBehaviour
                     Debug.Log("RepairDisplay");
                     //Debut Display
                     SC_TutorialUIManager.Instance.ActivateSystem(SC_TutorialUIManager.System.Display,true);
-
+                    SC_TutorialUIManager.Instance.ActivateBlink(SC_TutorialUIManager.System.Display,true);
                 }
                 break;
 
@@ -162,9 +162,11 @@ public class SC_GameStates : NetworkBehaviour
                 {
                     Debug.Log("RepairWeapon");
                     //Fin Display
-                    //Stop display blink
+                    SC_TutorialUIManager.Instance.ActivateBlink(SC_TutorialUIManager.System.Display, false);
                     //Debut Weapon
                     SC_TutorialUIManager.Instance.ActivateSystem(SC_TutorialUIManager.System.Weapon, true);
+                    SC_TutorialUIManager.Instance.ActivateBlink(SC_TutorialUIManager.System.Weapon, true);
+
 
                 }
                 break;
@@ -174,19 +176,20 @@ public class SC_GameStates : NetworkBehaviour
                 {
                     Debug.Log("RepairMotion");
                     //Fin Weapon
-                    //Stop weapon blink
+                    SC_TutorialUIManager.Instance.ActivateBlink(SC_TutorialUIManager.System.Weapon, false);
+
                     //Debut Motion
                     SC_TutorialUIManager.Instance.ActivateSystem(SC_TutorialUIManager.System.Motion, true);
-
-
+                    SC_TutorialUIManager.Instance.ActivateBlink(SC_TutorialUIManager.System.Motion, true);
                 }
                 break;    
             
             case TutorialState.Reboot:
                 if(!isServer)
                 {
-                    Debug.Log("RepairMotion");
+                    Debug.Log("Reboot");
                     //Fin Motion
+                    SC_TutorialUIManager.Instance.ActivateBlink(SC_TutorialUIManager.System.Motion, false);
 
                     //Debut Reboot
 
@@ -264,6 +267,9 @@ public class SC_GameStates : NetworkBehaviour
 
                 if (!isServer)
                 {
+                    SC_TutorialUIManager.Instance.ActivateBlink(SC_TutorialUIManager.System.Display, false);
+                    SC_TutorialUIManager.Instance.ActivateBlink(SC_TutorialUIManager.System.Weapon, false);
+                    SC_TutorialUIManager.Instance.ActivateBlink(SC_TutorialUIManager.System.Motion, false);
 
                     SC_instruct_op_manager.Instance.Deactivate(1);
                     SC_instruct_op_manager.Instance.Deactivate(13);
@@ -283,7 +289,7 @@ public class SC_GameStates : NetworkBehaviour
                 }
 
                 break;
-
+                
             case TutorialState.Tutorial2_3:
 
 
