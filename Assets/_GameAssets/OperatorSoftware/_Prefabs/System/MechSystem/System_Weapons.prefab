@@ -949,7 +949,7 @@ MonoBehaviour:
   tab_TorbiBar:
   - {fileID: 1332028369162521027}
   - {fileID: 1569091901309148568}
-  f_MaxLenght: 0
+  f_MaxLenght: 400
 --- !u!1 &7721296558538596869
 GameObject:
   m_ObjectHideFlags: 0

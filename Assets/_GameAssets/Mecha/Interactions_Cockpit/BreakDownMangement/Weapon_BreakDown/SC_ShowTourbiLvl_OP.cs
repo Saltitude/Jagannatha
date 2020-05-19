@@ -32,13 +32,19 @@ public class SC_ShowTourbiLvl_OP : MonoBehaviour
             float TargetValue = SC_SyncVar_BreakdownWeapon.Instance.SL_Tourbilols[i].valueWanted;
             float CurrentValue = SC_SyncVar_BreakdownWeapon.Instance.SL_Tourbilols[i].value;
 
+            if (CurrentValue >= 0)
+            {
+                tab_TorbiBar[i].pivot = new Vector2(1, 0.5f);
+                tab_TorbiBar[i].localPosition = new Vector2(0, tab_TorbiBar[i].localPosition.y);
+            }       
+            else
+            {
+                tab_TorbiBar[i].pivot = new Vector2(0, 0.5f);
+                tab_TorbiBar[i].localPosition = new Vector2(0, tab_TorbiBar[i].localPosition.y);
+            }
+
             if (CurrentValue < 0)
                 CurrentValue *= -1;
-
-            if(TargetValue == 1)
-                tab_TorbiBar[i].rotation = Quaternion.Euler(0, 0, 180);
-            else
-                tab_TorbiBar[i].rotation = Quaternion.Euler(0, 0, 0);
 
             tab_TorbiBar[i].SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, CurrentValue * f_MaxLenght);
 
