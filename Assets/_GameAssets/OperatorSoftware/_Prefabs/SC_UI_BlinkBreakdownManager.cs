@@ -75,11 +75,14 @@ public class SC_UI_BlinkBreakdownManager : MonoBehaviour
 
     public void SetBreakdown(bool b)
     {
+       
         breakdown = b;
-        if(b == false)
+        if (b == false)
         {
             StartCoroutine(LerpOpacity());
         }
+        
+    
     }
 
     IEnumerator LerpOpacity()
