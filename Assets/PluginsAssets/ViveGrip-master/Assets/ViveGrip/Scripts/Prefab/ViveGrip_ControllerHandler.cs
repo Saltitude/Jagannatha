@@ -154,7 +154,7 @@ public class ViveGrip_ControllerHandler : MonoBehaviour {
     for(float i = 0; i < length; i += Time.deltaTime) {
       if (Device() != null) {
         ushort vibration = (ushort)Mathf.Lerp(0, MAX_VIBRATION_STRENGTH, strength);
-        Device().TriggerHapticPulse(3999);
+        Device().TriggerHapticPulse(vibration);
       }
       yield return null;
     }
