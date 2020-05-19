@@ -85,8 +85,6 @@ public class SC_CordViewver : MonoBehaviour
     public void ComputeRatio()
     {
 
-        //CordRatio01 = (SC_SyncVar_MovementSystem.Instance.CordLenght01 - (ConstraintRange / 3) ) / DeadZone + 2 * (ConstraintRange / 3);
-        //CordRatio01 = SC_SyncVar_MovementSystem.Instance.CordLenght01 / (DeadZone + ConstraintRange);
         CordRatio01 = (SC_SyncVar_MovementSystem.Instance.CordLenght01 - (ConstraintRange * RatioFactor)) / (DeadZone + ConstraintRange - (ConstraintRange * RatioFactor));
         CordRatio02 = (SC_SyncVar_MovementSystem.Instance.CordLenght02 - (ConstraintRange * RatioFactor)) / (DeadZone + ConstraintRange - (ConstraintRange * RatioFactor));
         CordRatio03 = (SC_SyncVar_MovementSystem.Instance.CordLenght03 - (ConstraintRange * RatioFactor)) / (DeadZone + ConstraintRange - (ConstraintRange * RatioFactor));
