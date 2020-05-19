@@ -141,12 +141,6 @@ public class ViveGrip_ControllerHandler : MonoBehaviour {
   public void Vibrate(int milliseconds, float strength) {
     float seconds = milliseconds / 1000f;
 
-        if (!Application.isEditor)
-        {
-            strength *= 100;
-        }
-
-
         StartCoroutine(LongVibration(seconds, strength));
   }
 
