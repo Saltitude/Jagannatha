@@ -182,64 +182,114 @@ public class SC_Movement_MechState : MonoBehaviour
 
     void updateBrokenDirection()
     {
+        int nbBreakdown = SC_SyncVar_MovementSystem.Instance.n_BreakDownLvl;
 
-        if(SC_SyncVar_MovementSystem.Instance.CurBrokenDir == SC_JoystickMove.Dir.Left)
+        if (nbBreakdown != 0)
         {
-
-            dirLeft.b_IsBreak = true;
-            dirRight.b_IsBreak = false;
-
-            int nbBreakdown = SC_SyncVar_MovementSystem.Instance.n_BreakDownLvl;
-
-            if(nbBreakdown !=0)
+            if(SC_SyncVar_MovementSystem.Instance.CurBrokenDir == SC_JoystickMove.Dir.Left)
             {
                 for (int i = 0; i < nbBreakdown; i++)
                 {
                     arcL[i].color = breakdownColor;
                 }
-            }
-
-            else
+                for (int i = 0; i < arcR.Length; i++)
+                {
+                    arcR[i].color = validColor;
+                }
+            } 
+            if(SC_SyncVar_MovementSystem.Instance.CurBrokenDir == SC_JoystickMove.Dir.Right)
             {
+                for (int i = 0; i < nbBreakdown; i++)
+                {
+                    arcR[i].color = breakdownColor;
+                }
                 for (int i = 0; i < arcL.Length; i++)
                 {
                     arcL[i].color = validColor;
                 }
             }
 
-        }
-
-        else if (SC_SyncVar_MovementSystem.Instance.CurBrokenDir == SC_JoystickMove.Dir.Right)
-        {
-
-            dirLeft.b_IsBreak = false;
-            dirRight.b_IsBreak = true;
-
-            int nbBreakdown = SC_SyncVar_MovementSystem.Instance.n_BreakDownLvl;
-
-            if (nbBreakdown != 0)
+            if (SC_SyncVar_MovementSystem.Instance.b_BreakEngine)
             {
-                Debug.Log("Panne");
-                for (int i = 0; i < nbBreakdown; i++)
+                for (int i = 0; i < arcR.Length; i++)
                 {
                     arcR[i].color = breakdownColor;
                 }
-            }
-
-            else
-            {
-                
                 for (int i = 0; i < arcL.Length; i++)
                 {
-                    arcR[i].color = validColor;
+                    arcL[i].color = breakdownColor;
                 }
             }
 
-            dirLeft.b_IsBreak = true;
-            dirRight.b_IsBreak = false;
+        }
+        else
+        {
+            for (int i = 0; i < arcR.Length; i++)
+            {
+                arcR[i].color = validColor;
+            }
 
+            for (int i = 0; i < arcL.Length; i++)
+            {
+                arcL[i].color = validColor;
+            }
         }
 
+
+        //if (SC_SyncVar_MovementSystem.Instance.CurBrokenDir == SC_JoystickMove.Dir.Left)
+        //{
+
+        //    dirLeft.b_IsBreak = true;
+        //    dirRight.b_IsBreak = false;
+
+        //    int nbBreakdown = SC_SyncVar_MovementSystem.Instance.n_BreakDownLvl;
+
+        //    if(nbBreakdown !=0)
+        //    {
+        //        for (int i = 0; i < nbBreakdown; i++)
+        //        {
+        //            arcL[i].color = breakdownColor;
+        //        }
+        //    }
+
+        //    else
+        //    {
+        //        for (int i = 0; i < arcL.Length; i++)
+        //        {
+        //            arcL[i].color = validColor;
+        //        }
+        //    }
+
+        //}
+
+        //if (SC_SyncVar_MovementSystem.Instance.CurBrokenDir == SC_JoystickMove.Dir.Right)
+        //{
+
+        //    dirLeft.b_IsBreak = false;
+        //    dirRight.b_IsBreak = true;
+
+        //    int nbBreakdown = SC_SyncVar_MovementSystem.Instance.n_BreakDownLvl;
+
+        //    if (nbBreakdown != 0)
+        //    {
+        //        for (int i = 0; i < nbBreakdown; i++)
+        //        {
+        //            arcR[i].color = breakdownColor;
+        //        }
+        //    }
+
+        //    else
+        //    {
+                
+        //        for (int i = 0; i < arcL.Length; i++)
+        //        {
+        //            arcR[i].color = validColor;
+        //        }
+        //    }
+
+
+        //}
+ 
     }
 
     #endregion Directions
