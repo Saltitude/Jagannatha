@@ -184,7 +184,7 @@ public class SC_MovementBreakdown : MonoBehaviour, IF_BreakdownManager
         SetBreakdownLvl(0);
         ResizeTab();
 
-        int rnd = Random.Range(0, 1);
+        int rnd = Random.Range(0, 2);
         if(rnd == 0)
             SC_JoystickMove.Instance.SetBrokenDir(SC_JoystickMove.Dir.Left);       
         else
