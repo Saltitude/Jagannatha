@@ -516,6 +516,7 @@ MonoBehaviour:
   - {fileID: 2100000, guid: 07ab7739dd19db04f8c0ce245bc8c939, type: 2}
   - {fileID: 2100000, guid: d3c1cf6f3bd731d419ca0b7f56c8739a, type: 2}
   - {fileID: 2100000, guid: 27bd4a9456b1fdb4c9f401ec238f6e90, type: 2}
+  - {fileID: 2100000, guid: e5f9c4c7b7e2cef4fa6bb9533ffcc2bd, type: 2}
   demarage: 1
   gameEnded: 0
   curNbPanne: 0

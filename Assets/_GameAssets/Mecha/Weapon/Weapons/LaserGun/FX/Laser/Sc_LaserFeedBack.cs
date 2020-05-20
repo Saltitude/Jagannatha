@@ -54,7 +54,7 @@ public class Sc_LaserFeedBack : MonoBehaviour
         if (SFX_LaserBeam != null)
         {
             SFX_LaserBeam.transform.position = new Vector3(Laser.transform.position.x, -1000, Laser.transform.position.z);
-         
+            //Debug.Log(SFX_LaserBeam.transform.position);
         }
     }
     public void EnableLaser(RaycastHit hit)
