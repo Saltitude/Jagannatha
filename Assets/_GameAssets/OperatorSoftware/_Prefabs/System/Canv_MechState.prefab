@@ -8492,6 +8492,11 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 85.4
       objectReference: {fileID: 0}
+    - target: {fileID: 218947171571136115, guid: 354e7da0ed981224aba3e6f763c70768,
+        type: 3}
+      propertyPath: breakdownColor.rgba
+      value: 4278205900
+      objectReference: {fileID: 0}
     - target: {fileID: 270757494193014570, guid: 354e7da0ed981224aba3e6f763c70768,
         type: 3}
       propertyPath: m_AnchorMin.y
@@ -8521,6 +8526,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_SizeDelta.y
       value: 51.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 609763404272297670, guid: 354e7da0ed981224aba3e6f763c70768,
+        type: 3}
+      propertyPath: breakdownColor.rgba
+      value: 4278205900
+      objectReference: {fileID: 0}
+    - target: {fileID: 617087895191666926, guid: 354e7da0ed981224aba3e6f763c70768,
+        type: 3}
+      propertyPath: breakdownColor.rgba
+      value: 4278205900
       objectReference: {fileID: 0}
     - target: {fileID: 835140933945678903, guid: 354e7da0ed981224aba3e6f763c70768,
         type: 3}
@@ -8556,6 +8571,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_SizeDelta.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 869235697192664123, guid: 354e7da0ed981224aba3e6f763c70768,
+        type: 3}
+      propertyPath: breakdownColor.rgba
+      value: 4278205900
+      objectReference: {fileID: 0}
+    - target: {fileID: 948830948266364227, guid: 354e7da0ed981224aba3e6f763c70768,
+        type: 3}
+      propertyPath: breakdownColor.rgba
+      value: 4278205900
       objectReference: {fileID: 0}
     - target: {fileID: 1171828864614439896, guid: 354e7da0ed981224aba3e6f763c70768,
         type: 3}
@@ -9017,6 +9042,21 @@ PrefabInstance:
       propertyPath: m_SizeDelta.y
       value: 51.6
       objectReference: {fileID: 0}
+    - target: {fileID: 3928360121721095307, guid: 354e7da0ed981224aba3e6f763c70768,
+        type: 3}
+      propertyPath: breakdownColor.rgba
+      value: 4278205900
+      objectReference: {fileID: 0}
+    - target: {fileID: 4022731897867191165, guid: 354e7da0ed981224aba3e6f763c70768,
+        type: 3}
+      propertyPath: breakdownColor.rgba
+      value: 4278205900
+      objectReference: {fileID: 0}
+    - target: {fileID: 4186739724997968035, guid: 354e7da0ed981224aba3e6f763c70768,
+        type: 3}
+      propertyPath: breakdownColor.rgba
+      value: 4278205900
+      objectReference: {fileID: 0}
     - target: {fileID: 4256532422410233939, guid: 354e7da0ed981224aba3e6f763c70768,
         type: 3}
       propertyPath: m_AnchorMin.y
@@ -9256,6 +9296,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_SizeDelta.y
       value: 51.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 5495004683201222011, guid: 354e7da0ed981224aba3e6f763c70768,
+        type: 3}
+      propertyPath: breakdownColor.rgba
+      value: 4278205900
       objectReference: {fileID: 0}
     - target: {fileID: 5669160153276077245, guid: 354e7da0ed981224aba3e6f763c70768,
         type: 3}
@@ -9577,6 +9622,16 @@ PrefabInstance:
       propertyPath: m_SizeDelta.y
       value: 51.6
       objectReference: {fileID: 0}
+    - target: {fileID: 7460755934848139039, guid: 354e7da0ed981224aba3e6f763c70768,
+        type: 3}
+      propertyPath: breakdownColor.rgba
+      value: 4278205900
+      objectReference: {fileID: 0}
+    - target: {fileID: 7629459323880835828, guid: 354e7da0ed981224aba3e6f763c70768,
+        type: 3}
+      propertyPath: breakdownColor.rgba
+      value: 4278205900
+      objectReference: {fileID: 0}
     - target: {fileID: 7808063969151263121, guid: 354e7da0ed981224aba3e6f763c70768,
         type: 3}
       propertyPath: m_AnchorMin.y
@@ -9641,6 +9696,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_SizeDelta.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8734097025442194881, guid: 354e7da0ed981224aba3e6f763c70768,
+        type: 3}
+      propertyPath: breakdownColor.rgba
+      value: 4278205900
       objectReference: {fileID: 0}
     - target: {fileID: 8764478670072848849, guid: 354e7da0ed981224aba3e6f763c70768,
         type: 3}

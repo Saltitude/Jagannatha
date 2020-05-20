@@ -6,7 +6,7 @@ public class SC_UI_Display_KoaManager : MonoBehaviour
 {
     [SerializeField]
     GameObject _koaPrefab; 
-    GameObject _koa;
+    public GameObject _koa;
 
     /// <summary>
     /// Current BoidSettings

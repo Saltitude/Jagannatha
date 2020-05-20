@@ -64,6 +64,18 @@ public class SC_UI_Display_Flock : MonoBehaviour
 
     bool isActive = false;
 
+    Animator mainAnim;
+    Animator emissiveAnim;
+
+    //Animation
+    bool deploy;
+    bool flight;
+    bool bullet;
+    bool laser;
+    float speedFactor;
+    bool chargeLaser;
+
+
     void Awake()
     {
         if (_instance != null && _instance != this)
@@ -89,6 +101,7 @@ public class SC_UI_Display_Flock : MonoBehaviour
     {
 
         FlockUpdate();
+
     }
 
     void InitializePoolAndComputeShader()
@@ -124,9 +137,11 @@ public class SC_UI_Display_Flock : MonoBehaviour
         _KoaManager = Instantiate(_KoaPrefab, transform);//Instantiate Koa
         _SCKoaManager = _KoaManager.GetComponent<SC_UI_Display_KoaManager>(); //Récupère le Koa manager du koa instancié
 
-        _SCKoaManager.Initialize(_mainGuide,nbBoid, baseBoidSettings);//Initialise le Koa | paramètre : Guide a suivre <> Nombre de Boids a spawn <> Comportement des boids voulu
 
-  
+        _SCKoaManager.Initialize(_mainGuide,nbBoid, baseBoidSettings);//Initialise le Koa | paramètre : Guide a suivre <> Nombre de Boids a spawn <> Comportement des boids voulu
+        mainAnim = _KoaManager.GetComponent<SC_UI_Display_KoaManager>()._koa.transform.GetChild(0).GetComponent<Animator>();
+        emissiveAnim = mainAnim.transform.GetChild(0).GetComponent<Animator>();
+
         bezierWalkerSpeed = GetComponent<BezierSolution.BezierWalkerWithSpeed>();
         bezierWalkerSpeed.SetNewSpline(splineLine);
 
@@ -295,6 +310,12 @@ public class SC_UI_Display_Flock : MonoBehaviour
 
     }
 
+    public void SetAnimationBool(bool deploy, bool flight, bool bullet, bool laser, float speedFactor, bool chargeLaser)
+    {
+ 
+        this.deploy = deploy;this.flight = flight;this.bullet = bullet;this.laser = laser;this.speedFactor = speedFactor;this.chargeLaser = chargeLaser;
+    }
+
     void FlockUpdate()
     {
         if (isActive && _curBoidSetting != null)
@@ -305,6 +326,18 @@ public class SC_UI_Display_Flock : MonoBehaviour
             bezierWalkerSpeed.Execute(Time.deltaTime);
 
             transform.Rotate(new Vector3(_curBoidSetting.axisRotationSpeed.x, _curBoidSetting.axisRotationSpeed.y, _curBoidSetting.axisRotationSpeed.z));
+          
+            mainAnim.SetBool("Deploy", deploy);
+            mainAnim.SetBool("Flight", flight);
+            mainAnim.SetBool("Bullet", bullet);
+            mainAnim.SetBool("Laser", laser);
+            mainAnim.SetFloat("SpeedFactor", speedFactor);
+            emissiveAnim.SetBool("Deploy", deploy);
+            emissiveAnim.SetBool("Flight", flight);
+            emissiveAnim.SetBool("Bullet", bullet);
+            emissiveAnim.SetBool("Laser", laser);
+            emissiveAnim.SetFloat("SpeedFactor", speedFactor);
+            emissiveAnim.SetBool("LaserCharge", chargeLaser);
         }
     }
     public void StartNewBehavior(BoidSettings newSettings)

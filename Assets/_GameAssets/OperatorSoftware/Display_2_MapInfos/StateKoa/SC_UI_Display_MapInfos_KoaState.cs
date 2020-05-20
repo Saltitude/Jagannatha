@@ -39,13 +39,16 @@ public class SC_UI_Display_MapInfos_KoaState : MonoBehaviour
     //[SerializeField]
     //Text optiWeapon;
 
+
+    string[] StringState = { "Spawning", "Roaming", "Attacking", "Death", "Fleeing", "Absorbing" };
     enum KoaState
     {
-        Spawn = 0,
+        Spawning = 0,
         Roam = 1,
         AttackPlayer = 2,
         Death = 3,
-        Reaction = 4
+        Flight = 4,
+        Absorbtion = 5
     }
 
     KoaState curState;
@@ -89,7 +92,7 @@ public class SC_UI_Display_MapInfos_KoaState : MonoBehaviour
         curKoaScriptKoaSettings = newSettings;
         koaSensibility = new Vector3(curKoaScriptKoaSettings.GetSensibility().x, curKoaScriptKoaSettings.GetSensibility().y, curKoaScriptKoaSettings.GetSensibility().z);
         boidSettings = fixedData.GetBoidSettings(curKoaScriptKoaSettings.GetBoidSettingsIndex());
-       activated = true;
+        activated = true;
     }
 
     void GetReferences()
@@ -117,15 +120,15 @@ public class SC_UI_Display_MapInfos_KoaState : MonoBehaviour
             if (activated)
             {
                 curfKoaLife = fKoaLife;
+
                 //_triangle.b_Init = true;
-                
 
                 //sensi[0].text = (koaSensibility.x + 1).ToString();
                 //sensi[1].text = (koaSensibility.y + 1).ToString();
                 //sensi[2].text = (koaSensibility.z + 1).ToString();
 
-                _triangle.amplitudeValue = (koaSensibility.x + 1);
-                _triangle.frequenceValue = (koaSensibility.y + 1);
+                _triangle.amplitudeValue = (koaSensibility.y + 1);
+                _triangle.frequenceValue = (koaSensibility.x + 1);
                 _triangle.phaseValue = (koaSensibility.z + 1);
                 
 
@@ -140,8 +143,8 @@ public class SC_UI_Display_MapInfos_KoaState : MonoBehaviour
 
                 displayOptiBar();
                 type.text = "Type " + curKoaScriptKoaSettings.GetKoaID().ToString();
-                curState = (KoaState) curKoaScriptKoaSettings.GetKoaState();
-                koaStateTxt.text = curState.ToString().ToUpper();
+                koaStateTxt.text = StringState[curKoaScriptKoaSettings.GetKoaState()].ToUpper();
+                //koaStateTxt.text = curState.ToString().ToUpper();
 
                 if (curfKoaLife != fKoaLife)
                 {
@@ -157,6 +160,8 @@ public class SC_UI_Display_MapInfos_KoaState : MonoBehaviour
                     boidSettings = newBoidsettings;
                     SC_UI_Display_Flock.Instance.StartNewBehavior(boidSettings);
                 }
+
+                SC_UI_Display_Flock.Instance.SetAnimationBool(curKoaScriptKoaSettings.GetDeploy(), curKoaScriptKoaSettings.GetFlight(), curKoaScriptKoaSettings.GetBullet(), curKoaScriptKoaSettings.GetLaser(), curKoaScriptKoaSettings.GetSpeedFactor(), curKoaScriptKoaSettings.GetChargeLaser());
                 
             }
             else

@@ -461,8 +461,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b40a1d2365dceb14c9b2842ca11afece, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  normalizedAngle: 0
   index: 0
   isEnPanne: 0
+  desiredValue: 0
+  maxAngleBorne: 360
+  _handle1_grabbable: {fileID: 0}
+  _handle2_grabbable: {fileID: 0}
+  margeSimpson: 30
   type: 0
 --- !u!1 &2081596574453264873
 GameObject:
@@ -1030,8 +1036,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b40a1d2365dceb14c9b2842ca11afece, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  normalizedAngle: 0
   index: 1
   isEnPanne: 0
+  desiredValue: 0
+  maxAngleBorne: 1440
+  _handle1_grabbable: {fileID: 6459488616961077677}
+  _handle2_grabbable: {fileID: 5890634116334897683}
+  margeSimpson: 30
   type: 1
 --- !u!1 &6255736826803046409
 GameObject:
@@ -1325,8 +1337,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b40a1d2365dceb14c9b2842ca11afece, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  normalizedAngle: 0
   index: 0
   isEnPanne: 0
+  desiredValue: 0
+  maxAngleBorne: 1440
+  _handle1_grabbable: {fileID: 347186732017380805}
+  _handle2_grabbable: {fileID: 1932042597067745588}
+  margeSimpson: 30
   type: 0
 --- !u!1 &8858476223337815235
 GameObject:

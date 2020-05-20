@@ -11,9 +11,12 @@ public class SC_WeaponManager : MonoBehaviour, IF_BreakdownSystem
 
     #endregion
 
+    [Header("Infos")]
+    [SerializeField]
     bool b_InBreakdown = false;
-    bool b_BreakEngine = false;
-
+    [SerializeField]
+    public bool b_BreakEngine = false;
+    [SerializeField]
     bool b_OnFire = false;
 
     bool b_AlreadyCheck = false;
@@ -68,10 +71,10 @@ public class SC_WeaponManager : MonoBehaviour, IF_BreakdownSystem
     void Update()
     {
 
-        if ((Input.GetKey(KeyCode.Space) || Input.GetAxis("Fire1") > 0) && !b_BreakEngine)
+        if (((Input.GetKey(KeyCode.Space) || Input.GetAxis("Fire1") > 0)) && !b_BreakEngine)
             Fire();
 
-        if ((Input.GetKeyUp(KeyCode.Space) || Input.GetAxis("Fire1") == 0 ) && b_OnFire && !b_BreakEngine)
+        if (((Input.GetKeyUp(KeyCode.Space) || Input.GetAxis("Fire1") == 0 )) && b_OnFire)
             StopFire();
 
     }

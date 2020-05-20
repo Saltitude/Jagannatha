@@ -162,7 +162,8 @@ public class SC_MovementBreakdown : MonoBehaviour, IF_BreakdownManager
             SetMaxBreakdown(true);
 
         //Normal Breakdown
-        if (!SC_MainBreakDownManager.Instance.b_BreakEngine && n_BreakDownLvl > 0 && b_SeqIsCorrect )
+        //if (!SC_MainBreakDownManager.Instance.b_BreakEngine && n_BreakDownLvl > 0 && b_SeqIsCorrect )
+        if (n_BreakDownLvl > 0 && b_SeqIsCorrect )
             EndBreakdown();
 
         else
@@ -183,7 +184,7 @@ public class SC_MovementBreakdown : MonoBehaviour, IF_BreakdownManager
         SetBreakdownLvl(0);
         ResizeTab();
 
-        int rnd = Random.Range(0, 1);
+        int rnd = Random.Range(0, 2);
         if(rnd == 0)
             SC_JoystickMove.Instance.SetBrokenDir(SC_JoystickMove.Dir.Left);       
         else
@@ -315,6 +316,12 @@ public class SC_MovementBreakdown : MonoBehaviour, IF_BreakdownManager
         SyncCurPilotSeqLenght();
         SyncSystemState();
         SendSequences();
+
+        for (int j = 0; j < interactible.Length; j++)
+        {
+            interactible[j].GetComponent<IInteractible>().ForceSync();
+        }
+
     }
 
 }

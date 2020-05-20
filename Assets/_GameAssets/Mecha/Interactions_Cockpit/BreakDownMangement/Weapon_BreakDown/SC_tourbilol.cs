@@ -13,11 +13,32 @@ public class SC_tourbilol : MonoBehaviour, IInteractible
 
     float totalAngle = 0;
 
+    // valeur de rotation normalisée entre -1 et 1
+    [SerializeField]
+    float normalizedAngle = 0f;
+
     public int index = 0;
 
+    [SerializeField]
     public bool isEnPanne = false;
 
+    [SerializeField]
     private float desiredValue = 0f;
+
+    //angle total dans un sens et dans l'autre requis par le joueur pour atteindre les bornes
+    [SerializeField]
+    int maxAngleBorne = 360;
+
+
+    [SerializeField]
+    ViveGrip_Grabbable _handle1_grabbable;
+
+    [SerializeField]
+    ViveGrip_Grabbable _handle2_grabbable;
+
+    //marge pour le total angle => si le joueur dépasse la valeur affichable, celle-ci est toujours prise en compte, cela veut dire qu'il devra effectuer margeSimpson dans l'autre sens avant de la voir evoluer à nouveau
+    [SerializeField]
+    float margeSimpson = 30f;
 
     enum tourbiType { tourbiFirst, tourbiSecond }
 
@@ -28,10 +49,11 @@ public class SC_tourbilol : MonoBehaviour, IInteractible
     {
         f_InitRot = this.transform.localEulerAngles.z;
         oldRot = f_InitRot;
+
         sc_syncvar = SC_SyncVar_BreakdownWeapon.Instance;
     }
 
-    //Il faut faire 1/4 de tour de valve pour changer d'un cran la valeur signifiante
+    //Ici on update la rotation du tourbilol 
     void Update()
     {
 
@@ -43,6 +65,7 @@ public class SC_tourbilol : MonoBehaviour, IInteractible
         
     }
     
+    //met à jour le total angle et le normalize avant de l'envoyer dans la sync var et faire un test de panne
     void UpdateAngle()
     {
 
@@ -51,29 +74,57 @@ public class SC_tourbilol : MonoBehaviour, IInteractible
         if (Mathf.Abs(oldRot - curRot) < 260)
             totalAngle += oldRot - curRot;
 
-        //si on veut limiter à un tour           
-        if (totalAngle < -360)
-            totalAngle = 359;
 
-        else if (totalAngle > 360)
-            totalAngle = -360;
+        //sécurité pour que le joueur ne s'enfonce pas dans les meandres
+        if (totalAngle > maxAngleBorne + margeSimpson)
+            totalAngle = maxAngleBorne + margeSimpson;
+        else if (totalAngle <- (maxAngleBorne + margeSimpson))
+            totalAngle = -(maxAngleBorne + margeSimpson);
 
-        //FORMATAGE ET ENVOIE COTE OP
-        //Ici on crante par 90°
-        if (oldRot != curRot)
+        normalizedAngle = NormalizeAngle(totalAngle);
+
+        sendToSynchVar(normalizedAngle);
+
+        ///////////vibration pti crancrans
+        if (Mathf.Abs(Mathf.Abs(oldRot) - Mathf.Abs(curRot)) > 2)
         {
-            sendToSynchVar(Mathf.Floor(totalAngle / 90));
-            IsValueOk();
+            //vibrate
+            _handle1_grabbable.Vibrate(10, 0.02f);
+            _handle2_grabbable.Vibrate(10, 0.02f);
         }
+
+
+        // vibrate quand on atteint le bout
+
+        if (Mathf.Abs(normalizedAngle) == 1)
+        {
+            _handle1_grabbable.Vibrate(10, 2f);
+            _handle2_grabbable.Vibrate(10, 2f);
+        }
+
 
         oldRot = curRot;
 
-    }//0.06859592 // 0.1714907 // 0.1611188
+        IsValueOk();
+
+    }
+
+    //clamp l'angle d'après l'angle max et normalise l'angle total entre -1 et 1
+    private float NormalizeAngle(float _angle)
+    {
+        float _normalizedAngle = 0;
+
+        _normalizedAngle = Ratio(Mathf.Clamp(_angle, -maxAngleBorne, maxAngleBorne), maxAngleBorne, 1, -maxAngleBorne, -1);
+
+
+        return _normalizedAngle;
+    }
+
 
     public void IsValueOk()
     {
 
-        if (/*Mathf.Abs(totalAngle - desiredValue) < 89*/ Mathf.Floor(totalAngle / 90) == Mathf.Floor(desiredValue / 90))
+        if (normalizedAngle == desiredValue)
         {
 
             if (isEnPanne)
@@ -100,80 +151,27 @@ public class SC_tourbilol : MonoBehaviour, IInteractible
     public void ChangeDesired()
     {
 
-        // pour l'instant je pars sur 2 tours pour obtenir la totalité des positions possibles avec un changement d'état tous les 90°
+        // on remet à zero la position de départ
+        totalAngle = 0;
+        normalizedAngle = 0;
+        sendToSynchVar(0);
 
-        bool good = false;
+        //rand pour décider du côté
+        int rand = Random.Range(0, 2);
 
-        int count = 0;
-        while (good == false)
-        {
+        if (rand == 0)
+            desiredValue = 1;
+        else
+            desiredValue = -1;
 
-            if(type == tourbiType.tourbiFirst)
-            {
-                int rand = Random.Range(0,2);
-
-                if (rand == 0)
-                    desiredValue = 3 * 90;
-
-                else
-                    desiredValue = -90;
-
-            }
-
-            else if (type == tourbiType.tourbiSecond)
-            {
-
-                int rand = Random.Range(0, 3);
-
-                switch(rand)
-                {
-
-                    case 0:
-
-                        desiredValue = -4 * 90;
-
-                        break;
-
-                    case 1:
-
-                        desiredValue = -2 * 90;
-
-                        break;
-
-                    case 2:
-
-                        desiredValue = 1 * 90;
-
-                        break;
-
-                }
-
-            }
-
-            else
-            {
-                desiredValue = Random.Range(-4, 3) * 90;
-            }
-                
-            if (Mathf.Abs(desiredValue - totalAngle) > 90 )
-            {
-                good = true;
-            }
-
-            count++;
-
-            if (count > 10)
-            {
-                Debug.LogError("La boucle elle est FUCKEE");
-                break;              
-            }
-
-        }
 
         SetIsEnPanne(true);
 
-        sc_syncvar.TourbilolChangeValueWanted(index, desiredValue/90);
+        sc_syncvar.TourbilolChangeValueWanted(index, desiredValue);
         sc_syncvar.TourbilolChangeIsPanne(index, true);
+
+
+
 
     }
 
@@ -187,11 +185,11 @@ public class SC_tourbilol : MonoBehaviour, IInteractible
     public void Repair()
     {
 
-        desiredValue = totalAngle;
+        desiredValue = normalizedAngle;
 
         SetIsEnPanne(false);
 
-        sc_syncvar.TourbilolChangeValueWanted(index, Mathf.Floor(desiredValue / 90));
+        sc_syncvar.TourbilolChangeValueWanted(index, normalizedAngle);
         sc_syncvar.TourbilolChangeIsPanne(index, false);
 
     }
@@ -215,11 +213,23 @@ public class SC_tourbilol : MonoBehaviour, IInteractible
     {
         if (index == 0)
         {
-            Debug.Log("total : " + totalAngle);
+            Debug.Log("total : " + normalizedAngle);
             Debug.Log("desired : " + desiredValue);
         }
     }
 
     #endregion DebugMethods
+
+    public void ForceSync()
+    {
+        sendToSynchVar(normalizedAngle);
+    }
+
+    float Ratio(float inputValue, float inputMax, float outputMax, float inputMin = 0.0f, float outputMin = 0.0f)
+    {
+        float product = (inputValue - inputMin) / (inputMax - inputMin);
+        float output = ((outputMax - outputMin) * product) + outputMin;
+        return output;
+    }
 
 }

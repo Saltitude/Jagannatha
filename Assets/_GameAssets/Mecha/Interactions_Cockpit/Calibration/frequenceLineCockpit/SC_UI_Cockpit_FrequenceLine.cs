@@ -26,6 +26,13 @@ public class SC_UI_Cockpit_FrequenceLine : MonoBehaviour
     int speed = 1;
 
     public Color32 curColor;
+    public Color32 Color1;
+    public Color32 Color2;
+    public Color32 Color3;
+    public Color32 Color4;
+    public Color32 Color5;
+    public Color32 Color6;
+
     Renderer lineRenderer;
 
 
@@ -77,8 +84,46 @@ public class SC_UI_Cockpit_FrequenceLine : MonoBehaviour
         curFrequence = ratio(sc_syncvar.CalibrInts[1], 6, 0.33f, 0, 0.05f);
         curPhase = ratio(sc_syncvar.CalibrInts[2], 6, 20, 0, 0);
 
-        curColor.b = (byte)ratio(sc_syncvar.CalibrInts[2], 6, 255, 0, 0);
-        curColor.r = (byte)(255 - curColor.b);
+        //curColor.b = (byte)ratio(sc_syncvar.CalibrInts[2], 6, 255, 0, 0);
+        //curColor.r = (byte)(255 - curColor.b);
+
+        if(sc_syncvar.CalibrInts [2] == 1)
+        {
+            curColor.r = Color1.r;
+            curColor.g = Color1.g;
+            curColor.b = Color1.b;
+        }
+        else if (sc_syncvar.CalibrInts [2] == 2)
+        {
+            curColor.r = Color2.r;
+            curColor.g = Color2.g;
+            curColor.b = Color2.b;
+        }
+        else if (sc_syncvar.CalibrInts [2] == 3)
+        {
+            curColor.r = Color3.r;
+            curColor.g = Color3.g;
+            curColor.b = Color3.b;
+        }
+        else if (sc_syncvar.CalibrInts [2] == 4)
+        {
+            curColor.r = Color4.r;
+            curColor.g = Color4.g;
+            curColor.b = Color4.b;
+        }
+        else if (sc_syncvar.CalibrInts [2] == 5)
+        {
+            curColor.r = Color5.r;
+            curColor.g = Color5.g;
+            curColor.b = Color5.b;
+        }
+        else
+        {
+            curColor.r = Color6.r;
+            curColor.g = Color6.g;
+            curColor.b = Color6.b;
+        }
+
 
         line.positionCount = 300; //Configuration du nombre 
         for (int i = 0; i < line.positionCount; i++)

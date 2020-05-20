@@ -34,6 +34,8 @@ public class Sc_LaserFeedBack : MonoBehaviour
     public ParticleSystem.MainModule OndesPS;
     public ParticleSystem.MainModule ElicePS;
     public ParticleSystem.MainModule EliceDarkPS;
+    [SerializeField]
+    Animator Kahme;
 
     void Awake()
     {
@@ -47,6 +49,14 @@ public class Sc_LaserFeedBack : MonoBehaviour
         }
     }
 
+    private void Update()
+    {
+        if (SFX_LaserBeam != null)
+        {
+            SFX_LaserBeam.transform.position = new Vector3(Laser.transform.position.x, -1000, Laser.transform.position.z);
+            Debug.Log(SFX_LaserBeam.transform.position);
+        }
+    }
     public void EnableLaser(RaycastHit hit)
     {
         if (SoundSourceNumb == 0)
@@ -55,7 +65,7 @@ public class Sc_LaserFeedBack : MonoBehaviour
             SoundSourceNumb += 1;
         }
 
-        GetComponentInChildren<Animator>().SetBool("IsFire", true);
+        Kahme.SetBool("IsFire", true);
     }
 
     public void DiseableLaser()
@@ -65,12 +75,12 @@ public class Sc_LaserFeedBack : MonoBehaviour
             SFX_LaserBeam.GetComponent<AudioSource>().Stop();
             SoundSourceNumb = 0;
         }
-        GetComponentInChildren<Animator>().SetBool("IsFire", false);
+        Kahme.SetBool("IsFire", false);
     }
 
     public void SetLaserSize(int value)
     {
-        GetComponentInChildren<Animator>().SetInteger("CalibValue",value);
+        Kahme.SetInteger("CalibValue",value);
     }
 
     public void SetColor(Color32 NewColor)

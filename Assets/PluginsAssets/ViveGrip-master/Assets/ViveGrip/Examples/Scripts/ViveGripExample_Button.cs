@@ -5,8 +5,10 @@ public class ViveGripExample_Button : MonoBehaviour {
   private const float SPEED = 0.1f;
   private float distance;
   private int direction = 1;
+    [SerializeField]
   private int VIBRATION_DURATION_IN_MILLISECONDS = 25;
-  private float VIBRATION_STRENGTH = 0.4f;
+    [SerializeField]
+private float VIBRATION_STRENGTH = 2f;
 
   void Start () {
     ResetDistance();
@@ -14,7 +16,7 @@ public class ViveGripExample_Button : MonoBehaviour {
 
   void ViveGripInteractionStart(ViveGrip_GripPoint gripPoint) {
     gripPoint.controller.Vibrate(VIBRATION_DURATION_IN_MILLISECONDS, VIBRATION_STRENGTH);
-    GetComponent<ViveGrip_Interactable>().enabled = false;
+    //GetComponent<ViveGrip_Interactable>().enabled = false;
     StartCoroutine("Move");
   }
 
@@ -35,7 +37,7 @@ public class ViveGripExample_Button : MonoBehaviour {
     }
     direction *= -1;
     ResetDistance();
-    GetComponent<ViveGrip_Interactable>().enabled = true;
+    //GetComponent<ViveGrip_Interactable>().enabled = true;
   }
 
   void Increment() {

@@ -41,7 +41,17 @@ public class SC_Cord : MonoBehaviour
     [SerializeField]
     bool b_Enable = false;
     [SerializeField]
-    bool b_Grabbing = false;  
+    bool b_Grabbing = false;
+
+    //controller
+    private ViveGrip_ControllerHandler controller;
+
+    //Vibrations
+    [SerializeField]
+    private int _vibrationMilliSec = 10;
+    [SerializeField]
+    private float _vibrationStrength = 10f;
+
 
     //Non Public Refs
     Rigidbody Rb;
@@ -62,6 +72,8 @@ public class SC_Cord : MonoBehaviour
         #endif
         */
 
+        SyncParam();
+
     }
 
     // Update is called once per frame
@@ -74,7 +86,25 @@ public class SC_Cord : MonoBehaviour
 
         RangeEffect();
 
+        SyncCord();
+
     }
+
+
+    //Mise à jour controller
+
+    void ViveGripGrabStart(ViveGrip_GripPoint gripPoint)
+    {
+        controller = gripPoint.controller;
+    }
+
+    //appelé quand lache l'objet
+    void ViveGripGrabStop(ViveGrip_GripPoint gripPoint)
+    {
+        controller = null;
+    }
+
+
 
     void CalculateDistance()
     {
@@ -113,7 +143,15 @@ public class SC_Cord : MonoBehaviour
         {
             b_InRange = true;
             SetMaterial(false);
-        }        
+
+            //vibration constante en focntion de la distance
+            
+        }
+        if (f_CurDistance > ConstraintRange)
+        {
+            if (controller != null)
+                controller.Vibrate(_vibrationMilliSec, _vibrationStrength * Mathf.Clamp((f_CurDistance - ConstraintRange)/12, 0f, 1));
+        }
 
         if (f_CurDistance > ConstraintRange + DeadZone && b_InRange)
         {
@@ -121,10 +159,20 @@ public class SC_Cord : MonoBehaviour
             b_InRange = false;
             SetMaterial(true);
             SC_MovementBreakdown.Instance.AddToPilotSeq(n_Index);
+
+            //cran de vibration
+            if (controller != null)
+                controller.Vibrate(_vibrationMilliSec*10, _vibrationStrength *10);
         }
 
         if (f_CurDistance > ConstraintRange + AddMaxRange)
+        {
+            if (controller != null)
+                controller.Vibrate(_vibrationMilliSec * 5, _vibrationStrength * 100);
+
             ReleaseObject();
+
+        }
 
     }
 
@@ -194,6 +242,35 @@ public class SC_Cord : MonoBehaviour
         //fx.breakForce = JointBeakFroce;
         //fx.breakTorque = JointBeakFroce;
         return fx;
+
+    }
+
+    void SyncParam()
+    {
+        SC_SyncVar_MovementSystem.Instance.ConstraintRange = ConstraintRange;
+        SC_SyncVar_MovementSystem.Instance.DeadZone = DeadZone;
+        SC_SyncVar_MovementSystem.Instance.AddMaxRange = AddMaxRange;
+    }
+
+    void SyncCord()
+    {
+
+        switch (n_Index)
+        {
+
+            case 1:
+                SC_SyncVar_MovementSystem.Instance.CordLenght01 = f_CurDistance;
+                break;
+
+            case 2:
+                SC_SyncVar_MovementSystem.Instance.CordLenght02 = f_CurDistance;
+                break;
+
+            case 3:
+                SC_SyncVar_MovementSystem.Instance.CordLenght03 = f_CurDistance;
+                break;
+
+        }
 
     }
 

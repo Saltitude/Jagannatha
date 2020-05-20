@@ -28,18 +28,27 @@ public class SC_UI_Update_SliderSolo : MonoBehaviour
     [SerializeField]
     int[] wireIndex;
 
+    private Color _orange = new Color(255, 159, 0);
+    private Color _red = new Color(255, 0, 0);
+
+    //pour forcer la première update
+    bool firstUpdate = false;
+
     // Start is called before the first frame update
     void Start()
     {
 
         wireBlink = GetComponentInParent<SC_UI_WireBlink>();
         Mng_SyncVar = GameObject.FindGameObjectWithTag("Mng_SyncVar");
+        textWanted.enabled = true;
     }
 
     // Update is called once per frame²²
     void Update()
     {
-        
+
+        //textWanted.text = Mathf.RoundToInt(ratio(sc_syncvar.SL_sliders[index].valueWanted, 0.45f, 10, -0.45f, 0)).ToString();
+
 
         if (sc_syncvar == null || Mng_SyncVar == null)
         {
@@ -54,6 +63,19 @@ public class SC_UI_Update_SliderSolo : MonoBehaviour
         {
             updateSliderSolo();
             
+            //première update
+            if (firstUpdate == false)
+            {
+                textWanted.text = Mathf.FloorToInt(ratio(sc_syncvar.SL_sliders[index].valueWanted, 0.45f, 10, -0.45f, 1)).ToString();
+
+                if(isBreakdown)
+                    textWanted.color = _red;
+                else
+                    textWanted.color = _orange;
+
+            }
+
+
             //PANNE
             if (sc_syncvar.SL_sliders[index].isEnPanne && !isBreakdown)
             {
@@ -74,13 +96,19 @@ public class SC_UI_Update_SliderSolo : MonoBehaviour
     {
         if (breakdown)
         {
-            textWanted.enabled = true;
-            textWanted.text = Mathf.RoundToInt(ratio(sc_syncvar.SL_sliders[index].valueWanted, 0.4f, 10, -0.4f, 0)).ToString();
+            //textWanted.enabled = true;
+
+
+            textWanted.text = Mathf.FloorToInt(ratio(sc_syncvar.SL_sliders[index].valueWanted, 0.45f, 10, -0.45f, 1)).ToString();
+            textWanted.color = _red;
 
         }
         else
         {
-            textWanted.enabled = false;
+            //textWanted.enabled = false;
+
+            textWanted.text = Mathf.FloorToInt(ratio(sc_syncvar.SL_sliders[index].valueWanted, 0.45f, 10, -0.45f, 1)).ToString();
+            textWanted.color = _orange;
 
         }
 
@@ -94,9 +122,9 @@ public class SC_UI_Update_SliderSolo : MonoBehaviour
     void updateSliderSolo()
     {
 
-        textValue.text = Mathf.RoundToInt(ratio(sc_syncvar.SL_sliders[index].value, 0.4f, 9, -0.4f, 1)).ToString();
-        Bar.GetComponent<SC_UI_SystmShield>().simpleValue = ratio(sc_syncvar.SL_sliders[index].value, 0.4f, 1, -0.4f, 0.1f);
-        
+        textValue.text = Mathf.FloorToInt(ratio(sc_syncvar.SL_sliders[index].value, 0.45f, 10, -0.45f, 1)).ToString();
+        //Bar.GetComponent<SC_UI_SystmShield>().simpleValue = ratio(sc_syncvar.SL_sliders[index].value, 0.45f, 1, -0.45f, 0.1f);
+        Bar.GetComponent<SC_Display_flux_bar>().simpleValue = Mathf.FloorToInt(ratio(sc_syncvar.SL_sliders[index].value, 0.45f, 10, -0.45f, 1));
     }
 
     float ratio(float inputValue, float inputMax, float outputMax, float inputMin = 0.0f, float outputMin = 0.0f)

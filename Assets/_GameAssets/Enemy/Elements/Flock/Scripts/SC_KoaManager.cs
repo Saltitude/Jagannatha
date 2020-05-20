@@ -148,6 +148,7 @@ public class SC_KoaManager : MonoBehaviour
             vfx_Hit = _koa.GetComponent<ParticleSystem>();
 
             syncVarKoa = _koa.GetComponent<SC_MoveKoaSync>();
+            flockManager.moveKoaSync = syncVarKoa;
             syncVarKoa.InitOPKoaSettings(sensitivity, flockSettings.spawnTimer, koaID, KoaLife, maxLife, type, newGuide);
             syncVarKoa.curboidNumber = spawnCount;
             syncVarKoa.curboidNumber = flockSettings.maxBoid;
@@ -248,7 +249,7 @@ public class SC_KoaManager : MonoBehaviour
                     {
                         
 
-                        if (Vector3.Distance(_boidsTab[i].transform.position, flockManager.transform.position)<150)
+                        if (Vector3.Distance(_boidsTab[i].transform.position, flockManager.transform.position)<200)
                         {
                             nbActive++;
                             x += _boidsTab[i].transform.position.x;
@@ -285,7 +286,6 @@ public class SC_KoaManager : MonoBehaviour
     }
     void GetReferences()
     {
-
         if (NetPlayerP == null)
             NetPlayerP = SC_CheckList.Instance.NetworkPlayerPilot;
 

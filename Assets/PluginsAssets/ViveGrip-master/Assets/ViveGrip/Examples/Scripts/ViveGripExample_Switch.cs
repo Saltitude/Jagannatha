@@ -20,6 +20,12 @@ public class ViveGripExample_Switch : MonoBehaviour, IInteractible
     public int index;
 
 
+    [SerializeField]
+    private int _vibrationMilliSec = 25;
+    [SerializeField]
+    private float _vibrationStrength = 5f;
+
+
     public enum TargetSystem { Display, Movement }
     public TargetSystem MovementState = TargetSystem.Display;
 
@@ -101,6 +107,12 @@ public class ViveGripExample_Switch : MonoBehaviour, IInteractible
 
 
   }
+
+    void ViveGripInteractionStart(ViveGrip_GripPoint gripPoint)
+    {
+        gripPoint.controller.Vibrate(_vibrationMilliSec, _vibrationStrength);
+
+    }
 
     IEnumerator animGemme()
     {
@@ -230,6 +242,11 @@ public class ViveGripExample_Switch : MonoBehaviour, IInteractible
             return false;
 
         
+    }
+
+    public void ForceSync()
+    {
+        sendToSynchVar(curState);
     }
 
 }

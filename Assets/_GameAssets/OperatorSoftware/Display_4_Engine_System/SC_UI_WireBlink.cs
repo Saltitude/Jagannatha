@@ -12,6 +12,8 @@ public class SC_UI_WireBlink : MonoBehaviour
 
     [SerializeField]
     Material wireBreakdown;
+    [SerializeField]
+    Material wireShutdown;
 
     bool[] IndexToActivate;
 
@@ -48,6 +50,16 @@ public class SC_UI_WireBlink : MonoBehaviour
         }
 
         IndexToActivate[index] = activate;
+
+    }
+
+    public void ShutDownWire(int index, bool activate)
+    {
+        if(activate)
+            img_ToBreakDown[index].material = wireShutdown;
+        else
+            img_ToBreakDown[index].material = wireSafe[index];
+
 
     }
 

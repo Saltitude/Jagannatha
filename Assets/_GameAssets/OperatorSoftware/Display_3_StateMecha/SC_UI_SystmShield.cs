@@ -19,8 +19,8 @@ public class SC_UI_SystmShield : MonoBehaviour
     {
         nbImage = transform.childCount;
         tabImage = new Image[nbImage];
-        
-        for(int i = 0; i<nbImage;i++)
+
+        for (int i = 0; i < nbImage; i++)
         {
             tabImage[i] = transform.GetChild(i).GetComponent<Image>();
         }
@@ -50,12 +50,12 @@ public class SC_UI_SystmShield : MonoBehaviour
                 tabImage[i].enabled = true;
             }
         }
-        if (ratioValue != nbImage-1)
+        if (ratioValue != nbImage - 1)
         {
             for (int i = nbImage - 1; i >= ratioValue; i--)
             {
                 tabImage[i].enabled = false;
             }
-        } 
+        }
     }
 }

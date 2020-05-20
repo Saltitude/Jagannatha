@@ -147,7 +147,11 @@ public class SC_GameStates : NetworkBehaviour
                     SC_main_breakdown_validation.Instance.bringDown();
                 }
                 if(!isServer)
+                {
+                    SC_instruct_op_manager.Instance.Deactivate(0);
+                    SC_instruct_op_manager.Instance.Deactivate(2);
                     SC_instruct_op_manager.Instance.Deactivate(6);
+                }
                 StartCoroutine(Swichtuto(0.4f, TutorialState.Tutorial1_3));
 
                 break;
@@ -155,6 +159,8 @@ public class SC_GameStates : NetworkBehaviour
             case TutorialState.Tutorial1_3:
                 if(!isServer)
                 {
+                    SC_instruct_op_manager.Instance.Deactivate(0);
+                    SC_instruct_op_manager.Instance.Deactivate(2);
                     SC_instruct_op_manager.Instance.Activate(7);
                     SC_instruct_op_manager.Instance.Activate(8);
                 }
@@ -262,7 +268,8 @@ public class SC_GameStates : NetworkBehaviour
                 break;
 
             case TutorialState.Tutorial2_2:
-
+                SC_instruct_op_manager.Instance.Activate(2);
+                SC_instruct_op_manager.Instance.Deactivate(0);
 
                 break;
 
@@ -312,7 +319,21 @@ public class SC_GameStates : NetworkBehaviour
                 break;
 
             case TutorialState.TutorialEnd:
-
+                SC_instruct_op_manager.Instance.Deactivate(0);
+                SC_instruct_op_manager.Instance.Deactivate(1);
+                SC_instruct_op_manager.Instance.Deactivate(2);
+                SC_instruct_op_manager.Instance.Deactivate(3);
+                SC_instruct_op_manager.Instance.Deactivate(4);
+                SC_instruct_op_manager.Instance.Deactivate(5);
+                SC_instruct_op_manager.Instance.Deactivate(6);
+                SC_instruct_op_manager.Instance.Deactivate(7);
+                SC_instruct_op_manager.Instance.Deactivate(8);
+                SC_instruct_op_manager.Instance.Deactivate(9);
+                SC_instruct_op_manager.Instance.Deactivate(10);
+                SC_instruct_op_manager.Instance.Deactivate(11);
+                SC_instruct_op_manager.Instance.Deactivate(12);
+                SC_instruct_op_manager.Instance.Deactivate(13);
+                SC_instruct_op_manager.Instance.Deactivate(14);
                 ChangeGameState(GameState.Game);
 
                 break;

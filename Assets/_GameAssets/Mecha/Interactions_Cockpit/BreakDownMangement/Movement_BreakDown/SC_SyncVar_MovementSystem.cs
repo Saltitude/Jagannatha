@@ -147,6 +147,48 @@ public class SC_SyncVar_MovementSystem : NetworkBehaviour
 
     #endregion Var SC_JoystickMove
 
+    #region SC_Cord
+
+    [Header("Var SC_Cord")]
+    [SyncVar]
+    public float CordLenght01;
+    [SyncVar]
+    public float CordLenght02;
+    [SyncVar]
+    public float CordLenght03;
+    [SyncVar(hook = "OnChangeConstraintRange")]
+    public float ConstraintRange;
+    [SyncVar(hook = "OnChangeDeadZone")]
+    public float DeadZone;
+    [SyncVar(hook = "OnChangeAddMaxRange")]
+    public float AddMaxRange;
+
+    void OnChangeConstraintRange(float Target)
+    {
+        ConstraintRange = Target;
+        CallGetBaseValue();
+    }
+
+    void OnChangeDeadZone(float Target)
+    {
+        DeadZone = Target;
+        CallGetBaseValue();
+    }
+
+    void OnChangeAddMaxRange(float Target)
+    {
+        AddMaxRange = Target;
+        CallGetBaseValue();
+    }
+
+    void CallGetBaseValue()
+    {
+        if (!isServer)
+            SC_CordViewver.Instance.GetBaseValue();
+    }
+
+    #endregion SC_Cord
+
     void Awake()
     {
 
@@ -168,14 +210,11 @@ public class SC_SyncVar_MovementSystem : NetworkBehaviour
 
             SC_Movement_MechState.Instance.UpdateVar();
 
-            //Debug.Log("UpdateOnClient b_SeqIsSync " + b_SeqIsSync);
-
             if (b_SeqIsSync)
-            {
-                //Debug.Log("UpdateOnClient b_SeqIsSync IN");
                 SC_ShowSequence_OP.Instance.DisplaySequence();
-            }
-                
+
+            if(b_SeqIsCorrect)
+                SC_ShowSequence_OP.Instance.HideSequence();
 
         }
             

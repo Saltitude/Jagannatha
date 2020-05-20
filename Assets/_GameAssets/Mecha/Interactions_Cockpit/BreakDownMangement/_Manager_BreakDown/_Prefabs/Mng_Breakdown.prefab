@@ -53,7 +53,7 @@ MonoBehaviour:
   DisplayBreakdownSC: {fileID: 5842008656497009059}
   WeaponBreakdownSC: {fileID: 6268457991761995117}
   MovementBreakdownSC: {fileID: 6230009689821033757}
-  nbOfBreakDownBeforeTotalBreak: 8
+  nbOfBreakDownBeforeTotalBreak: 10
   b_BreakEngine: 0
   Displaylife: 10
   n_MaxBreakInterB4MaxBD: 0
@@ -314,6 +314,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2653310943489722879}
     m_Modifications:
+    - target: {fileID: 145334239224338106, guid: 7c54dde4666b02e409e770bec69b989d,
+        type: 3}
+      propertyPath: n_MaxBreakInterB4MaxBD
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 156169384300467518, guid: 7c54dde4666b02e409e770bec69b989d,
         type: 3}
       propertyPath: m_Mesh
@@ -385,6 +390,11 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 0}
     - target: {fileID: 972472175604221348, guid: 7c54dde4666b02e409e770bec69b989d,
+        type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 1168220125097686881, guid: 7c54dde4666b02e409e770bec69b989d,
         type: 3}
       propertyPath: m_Mesh
       value: 
@@ -616,6 +626,21 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2653310943489722879}
     m_Modifications:
+    - target: {fileID: 1532921699279988535, guid: a44dcb5566868374b8e50f00f90eb930,
+        type: 3}
+      propertyPath: m_ConnectedAnchor.x
+      value: -0.7695224
+      objectReference: {fileID: 0}
+    - target: {fileID: 1532921699279988535, guid: a44dcb5566868374b8e50f00f90eb930,
+        type: 3}
+      propertyPath: m_ConnectedAnchor.y
+      value: 0.19496596
+      objectReference: {fileID: 0}
+    - target: {fileID: 1532921699279988535, guid: a44dcb5566868374b8e50f00f90eb930,
+        type: 3}
+      propertyPath: m_ConnectedAnchor.z
+      value: -0.10587521
+      objectReference: {fileID: 0}
     - target: {fileID: 2041510946530775508, guid: a44dcb5566868374b8e50f00f90eb930,
         type: 3}
       propertyPath: m_ConnectedAnchor.x
@@ -665,6 +690,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4081998168588560511, guid: a44dcb5566868374b8e50f00f90eb930,
+        type: 3}
+      propertyPath: m_ConnectedAnchor.x
+      value: -0.8122859
+      objectReference: {fileID: 0}
+    - target: {fileID: 4081998168588560511, guid: a44dcb5566868374b8e50f00f90eb930,
+        type: 3}
+      propertyPath: m_ConnectedAnchor.y
+      value: 0.63539577
+      objectReference: {fileID: 0}
+    - target: {fileID: 4081998168588560511, guid: a44dcb5566868374b8e50f00f90eb930,
+        type: 3}
+      propertyPath: m_ConnectedAnchor.z
+      value: -0.026072554
       objectReference: {fileID: 0}
     - target: {fileID: 4351316507534690389, guid: a44dcb5566868374b8e50f00f90eb930,
         type: 3}

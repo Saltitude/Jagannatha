@@ -178,10 +178,11 @@ public class SC_MainBreakDownManager : MonoBehaviour, IF_BreakdownManager
 
             //
 
-            b_BreakEngine = true;
+            //b_BreakEngine = true;
+            SetBreakEngine(true);
 
             //On met en pause les Wave
-            
+
 
             //FB Alert
             if (SC_GameStates.Instance.CurState == SC_GameStates.GameState.Game)
@@ -267,7 +268,8 @@ public class SC_MainBreakDownManager : MonoBehaviour, IF_BreakdownManager
                     }
 
                     //Sortie de la Panne Globale
-                    b_BreakEngine = false;
+                    //b_BreakEngine = false;
+                    SetBreakEngine(false);
 
                     //remonter le bouton de validation
                     SC_main_breakdown_validation.Instance.bringUp();
@@ -422,6 +424,13 @@ public class SC_MainBreakDownManager : MonoBehaviour, IF_BreakdownManager
 
   
 
+    }
+
+    void SetBreakEngine(bool Target)
+    {
+        b_BreakEngine = Target;
+        SC_JoystickMove.Instance.b_BreakEngine = b_BreakEngine;
+        SC_WeaponManager.Instance.b_BreakEngine = b_BreakEngine;
     }
 
     void SyncSystemsLifes()

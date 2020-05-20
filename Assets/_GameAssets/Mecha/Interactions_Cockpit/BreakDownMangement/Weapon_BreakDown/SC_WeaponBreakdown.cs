@@ -24,7 +24,7 @@ public class SC_WeaponBreakdown : MonoBehaviour, IF_BreakdownManager
     float curTimer;
     float offTime;
     float onTime;
-    bool bCanFire;
+    public bool bCanFire;
 
     public float f_EnergyValue;
 
@@ -191,7 +191,8 @@ public class SC_WeaponBreakdown : MonoBehaviour, IF_BreakdownManager
         */
 
         //Resolution
-        if (n_BreakdownValue == 0 && !SC_MainBreakDownManager.Instance.b_BreakEngine)
+        //if (n_BreakdownValue == 0 && !SC_MainBreakDownManager.Instance.b_BreakEngine)
+        if (n_BreakdownValue == 0)
             EndBreakdown();
         else
         {
@@ -344,8 +345,17 @@ public class SC_WeaponBreakdown : MonoBehaviour, IF_BreakdownManager
 
     public void ForceUpdate()
     {
+
         SyncSystemState();
         SC_SyncVar_WeaponSystem.Instance.b_MaxBreakdown = b_MaxBreakdown;
+
+        /*
+        for (int j = 0; j < interactible.Length; j++)
+        {
+            interactible[j].GetComponent<IInteractible>().ForceSync();
+        }
+        */
+
     }
 
 }
