@@ -108,7 +108,7 @@ public class SC_passwordLock : MonoBehaviour
                 //SC_instruct_op_manager.Instance.Deactivate(6);
                 
                 
-            if (countTime > 1.5f)
+            if (countTime > 1f)
             {
                 Debug.Log("Connection Failed");
                 failPassword();
