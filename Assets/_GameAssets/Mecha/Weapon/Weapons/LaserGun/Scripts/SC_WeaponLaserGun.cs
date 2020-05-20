@@ -58,6 +58,9 @@ public class SC_WeaponLaserGun : MonoBehaviour, IF_Weapon, IF_BreakdownSystem
     float speedW = 0f;
     public bool trig = false;
 
+    [SerializeField]
+    Animator PlasmaBall;
+
     #endregion Variables
 
     void Awake()
@@ -105,6 +108,7 @@ public class SC_WeaponLaserGun : MonoBehaviour, IF_Weapon, IF_BreakdownSystem
             }
             speedW = Mathf.Lerp(speedW, 0f, 0.1f);
             GetComponent<Animator>().SetFloat("rotateSpeed", speedW);
+            PlasmaBall.SetBool("isShooting", false);
         }
     }
 
@@ -165,6 +169,7 @@ public class SC_WeaponLaserGun : MonoBehaviour, IF_Weapon, IF_BreakdownSystem
             speedW = Mathf.Lerp(speedW, 1f, 0.1f);
             trig = true;
             GetComponent<Animator>().SetFloat("rotateSpeed", speedW);
+            PlasmaBall.SetBool("isShooting", true);
         }
 
         else

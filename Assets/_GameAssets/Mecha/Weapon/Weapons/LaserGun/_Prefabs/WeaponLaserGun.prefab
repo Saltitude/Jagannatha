@@ -203,6 +203,7 @@ MonoBehaviour:
   n_BulletMagazine: 1
   speedW: 0
   trig: 0
+  PlasmaBall: {fileID: 2599617211330152558}
 --- !u!114 &2676181716841152618
 MonoBehaviour:
   m_ObjectHideFlags: 0
