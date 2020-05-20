@@ -325,7 +325,25 @@ MonoBehaviour:
   frequence: 110
   curColor:
     serializedVersion: 2
-    rgba: 0
+    rgba: 12124155
+  Color1:
+    serializedVersion: 2
+    rgba: 9687293
+  Color2:
+    serializedVersion: 2
+    rgba: 11581434
+  Color3:
+    serializedVersion: 2
+    rgba: 16756459
+  Color4:
+    serializedVersion: 2
+    rgba: 16759729
+  Color5:
+    serializedVersion: 2
+    rgba: 16776390
+  Color6:
+    serializedVersion: 2
+    rgba: 12976056
   indexDouble1: 4
   indexDouble2: 3
 --- !u!1 &1464007466954495275

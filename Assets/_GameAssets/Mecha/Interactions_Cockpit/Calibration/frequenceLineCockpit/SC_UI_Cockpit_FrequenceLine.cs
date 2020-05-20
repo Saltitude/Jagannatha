@@ -26,6 +26,13 @@ public class SC_UI_Cockpit_FrequenceLine : MonoBehaviour
     int speed = 1;
 
     public Color32 curColor;
+    public Color32 Color1;
+    public Color32 Color2;
+    public Color32 Color3;
+    public Color32 Color4;
+    public Color32 Color5;
+    public Color32 Color6;
+
     Renderer lineRenderer;
 
 
@@ -82,39 +89,39 @@ public class SC_UI_Cockpit_FrequenceLine : MonoBehaviour
 
         if(sc_syncvar.CalibrInts [2] == 1)
         {
-            curColor.r = 255;
-            curColor.g = 199;
-            curColor.b = 64;
+            curColor.r = Color1.r;
+            curColor.g = Color1.g;
+            curColor.b = Color1.b;
         }
         else if (sc_syncvar.CalibrInts [2] == 2)
         {
-            curColor.r = 0;
-            curColor.g = 255;
-            curColor.b = 255;
+            curColor.r = Color2.r;
+            curColor.g = Color2.g;
+            curColor.b = Color2.b;
         }
         else if (sc_syncvar.CalibrInts [2] == 3)
         {
-            curColor.r = 91;
-            curColor.g = 192;
-            curColor.b = 0;
+            curColor.r = Color3.r;
+            curColor.g = Color3.g;
+            curColor.b = Color3.b;
         }
         else if (sc_syncvar.CalibrInts [2] == 4)
         {
-            curColor.r = 166;
-            curColor.g = 19;
-            curColor.b = 0;
+            curColor.r = Color4.r;
+            curColor.g = Color4.g;
+            curColor.b = Color4.b;
         }
         else if (sc_syncvar.CalibrInts [2] == 5)
         {
-            curColor.r = 166;
-            curColor.g = 0;
-            curColor.b = 152;
+            curColor.r = Color5.r;
+            curColor.g = Color5.g;
+            curColor.b = Color5.b;
         }
         else
         {
-            curColor.r = 56;
-            curColor.g = 0;
-            curColor.b = 166;
+            curColor.r = Color6.r;
+            curColor.g = Color6.g;
+            curColor.b = Color6.b;
         }
 
 
