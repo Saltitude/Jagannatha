@@ -14,13 +14,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   initialSpawnFlock:
   - {fileID: 11400000, guid: 016999d769f9bda47997e96bfc9fe43b, type: 2}
-  initialSpawnPosition: 02000000
+  initialSpawnPosition: 06000000
   timeBetweenSpawnInitial: 0
   backup: 1
   backupSpawnFlock:
   - {fileID: 11400000, guid: 7d8fcc4ac73bd2b47a2739cf3805a44f, type: 2}
   - {fileID: 11400000, guid: 016999d769f9bda47997e96bfc9fe43b, type: 2}
-  backupSpawnPosition: 0600000006000000
+  backupSpawnPosition: 0200000002000000
   timeBeforeBackup: -1
   flockLeftBeforeBackup: 0
   timeBetweenSpawnBackup: 5

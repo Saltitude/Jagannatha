@@ -14,19 +14,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   initialSpawnFlock:
   - {fileID: 11400000, guid: e2539410742a3654494ab6ce864428da, type: 2}
-  - {fileID: 11400000, guid: e2539410742a3654494ab6ce864428da, type: 2}
-  - {fileID: 11400000, guid: e2539410742a3654494ab6ce864428da, type: 2}
-  - {fileID: 11400000, guid: e2539410742a3654494ab6ce864428da, type: 2}
-  - {fileID: 11400000, guid: e2539410742a3654494ab6ce864428da, type: 2}
-  - {fileID: 11400000, guid: e2539410742a3654494ab6ce864428da, type: 2}
-  - {fileID: 11400000, guid: e2539410742a3654494ab6ce864428da, type: 2}
-  - {fileID: 11400000, guid: e2539410742a3654494ab6ce864428da, type: 2}
-  initialSpawnPosition: 0000000000000000000000000000000000000000000000000000000000000000
-  timeBetweenSpawnInitial: 1
-  backup: 0
-  backupSpawnFlock: []
-  backupSpawnPosition: 
-  timeBeforeBackup: 0
+  initialSpawnPosition: 00000000
+  timeBetweenSpawnInitial: 0
+  backup: 1
+  backupSpawnFlock:
+  - {fileID: 11400000, guid: a2e1ee6db55ca5d4793fa4ea58429bc5, type: 2}
+  - {fileID: 11400000, guid: a2e1ee6db55ca5d4793fa4ea58429bc5, type: 2}
+  - {fileID: 11400000, guid: a2e1ee6db55ca5d4793fa4ea58429bc5, type: 2}
+  - {fileID: 11400000, guid: a2e1ee6db55ca5d4793fa4ea58429bc5, type: 2}
+  - {fileID: 11400000, guid: a2e1ee6db55ca5d4793fa4ea58429bc5, type: 2}
+  - {fileID: 11400000, guid: a2e1ee6db55ca5d4793fa4ea58429bc5, type: 2}
+  - {fileID: 11400000, guid: a2e1ee6db55ca5d4793fa4ea58429bc5, type: 2}
+  backupSpawnPosition: 00000000000000000000000000000000000000000000000000000000
+  timeBeforeBackup: 12
   flockLeftBeforeBackup: 0
-  timeBetweenSpawnBackup: 0
+  timeBetweenSpawnBackup: 1.5
   timeBeforeNextWave: 15

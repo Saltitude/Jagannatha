@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Wave_Solo_Laser_midi
   m_EditorClassIdentifier: 
   initialSpawnFlock:
-  - {fileID: 11400000, guid: 7d8fcc4ac73bd2b47a2739cf3805a44f, type: 2}
+  - {fileID: 11400000, guid: b9b85c8c7cf4ba944b1345051b58ce63, type: 2}
   initialSpawnPosition: 00000000
   timeBetweenSpawnInitial: 0
   backup: 0

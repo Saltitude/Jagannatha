@@ -16,12 +16,12 @@ MonoBehaviour:
   - {fileID: 11400000, guid: e2539410742a3654494ab6ce864428da, type: 2}
   - {fileID: 11400000, guid: e2539410742a3654494ab6ce864428da, type: 2}
   - {fileID: 11400000, guid: e2539410742a3654494ab6ce864428da, type: 2}
-  initialSpawnPosition: 020000000100000003000000
+  initialSpawnPosition: 060000000700000005000000
   timeBetweenSpawnInitial: 0.6
   backup: 1
   backupSpawnFlock:
-  - {fileID: 11400000, guid: 7d8fcc4ac73bd2b47a2739cf3805a44f, type: 2}
-  backupSpawnPosition: 06000000
+  - {fileID: 11400000, guid: b9b85c8c7cf4ba944b1345051b58ce63, type: 2}
+  backupSpawnPosition: 02000000
   timeBeforeBackup: -1
   flockLeftBeforeBackup: 0
   timeBetweenSpawnBackup: 0
