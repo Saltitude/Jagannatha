@@ -12,6 +12,10 @@ public class SC_SceneManager : NetworkBehaviour
     [SyncVar]
     public int n_ConnectionsCount = 0;
 
+    float countTime = 0;
+
+    [SerializeField]
+    SC_passwordLock _SC_PasswordLock;
     // Start is called before the first frame update
     void Start()
     {
@@ -43,7 +47,17 @@ public class SC_SceneManager : NetworkBehaviour
 
             //si pas Server on load la scène opérateur
             if (!isServer)
+            {
+                //_SC_PasswordLock.b_IsConnected = true;
                 LoadTutoOperator();
+
+                if (_SC_PasswordLock != null)
+                {
+                    _SC_PasswordLock.validatePassword();
+                        
+                }
+            }
+                
 
             //si server on invoke le chargement de la scène pilote (la scène opérateur necessitant de se lancer en première)
             //sécurisé par b_hasInvoked pour n'être appelé qu'une fois
