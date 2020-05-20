@@ -40,7 +40,7 @@ public class SC_IPManager : NetworkBehaviour
 
         //#endif
         localComputerIP = GetLocalIPAddress();
-        Debug.Log("Current IP is : " + localComputerIP);
+        //Debug.Log("Current IP is : " + localComputerIP);
     }
 
     // Update is called once per frame

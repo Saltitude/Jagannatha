@@ -90,7 +90,7 @@ public class SC_passwordLock : MonoBehaviour
     {
             if(Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.KeypadEnter)) //Validation
             {
-                Debug.Log("Engage password");
+               // Debug.Log("Engage password");
                 manager.networkAddress = objectPassword.GetComponent<Text>().text;
                 unlock = true;
                 b_IsConnected = true;
@@ -107,7 +107,7 @@ public class SC_passwordLock : MonoBehaviour
 
             else if (countTime > 2f && !secu)
             {
-                Debug.Log("Connection Failed");
+                //Debug.Log("Connection Failed");
                 
                 failPassword();
                 countTime = 0; //RaZ compteur
