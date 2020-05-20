@@ -48,14 +48,12 @@ public class SC_SceneManager : NetworkBehaviour
             //si pas Server on load la scène opérateur
             if (!isServer)
             {
-                if(_SC_PasswordLock != null)
+                LoadTutoOperator();
+                if (_SC_PasswordLock != null)
                 {
                     _SC_PasswordLock.validatePassword();
                         
                 }
-                LoadTutoOperator();
-
-
             }
                 
 

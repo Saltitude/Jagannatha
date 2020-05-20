@@ -97,24 +97,23 @@ public class SC_passwordLock : MonoBehaviour
                 secu = true;
             }
 
-            if (countTime > 0.1f) //Fin de compteur
+            if (countTime > 0.001f) //Fin de compteur
             {
                 if(secu)
                 {
-                    
                     manager.StartClient();
                     secu = false;
                 }
-                //SC_instruct_op_manager.Instance.Deactivate(6);
-                
-                
-            if (countTime > 3f)
+
+            else if (countTime > 2f && !secu)
             {
                 Debug.Log("Connection Failed");
+                
                 failPassword();
                 countTime = 0; //RaZ compteur
                 unlock = false; //Sécurité
                 secu = false;
+                manager.StopClient();
             }
         }
 
