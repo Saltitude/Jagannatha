@@ -77,12 +77,10 @@ public class SC_Movement_MechState : MonoBehaviour
 
         if ( (SC_GameStates.Instance.CurState == SC_GameStates.GameState.Tutorial && SC_passwordLock.Instance.b_IsConnected) || (SC_GameStates.Instance.CurState != SC_GameStates.GameState.Tutorial && !SC_SyncVar_MovementSystem.Instance.b_BreakEngine) )
         {
-
             CurState = SystemState.Connected;
 
             if ((SC_GameStates.Instance.CurState == SC_GameStates.GameState.Tutorial && SC_SyncVar_MovementSystem.Instance.b_SeqIsCorrect) || (SC_GameStates.Instance.CurState != SC_GameStates.GameState.Tutorial && !SC_SyncVar_MovementSystem.Instance.b_MaxBreakdown))
             {
-
                 CurState = SystemState.Initialize;
 
                 if (SC_SyncVar_MovementSystem.Instance.b_IsLaunch)

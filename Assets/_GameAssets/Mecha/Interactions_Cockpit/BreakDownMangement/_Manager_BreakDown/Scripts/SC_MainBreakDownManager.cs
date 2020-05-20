@@ -228,8 +228,9 @@ public class SC_MainBreakDownManager : MonoBehaviour, IF_BreakdownManager
                     //Désactive le timer
                     SC_BreakdownOnBreakdownAlert.Instance.StopAllCoroutines();
 
+                    /*
                     if (SC_GameStates.Instance.CurTutoState == SC_GameStates.TutorialState.Tutorial1_8)
-                        SC_GameStates.Instance.ChangeTutoGameState(SC_GameStates.TutorialState.Tutorial1_9);
+                        SC_GameStates.Instance.ChangeTutoGameState(SC_GameStates.TutorialState.Tutorial1_9);*/
 
                     SC_FogBreakDown.Instance.ClearDensity();
                     SC_LightAlarm.Instance.ClearLight();
@@ -473,7 +474,7 @@ public class SC_MainBreakDownManager : MonoBehaviour, IF_BreakdownManager
         else if (SC_GameStates.Instance.CurTutoState == SC_GameStates.TutorialState.RepairMotion && SC_MovementBreakdown.Instance.n_InteractibleInBreakDown == 0)
         {
             //ICI ROMAIN 
-            SC_GameStates.Instance.ChangeTutoGameState(SC_GameStates.TutorialState.Tutorial1_7);
+            SC_GameStates.Instance.ChangeTutoGameState(SC_GameStates.TutorialState.Reboot);
         }
     }
 

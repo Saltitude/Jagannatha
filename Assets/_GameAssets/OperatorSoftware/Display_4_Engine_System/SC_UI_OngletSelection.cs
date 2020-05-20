@@ -64,7 +64,7 @@ public class SC_UI_OngletSelection : MonoBehaviour, IF_clicableAction, IF_Hover
             ongletContainer.WeaponIn();
             animator.SetBool("ActivateWeapon", true);
         }
-        else if (index == 2 && SC_GameStates.Instance.CurTutoState == SC_GameStates.TutorialState.RepairDisplay)
+        else if (index == 2 && SC_GameStates.Instance.CurTutoState == SC_GameStates.TutorialState.RepairMotion)
         {
             //SC_CheckList.Instance.NetworkPlayerPilot.GetComponent<SC_Net_Player_TutoState>().CmdChangeTutoState(SC_GameStates.TutorialState.Tutorial1_6);
             ongletContainer.MoveIn();

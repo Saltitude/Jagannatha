@@ -13,15 +13,24 @@ public class SC_TutorialUIManager : MonoBehaviour
     #endregion
 
     [SerializeField]
-    Image[][] ImageTab;
-    Color[] InitColorTab;
+    Image[][] imageBlink;
 
     [SerializeField]
-    Image[] Display;
+    Image[][] imageState;
+
     [SerializeField]
-    Image[] Weapon; 
+    Image[] displayHub;
     [SerializeField]
-    Image[] Motion;
+    Image[] weaponHub; 
+    [SerializeField]
+    Image[] motionHub;  
+    
+    [SerializeField]
+    GameObject displayState;
+    [SerializeField]
+    GameObject weaponState; 
+    [SerializeField]
+    GameObject motionState;
 
     List<Image> img_Blink;
 
@@ -48,10 +57,17 @@ public class SC_TutorialUIManager : MonoBehaviour
     void Start()
     {
         img_Blink = new List<Image>();
-        ImageTab = new Image[3][];
-        ImageTab[0] = Display;
-        ImageTab[1] = Weapon;
-        ImageTab[2] = Motion;
+        imageBlink = new Image[3][];
+        imageState = new Image[3][];
+
+        imageBlink[0] = displayHub;
+        imageBlink[1] = weaponHub;
+        imageBlink[2] = motionHub;
+
+        imageState[0] = displayState.GetComponentsInChildren<Image>();
+        imageState[1] = weaponState.GetComponentsInChildren<Image>();
+        imageState[2] = motionState.GetComponentsInChildren<Image>();
+
         StartCoroutine(BlinkCoro());
     }
 
@@ -87,26 +103,34 @@ public class SC_TutorialUIManager : MonoBehaviour
     
     public void ActivateSystem(System syst, bool activation)
     {
-        for(int i = 0; i < ImageTab[(int)syst].Length; i++)
+        for(int i = 0; i < imageBlink[(int)syst].Length; i++)
         {
             if(activation)
-                ActivateImage(ImageTab[(int)syst][i]); 
+                ActivateImage(imageBlink[(int)syst][i]); 
 
             else
-                DeactivateImage(ImageTab[(int)syst][i]);
+                DeactivateImage(imageBlink[(int)syst][i]);
+        }
+        for(int i = 0;i < imageState[(int)syst].Length; i++)
+        {
+            if (activation)
+                ActivateImage(imageState[(int)syst][i]);
+
+            else
+                DeactivateImage(imageState[(int)syst][i]);
         }
 
     }
 
     public void ActivateBlink(System syst, bool blink)
     {
-        for (int i = 0; i < ImageTab[(int)syst].Length; i++)
+        for (int i = 0; i < imageBlink[(int)syst].Length; i++)
         {
             if (blink)
-                ActivateBlink(ImageTab[(int)syst][i]);
+                ActivateBlink(imageBlink[(int)syst][i]);
 
             else
-                EndBlink(ImageTab[(int)syst][i]);
+                EndBlink(imageBlink[(int)syst][i]);
         }
     }
 

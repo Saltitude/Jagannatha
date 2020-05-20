@@ -61,7 +61,6 @@ public class SC_Display_MechState : MonoBehaviour
 
             if((SC_GameStates.Instance.CurState == SC_GameStates.GameState.Tutorial && SC_SyncVar_DisplaySystem.Instance.f_CurNbOfBd == 0) || (SC_GameStates.Instance.CurState != SC_GameStates.GameState.Tutorial && !SC_SyncVar_DisplaySystem.Instance.b_MaxBreakdown))
             {
-
                 CurState = SystemState.Initialize;
 
                 if (SC_SyncVar_DisplaySystem.Instance.b_IsLaunch)
@@ -75,6 +74,7 @@ public class SC_Display_MechState : MonoBehaviour
 
         else
         {
+
             CurState = SystemState.Disconnected;
         }
 

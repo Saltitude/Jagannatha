@@ -14,7 +14,7 @@ public class SC_GameStates : NetworkBehaviour
     #endregion
 
     public enum GameState {Lobby, Tutorial, Tutorial2, Game, GameEnd }
-    public enum TutorialState { StartTutorial, RepairDisplay, RepairWeapon, RepairMotion, Reboot, Tutorial1_4, Tutorial1_5, Tutorial1_6, Tutorial1_7, Tutorial1_8, Tutorial1_9, Tutorial1_10, Tutorial1_11, Tutorial2_1, Tutorial2_2, Tutorial2_3, Tutorial2_4, Tutorial2_5, TutorialEnd}
+    public enum TutorialState { StartTutorial, RepairDisplay, RepairWeapon, RepairMotion, Reboot, Tutorial2_1, Tutorial2_2, Tutorial2_3, Tutorial2_4, Tutorial2_5, TutorialEnd}
     public GameState CurState;
     public TutorialState CurTutoState;
     public bool Disp = false;
@@ -137,11 +137,9 @@ public class SC_GameStates : NetworkBehaviour
                 }
                 if(!isServer)
                 {
-
                     SC_TutorialUIManager.Instance.ActivateSystem(SC_TutorialUIManager.System.Display, false);
                     SC_TutorialUIManager.Instance.ActivateSystem(SC_TutorialUIManager.System.Weapon, false);
                     SC_TutorialUIManager.Instance.ActivateSystem(SC_TutorialUIManager.System.Motion, false);
-
                 }
                 StartCoroutine(Swichtuto(0.4f, TutorialState.RepairDisplay));
 
@@ -196,71 +194,7 @@ public class SC_GameStates : NetworkBehaviour
                 }
                 break;     
 
-            case TutorialState.Tutorial1_4:
-                if (!isServer)
-                {
-                    
-                    Debug.Log("Tutorial1_4");
-                }
-                break;
-
-            case TutorialState.Tutorial1_5:
-
-                if (!isServer)
-                {
-                    Debug.Log("Tutorial1_5");
-
-                }
-                break;
-
-            case TutorialState.Tutorial1_6:
-                if (!isServer)
-                {
-                    Debug.Log("Tutorial1_6");
-
-                }
-
-                break;
-
-            case TutorialState.Tutorial1_7:
-                if (!isServer)
-                {
-                    Debug.Log("Tutorial1_7");
-                }
-
-                    break;
-
-            case TutorialState.Tutorial1_8:
-
-                if(!isServer)
-                {
-                    Debug.Log("Tutorial1_8");
-
-                }
-
-                break;
-
-            case TutorialState.Tutorial1_9:
-
-                if (!isServer)
-                {
-                    Debug.Log("Tutorial1_9");
-                    
-                }
-                StartCoroutine(Swichtuto(0.8f, TutorialState.Tutorial1_10));
-
-
-                break;
-
-                 case TutorialState.Tutorial1_10:
-
-                if (!isServer)
-                {
-                    Debug.Log("Tutorial1_10");
-
-                }
-
-                break;
+           
 
 
             case TutorialState.Tutorial2_1:
