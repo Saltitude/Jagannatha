@@ -16,7 +16,7 @@ public class SC_IPManager : NetworkBehaviour
     [SerializeField]
     bool isLocalHostEditor;
 
-    string localComputerIP;
+    public string localComputerIP = "0.0.0.0";
     // Start is called before the first frame update
     void Start()
     {
@@ -39,7 +39,7 @@ public class SC_IPManager : NetworkBehaviour
 
 
         //#endif
-        localComputerIP = GetLocalIPAddress();
+        //localComputerIP = GetLocalIPAddress();
         //Debug.Log("Current IP is : " + localComputerIP);
     }
 
@@ -49,7 +49,7 @@ public class SC_IPManager : NetworkBehaviour
 
     }
 
-    static string GetLocalIPAddress()
+    public string GetLocalIPAddress()
     {
         var host = System.Net.Dns.GetHostEntry(System.Net.Dns.GetHostName());
         foreach (var ip in host.AddressList)
