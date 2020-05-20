@@ -191,7 +191,8 @@ public class SC_WeaponBreakdown : MonoBehaviour, IF_BreakdownManager
         */
 
         //Resolution
-        if (n_BreakdownValue == 0 && !SC_MainBreakDownManager.Instance.b_BreakEngine)
+        //if (n_BreakdownValue == 0 && !SC_MainBreakDownManager.Instance.b_BreakEngine)
+        if (n_BreakdownValue == 0)
             EndBreakdown();
         else
         {
