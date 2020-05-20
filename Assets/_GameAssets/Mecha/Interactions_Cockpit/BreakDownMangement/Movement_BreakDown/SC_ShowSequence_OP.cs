@@ -107,14 +107,14 @@ public class SC_ShowSequence_OP : MonoBehaviour
         for (int i = 0; i < PlayerSeqLenght; i++)
                 tab_Progress[i].GetComponent<Image>().material = ProgressOn;
 
-        Debug.Log("DispProg | " + PlayerSeqLenght + " | " + SC_SyncVar_MovementSystem.Instance.BreakdownList.Count);
+        //Debug.Log("DispProg | " + PlayerSeqLenght + " | " + SC_SyncVar_MovementSystem.Instance.BreakdownList.Count);
 
     }
 
     public void HideSequence()
     {
 
-        Debug.Log("HideSequences");
+        //Debug.Log("HideSequences");
 
         for (int i = 0; i < SeqParts.Length; i++)
         {
