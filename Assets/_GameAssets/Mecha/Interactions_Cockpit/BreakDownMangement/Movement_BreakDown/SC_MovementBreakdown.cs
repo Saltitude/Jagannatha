@@ -162,7 +162,8 @@ public class SC_MovementBreakdown : MonoBehaviour, IF_BreakdownManager
             SetMaxBreakdown(true);
 
         //Normal Breakdown
-        if (!SC_MainBreakDownManager.Instance.b_BreakEngine && n_BreakDownLvl > 0 && b_SeqIsCorrect )
+        //if (!SC_MainBreakDownManager.Instance.b_BreakEngine && n_BreakDownLvl > 0 && b_SeqIsCorrect )
+        if (n_BreakDownLvl > 0 && b_SeqIsCorrect )
             EndBreakdown();
 
         else
