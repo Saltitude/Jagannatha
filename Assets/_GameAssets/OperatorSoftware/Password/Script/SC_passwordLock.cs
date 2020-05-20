@@ -33,7 +33,7 @@ public class SC_passwordLock : MonoBehaviour
     float countTime = 0; //Compteur 
     public bool unlock = false; //Sécurité
     public bool b_IsConnected = false;
-
+    bool secu = false;
     //[SerializeField]
     //SC_electricPlug plugObject; //récupération de l'objet prise electrique
 
@@ -88,60 +88,36 @@ public class SC_passwordLock : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //if (SC_GameStates.Instance.CurState == SC_GameStates.GameState.Tutorial2)
-        //    SC_instruct_op_manager.Instance.Deactivate(6);
-        //if (cheatCode)
-        //{
-        //    for (int i = 0; i < 4; i++)
-        //    {
-        //        canvasMng.GetComponent<SC_CanvasManager>().activateChildInGame(i);
-        //    }
-        //    canvasMng.GetComponent<SC_CanvasManager>().checkTaskBeforeGo();
-        //    gameObject.SetActive(false);
-        //    objectElectricPlug.SetActive(false);
-        //    SC_instruct_op_manager.Instance.Deactivate(6);
-        //    b_IsConnected = true;
-        //    unlock = false;
-        //    countTime = 0;
-        //    SC_CheckList.Instance.NetworkPlayerOperator.GetComponent<SC_Net_Player_TutoState>().CmdChangeTutoState(SC_GameStates.TutorialState.Tutorial1_2);
-        //}
-        if (string.Equals(objectPassword.GetComponent<Text>().text, s_password, System.StringComparison.CurrentCultureIgnoreCase) /*objectPassword.GetComponent<Text>().text == s_password*/) //Check du mot de passe
-        {
-
             if(Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.KeypadEnter)) //Validation
             {
-                textFeedbackFunction("Valid password", new Color32(0, 255, 0, 255)); //Feedback textuel vert
-                unlock = true; //Sécurité
+               // Debug.Log("Engage password");
+                manager.networkAddress = objectPassword.GetComponent<Text>().text;
+                unlock = true;
                 b_IsConnected = true;
-                CustomSoundManager.Instance.PlaySound(gameObject, "SFX_o_opening", false, 0.4f);
-
-              /*  plugObject.GetComponent<SC_electricPlug>().plugConnected();*/ //Animation PLay
-
-               // SC_instruct_op_manager.Instance.Activate(1);
-                //if(SC_GameStates.Instance.CurTutoState == SC_GameStates.TutorialState.Tutorial1_1)
-                //    SC_CheckList.Instance.NetworkPlayerOperator.GetComponent<SC_Net_Player_TutoState>().CmdChangeTutoState(SC_GameStates.TutorialState.Tutorial1_2);
+                secu = true;
             }
 
-            if (countTime > 4f) //Fin de compteur
+            if (countTime > 0.001f) //Fin de compteur
             {
-                //canvasMng.GetComponent<SC_CanvasManager>().checkTaskBeforeGo(); //Activation des écrans (cf distributionDisplay)
-                gameObject.SetActive(false); //désactivation du canvas de mot de passe (ContainerPassword)
-                //objectElectricPlug.SetActive(false);
-                unlock = false; //Sécurité
+                if(secu)
+                {
+                    manager.StartClient();
+                    secu = false;
+                }
+
+            else if (countTime > 2f && !secu)
+            {
+                //Debug.Log("Connection Failed");
+                
+                failPassword();
                 countTime = 0; //RaZ compteur
-                //SC_instruct_op_manager.Instance.Deactivate(6);
-                manager.StartClient();
-            }
-
-        }
-
-        else
-        {
-            if (Input.GetKeyDown(KeyCode.Return)) //Mot de passe faux
-            {
-                textFeedbackFunction("Invalid password", new Color32(255, 0, 0, 255)); //feedback textuel rouge
+                unlock = false; //Sécurité
+                secu = false;
+                manager.StopClient();
             }
         }
+
+        
 
         if(unlock)
         {
@@ -163,5 +139,17 @@ public class SC_passwordLock : MonoBehaviour
     {
         textFeedback.color = color;
         textFeedback.text = texte;
+    }
+    
+    public void validatePassword()
+    {
+        textFeedbackFunction("Valid password", new Color32(0, 255, 0, 255)); //Feedback textuel vert
+        CustomSoundManager.Instance.PlaySound(gameObject, "SFX_o_opening", false, 0.4f);
+    }
+
+    void failPassword()
+    {
+        textFeedbackFunction("Wrong password", new Color32(255, 0, 0, 255)); //Feedback textuel vert
+        
     }
 }
