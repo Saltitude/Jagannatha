@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2f853b98b2e469d4682403b69d26ee96, type: 3}
+  m_Name: Wave_Le_Cul(quel_cul)_Entre_Deux_Chaises
+  m_EditorClassIdentifier: 
+  initialSpawnFlock:
+  - {fileID: 11400000, guid: 016999d769f9bda47997e96bfc9fe43b, type: 2}
+  initialSpawnPosition: 02000000
+  timeBetweenSpawnInitial: 0
+  backup: 1
+  backupSpawnFlock:
+  - {fileID: 11400000, guid: 7d8fcc4ac73bd2b47a2739cf3805a44f, type: 2}
+  - {fileID: 11400000, guid: 016999d769f9bda47997e96bfc9fe43b, type: 2}
+  backupSpawnPosition: 0600000006000000
+  timeBeforeBackup: -1
+  flockLeftBeforeBackup: 0
+  timeBetweenSpawnBackup: 5
+  timeBeforeNextWave: 15
