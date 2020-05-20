@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2f853b98b2e469d4682403b69d26ee96, type: 3}
+  m_Name: Wave_360_no_reCalibr_bullets
+  m_EditorClassIdentifier: 
+  initialSpawnFlock:
+  - {fileID: 11400000, guid: e2539410742a3654494ab6ce864428da, type: 2}
+  initialSpawnPosition: 00000000
+  timeBetweenSpawnInitial: 1
+  backup: 1
+  backupSpawnFlock:
+  - {fileID: 11400000, guid: e2539410742a3654494ab6ce864428da, type: 2}
+  - {fileID: 11400000, guid: e2539410742a3654494ab6ce864428da, type: 2}
+  - {fileID: 11400000, guid: e2539410742a3654494ab6ce864428da, type: 2}
+  - {fileID: 11400000, guid: e2539410742a3654494ab6ce864428da, type: 2}
+  - {fileID: 11400000, guid: e2539410742a3654494ab6ce864428da, type: 2}
+  - {fileID: 11400000, guid: e2539410742a3654494ab6ce864428da, type: 2}
+  - {fileID: 11400000, guid: e2539410742a3654494ab6ce864428da, type: 2}
+  - {fileID: 11400000, guid: e2539410742a3654494ab6ce864428da, type: 2}
+  backupSpawnPosition: 0700000006000000050000000400000003000000020000000100000000000000
+  timeBeforeBackup: 3
+  flockLeftBeforeBackup: -1
+  timeBetweenSpawnBackup: 1
+  timeBeforeNextWave: 0
