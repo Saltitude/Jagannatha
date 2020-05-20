@@ -48,18 +48,14 @@ public class SC_SceneManager : NetworkBehaviour
             //si pas Server on load la scène opérateur
             if (!isServer)
             {
-                countTime += Time.deltaTime;
                 if(_SC_PasswordLock != null)
                 {
                     _SC_PasswordLock.validatePassword();
-                    if (countTime > 1)
-                    {
-                        LoadTutoOperator();
-                    }
+                        
                 }
-                
-                
-                
+                LoadTutoOperator();
+
+
             }
                 
 
