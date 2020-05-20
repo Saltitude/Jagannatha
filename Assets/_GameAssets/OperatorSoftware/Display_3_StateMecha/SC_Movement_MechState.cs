@@ -41,6 +41,8 @@ public class SC_Movement_MechState : MonoBehaviour
     GameObject LeftOffState;
     [SerializeField]
     GameObject RightOffState;
+    [SerializeField]
+    GameObject InitializedState;
 
     public enum SystemState { Disconnected, Connected, Initialize, Launched }
     public SystemState CurState;
@@ -107,13 +109,14 @@ public class SC_Movement_MechState : MonoBehaviour
         switch (CurState)
         {
 
+
             case SystemState.Disconnected:
                 ConnectedOffState.SetActive(true);
                 InitializeOffState.SetActive(true);
                 LaunchedOffState.SetActive(true);
                 GeneralOffState.SetActive(true);
-                RightOffState.SetActive(true);
-                LeftOffState.SetActive(true);
+                InitializedState.SetActive(false);
+
                 break;
 
             case SystemState.Connected:
@@ -121,17 +124,16 @@ public class SC_Movement_MechState : MonoBehaviour
                 InitializeOffState.SetActive(true);
                 LaunchedOffState.SetActive(true);
                 GeneralOffState.SetActive(true);
-                RightOffState.SetActive(true);
-                LeftOffState.SetActive(true);
+                InitializedState.SetActive(false);
+
                 break;
 
             case SystemState.Initialize:
                 ConnectedOffState.SetActive(false);
                 InitializeOffState.SetActive(false);
                 LaunchedOffState.SetActive(true);
-                GeneralOffState.SetActive(true);
-                RightOffState.SetActive(true);
-                LeftOffState.SetActive(true);
+                GeneralOffState.SetActive(false);
+                InitializedState.SetActive(true);
                 break;
 
             case SystemState.Launched:
@@ -139,10 +141,9 @@ public class SC_Movement_MechState : MonoBehaviour
                 InitializeOffState.SetActive(false);
                 LaunchedOffState.SetActive(false);
                 GeneralOffState.SetActive(false);
-                RightOffState.SetActive(false);
-                LeftOffState.SetActive(false);
-                break;
+                InitializedState.SetActive(false);
 
+                break;
         }
 
     }
