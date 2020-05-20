@@ -87,6 +87,30 @@ public class SC_breakdown_displays_screens : MonoBehaviour
         SC_EnemyManager.Instance.Initialize();
     }
 
+
+    public void PannePartielleDisplay()
+    {
+        for (int i = 0; i < gameObject.transform.childCount; i++)
+        {
+            tab_screens_renderers[i].material = mat[1];
+            tab_screens_renderers[i].GetComponent<SC_playvideo>().StopVideo();
+            tab_screens_renderers[i].GetComponent<SC_playvideo>().PlayVideo();
+        }
+
+    }
+
+
+    //pour foutre le mat video de panne totale
+    public void FullPanneDisplay()
+    {
+        for (int i = 0; i < gameObject.transform.childCount; i++)
+        {
+            tab_screens_renderers[i].material = mat[3];
+            tab_screens_renderers[i].GetComponent<SC_playvideo>().StopVideo();
+            tab_screens_renderers[i].GetComponent<SC_playvideo>().PlayVideo();
+        }
+    }
+
     public void EndScreenDisplay()
     {
         gameEnded = true;
@@ -98,6 +122,8 @@ public class SC_breakdown_displays_screens : MonoBehaviour
             tab_screens_renderers[i].GetComponent<SC_playvideo>().PlayVideo();
         }
     }
+
+
 
     public void PutOneEnPanne()
     {
@@ -168,16 +194,22 @@ public class SC_breakdown_displays_screens : MonoBehaviour
             SetScreenState(i,true);            
         }
 
+
+        if (SC_GameStates.Instance.CurState == SC_GameStates.GameState.Game)
+            FullPanneDisplay();
+
     }
 
     public void RepairAll()
     {
 
-        if(demarage)
+        if (demarage)
         {
             FirstPanneFinish();
             CustomSoundManager.Instance.PlaySound(gameObject, "SFX_p_ScreenActivated", false, 0.1f);
         }
+        else
+            PannePartielleDisplay();
 
         for (int i = 0; i < tab_screens_renderers.Length; i++)
         {
