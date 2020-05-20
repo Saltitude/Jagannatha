@@ -20,39 +20,36 @@ public class SC_IPManager : NetworkBehaviour
     // Start is called before the first frame update
     void Start()
     {
-//        if(isLocalHostBuild)
-//            _NetworkManager.networkAddress = "localhost";
-        
-//        else
-//            _NetworkManager.networkAddress = "192.168.151.116";
+        //        if(isLocalHostBuild)
+        //            _NetworkManager.networkAddress = "localhost";
 
-//#if UNITY_EDITOR
-//        if (isLocalHostEditor)
-//        {
-//            _NetworkManager.networkAddress = "localhost";
-//        }
-//        else
-//        {
-//            _NetworkManager.networkAddress = "192.168.151.116";
-//        }
+        //        else
+        //            _NetworkManager.networkAddress = "192.168.151.116";
 
-        
+        //#if UNITY_EDITOR
+        //        if (isLocalHostEditor)
+        //        {
+        //            _NetworkManager.networkAddress = "localhost";
+        //        }
+        //        else
+        //        {
+        //            _NetworkManager.networkAddress = "192.168.151.116";
+        //        }
 
-//#endif
+
+
+        //#endif
+        localComputerIP = GetLocalIPAddress();
+        Debug.Log("Current IP is : " + localComputerIP);
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Escape))
-        {
 
-            localComputerIP = GetLocalIPAddress();
-            Debug.Log("Current IP is : " + localComputerIP);
-        }
     }
 
-    public static string GetLocalIPAddress()
+    static string GetLocalIPAddress()
     {
         var host = System.Net.Dns.GetHostEntry(System.Net.Dns.GetHostName());
         foreach (var ip in host.AddressList)
