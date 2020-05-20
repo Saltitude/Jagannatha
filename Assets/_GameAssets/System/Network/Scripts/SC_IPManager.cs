@@ -1,5 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Net;
+using System.Net.Sockets;
 using UnityEngine;
 using UnityEngine.Networking;
 using UnityEngine.Networking.Match;
@@ -14,33 +16,53 @@ public class SC_IPManager : NetworkBehaviour
     [SerializeField]
     bool isLocalHostEditor;
 
+    string localComputerIP;
     // Start is called before the first frame update
     void Start()
     {
-        if(isLocalHostBuild)
-            _NetworkManager.networkAddress = "localhost";
+//        if(isLocalHostBuild)
+//            _NetworkManager.networkAddress = "localhost";
         
-        else
-            _NetworkManager.networkAddress = "192.168.151.116";
+//        else
+//            _NetworkManager.networkAddress = "192.168.151.116";
 
-#if UNITY_EDITOR
-        if (isLocalHostEditor)
-        {
-            _NetworkManager.networkAddress = "localhost";
-        }
-        else
-        {
-            _NetworkManager.networkAddress = "192.168.151.116";
-        }
+//#if UNITY_EDITOR
+//        if (isLocalHostEditor)
+//        {
+//            _NetworkManager.networkAddress = "localhost";
+//        }
+//        else
+//        {
+//            _NetworkManager.networkAddress = "192.168.151.116";
+//        }
 
         
 
-#endif
+//#endif
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        if(Input.GetKeyDown(KeyCode.Escape))
+        {
+
+            localComputerIP = GetLocalIPAddress();
+            Debug.Log("Current IP is : " + localComputerIP);
+        }
+    }
+
+    public static string GetLocalIPAddress()
+    {
+        var host = System.Net.Dns.GetHostEntry(System.Net.Dns.GetHostName());
+        foreach (var ip in host.AddressList)
+        {
+            if (ip.AddressFamily == System.Net.Sockets.AddressFamily.InterNetwork)
+            {
+                return ip.ToString();
+            }
+        }
+
+        throw new System.Exception("No network adapters with an IPv4 address in the system!");
     }
 }
