@@ -64,9 +64,15 @@ public class SC_ShowSequence_OP : MonoBehaviour
         for (int i = 0; i < tab_Progress.Length; i++)
         {
             if (i < SequenceLenght)
-                tab_Progress[i].GetComponent<Image>().material = ProgressOff;
+            {
+                SeqParts[i].SetActive(true);
+                tab_Progress[i].GetComponent<Image>().material = ProgressOff;              
+            }               
             else
+            {
+                SeqParts[i].SetActive(false);
                 tab_Progress[i].GetComponent<Image>().material = ProgressDisable;
+            }              
         }
 
         for (int i = 0; i < SeqParts.Length; i++)
@@ -101,6 +107,20 @@ public class SC_ShowSequence_OP : MonoBehaviour
         for (int i = 0; i < PlayerSeqLenght; i++)
                 tab_Progress[i].GetComponent<Image>().material = ProgressOn;
 
+        //Debug.Log("DispProg | " + PlayerSeqLenght + " | " + SC_SyncVar_MovementSystem.Instance.BreakdownList.Count);
+
+    }
+
+    public void HideSequence()
+    {
+
+        //Debug.Log("HideSequences");
+
+        for (int i = 0; i < SeqParts.Length; i++)
+        {
+            SeqParts[i].SetActive(false);
+            tab_Progress[i].GetComponent<Image>().material = ProgressDisable;
+        }
     }
 
 }

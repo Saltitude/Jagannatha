@@ -50,7 +50,7 @@ public class SC_Cord : MonoBehaviour
     [SerializeField]
     private int _vibrationMilliSec = 10;
     [SerializeField]
-    private float _vibrationStrength = 5f;
+    private float _vibrationStrength = 10f;
 
 
     //Non Public Refs
@@ -145,9 +145,13 @@ public class SC_Cord : MonoBehaviour
             SetMaterial(false);
 
             //vibration constante en focntion de la distance
+            
+        }
+        if (f_CurDistance > ConstraintRange)
+        {
             if (controller != null)
-                controller.Vibrate(_vibrationMilliSec, _vibrationStrength * 7 * Mathf.Clamp((f_CurDistance - ConstraintRange), 0f, 1));
-        }        
+                controller.Vibrate(_vibrationMilliSec, _vibrationStrength * Mathf.Clamp((f_CurDistance - ConstraintRange)/12, 0f, 1));
+        }
 
         if (f_CurDistance > ConstraintRange + DeadZone && b_InRange)
         {
@@ -254,15 +258,15 @@ public class SC_Cord : MonoBehaviour
         switch (n_Index)
         {
 
-            case 0:
+            case 1:
                 SC_SyncVar_MovementSystem.Instance.CordLenght01 = f_CurDistance;
                 break;
 
-            case 1:
+            case 2:
                 SC_SyncVar_MovementSystem.Instance.CordLenght02 = f_CurDistance;
                 break;
 
-            case 2:
+            case 3:
                 SC_SyncVar_MovementSystem.Instance.CordLenght03 = f_CurDistance;
                 break;
 

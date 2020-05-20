@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using Boo.Lang;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -22,6 +23,14 @@ public class SC_raycast : MonoBehaviour
     [SerializeField]
     Vector3 VT3_HitPos;
 
+    private int layerMask;
+
+
+    private void Start()
+    {
+        layerMask = 1 << 0;
+    }
+
     void Update()
     {
 
@@ -42,7 +51,7 @@ public class SC_raycast : MonoBehaviour
     {
 
         //Cast un ray à partir du casque
-        if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, 100f))
+        if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, 100f, layerMask))
         {
 
             if (hit.collider == Target.GetComponent<Collider>())
