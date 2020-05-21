@@ -82,7 +82,7 @@ public class SC_KoaSettingsOP : MonoBehaviour, IF_KoaForOperator, IF_Hover
         this.koaID = koaID;
     }
 
-    public void SetKoaLife(int curLife)
+    public void SetKoaLife(float curLife)
     {
 
         this.curKoaLife = curLife;
@@ -102,7 +102,7 @@ public class SC_KoaSettingsOP : MonoBehaviour, IF_KoaForOperator, IF_Hover
         this.currentState = (koaState)curState;
     }
 
-    public void SetKoamaxLife(int maxLife)
+    public void SetKoamaxLife(float maxLife)
     {
         this.maxKoaLife = maxLife;
     }

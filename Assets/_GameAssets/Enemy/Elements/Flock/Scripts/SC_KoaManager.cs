@@ -24,9 +24,9 @@ public class SC_KoaManager : MonoBehaviour
 
     [Header("Parameters")]
     [SerializeField]
-    int maxLife = 10;
+    float maxLife = 10;
     [SerializeField]
-    int KoaLife = 10;
+    float KoaLife = 10;
     [SerializeField]
     float recoveryDuration = 1.5f;
 
@@ -402,7 +402,10 @@ public class SC_KoaManager : MonoBehaviour
 
             if (powerPerCent > 0)
             {
-                KoaLife -= (int)((powerPerCent * maxLife) / 100) / 3;
+
+                Debug.Log("damage done = " + ((powerPerCent * maxLife) / 100) / 3);
+
+                KoaLife -= (powerPerCent * maxLife) / 100 / 3 * curFlockSettings.damageMultiplicator;
                 if (KoaLife <= 0)
                     KoaLife = 0;
                 syncVarKoa.SetCurLife(KoaLife);
