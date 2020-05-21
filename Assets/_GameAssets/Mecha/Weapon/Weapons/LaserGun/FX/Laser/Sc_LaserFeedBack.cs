@@ -19,7 +19,7 @@ public class Sc_LaserFeedBack : MonoBehaviour
     [SerializeField]
     Color CurColor;
     public GameObject Laser;
-    public GameObject EnergyBall;
+    public Material EnergyBall;
     public GameObject ChargeSpark;
     public GameObject Fioriture;
     public GameObject Ondes;
@@ -28,7 +28,7 @@ public class Sc_LaserFeedBack : MonoBehaviour
     [SerializeField]
     SC_WeaponLaserGun WeapMainSC;
     public ParticleSystem.MainModule LaserPS;
-    public ParticleSystem.MainModule EnergyBallPS;
+    //public ParticleSystem.MainModule EnergyBallPS;
     public ParticleSystem.MainModule ChargeSparkPS;
     public ParticleSystem.MainModule FioriturePS;
     public ParticleSystem.MainModule OndesPS;
@@ -117,7 +117,7 @@ public class Sc_LaserFeedBack : MonoBehaviour
 
             LaserPS.startColor = gradiend;
             ChargeSparkPS.startColor = gradiend;
-            //EnergyBallPS.startColor = gradiend;
+            EnergyBall.SetColor("_EmissionColor", CurColor);
             FioriturePS.startColor = gradiend;
             OndesPS.startColor = gradiend;
             ElicePS.startColor = gradiend;
