@@ -12,6 +12,10 @@ public class SC_ShowTourbiLvl_OP : MonoBehaviour
     [SerializeField]
     float f_MaxLenght;
 
+    //BlinkDanceFLoor
+    [SerializeField]
+    SC_UI_WireBlink BlinkMaster;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -22,6 +26,7 @@ public class SC_ShowTourbiLvl_OP : MonoBehaviour
     void Update()
     {
         UpdateBar();
+        SetWireBlink();
     }
 
     void UpdateBar()
@@ -48,6 +53,164 @@ public class SC_ShowTourbiLvl_OP : MonoBehaviour
 
             tab_TorbiBar[i].SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, CurrentValue * f_MaxLenght);
 
+        }
+    }
+
+    void SetWireBlink()
+    {
+        for (int i = 0; i < tab_TorbiBar.Length; i++)
+        {
+
+            if (SC_SyncVar_BreakdownWeapon.Instance.SL_Tourbilols[i].isEnPanne)
+            {
+                switch (i)
+                {
+                    case 0:
+
+                        switch (SC_SyncVar_BreakdownWeapon.Instance.SL_Tourbilols[i].valueWanted)
+                        {
+                            case -1:
+
+                                BlinkMaster.ShutDownWire(1, false);
+                                BlinkMaster.ShutDownWire(4, false);
+                                BlinkMaster.ShutDownWire(5, false);
+                                BlinkMaster.ShutDownWire(6, false);
+                                BlinkMaster.ShutDownWire(8, false);
+                                
+
+                                BlinkMaster.SetBreakDown(0, true);
+                                BlinkMaster.SetBreakDown(3, true);
+                                BlinkMaster.SetBreakDown(7, true);
+                                BlinkMaster.SetBreakDown(9, true);
+
+                                BlinkMaster.SetBreakDown(1, false);
+                                BlinkMaster.SetBreakDown(4, false);
+                                BlinkMaster.SetBreakDown(5, false);
+                                BlinkMaster.SetBreakDown(6, false);
+                                BlinkMaster.SetBreakDown(8, false);
+
+                                BlinkMaster.ShutDownWire(1, true);
+                                BlinkMaster.ShutDownWire(4, true);
+                                BlinkMaster.ShutDownWire(5, true);
+                                BlinkMaster.ShutDownWire(6, true);
+                                BlinkMaster.ShutDownWire(8, true);
+
+
+
+                                break;
+
+                            case 1:
+
+                                BlinkMaster.ShutDownWire(1, false);
+                                BlinkMaster.ShutDownWire(3, false);
+                                BlinkMaster.ShutDownWire(5, false);
+                                BlinkMaster.ShutDownWire(6, false);
+                                BlinkMaster.ShutDownWire(7, false);
+
+                                BlinkMaster.SetBreakDown(0, true);
+                                BlinkMaster.SetBreakDown(4, true);
+                                BlinkMaster.SetBreakDown(8, true);
+                                BlinkMaster.SetBreakDown(9, true);
+
+                                BlinkMaster.SetBreakDown(1, false);
+                                BlinkMaster.ShutDownWire(3, false);
+                                BlinkMaster.SetBreakDown(5, false);
+                                BlinkMaster.SetBreakDown(6, false);
+                                BlinkMaster.SetBreakDown(7, false);
+
+                                BlinkMaster.ShutDownWire(1, true);
+                                BlinkMaster.ShutDownWire(3, true);
+                                BlinkMaster.ShutDownWire(5, true);
+                                BlinkMaster.ShutDownWire(6, true);
+                                BlinkMaster.ShutDownWire(7, true);
+
+                                break;
+
+                        }
+
+                        break;
+
+                    case 1:
+
+                        switch (SC_SyncVar_BreakdownWeapon.Instance.SL_Tourbilols[i].valueWanted)
+                        {
+                            case -1:
+
+
+                                BlinkMaster.ShutDownWire(0, false);
+                                BlinkMaster.ShutDownWire(3, false);
+                                BlinkMaster.ShutDownWire(4, false);
+                                BlinkMaster.ShutDownWire(6, false);
+                                BlinkMaster.ShutDownWire(8, false);
+
+
+                                BlinkMaster.SetBreakDown(1, true);
+                                BlinkMaster.SetBreakDown(5, true);
+                                BlinkMaster.SetBreakDown(7, true);
+                                BlinkMaster.SetBreakDown(9, true);
+
+                                BlinkMaster.SetBreakDown(0, false);
+                                BlinkMaster.SetBreakDown(3, false);
+                                BlinkMaster.SetBreakDown(4, false);
+                                BlinkMaster.SetBreakDown(6, false);
+                                BlinkMaster.SetBreakDown(8, false);
+
+                                BlinkMaster.ShutDownWire(0, true);
+                                BlinkMaster.ShutDownWire(3, true);
+                                BlinkMaster.ShutDownWire(4, true);
+                                BlinkMaster.ShutDownWire(6, true);
+                                BlinkMaster.ShutDownWire(8, true);
+
+                                break;
+
+                            case 1:
+
+                                BlinkMaster.ShutDownWire(0, false);
+                                BlinkMaster.ShutDownWire(3, false);
+                                BlinkMaster.ShutDownWire(4, false);
+                                BlinkMaster.ShutDownWire(5, false);
+                                BlinkMaster.ShutDownWire(7, false);
+
+
+                                BlinkMaster.SetBreakDown(1, true);
+                                BlinkMaster.SetBreakDown(6, true);
+                                BlinkMaster.SetBreakDown(8, true);
+                                BlinkMaster.SetBreakDown(9, true);
+
+                                BlinkMaster.SetBreakDown(0, false);
+                                BlinkMaster.SetBreakDown(3, false);
+                                BlinkMaster.SetBreakDown(4, false);
+                                BlinkMaster.SetBreakDown(5, false);
+                                BlinkMaster.SetBreakDown(7, false);
+
+                                BlinkMaster.ShutDownWire(0, true);
+                                BlinkMaster.ShutDownWire(3, true);
+                                BlinkMaster.ShutDownWire(4, true);
+                                BlinkMaster.ShutDownWire(5, true);
+                                BlinkMaster.ShutDownWire(7, true);
+
+                                break;
+
+                        }
+
+                        break;
+                }
+              
+            }
+            else
+            {
+                BlinkMaster.ShutDownWire(0, false);
+                BlinkMaster.ShutDownWire(1, false);
+                BlinkMaster.ShutDownWire(2, false);
+                BlinkMaster.ShutDownWire(3, false);
+                BlinkMaster.ShutDownWire(4, false);
+                BlinkMaster.ShutDownWire(5, false);
+                BlinkMaster.ShutDownWire(6, false);
+                BlinkMaster.ShutDownWire(7, false);
+                BlinkMaster.ShutDownWire(8, false);
+                BlinkMaster.ShutDownWire(9, false);
+            }
+            
         }
     }
 
