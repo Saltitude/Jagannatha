@@ -106,6 +106,11 @@ public class SC_Display_MechState : MonoBehaviour
 
             case SystemState.Connected:
 
+
+                ConnectedOffState.SetActive(false);
+
+                yield return new WaitForSeconds(0.75f);
+
                 DisconnectedState.SetActive(false);
 
 
@@ -115,9 +120,7 @@ public class SC_Display_MechState : MonoBehaviour
                 
                 InitializedState.SetActive(false);
 
-                yield return new WaitForSeconds(1f);
 
-                ConnectedOffState.SetActive(false);
 
 
                 break;
@@ -127,7 +130,7 @@ public class SC_Display_MechState : MonoBehaviour
 
                 InitializeOffState.SetActive(false);
 
-                yield return new WaitForSeconds(1f);
+                yield return new WaitForSeconds(0.75f);
 
                 GeneralOffState.SetActive(false);
                 InitializedState.SetActive(true);
@@ -141,7 +144,7 @@ public class SC_Display_MechState : MonoBehaviour
 
                 LaunchedOffState.SetActive(false);
 
-                yield return new WaitForSeconds(1f);
+                yield return new WaitForSeconds(0.75f);
 
                 InitializedState.SetActive(false);
 

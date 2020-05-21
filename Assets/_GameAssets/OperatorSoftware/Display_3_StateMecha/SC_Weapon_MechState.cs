@@ -123,6 +123,7 @@ public class SC_Weapon_MechState : MonoBehaviour
     IEnumerator ApplyState()
     {
 
+
         switch (CurState)
         {
 
@@ -134,6 +135,11 @@ public class SC_Weapon_MechState : MonoBehaviour
 
             case SystemState.Connected:
 
+
+                ConnectedOffState.SetActive(false);
+
+                yield return new WaitForSeconds(0.75f);
+
                 DisconnectedState.SetActive(false);
 
 
@@ -143,18 +149,17 @@ public class SC_Weapon_MechState : MonoBehaviour
 
                 InitializedState.SetActive(false);
 
-                yield return new WaitForSeconds(1f);
 
-                ConnectedOffState.SetActive(false);
 
 
                 break;
 
             case SystemState.Initialize:
+                DisconnectedState.SetActive(false);
 
                 InitializeOffState.SetActive(false);
 
-                yield return new WaitForSeconds(1f);
+                yield return new WaitForSeconds(0.75f);
 
                 GeneralOffState.SetActive(false);
                 InitializedState.SetActive(true);
@@ -163,20 +168,19 @@ public class SC_Weapon_MechState : MonoBehaviour
                 break;
 
             case SystemState.Launched:
+                DisconnectedState.SetActive(false);
 
 
                 LaunchedOffState.SetActive(false);
 
-                yield return new WaitForSeconds(1f);
+                yield return new WaitForSeconds(0.75f);
 
                 InitializedState.SetActive(false);
 
                 break;
 
         }
-
     }
-
     #endregion States
 
 }
