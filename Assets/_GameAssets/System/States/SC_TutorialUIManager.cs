@@ -19,9 +19,6 @@ public class SC_TutorialUIManager : MonoBehaviour
     Image[][] imageState;  
     
     [SerializeField]
-    Image[][] imageOff;
-
-    [SerializeField]
     Image[] displayHub;
     [SerializeField]
     Image[] weaponHub; 
@@ -71,7 +68,7 @@ public class SC_TutorialUIManager : MonoBehaviour
         img_Blink = new List<Image>();
         imageBlink = new Image[3][];
         imageState = new Image[3][];
-        imageOff = new Image[3][];
+
 
         imageBlink[0] = displayHub;
         imageBlink[1] = weaponHub;

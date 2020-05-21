@@ -75,18 +75,18 @@ public class SC_Movement_MechState : MonoBehaviour
 
     void CheckState()
     {
-
-        if ((SC_GameStates.Instance.CurState == SC_GameStates.GameState.Tutorial && (int)SC_GameStates.Instance.CurTutoState >= (int)SC_GameStates.TutorialState.RepairDisplay) || (SC_GameStates.Instance.CurState != SC_GameStates.GameState.Tutorial && !SC_SyncVar_MovementSystem.Instance.b_BreakEngine) )
+        SystemState newState;
+        if ((SC_GameStates.Instance.CurState == SC_GameStates.GameState.Tutorial && (int)SC_GameStates.Instance.CurTutoState >= (int)SC_GameStates.TutorialState.StartRepairDisplay) || (SC_GameStates.Instance.CurState != SC_GameStates.GameState.Tutorial && !SC_SyncVar_MovementSystem.Instance.b_BreakEngine) )
         {
-            CurState = SystemState.Connected;
+            newState = SystemState.Connected;
 
             if ((SC_GameStates.Instance.CurState == SC_GameStates.GameState.Tutorial && SC_SyncVar_MovementSystem.Instance.b_SeqIsCorrect) || (SC_GameStates.Instance.CurState != SC_GameStates.GameState.Tutorial && !SC_SyncVar_MovementSystem.Instance.b_MaxBreakdown))
             {
-                CurState = SystemState.Initialize;
+                newState = SystemState.Initialize;
 
                 if (SC_SyncVar_MovementSystem.Instance.b_IsLaunch)
                 {
-                    CurState = SystemState.Launched;
+                    newState = SystemState.Launched;
                 }
 
             }
@@ -95,22 +95,27 @@ public class SC_Movement_MechState : MonoBehaviour
 
         else
         {
-            CurState = SystemState.Disconnected;
+            newState = SystemState.Disconnected;
         }
 
-        ApplyState();
+        if (newState != CurState)
+        {
+            CurState = newState;
+            StopAllCoroutines();
+            StartCoroutine(ApplyState());
+        }
+
 
     }
 
-    void ApplyState()
+    IEnumerator ApplyState()
     {
 
         switch (CurState)
         {
 
-
             case SystemState.Disconnected:
-           
+
                 DisconnectedState.SetActive(true);
 
                 break;
@@ -119,43 +124,44 @@ public class SC_Movement_MechState : MonoBehaviour
 
                 DisconnectedState.SetActive(false);
 
+
                 InitializeOffState.SetActive(true);
                 LaunchedOffState.SetActive(true);
                 GeneralOffState.SetActive(true);
 
                 InitializedState.SetActive(false);
 
+                yield return new WaitForSeconds(1f);
+
                 ConnectedOffState.SetActive(false);
-           
+
 
                 break;
 
             case SystemState.Initialize:
 
-                DisconnectedState.SetActive(false);
-
-                ConnectedOffState.SetActive(false);
                 InitializeOffState.SetActive(false);
-                LaunchedOffState.SetActive(true);
-                GeneralOffState.SetActive(false);
 
+                yield return new WaitForSeconds(1f);
+
+                GeneralOffState.SetActive(false);
                 InitializedState.SetActive(true);
 
-                ConnectedOffState.SetActive(false);
 
                 break;
 
             case SystemState.Launched:
+
+
+                LaunchedOffState.SetActive(false);
                 DisconnectedState.SetActive(false);
 
-                ConnectedOffState.SetActive(false);
-                InitializeOffState.SetActive(false);
-                LaunchedOffState.SetActive(false);
-                GeneralOffState.SetActive(false);
+                yield return new WaitForSeconds(1f);
 
                 InitializedState.SetActive(false);
 
                 break;
+
         }
 
     }

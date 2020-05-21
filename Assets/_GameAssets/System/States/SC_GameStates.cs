@@ -14,7 +14,7 @@ public class SC_GameStates : NetworkBehaviour
     #endregion
 
     public enum GameState {Lobby, Tutorial, Tutorial2, Game, GameEnd }
-    public enum TutorialState { StartTutorial, RepairDisplay, RepairWeapon, RepairMotion, Reboot, Tutorial2_1, Tutorial2_2, Tutorial2_3, Tutorial2_4, Tutorial2_5, TutorialEnd}
+    public enum TutorialState { StartTutorial, StartRepairDisplay, EndRepairDisplay, StartRepairWeapon,EndRepairWeapon, StartRepairMotion, EndRepairMotion, Reboot, Tutorial2_1, Tutorial2_2, Tutorial2_3, Tutorial2_4, Tutorial2_5, TutorialEnd}
     public GameState CurState;
     public TutorialState CurTutoState;
     public bool Disp = false;
@@ -141,14 +141,14 @@ public class SC_GameStates : NetworkBehaviour
                     SC_TutorialUIManager.Instance.ActivateSystem(SC_TutorialUIManager.System.Weapon, false);
                     SC_TutorialUIManager.Instance.ActivateSystem(SC_TutorialUIManager.System.Motion, false);
                 }
-                StartCoroutine(Swichtuto(0.4f, TutorialState.RepairDisplay));
+                StartCoroutine(Swichtuto(1f, TutorialState.StartRepairDisplay));
 
                 break;
 
-            case TutorialState.RepairDisplay:
+            //----------------------------DISPLAY---------------------------------------//
+            case TutorialState.StartRepairDisplay:
                 if(!isServer)
                 {
-                    Debug.Log("RepairDisplay");
                     //Debut Display
                     SC_Display_MechState.Instance.UpdateVar();
                     SC_TutorialUIManager.Instance.ActivateSystem(SC_TutorialUIManager.System.Display,true);
@@ -156,43 +156,61 @@ public class SC_GameStates : NetworkBehaviour
                 }
                 break;
 
-            case TutorialState.RepairWeapon:
-                if(!isServer)
+            case TutorialState.EndRepairDisplay:
+                if (!isServer)
                 {
-                    Debug.Log("RepairWeapon");
                     //Fin Display
                     SC_TutorialUIManager.Instance.ActivateBlink(SC_TutorialUIManager.System.Display, false);
+                }
+                StartCoroutine(Swichtuto(1f, TutorialState.StartRepairWeapon));
+
+                break;
+               
+            //----------------------------WEAPON---------------------------------------//
+            case TutorialState.StartRepairWeapon:
+                if(!isServer)
+                {                    
                     //Debut Weapon
                     SC_Weapon_MechState.Instance.UpdateVar();
                     SC_TutorialUIManager.Instance.ActivateSystem(SC_TutorialUIManager.System.Weapon, true);
                     SC_TutorialUIManager.Instance.ActivateBlink(SC_TutorialUIManager.System.Weapon, true);
 
-
                 }
                 break;
+
+            case TutorialState.EndRepairWeapon:
+                if (!isServer)
+                {
+                    SC_TutorialUIManager.Instance.ActivateBlink(SC_TutorialUIManager.System.Weapon, false);
+                }
+                StartCoroutine(Swichtuto(1f, TutorialState.StartRepairMotion));
+
+                break;
             
-            case TutorialState.RepairMotion:
+            //----------------------------MOTION---------------------------------------//
+            case TutorialState.StartRepairMotion:
                 if(!isServer)
                 {
-                    Debug.Log("RepairMotion");
-                    //Fin Weapon
-                    SC_TutorialUIManager.Instance.ActivateBlink(SC_TutorialUIManager.System.Weapon, false);
-
                     //Debut Motion
                     SC_Movement_MechState.Instance.UpdateVar();
                     SC_TutorialUIManager.Instance.ActivateSystem(SC_TutorialUIManager.System.Motion, true);
                     SC_TutorialUIManager.Instance.ActivateBlink(SC_TutorialUIManager.System.Motion, true);
                 }
-                break;    
-            
+                break;
+
+            case TutorialState.EndRepairMotion:
+                if (!isServer)
+                {
+                    SC_TutorialUIManager.Instance.ActivateBlink(SC_TutorialUIManager.System.Motion, false);
+
+                }
+                StartCoroutine(Swichtuto(1f, TutorialState.Reboot));
+
+                break;
+
             case TutorialState.Reboot:
                 if(!isServer)
                 {
-                    Debug.Log("Reboot");
-                    //Fin Motion
-                    SC_TutorialUIManager.Instance.ActivateBlink(SC_TutorialUIManager.System.Motion, false);
-
-                    //Debut Reboot
 
                 }
                 break;     
