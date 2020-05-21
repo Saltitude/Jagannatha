@@ -4,7 +4,7 @@ VideoClipImporter:
   externalObjects: {}
   serializedVersion: 2
   useLegacyImporter: 1
-  quality: 1
+  quality: 0
   isColorLinear: 0
   frameRange: 0
   startFrame: -1
