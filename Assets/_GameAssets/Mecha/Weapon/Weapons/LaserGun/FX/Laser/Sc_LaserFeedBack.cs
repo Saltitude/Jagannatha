@@ -19,7 +19,7 @@ public class Sc_LaserFeedBack : MonoBehaviour
     [SerializeField]
     Color CurColor;
     public GameObject Laser;
-    public GameObject EnergyBall;
+    public Material EnergyBall;
     public GameObject ChargeSpark;
     public GameObject Fioriture;
     public GameObject Ondes;
@@ -28,7 +28,7 @@ public class Sc_LaserFeedBack : MonoBehaviour
     [SerializeField]
     SC_WeaponLaserGun WeapMainSC;
     public ParticleSystem.MainModule LaserPS;
-    public ParticleSystem.MainModule EnergyBallPS;
+    //public ParticleSystem.MainModule EnergyBallPS;
     public ParticleSystem.MainModule ChargeSparkPS;
     public ParticleSystem.MainModule FioriturePS;
     public ParticleSystem.MainModule OndesPS;
@@ -54,7 +54,7 @@ public class Sc_LaserFeedBack : MonoBehaviour
         if (SFX_LaserBeam != null)
         {
             SFX_LaserBeam.transform.position = new Vector3(Laser.transform.position.x, -1000, Laser.transform.position.z);
-            Debug.Log(SFX_LaserBeam.transform.position);
+            //Debug.Log(SFX_LaserBeam.transform.position);
         }
     }
     public void EnableLaser(RaycastHit hit)
@@ -109,7 +109,7 @@ public class Sc_LaserFeedBack : MonoBehaviour
 
             LaserPS = Laser.GetComponent<ParticleSystem>().main;
             ChargeSparkPS = ChargeSpark.GetComponent<ParticleSystem>().main;
-            EnergyBallPS = EnergyBall.GetComponent<ParticleSystem>().main;
+            //EnergyBallPS = EnergyBall.GetComponent<ParticleSystem>().main;
             FioriturePS = Fioriture.GetComponent<ParticleSystem>().main;
             OndesPS = Ondes.GetComponent<ParticleSystem>().main;
             ElicePS = Elice.GetComponent<ParticleSystem>().main;
@@ -117,7 +117,7 @@ public class Sc_LaserFeedBack : MonoBehaviour
 
             LaserPS.startColor = gradiend;
             ChargeSparkPS.startColor = gradiend;
-            EnergyBallPS.startColor = gradiend;
+            EnergyBall.SetColor("_EmissionColor", CurColor);
             FioriturePS.startColor = gradiend;
             OndesPS.startColor = gradiend;
             ElicePS.startColor = gradiend;

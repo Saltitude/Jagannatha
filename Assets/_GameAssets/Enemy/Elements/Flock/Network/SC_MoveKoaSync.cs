@@ -72,7 +72,7 @@ public class SC_MoveKoaSync : NetworkBehaviour
     }
 
     [ClientRpc]
-    public void RpcSendIntCurLife(GameObject Target, int curLife)
+    public void RpcSendIntCurLife(GameObject Target, float curLife)
     {
         if (!isServer) 
             Target.transform.GetChild(1).GetComponent<SC_KoaSettingsOP>().SetKoaLife(curLife);
@@ -93,7 +93,7 @@ public class SC_MoveKoaSync : NetworkBehaviour
     }
 
     [ClientRpc]
-    public void RpcSendStartInfo(GameObject Target, Vector3 vt3_Sensibility, int timeBeforeSpawn,string KoaID,int curLife, int maxLife,int type)
+    public void RpcSendStartInfo(GameObject Target, Vector3 vt3_Sensibility, int timeBeforeSpawn,string KoaID,float curLife, float maxLife,int type)
     {
         this.KoaID = KoaID;
         if (!isServer)
@@ -117,7 +117,7 @@ public class SC_MoveKoaSync : NetworkBehaviour
         sc_KoaSettings.SetBoolAnimation(deploy, flight, bullet, laser, speedFactor, chargeLaser);
     }
 
-    public void InitOPKoaSettings(Vector3 sensibility, int timeBeforeSpawn, string KoaID,int curLife, int maxLife, int type, Transform guide)
+    public void InitOPKoaSettings(Vector3 sensibility, int timeBeforeSpawn, string KoaID,float curLife, float maxLife, int type, Transform guide)
     {
         if (isServer)
         {
@@ -126,7 +126,7 @@ public class SC_MoveKoaSync : NetworkBehaviour
         }
     }
 
-    public void SetCurLife(int curLife)
+    public void SetCurLife(float curLife)
     {
         RpcSendIntCurLife(gameObject, curLife);
     }
