@@ -31,6 +31,9 @@ public class SC_breakdown_displays_screens : MonoBehaviour
     [Header("BreakDown Infos")]
     [SerializeField]
     int curNbPanne = 0;
+
+
+    private int nbOfChildrenAtInit = 13;
     
     void Awake()
     {
@@ -79,6 +82,8 @@ public class SC_breakdown_displays_screens : MonoBehaviour
     {
         for (int i = 0; i < gameObject.transform.childCount; i++)
         {
+            nbOfChildrenAtInit = gameObject.transform.childCount;
+
             tab_screens_renderers[i].material = mat[1];
             tab_screens_renderers[i].GetComponent<SC_playvideo>().StopVideo();
             tab_screens_renderers[i].GetComponent<SC_playvideo>().PlayVideo();
@@ -90,8 +95,9 @@ public class SC_breakdown_displays_screens : MonoBehaviour
 
     public void PannePartielleDisplay()
     {
-        for (int i = 0; i < gameObject.transform.childCount; i++)
+        for (int i = 0; i < nbOfChildrenAtInit; i++)
         {
+
             tab_screens_renderers[i].material = mat[1];
             tab_screens_renderers[i].GetComponent<SC_playvideo>().StopVideo();
             tab_screens_renderers[i].GetComponent<SC_playvideo>().PlayVideo();
@@ -103,7 +109,7 @@ public class SC_breakdown_displays_screens : MonoBehaviour
     //pour foutre le mat video de panne totale
     public void FullPanneDisplay()
     {
-        for (int i = 0; i < gameObject.transform.childCount; i++)
+        for (int i = 0; i < nbOfChildrenAtInit; i++)
         {
             tab_screens_renderers[i].material = mat[3];
             tab_screens_renderers[i].GetComponent<SC_playvideo>().StopVideo();
@@ -114,7 +120,7 @@ public class SC_breakdown_displays_screens : MonoBehaviour
     public void EndScreenDisplay()
     {
         gameEnded = true;
-        for (int i = 0; i < gameObject.transform.childCount; i++)
+        for (int i = 0; i < nbOfChildrenAtInit; i++)
         {
             tab_screens_renderers[i].material = mat[2];
             tab_screens_renderers[i].enabled = true;
@@ -209,7 +215,7 @@ public class SC_breakdown_displays_screens : MonoBehaviour
             CustomSoundManager.Instance.PlaySound(gameObject, "SFX_p_ScreenActivated", false, 0.1f);
         }
         else
-            PannePartielleDisplay();
+           PannePartielleDisplay();
 
         for (int i = 0; i < tab_screens_renderers.Length; i++)
         {
