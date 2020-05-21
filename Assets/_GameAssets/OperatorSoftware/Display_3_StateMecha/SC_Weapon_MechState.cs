@@ -128,28 +128,44 @@ public class SC_Weapon_MechState : MonoBehaviour
         {
 
             case SystemState.Disconnected:
-
+                SC_TutorialUIManager.Instance.ActivateSystem(SC_TutorialUIManager.System.Weapon, false);
                 DisconnectedState.SetActive(true);
 
                 break;
 
             case SystemState.Connected:
 
+                SC_TutorialUIManager.Instance.ActivateSystem(SC_TutorialUIManager.System.Weapon, false);
 
                 ConnectedOffState.SetActive(false);
-
-                yield return new WaitForSeconds(0.75f);
-
-                DisconnectedState.SetActive(false);
-
-
                 InitializeOffState.SetActive(true);
                 LaunchedOffState.SetActive(true);
                 GeneralOffState.SetActive(true);
-
                 InitializedState.SetActive(false);
 
+                yield return new WaitForSeconds(0.75f);
+                SC_TutorialUIManager.Instance.ActivateSystem(SC_TutorialUIManager.System.Weapon, true);
+                DisconnectedState.SetActive(false);
 
+                yield return new WaitForSeconds(0.1f);
+                SC_TutorialUIManager.Instance.ActivateSystem(SC_TutorialUIManager.System.Weapon, false);
+
+                DisconnectedState.SetActive(true);
+
+                yield return new WaitForSeconds(0.1f);
+                SC_TutorialUIManager.Instance.ActivateSystem(SC_TutorialUIManager.System.Weapon, true);
+
+                DisconnectedState.SetActive(false);
+
+                yield return new WaitForSeconds(0.1f);
+                SC_TutorialUIManager.Instance.ActivateSystem(SC_TutorialUIManager.System.Weapon, false);
+
+                DisconnectedState.SetActive(true);
+
+                yield return new WaitForSeconds(0.1f);
+                SC_TutorialUIManager.Instance.ActivateSystem(SC_TutorialUIManager.System.Weapon, true);
+                SC_TutorialUIManager.Instance.ActivateBlink(SC_TutorialUIManager.System.Weapon, true);
+                DisconnectedState.SetActive(false);
 
 
                 break;

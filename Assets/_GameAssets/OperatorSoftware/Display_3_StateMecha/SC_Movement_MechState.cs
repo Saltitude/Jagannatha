@@ -116,6 +116,7 @@ public class SC_Movement_MechState : MonoBehaviour
         {
 
             case SystemState.Disconnected:
+                SC_TutorialUIManager.Instance.ActivateSystem(SC_TutorialUIManager.System.Motion, false);
 
                 DisconnectedState.SetActive(true);
 
@@ -124,20 +125,38 @@ public class SC_Movement_MechState : MonoBehaviour
             case SystemState.Connected:
 
 
+                SC_TutorialUIManager.Instance.ActivateSystem(SC_TutorialUIManager.System.Motion, false);
+
                 ConnectedOffState.SetActive(false);
-
-                yield return new WaitForSeconds(0.75f);
-
-                DisconnectedState.SetActive(false);
-
-
                 InitializeOffState.SetActive(true);
                 LaunchedOffState.SetActive(true);
                 GeneralOffState.SetActive(true);
-
                 InitializedState.SetActive(false);
 
+                yield return new WaitForSeconds(0.75f);
+                SC_TutorialUIManager.Instance.ActivateSystem(SC_TutorialUIManager.System.Motion, true);
+                DisconnectedState.SetActive(false);
 
+                yield return new WaitForSeconds(0.1f);
+                SC_TutorialUIManager.Instance.ActivateSystem(SC_TutorialUIManager.System.Motion, false);
+
+                DisconnectedState.SetActive(true);
+
+                yield return new WaitForSeconds(0.1f);
+                SC_TutorialUIManager.Instance.ActivateSystem(SC_TutorialUIManager.System.Motion, true);
+
+                DisconnectedState.SetActive(false);
+
+                yield return new WaitForSeconds(0.1f);
+                SC_TutorialUIManager.Instance.ActivateSystem(SC_TutorialUIManager.System.Motion, false);
+
+                DisconnectedState.SetActive(true);
+
+                yield return new WaitForSeconds(0.1f);
+                SC_TutorialUIManager.Instance.ActivateSystem(SC_TutorialUIManager.System.Motion, true);
+                SC_TutorialUIManager.Instance.ActivateBlink(SC_TutorialUIManager.System.Motion, true);
+
+                DisconnectedState.SetActive(false);
 
 
                 break;

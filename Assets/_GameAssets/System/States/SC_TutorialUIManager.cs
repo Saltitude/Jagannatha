@@ -60,6 +60,9 @@ public class SC_TutorialUIManager : MonoBehaviour
     void Start()
     {
         SetTab();
+        ActivateSystem(System.Display, false);
+        ActivateSystem(System.Weapon, false);
+        ActivateSystem(System.Motion, false);
         StartCoroutine(BlinkCoro());
     }
 
@@ -113,27 +116,33 @@ public class SC_TutorialUIManager : MonoBehaviour
     
     public void ActivateSystem(System syst, bool activation)
     {
-        for(int i = 0; i < imageBlink[(int)syst].Length; i++)
-        {
-            if(activation)
-                ActivateImage(imageBlink[(int)syst][i]); 
-
-            else
-                DeactivateImage(imageBlink[(int)syst][i]);
-        }
+    
         for(int i = 0;i < imageState[(int)syst].Length; i++)
         {
             if (activation)
                 ActivateImage(imageState[(int)syst][i]);
-
             else
                 DeactivateImage(imageState[(int)syst][i]);
+        }
+        for(int i = 0;i < imageBlink[(int)syst].Length; i++)
+        {
+            if (activation)
+                ActivateImage(imageBlink[(int)syst][i]);
+            else
+                DeactivateImage(imageBlink[(int)syst][i]);
+            
         }
 
     }
 
     public void ActivateBlink(System syst, bool blink)
     {
+        for (int i = 0; i < imageBlink[(int)syst].Length; i++)
+        {
+            if (blink)
+                ActivateImage(imageBlink[(int)syst][i]);
+
+        }
         for (int i = 0; i < imageBlink[(int)syst].Length; i++)
         {
             if (blink)

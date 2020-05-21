@@ -52,6 +52,7 @@ public class SC_GameStates : NetworkBehaviour
     {
         if (isServer)
         {
+
             RpcSetState(TargetState);
             SyncSystemState(TargetState);
         }
@@ -61,6 +62,8 @@ public class SC_GameStates : NetworkBehaviour
     {
         if (isServer)
         {
+            Debug.Log("ChangeTuto : "+ TargetTutoState);
+
             RpcSetTutoState(TargetTutoState);
             SyncSystemTutoState(TargetTutoState);
         }
@@ -140,6 +143,7 @@ public class SC_GameStates : NetworkBehaviour
                     SC_TutorialUIManager.Instance.ActivateSystem(SC_TutorialUIManager.System.Display, false);
                     SC_TutorialUIManager.Instance.ActivateSystem(SC_TutorialUIManager.System.Weapon, false);
                     SC_TutorialUIManager.Instance.ActivateSystem(SC_TutorialUIManager.System.Motion, false);
+
                 }
                 StartCoroutine(Swichtuto(1f, TutorialState.StartRepairDisplay));
 
@@ -151,8 +155,6 @@ public class SC_GameStates : NetworkBehaviour
                 {
                     //Debut Display
                     SC_Display_MechState.Instance.UpdateVar();
-                    SC_TutorialUIManager.Instance.ActivateSystem(SC_TutorialUIManager.System.Display,true);
-                    SC_TutorialUIManager.Instance.ActivateBlink(SC_TutorialUIManager.System.Display,true);
                 }
                 break;
 
@@ -162,19 +164,15 @@ public class SC_GameStates : NetworkBehaviour
                     //Fin Display
                     SC_TutorialUIManager.Instance.ActivateBlink(SC_TutorialUIManager.System.Display, false);
                 }
-                StartCoroutine(Swichtuto(1f, TutorialState.StartRepairWeapon));
+                StartCoroutine(Swichtuto(0f, TutorialState.StartRepairWeapon));
 
                 break;
                
             //----------------------------WEAPON---------------------------------------//
             case TutorialState.StartRepairWeapon:
                 if(!isServer)
-                {                    
+                {
                     //Debut Weapon
-                    SC_Weapon_MechState.Instance.UpdateVar();
-                    SC_TutorialUIManager.Instance.ActivateSystem(SC_TutorialUIManager.System.Weapon, true);
-                    SC_TutorialUIManager.Instance.ActivateBlink(SC_TutorialUIManager.System.Weapon, true);
-
                 }
                 break;
 
@@ -183,7 +181,7 @@ public class SC_GameStates : NetworkBehaviour
                 {
                     SC_TutorialUIManager.Instance.ActivateBlink(SC_TutorialUIManager.System.Weapon, false);
                 }
-                StartCoroutine(Swichtuto(1f, TutorialState.StartRepairMotion));
+                StartCoroutine(Swichtuto(0f, TutorialState.StartRepairMotion));
 
                 break;
             
@@ -191,10 +189,7 @@ public class SC_GameStates : NetworkBehaviour
             case TutorialState.StartRepairMotion:
                 if(!isServer)
                 {
-                    //Debut Motion
-                    SC_Movement_MechState.Instance.UpdateVar();
-                    SC_TutorialUIManager.Instance.ActivateSystem(SC_TutorialUIManager.System.Motion, true);
-                    SC_TutorialUIManager.Instance.ActivateBlink(SC_TutorialUIManager.System.Motion, true);
+
                 }
                 break;
 
@@ -204,9 +199,10 @@ public class SC_GameStates : NetworkBehaviour
                     SC_TutorialUIManager.Instance.ActivateBlink(SC_TutorialUIManager.System.Motion, false);
 
                 }
-                StartCoroutine(Swichtuto(1f, TutorialState.Reboot));
+                StartCoroutine(Swichtuto(0f, TutorialState.Reboot));
 
-                break;
+                break;²
+
 
             case TutorialState.Reboot:
                 if(!isServer)
@@ -322,6 +318,8 @@ public class SC_GameStates : NetworkBehaviour
         SC_SyncVar_MovementSystem.Instance.CurState = TargetState;
         SC_SyncVar_WeaponSystem.Instance.CurState = TargetState;
     }
+
+    
     void SyncSystemTutoState(TutorialState TargetTutoState)
     {
 

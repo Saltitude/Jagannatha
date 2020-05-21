@@ -51,51 +51,37 @@ public class SC_UI_OngletSelection : MonoBehaviour, IF_clicableAction, IF_Hover
     public void Action()
     {
         SC_UI_OngletContainer.Window newWindow = (SC_UI_OngletContainer.Window)index;
-        if(index == 0 && SC_GameStates.Instance.CurTutoState == SC_GameStates.TutorialState.StartRepairDisplay)
+
+        if (SC_GameStates.Instance.CurState == SC_GameStates.GameState.Game)
+            ActionGame();
+
+        if (SC_GameStates.Instance.CurState == SC_GameStates.GameState.Tutorial || SC_GameStates.Instance.CurState == SC_GameStates.GameState.Tutorial)
+            ActionTuto();
+
+        ongletContainer.ChangeWindow(newWindow);
+        
+    }
+    
+    void ActionGame()
+    {
+        //ONGLET IN
+        if (index == 0)
         {
-            // SC_CheckList.Instance.NetworkPlayerPilot.GetComponent<SC_Net_Player_TutoState>().CmdChangeTutoState(SC_GameStates.TutorialState.Tutorial1_4);
             ongletContainer.DisplayIn();
             animator.SetBool("ActivateDisplay", true);
         }
-        else if (index == 1 && SC_GameStates.Instance.CurTutoState == SC_GameStates.TutorialState.StartRepairWeapon)
+        if (index == 1)
         {
-            //SC_CheckList.Instance.NetworkPlayerPilot.GetComponent<SC_Net_Player_TutoState>().CmdChangeTutoState(SC_GameStates.TutorialState.Tutorial1_5);
-
             ongletContainer.WeaponIn();
             animator.SetBool("ActivateWeapon", true);
         }
-        else if (index == 2 && SC_GameStates.Instance.CurTutoState == SC_GameStates.TutorialState.StartRepairMotion)
+        if (index == 2)
         {
-            //SC_CheckList.Instance.NetworkPlayerPilot.GetComponent<SC_Net_Player_TutoState>().CmdChangeTutoState(SC_GameStates.TutorialState.Tutorial1_6);
             ongletContainer.MoveIn();
             animator.SetBool("ActivateMove", true);
         }
 
-        ongletContainer.ChangeWindow(newWindow);
-        #region AnimIn&Out
-        
-        if(SC_GameStates.Instance.CurState == SC_GameStates.GameState.Game)
-        {
-            if (index == 0)
-            {
-                ongletContainer.DisplayIn();
-                animator.SetBool("ActivateDisplay", true);
-            }
-            if (index == 1)
-            {
-                ongletContainer.WeaponIn();
-                animator.SetBool("ActivateWeapon", true);
-            }
-            if (index == 2)
-            {
-                ongletContainer.MoveIn();
-                animator.SetBool("ActivateMove", true);
-            }
-
-        }
-
-
-
+        //ONGLET OUT
         if (index == 3)
         {
             ongletContainer.DisplayOut();
@@ -111,7 +97,47 @@ public class SC_UI_OngletSelection : MonoBehaviour, IF_clicableAction, IF_Hover
             ongletContainer.MoveOut();
             additionalAnimator.SetBool("ActivateMove", false);
         }
-        #endregion
+    }
+    void ActionTuto()
+    {
+        if (index == 0 && SC_GameStates.Instance.CurTutoState == SC_GameStates.TutorialState.StartRepairDisplay)
+        {
+            ongletContainer.DisplayIn();
+            animator.SetBool("ActivateDisplay", true);
+        }
+        else if (index == 1 && SC_GameStates.Instance.CurTutoState == SC_GameStates.TutorialState.StartRepairWeapon)
+        {
+
+            ongletContainer.WeaponIn();
+            animator.SetBool("ActivateWeapon", true);
+        }
+        else if (index == 2 && SC_GameStates.Instance.CurTutoState == SC_GameStates.TutorialState.StartRepairMotion)
+        {
+            ongletContainer.MoveIn();
+            animator.SetBool("ActivateMove", true);
+        }
+
+        //ONGLET OUT
+        if (index == 3 && SC_GameStates.Instance.CurTutoState == SC_GameStates.TutorialState.StartRepairWeapon)
+        {
+
+            SC_Weapon_MechState.Instance.UpdateVar();
+            ongletContainer.DisplayOut();
+            additionalAnimator.SetBool("ActivateDisplay", false);
+        }
+        if (index == 4 && SC_GameStates.Instance.CurTutoState == SC_GameStates.TutorialState.StartRepairMotion)
+        {
+            SC_Movement_MechState.Instance.UpdateVar();
+            ongletContainer.WeaponOut();
+            additionalAnimator.SetBool("ActivateWeapon", false);
+        }
+        if (index == 5 && SC_GameStates.Instance.CurTutoState == SC_GameStates.TutorialState.Reboot)
+        {
+            
+            ongletContainer.MoveOut();
+            additionalAnimator.SetBool("ActivateMove", false);
+        }
+
     }
 
     public void HoverAction()
@@ -148,17 +174,17 @@ public class SC_UI_OngletSelection : MonoBehaviour, IF_clicableAction, IF_Hover
         if (animator != null)
         {
 
-            if ((index == 0 || index == 3)&& SC_GameStates.Instance.CurTutoState == SC_GameStates.TutorialState.StartRepairDisplay)
+            if ((index == 0 || index == 3)&& (SC_GameStates.Instance.CurTutoState == SC_GameStates.TutorialState.StartRepairDisplay || SC_GameStates.Instance.CurTutoState == SC_GameStates.TutorialState.EndRepairDisplay))
             {
                 animator.SetBool("Hover", true);
                 StartCoroutine(EndCoroutine("Hover"));
             }
-            if ((index == 1 || index == 4)&& SC_GameStates.Instance.CurTutoState == SC_GameStates.TutorialState.StartRepairWeapon)
+            if ((index == 1 || index == 4)&& (SC_GameStates.Instance.CurTutoState == SC_GameStates.TutorialState.StartRepairWeapon || SC_GameStates.Instance.CurTutoState == SC_GameStates.TutorialState.EndRepairWeapon))
             {
                 animator.SetBool("Hover", true);
                 StartCoroutine(EndCoroutine("Hover"));
             }
-            if ((index == 2 || index == 5)&& SC_GameStates.Instance.CurTutoState == SC_GameStates.TutorialState.StartRepairMotion)
+            if ((index == 2 || index == 5)&& (SC_GameStates.Instance.CurTutoState == SC_GameStates.TutorialState.StartRepairMotion || SC_GameStates.Instance.CurTutoState == SC_GameStates.TutorialState.EndRepairMotion))
             {
                 animator.SetBool("Hover", true);
                 StartCoroutine(EndCoroutine("Hover"));
