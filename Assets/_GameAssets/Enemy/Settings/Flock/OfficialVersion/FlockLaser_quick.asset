@@ -55,3 +55,4 @@ MonoBehaviour:
   boidSpawn: 200
   maxBoid: 200
   regenerationRate: 400
+  damageMultiplicator: 0.5

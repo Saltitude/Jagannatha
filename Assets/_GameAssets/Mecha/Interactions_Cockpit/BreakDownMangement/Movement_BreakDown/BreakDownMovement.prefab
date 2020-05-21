@@ -118,6 +118,11 @@ PrefabInstance:
       propertyPath: m_LinearLimit.limit
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 6214298081292063231, guid: 124da0aa294877c498d4a2df69c64921,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -1.0759888
+      objectReference: {fileID: 0}
     - target: {fileID: 6214298081980365120, guid: 124da0aa294877c498d4a2df69c64921,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -250,6 +255,11 @@ PrefabInstance:
       propertyPath: m_LinearLimit.limit
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 6214298081292063231, guid: 124da0aa294877c498d4a2df69c64921,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -1.0759888
+      objectReference: {fileID: 0}
     - target: {fileID: 6214298081980365120, guid: 124da0aa294877c498d4a2df69c64921,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -376,6 +386,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LinearLimit.limit
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6214298081292063231, guid: 124da0aa294877c498d4a2df69c64921,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -1.076
       objectReference: {fileID: 0}
     - target: {fileID: 6214298081980365120, guid: 124da0aa294877c498d4a2df69c64921,
         type: 3}
