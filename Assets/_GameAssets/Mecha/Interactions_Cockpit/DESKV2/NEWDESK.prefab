@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 4639342172206388722}
   - component: {fileID: 8937092910024140861}
   - component: {fileID: 8079341220510477244}
-  - component: {fileID: 3211158198089168324}
   m_Layer: 0
   m_Name: calibr_syst
   m_TagString: Untagged
@@ -78,25 +77,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!95 &3211158198089168324
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 418147986733225772}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 2a54382a0b50ffa46a4c09e6895608df, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!64 &2312968184786547054
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -136,7 +116,6 @@ GameObject:
   - component: {fileID: 5450122262218840658}
   - component: {fileID: 2468743539624719784}
   - component: {fileID: 462040937190766429}
-  - component: {fileID: 7987607470545111361}
   m_Layer: 0
   m_Name: iris_threads
   m_TagString: Untagged
@@ -203,25 +182,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!95 &7987607470545111361
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1652618998082075440}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: a1f17b398d4154747888f8fbc08068e8, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &3753322347657344314
 GameObject:
   m_ObjectHideFlags: 0
@@ -462,7 +422,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7594371457580833803}
-  - component: {fileID: 2719510176816376421}
   m_Layer: 0
   m_Name: NEWDESK
   m_TagString: Untagged
@@ -500,25 +459,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!95 &2719510176816376421
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4159815535670676933}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 839baa1deed88c0439ba6f0ec623c898, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &4171916977060448471
 GameObject:
   m_ObjectHideFlags: 0
@@ -530,7 +470,6 @@ GameObject:
   - component: {fileID: 6859237118346364657}
   - component: {fileID: 2974591872430186691}
   - component: {fileID: 1990952789826750088}
-  - component: {fileID: 7290405580516098204}
   m_Layer: 0
   m_Name: Optical_nerves
   m_TagString: Untagged
@@ -597,25 +536,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!95 &7290405580516098204
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4171916977060448471}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 174e648cc0a13f646b2fbf0201d8e1cc, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &4492004074616630880
 GameObject:
   m_ObjectHideFlags: 0
@@ -1012,7 +932,6 @@ GameObject:
   - component: {fileID: 4352736658348172726}
   - component: {fileID: 3142840089569841510}
   - component: {fileID: 579273786601451154}
-  - component: {fileID: 2140813661914015731}
   m_Layer: 0
   m_Name: retinal_path
   m_TagString: Untagged
@@ -1079,25 +998,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!95 &2140813661914015731
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6783719865613961437}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: ca93591c5a751a445a1d3395613c5430, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &7533134264079742570
 GameObject:
   m_ObjectHideFlags: 0
@@ -1186,7 +1086,6 @@ GameObject:
   - component: {fileID: 4677857936090404273}
   - component: {fileID: 2379850599358669205}
   - component: {fileID: 4723553321391964069}
-  - component: {fileID: 4262187245269213578}
   m_Layer: 0
   m_Name: syzygy
   m_TagString: Untagged
@@ -1253,25 +1152,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!95 &4262187245269213578
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8633125485540169943}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: f4d2a0757d6c9834d87e1114306f4afd, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1001 &830256038882665580
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1420,15 +1300,15 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: 9f24d414125fd704d8117ad5cd581757, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1dab4eca4bdad93449aefb13adc4df8b, type: 3}
---- !u!4 &1011685425056193069 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 400000, guid: 1dab4eca4bdad93449aefb13adc4df8b,
-    type: 3}
-  m_PrefabInstance: {fileID: 1011685425056317613}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1011685425056417293 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 100000, guid: 1dab4eca4bdad93449aefb13adc4df8b,
+    type: 3}
+  m_PrefabInstance: {fileID: 1011685425056317613}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &1011685425056193069 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 400000, guid: 1dab4eca4bdad93449aefb13adc4df8b,
     type: 3}
   m_PrefabInstance: {fileID: 1011685425056317613}
   m_PrefabAsset: {fileID: 0}
