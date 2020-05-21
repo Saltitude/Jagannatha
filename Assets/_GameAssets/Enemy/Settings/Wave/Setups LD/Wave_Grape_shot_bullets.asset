@@ -18,15 +18,15 @@ MonoBehaviour:
   timeBetweenSpawnInitial: 0
   backup: 1
   backupSpawnFlock:
+  - {fileID: 11400000, guid: 35b2fbc7fd05ed34cb227d96c78f9b4d, type: 2}
+  - {fileID: 11400000, guid: 35b2fbc7fd05ed34cb227d96c78f9b4d, type: 2}
   - {fileID: 11400000, guid: a2e1ee6db55ca5d4793fa4ea58429bc5, type: 2}
+  - {fileID: 11400000, guid: 35b2fbc7fd05ed34cb227d96c78f9b4d, type: 2}
   - {fileID: 11400000, guid: a2e1ee6db55ca5d4793fa4ea58429bc5, type: 2}
-  - {fileID: 11400000, guid: a2e1ee6db55ca5d4793fa4ea58429bc5, type: 2}
-  - {fileID: 11400000, guid: a2e1ee6db55ca5d4793fa4ea58429bc5, type: 2}
-  - {fileID: 11400000, guid: a2e1ee6db55ca5d4793fa4ea58429bc5, type: 2}
-  - {fileID: 11400000, guid: a2e1ee6db55ca5d4793fa4ea58429bc5, type: 2}
-  - {fileID: 11400000, guid: a2e1ee6db55ca5d4793fa4ea58429bc5, type: 2}
+  - {fileID: 11400000, guid: 35b2fbc7fd05ed34cb227d96c78f9b4d, type: 2}
+  - {fileID: 11400000, guid: 35b2fbc7fd05ed34cb227d96c78f9b4d, type: 2}
   backupSpawnPosition: 00000000000000000000000000000000000000000000000000000000
   timeBeforeBackup: 12
   flockLeftBeforeBackup: 0
-  timeBetweenSpawnBackup: 1.5
-  timeBeforeNextWave: 15
+  timeBetweenSpawnBackup: 2
+  timeBeforeNextWave: 5

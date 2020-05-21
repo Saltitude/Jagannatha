@@ -89,4 +89,7 @@ public class FlockSettings : ScriptableObject
 
     [Tooltip("boids per min")]
     public int regenerationRate;
+
+    [Tooltip("1 is normal"), Range(0.01f, 5f)]
+    public float damageMultiplicator = 1;
 }

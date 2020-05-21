@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Wave_Solo_Bullet_midi
   m_EditorClassIdentifier: 
   initialSpawnFlock:
-  - {fileID: 11400000, guid: a2e1ee6db55ca5d4793fa4ea58429bc5, type: 2}
+  - {fileID: 11400000, guid: cf1b74afa5c01ba46b7e72419b0b1bcb, type: 2}
   initialSpawnPosition: 00000000
   timeBetweenSpawnInitial: 0
   backup: 0
