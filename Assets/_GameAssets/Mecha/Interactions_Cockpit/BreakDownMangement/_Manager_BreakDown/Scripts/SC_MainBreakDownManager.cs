@@ -161,7 +161,7 @@ public class SC_MainBreakDownManager : MonoBehaviour, IF_BreakdownManager
         //Ici on additionne toutes les pannes des sytemes pour savoir si on déclanche la Generale
         if (!b_BreakEngine && SC_BreakdownDisplayManager.Instance.CurNbOfBreakdown + SC_WeaponBreakdown.Instance.CurNbOfBreakdown + SC_MovementBreakdown.Instance.n_BreakDownLvl >= nbOfBreakDownBeforeTotalBreak)
         {
-
+            
             //Debug.Log("CheckBd - ToBd");
 
             //On s'assure que chaque system ai au moins une panne

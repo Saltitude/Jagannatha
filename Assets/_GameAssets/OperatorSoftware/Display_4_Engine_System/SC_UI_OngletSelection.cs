@@ -52,13 +52,12 @@ public class SC_UI_OngletSelection : MonoBehaviour, IF_clicableAction, IF_Hover
     {
         SC_UI_OngletContainer.Window newWindow = (SC_UI_OngletContainer.Window)index;
 
-        if (SC_GameStates.Instance.CurState == SC_GameStates.GameState.Game)
+        if (SC_GameStates.Instance.CurState != SC_GameStates.GameState.Game)
+            ActionTuto();
+        else
             ActionGame();
 
-        if (SC_GameStates.Instance.CurState == SC_GameStates.GameState.Tutorial || SC_GameStates.Instance.CurState == SC_GameStates.GameState.Tutorial)
-            ActionTuto();
-
-        ongletContainer.ChangeWindow(newWindow);
+            ongletContainer.ChangeWindow(newWindow);
         
     }
     
@@ -133,7 +132,6 @@ public class SC_UI_OngletSelection : MonoBehaviour, IF_clicableAction, IF_Hover
         }
         if (index == 5 && SC_GameStates.Instance.CurTutoState == SC_GameStates.TutorialState.Reboot)
         {
-            
             ongletContainer.MoveOut();
             additionalAnimator.SetBool("ActivateMove", false);
         }

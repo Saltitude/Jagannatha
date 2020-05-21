@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -116,7 +117,7 @@ public class SC_TutorialUIManager : MonoBehaviour
     
     public void ActivateSystem(System syst, bool activation)
     {
-    
+
         for(int i = 0;i < imageState[(int)syst].Length; i++)
         {
             if (activation)

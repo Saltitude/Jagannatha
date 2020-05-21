@@ -143,6 +143,8 @@ public class SC_Display_MechState : MonoBehaviour
                 break;
 
             case SystemState.Initialize:
+                SC_TutorialUIManager.Instance.ActivateSystem(SC_TutorialUIManager.System.Display, true);
+
                 DisconnectedState.SetActive(false);
 
                 InitializeOffState.SetActive(false);
@@ -156,10 +158,14 @@ public class SC_Display_MechState : MonoBehaviour
                 break;
 
             case SystemState.Launched:
+                SC_TutorialUIManager.Instance.ActivateSystem(SC_TutorialUIManager.System.Display, true);
+
                 DisconnectedState.SetActive(false);
-
-
                 LaunchedOffState.SetActive(false);
+                ConnectedOffState.SetActive(false);
+                InitializeOffState.SetActive(false);
+                GeneralOffState.SetActive(false);
+
 
                 yield return new WaitForSeconds(0.75f);
 
