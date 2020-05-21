@@ -16,7 +16,10 @@ public class SC_TutorialUIManager : MonoBehaviour
     Image[][] imageBlink;
 
     [SerializeField]
-    Image[][] imageState;
+    Image[][] imageState;  
+    
+    [SerializeField]
+    Image[][] imageOff;
 
     [SerializeField]
     Image[] displayHub;
@@ -31,8 +34,11 @@ public class SC_TutorialUIManager : MonoBehaviour
     GameObject weaponState; 
     [SerializeField]
     GameObject motionState;
+    
 
     List<Image> img_Blink;
+
+    
 
     public enum System
     {
@@ -56,9 +62,16 @@ public class SC_TutorialUIManager : MonoBehaviour
 
     void Start()
     {
+        SetTab();
+        StartCoroutine(BlinkCoro());
+    }
+
+    void SetTab()
+    {
         img_Blink = new List<Image>();
         imageBlink = new Image[3][];
         imageState = new Image[3][];
+        imageOff = new Image[3][];
 
         imageBlink[0] = displayHub;
         imageBlink[1] = weaponHub;
@@ -68,8 +81,8 @@ public class SC_TutorialUIManager : MonoBehaviour
         imageState[1] = weaponState.GetComponentsInChildren<Image>();
         imageState[2] = motionState.GetComponentsInChildren<Image>();
 
-        StartCoroutine(BlinkCoro());
     }
+
 
     void DeactivateImage(Image image)
     {

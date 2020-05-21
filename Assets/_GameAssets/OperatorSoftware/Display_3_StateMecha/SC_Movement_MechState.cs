@@ -38,11 +38,10 @@ public class SC_Movement_MechState : MonoBehaviour
     [SerializeField]
     GameObject LaunchedOffState;
     [SerializeField]
-    GameObject LeftOffState;
-    [SerializeField]
-    GameObject RightOffState;
-    [SerializeField]
     GameObject InitializedState;
+    [SerializeField]
+    GameObject DisconnectedState;
+
 
     public enum SystemState { Disconnected, Connected, Initialize, Launched }
     public SystemState CurState;
@@ -77,7 +76,7 @@ public class SC_Movement_MechState : MonoBehaviour
     void CheckState()
     {
 
-        if ( (SC_GameStates.Instance.CurState == SC_GameStates.GameState.Tutorial && SC_passwordLock.Instance.b_IsConnected) || (SC_GameStates.Instance.CurState != SC_GameStates.GameState.Tutorial && !SC_SyncVar_MovementSystem.Instance.b_BreakEngine) )
+        if ((SC_GameStates.Instance.CurState == SC_GameStates.GameState.Tutorial && (int)SC_GameStates.Instance.CurTutoState >= (int)SC_GameStates.TutorialState.RepairDisplay) || (SC_GameStates.Instance.CurState != SC_GameStates.GameState.Tutorial && !SC_SyncVar_MovementSystem.Instance.b_BreakEngine) )
         {
             CurState = SystemState.Connected;
 
@@ -111,36 +110,49 @@ public class SC_Movement_MechState : MonoBehaviour
 
 
             case SystemState.Disconnected:
-                ConnectedOffState.SetActive(true);
-                InitializeOffState.SetActive(true);
-                LaunchedOffState.SetActive(true);
-                GeneralOffState.SetActive(true);
-                InitializedState.SetActive(false);
+           
+                DisconnectedState.SetActive(true);
 
                 break;
 
             case SystemState.Connected:
-                ConnectedOffState.SetActive(false);
+
+                DisconnectedState.SetActive(false);
+
                 InitializeOffState.SetActive(true);
                 LaunchedOffState.SetActive(true);
                 GeneralOffState.SetActive(true);
+
                 InitializedState.SetActive(false);
+
+                ConnectedOffState.SetActive(false);
+           
 
                 break;
 
             case SystemState.Initialize:
+
+                DisconnectedState.SetActive(false);
+
                 ConnectedOffState.SetActive(false);
                 InitializeOffState.SetActive(false);
                 LaunchedOffState.SetActive(true);
                 GeneralOffState.SetActive(false);
+
                 InitializedState.SetActive(true);
+
+                ConnectedOffState.SetActive(false);
+
                 break;
 
             case SystemState.Launched:
+                DisconnectedState.SetActive(false);
+
                 ConnectedOffState.SetActive(false);
                 InitializeOffState.SetActive(false);
                 LaunchedOffState.SetActive(false);
                 GeneralOffState.SetActive(false);
+
                 InitializedState.SetActive(false);
 
                 break;

@@ -150,6 +150,7 @@ public class SC_GameStates : NetworkBehaviour
                 {
                     Debug.Log("RepairDisplay");
                     //Debut Display
+                    SC_Display_MechState.Instance.UpdateVar();
                     SC_TutorialUIManager.Instance.ActivateSystem(SC_TutorialUIManager.System.Display,true);
                     SC_TutorialUIManager.Instance.ActivateBlink(SC_TutorialUIManager.System.Display,true);
                 }
@@ -162,6 +163,7 @@ public class SC_GameStates : NetworkBehaviour
                     //Fin Display
                     SC_TutorialUIManager.Instance.ActivateBlink(SC_TutorialUIManager.System.Display, false);
                     //Debut Weapon
+                    SC_Weapon_MechState.Instance.UpdateVar();
                     SC_TutorialUIManager.Instance.ActivateSystem(SC_TutorialUIManager.System.Weapon, true);
                     SC_TutorialUIManager.Instance.ActivateBlink(SC_TutorialUIManager.System.Weapon, true);
 
@@ -177,6 +179,7 @@ public class SC_GameStates : NetworkBehaviour
                     SC_TutorialUIManager.Instance.ActivateBlink(SC_TutorialUIManager.System.Weapon, false);
 
                     //Debut Motion
+                    SC_Movement_MechState.Instance.UpdateVar();
                     SC_TutorialUIManager.Instance.ActivateSystem(SC_TutorialUIManager.System.Motion, true);
                     SC_TutorialUIManager.Instance.ActivateBlink(SC_TutorialUIManager.System.Motion, true);
                 }
