@@ -271,7 +271,8 @@ public class SC_KoaManager : MonoBehaviour
                 y /= nbActive;
                 z /= nbActive;
 
-                _koa.transform.position = Vector3.Lerp(_koa.transform.position, new Vector3(x, y, z), 5* Time.deltaTime);
+                if(_koa != null)
+                    _koa.transform.position = Vector3.Lerp(_koa.transform.position, new Vector3(x, y, z), 5* Time.deltaTime);
           
          
 
