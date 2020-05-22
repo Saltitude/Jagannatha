@@ -25,6 +25,9 @@ public class SC_SyncVar_DisplaySystem : NetworkBehaviour
         UpdateOnClient();
     }
 
+    #endregion Var SC_GameStates
+
+    #region Var SC_EnemyManager
 
     [Header("Var Download")]
     [SyncVar(hook = "OnDownload")]
@@ -35,7 +38,7 @@ public class SC_SyncVar_DisplaySystem : NetworkBehaviour
         Progress = newValue;
     }
 
-    #endregion Var SC_GameStates
+    #endregion Var SC_EnemyManager
 
     #region Var SC_main_breakdown_validation
 

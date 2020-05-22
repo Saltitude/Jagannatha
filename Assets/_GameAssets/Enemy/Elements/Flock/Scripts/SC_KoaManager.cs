@@ -514,6 +514,7 @@ public class SC_KoaManager : MonoBehaviour
 
     public void ChangeKoaState(int state)
     {
-        syncVarKoa.SetCurState(state);
+        if(syncVarKoa != null)
+            syncVarKoa.SetCurState(state);
     }
 }

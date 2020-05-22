@@ -133,7 +133,8 @@ public class SC_MoveKoaSync : NetworkBehaviour
 
     public void SetCurState(int curState)
     {
-        RpcSendIntCurState(gameObject, curState);
+        if(gameObject != null)
+            RpcSendIntCurState(gameObject, curState);
     }
 
     public void SetNewBehavior(int boidSettingsIndex)
