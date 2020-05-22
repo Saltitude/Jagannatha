@@ -16,12 +16,13 @@ public class SC_PhaseManager : MonoBehaviour
     public static SC_PhaseManager Instance { get { return _instance; } }
 
     #endregion
-    PhaseSettings curPhaseSettings;
+    public PhaseSettings curPhaseSettings;
     public WaveSettings[] waves;
 
-    public PhaseSettings.Orientation[] WavesOrientation;
-
     public int curWaveIndex;
+
+    public int[] OrientationFactor;
+
     // Start is called before the first frame update
     void Awake()
     {
@@ -39,18 +40,33 @@ public class SC_PhaseManager : MonoBehaviour
 
     public void Initialize(PhaseSettings newPhaseSettigns)
     {
+
         SC_KoaSpawn.Instance.InitNewPhase(newPhaseSettigns);
         curPhaseSettings = newPhaseSettigns;
         resetVariables();
         waves = newPhaseSettigns.waves;
         
         SC_WaveManager.Instance.InitializeWave(waves[curWaveIndex]);
+
     }
 
-    // Update is called once per frame
-    void Update()
+    void ApplyOrientation()
     {
-    
+
+        OrientationFactor = new int[waves.Length];
+
+        /*
+        for(int i = 0; i < OrientationFactor.Length; i++)
+        {
+            switch (curPhaseSettings.WavesOrientation[i])
+            {
+                case PhaseSettings.Orientation.NorthDefault:
+                    OrientationFactor[i] =
+                    break;
+            }
+        } 
+        */
+
     }
            
     public void EndWave()

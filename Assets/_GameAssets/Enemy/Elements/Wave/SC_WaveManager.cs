@@ -134,6 +134,8 @@ public class SC_WaveManager : MonoBehaviour
 
 
             StartCoroutine(SC_KoaSpawn.Instance.SpawnCoro(SC_PhaseManager.Instance.curWaveIndex, 0, i, _curWaveSettings.initialSpawnPosition[i]));
+            //Debug.Log("initialSpawnPosition = " + _curWaveSettings.initialSpawnPosition[i]);
+            //StartCoroutine(SC_KoaSpawn.Instance.SpawnCoro(SC_PhaseManager.Instance.curWaveIndex, 0, i, 1));
 
             yield return new WaitForSeconds(_curWaveSettings.timeBetweenSpawnInitial);            
         }
