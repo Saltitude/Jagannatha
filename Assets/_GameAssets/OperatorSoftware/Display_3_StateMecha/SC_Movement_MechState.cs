@@ -38,9 +38,10 @@ public class SC_Movement_MechState : MonoBehaviour
     [SerializeField]
     GameObject LaunchedOffState;
     [SerializeField]
-    GameObject LeftOffState;
+    GameObject InitializedState;
     [SerializeField]
-    GameObject RightOffState;
+    GameObject DisconnectedState;
+
 
     public enum SystemState { Disconnected, Connected, Initialize, Launched }
     public SystemState CurState;
@@ -74,20 +75,18 @@ public class SC_Movement_MechState : MonoBehaviour
 
     void CheckState()
     {
-
-        if ( (SC_GameStates.Instance.CurState == SC_GameStates.GameState.Tutorial && SC_passwordLock.Instance.b_IsConnected) || (SC_GameStates.Instance.CurState != SC_GameStates.GameState.Tutorial && !SC_SyncVar_MovementSystem.Instance.b_BreakEngine) )
+        SystemState newState;
+        if ((SC_GameStates.Instance.CurState == SC_GameStates.GameState.Tutorial && (int)SC_GameStates.Instance.CurTutoState >= (int)SC_GameStates.TutorialState.StartRepairDisplay) || (SC_GameStates.Instance.CurState != SC_GameStates.GameState.Tutorial && !SC_SyncVar_MovementSystem.Instance.b_BreakEngine) )
         {
-
-            CurState = SystemState.Connected;
+            newState = SystemState.Connected;
 
             if ((SC_GameStates.Instance.CurState == SC_GameStates.GameState.Tutorial && SC_SyncVar_MovementSystem.Instance.b_SeqIsCorrect) || (SC_GameStates.Instance.CurState != SC_GameStates.GameState.Tutorial && !SC_SyncVar_MovementSystem.Instance.b_MaxBreakdown))
             {
-
-                CurState = SystemState.Initialize;
+                newState = SystemState.Initialize;
 
                 if (SC_SyncVar_MovementSystem.Instance.b_IsLaunch)
                 {
-                    CurState = SystemState.Launched;
+                    newState = SystemState.Launched;
                 }
 
             }
@@ -96,57 +95,102 @@ public class SC_Movement_MechState : MonoBehaviour
 
         else
         {
-            CurState = SystemState.Disconnected;
+            newState = SystemState.Disconnected;
         }
 
-        ApplyState();
+        if (newState != CurState)
+        {
+            CurState = newState;
+            StopAllCoroutines();
+            StartCoroutine(ApplyState());
+        }
+
 
     }
 
-    void ApplyState()
+    IEnumerator ApplyState()
     {
+
 
         switch (CurState)
         {
 
             case SystemState.Disconnected:
-                ConnectedOffState.SetActive(true);
-                InitializeOffState.SetActive(true);
-                LaunchedOffState.SetActive(true);
-                GeneralOffState.SetActive(true);
-                RightOffState.SetActive(true);
-                LeftOffState.SetActive(true);
+                SC_TutorialUIManager.Instance.ActivateSystem(SC_TutorialUIManager.System.Motion, false);
+
+                DisconnectedState.SetActive(true);
+
                 break;
 
             case SystemState.Connected:
+
+
+                SC_TutorialUIManager.Instance.ActivateSystem(SC_TutorialUIManager.System.Motion, false);
+
                 ConnectedOffState.SetActive(false);
                 InitializeOffState.SetActive(true);
                 LaunchedOffState.SetActive(true);
                 GeneralOffState.SetActive(true);
-                RightOffState.SetActive(true);
-                LeftOffState.SetActive(true);
+                InitializedState.SetActive(false);
+
+                yield return new WaitForSeconds(0.75f);
+                SC_TutorialUIManager.Instance.ActivateSystem(SC_TutorialUIManager.System.Motion, true);
+                DisconnectedState.SetActive(false);
+
+                yield return new WaitForSeconds(0.1f);
+                SC_TutorialUIManager.Instance.ActivateSystem(SC_TutorialUIManager.System.Motion, false);
+
+                DisconnectedState.SetActive(true);
+
+                yield return new WaitForSeconds(0.1f);
+                SC_TutorialUIManager.Instance.ActivateSystem(SC_TutorialUIManager.System.Motion, true);
+
+                DisconnectedState.SetActive(false);
+
+                yield return new WaitForSeconds(0.1f);
+                SC_TutorialUIManager.Instance.ActivateSystem(SC_TutorialUIManager.System.Motion, false);
+
+                DisconnectedState.SetActive(true);
+
+                yield return new WaitForSeconds(0.1f);
+                SC_TutorialUIManager.Instance.ActivateSystem(SC_TutorialUIManager.System.Motion, true);
+                SC_TutorialUIManager.Instance.ActivateBlink(SC_TutorialUIManager.System.Motion, true);
+
+                DisconnectedState.SetActive(false);
+
+
                 break;
 
             case SystemState.Initialize:
-                ConnectedOffState.SetActive(false);
+                SC_TutorialUIManager.Instance.ActivateSystem(SC_TutorialUIManager.System.Motion, true);
+
+                DisconnectedState.SetActive(false);
+
                 InitializeOffState.SetActive(false);
-                LaunchedOffState.SetActive(true);
-                GeneralOffState.SetActive(true);
-                RightOffState.SetActive(true);
-                LeftOffState.SetActive(true);
+
+                yield return new WaitForSeconds(0.75f);
+
+                GeneralOffState.SetActive(false);
+                InitializedState.SetActive(true);
                 break;
 
             case SystemState.Launched:
+                SC_TutorialUIManager.Instance.ActivateSystem(SC_TutorialUIManager.System.Motion, true);
+
+                DisconnectedState.SetActive(false);
+                LaunchedOffState.SetActive(false);
                 ConnectedOffState.SetActive(false);
                 InitializeOffState.SetActive(false);
-                LaunchedOffState.SetActive(false);
                 GeneralOffState.SetActive(false);
-                RightOffState.SetActive(false);
-                LeftOffState.SetActive(false);
+
+
+                yield return new WaitForSeconds(0.75f);
+
+                InitializedState.SetActive(false);
+
                 break;
 
         }
-
     }
 
     #endregion States
@@ -183,64 +227,114 @@ public class SC_Movement_MechState : MonoBehaviour
 
     void updateBrokenDirection()
     {
+        int nbBreakdown = SC_SyncVar_MovementSystem.Instance.n_BreakDownLvl;
 
-        if(SC_SyncVar_MovementSystem.Instance.CurBrokenDir == SC_JoystickMove.Dir.Left)
+        if (nbBreakdown != 0)
         {
-
-            dirLeft.b_IsBreak = true;
-            dirRight.b_IsBreak = false;
-
-            int nbBreakdown = SC_SyncVar_MovementSystem.Instance.n_BreakDownLvl;
-
-            if(nbBreakdown !=0)
+            if(SC_SyncVar_MovementSystem.Instance.CurBrokenDir == SC_JoystickMove.Dir.Left)
             {
                 for (int i = 0; i < nbBreakdown; i++)
                 {
                     arcL[i].color = breakdownColor;
                 }
-            }
-
-            else
+                for (int i = 0; i < arcR.Length; i++)
+                {
+                    arcR[i].color = validColor;
+                }
+            } 
+            if(SC_SyncVar_MovementSystem.Instance.CurBrokenDir == SC_JoystickMove.Dir.Right)
             {
+                for (int i = 0; i < nbBreakdown; i++)
+                {
+                    arcR[i].color = breakdownColor;
+                }
                 for (int i = 0; i < arcL.Length; i++)
                 {
                     arcL[i].color = validColor;
                 }
             }
 
-        }
-
-        else if (SC_SyncVar_MovementSystem.Instance.CurBrokenDir == SC_JoystickMove.Dir.Right)
-        {
-
-            dirLeft.b_IsBreak = false;
-            dirRight.b_IsBreak = true;
-
-            int nbBreakdown = SC_SyncVar_MovementSystem.Instance.n_BreakDownLvl;
-
-            if (nbBreakdown != 0)
+            if (SC_SyncVar_MovementSystem.Instance.b_BreakEngine)
             {
-                Debug.Log("Panne");
-                for (int i = 0; i < nbBreakdown; i++)
+                for (int i = 0; i < arcR.Length; i++)
                 {
                     arcR[i].color = breakdownColor;
                 }
-            }
-
-            else
-            {
-                
                 for (int i = 0; i < arcL.Length; i++)
                 {
-                    arcR[i].color = validColor;
+                    arcL[i].color = breakdownColor;
                 }
             }
 
-            dirLeft.b_IsBreak = true;
-            dirRight.b_IsBreak = false;
+        }
+        else
+        {
+            for (int i = 0; i < arcR.Length; i++)
+            {
+                arcR[i].color = validColor;
+            }
 
+            for (int i = 0; i < arcL.Length; i++)
+            {
+                arcL[i].color = validColor;
+            }
         }
 
+
+        //if (SC_SyncVar_MovementSystem.Instance.CurBrokenDir == SC_JoystickMove.Dir.Left)
+        //{
+
+        //    dirLeft.b_IsBreak = true;
+        //    dirRight.b_IsBreak = false;
+
+        //    int nbBreakdown = SC_SyncVar_MovementSystem.Instance.n_BreakDownLvl;
+
+        //    if(nbBreakdown !=0)
+        //    {
+        //        for (int i = 0; i < nbBreakdown; i++)
+        //        {
+        //            arcL[i].color = breakdownColor;
+        //        }
+        //    }
+
+        //    else
+        //    {
+        //        for (int i = 0; i < arcL.Length; i++)
+        //        {
+        //            arcL[i].color = validColor;
+        //        }
+        //    }
+
+        //}
+
+        //if (SC_SyncVar_MovementSystem.Instance.CurBrokenDir == SC_JoystickMove.Dir.Right)
+        //{
+
+        //    dirLeft.b_IsBreak = false;
+        //    dirRight.b_IsBreak = true;
+
+        //    int nbBreakdown = SC_SyncVar_MovementSystem.Instance.n_BreakDownLvl;
+
+        //    if (nbBreakdown != 0)
+        //    {
+        //        for (int i = 0; i < nbBreakdown; i++)
+        //        {
+        //            arcR[i].color = breakdownColor;
+        //        }
+        //    }
+
+        //    else
+        //    {
+                
+        //        for (int i = 0; i < arcL.Length; i++)
+        //        {
+        //            arcR[i].color = validColor;
+        //        }
+        //    }
+
+
+        //}
+ 
     }
 
     #endregion Directions

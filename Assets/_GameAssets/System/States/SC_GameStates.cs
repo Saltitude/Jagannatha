@@ -14,7 +14,7 @@ public class SC_GameStates : NetworkBehaviour
     #endregion
 
     public enum GameState {Lobby, Tutorial, Tutorial2, Game, GameEnd }
-    public enum TutorialState { Tutorial1_1, Tutorial1_2, Tutorial1_3, Tutorial1_4, Tutorial1_5, Tutorial1_6, Tutorial1_7, Tutorial1_8, Tutorial1_9, Tutorial1_10, Tutorial1_11, Tutorial2_1, Tutorial2_2, Tutorial2_3, Tutorial2_4, Tutorial2_5, TutorialEnd}
+    public enum TutorialState { StartTutorial1, StartRepairDisplay, EndRepairDisplay, StartRepairWeapon,EndRepairWeapon, StartRepairMotion, EndRepairMotion, Reboot, StartTutorial2, TutorialEnd}
     public GameState CurState;
     public TutorialState CurTutoState;
     public bool Disp = false;
@@ -52,6 +52,7 @@ public class SC_GameStates : NetworkBehaviour
     {
         if (isServer)
         {
+
             RpcSetState(TargetState);
             SyncSystemState(TargetState);
         }
@@ -69,7 +70,34 @@ public class SC_GameStates : NetworkBehaviour
 
     public void SkipTuto()
     {
-        ChangeTutoGameState(TutorialState.Tutorial2_4);
+        if(isServer)
+        {
+            SC_MainBreakDownManager.Instance.DisplayBreakdownSC.RepairBreakdownDebug();
+            SC_MainBreakDownManager.Instance.WeaponBreakdownSC.RepairBreakdownDebug();
+            SC_MainBreakDownManager.Instance.MovementBreakdownSC.RepairBreakdownDebug();
+            SC_main_breakdown_validation.Instance.Validate();
+            ChangeGameState(GameState.Tutorial2);
+
+        }
+        if (!isServer)
+        {
+
+            SC_TutorialUIManager.Instance.ActivateBlink(SC_TutorialUIManager.System.Display, false);
+            SC_TutorialUIManager.Instance.ActivateBlink(SC_TutorialUIManager.System.Weapon, false);
+            SC_TutorialUIManager.Instance.ActivateBlink(SC_TutorialUIManager.System.Motion, false);
+
+            SC_TutorialUIManager.Instance.ActivateSystem(SC_TutorialUIManager.System.Display, true);
+            SC_TutorialUIManager.Instance.ActivateSystem(SC_TutorialUIManager.System.Weapon, true);
+            SC_TutorialUIManager.Instance.ActivateSystem(SC_TutorialUIManager.System.Motion, true);
+
+            SC_Display_MechState.Instance.UpdateVar();
+            SC_Movement_MechState.Instance.UpdateVar();
+            SC_Weapon_MechState.Instance.UpdateVar();
+
+
+            SC_passwordLock.Instance.cheatCode = true;
+        }
+
     }
 
     [ClientRpc]
@@ -86,13 +114,13 @@ public class SC_GameStates : NetworkBehaviour
 
             case GameState.Tutorial:
                 //Descendre le Bouton Reboot au tuto
-                ChangeTutoGameState(TutorialState.Tutorial1_2);
+                ChangeTutoGameState(TutorialState.StartTutorial1);
 
                 break;
 
             case GameState.Tutorial2:
 
-                ChangeTutoGameState(TutorialState.Tutorial2_1);
+                ChangeTutoGameState(TutorialState.StartTutorial2);
 
                 break;     
 
@@ -128,18 +156,7 @@ public class SC_GameStates : NetworkBehaviour
         
         switch (TargetTutoState)
         {
-            case TutorialState.Tutorial1_1:
-                if(!isServer)
-                {
-                    SC_instruct_op_manager.Instance.Activate(6);
-                    SC_instruct_op_manager.Instance.Deactivate(0);
-                    SC_instruct_op_manager.Instance.Deactivate(2);
-                }
-                 
-
-                break;
-
-            case TutorialState.Tutorial1_2:
+            case TutorialState.StartTutorial1:
                 if (isServer)
                 {
                     SC_main_breakdown_validation.Instance.isValidated = false;
@@ -147,197 +164,97 @@ public class SC_GameStates : NetworkBehaviour
                     SC_main_breakdown_validation.Instance.bringDown();
                 }
                 if(!isServer)
-                {
-                    SC_instruct_op_manager.Instance.Deactivate(0);
-                    SC_instruct_op_manager.Instance.Deactivate(2);
-                    SC_instruct_op_manager.Instance.Deactivate(6);
+                { 
+                  
+                    SC_TutorialUIManager.Instance.ActivateSystem(SC_TutorialUIManager.System.Display, false);
+                    SC_TutorialUIManager.Instance.ActivateSystem(SC_TutorialUIManager.System.Weapon, false);
+                    SC_TutorialUIManager.Instance.ActivateSystem(SC_TutorialUIManager.System.Motion, false);
+
                 }
-                StartCoroutine(Swichtuto(0.4f, TutorialState.Tutorial1_3));
+                StartCoroutine(Swichtuto(1f, TutorialState.StartRepairDisplay));
 
                 break;
 
-            case TutorialState.Tutorial1_3:
+            //----------------------------DISPLAY---------------------------------------//
+            case TutorialState.StartRepairDisplay:
                 if(!isServer)
                 {
-                    SC_instruct_op_manager.Instance.Deactivate(0);
-                    SC_instruct_op_manager.Instance.Deactivate(2);
-                    SC_instruct_op_manager.Instance.Activate(7);
-                    SC_instruct_op_manager.Instance.Activate(8);
-                }
-
-
-                break;     
-
-            case TutorialState.Tutorial1_4:
-                if (!isServer)
-                {
-                    Disp = true;
-                    SC_instruct_op_manager.Instance.Deactivate(7);
-                    SC_instruct_op_manager.Instance.Deactivate(8);
-                    SC_instruct_op_manager.Instance.Activate(9);
+                    //Debut Display
+                    SC_Display_MechState.Instance.UpdateVar();
                 }
                 break;
 
-            case TutorialState.Tutorial1_5:
-
+            case TutorialState.EndRepairDisplay:
                 if (!isServer)
                 {
-                    Weap = true;
-                    SC_instruct_op_manager.Instance.Deactivate(7);
-                    SC_instruct_op_manager.Instance.Deactivate(8);
-                    SC_instruct_op_manager.Instance.Activate(10);
+                    //Fin Display
+                    SC_TutorialUIManager.Instance.ActivateBlink(SC_TutorialUIManager.System.Display, false);
                 }
-                break;
-
-            case TutorialState.Tutorial1_6:
-                if (!isServer)
-                {
-                    Mov = true;
-                    SC_instruct_op_manager.Instance.Deactivate(7);
-                    SC_instruct_op_manager.Instance.Deactivate(8);
-                    SC_instruct_op_manager.Instance.Activate(11);
-                }
+                StartCoroutine(Swichtuto(0f, TutorialState.StartRepairWeapon));
 
                 break;
-
-            case TutorialState.Tutorial1_7:
-                if (!isServer)
-                {
-                    SC_instruct_op_manager.Instance.Deactivate(9);
-                    SC_instruct_op_manager.Instance.Deactivate(10);
-                    SC_instruct_op_manager.Instance.Deactivate(11);
-                    if(Disp == true)
-                        SC_instruct_op_manager.Instance.Activate(12);
-                    if(Weap == true)
-                        SC_instruct_op_manager.Instance.Activate(15);
-                    if(Mov == true)
-                        SC_instruct_op_manager.Instance.Activate(16);
-                }
-
-                    break;
-
-            case TutorialState.Tutorial1_8:
-
+               
+            //----------------------------WEAPON---------------------------------------//
+            case TutorialState.StartRepairWeapon:
                 if(!isServer)
                 {
-                    Disp = false;
-                    Weap = false;
-                    Mov = false;
-                    SC_instruct_op_manager.Instance.Deactivate(12);  
-                    SC_instruct_op_manager.Instance.Deactivate(15);  
-                    SC_instruct_op_manager.Instance.Deactivate(16);  
+                    //Debut Weapon
                 }
+                break;
+
+            case TutorialState.EndRepairWeapon:
+                if (!isServer)
+                {
+                    SC_TutorialUIManager.Instance.ActivateBlink(SC_TutorialUIManager.System.Weapon, false);
+                }
+                StartCoroutine(Swichtuto(0f, TutorialState.StartRepairMotion));
+
+                break;
+            
+            //----------------------------MOTION---------------------------------------//
+            case TutorialState.StartRepairMotion:
+                if(!isServer)
+                {
+
+                }
+                break;
+
+            case TutorialState.EndRepairMotion:
+                if (!isServer)
+                {
+                    SC_TutorialUIManager.Instance.ActivateBlink(SC_TutorialUIManager.System.Motion, false);
+
+                }
+                StartCoroutine(Swichtuto(0f, TutorialState.Reboot));
 
                 break;
 
-            case TutorialState.Tutorial1_9:
+
+            case TutorialState.Reboot:
+                if(!isServer)
+                {
+
+                }
+                break;
+
+           
+            //------------------------------------- PART 2 ---------------------------------------//
+
+            case TutorialState.StartTutorial2:
 
                 if (!isServer)
                 {
-                    SC_instruct_op_manager.Instance.Activate(13);
-                    
-                }
-                StartCoroutine(Swichtuto(0.8f, TutorialState.Tutorial1_10));
 
+                }
+                
 
                 break;
 
-                 case TutorialState.Tutorial1_10:
-
-                if (!isServer)
-                {
-                    SC_instruct_op_manager.Instance.Activate(14);
-                }
-
-                break;
-
-
-            case TutorialState.Tutorial2_1:
-
-                if (!isServer)
-                {
-
-                    SC_instruct_op_manager.Instance.Deactivate(1);
-                    SC_instruct_op_manager.Instance.Deactivate(13);
-                    SC_instruct_op_manager.Instance.Deactivate(14);
-                    SC_instruct_op_manager.Instance.Activate(0);
-                    SC_instruct_op_manager.Instance.Deactivate(6);
-
-                }
-
-                break;
-
-            case TutorialState.Tutorial2_2:
-                if (!isServer)
-                {
-                    SC_instruct_op_manager.Instance.Activate(2);
-                    SC_instruct_op_manager.Instance.Deactivate(0);
-                }
-                break;
-
-            case TutorialState.Tutorial2_3:
-
-
-                break;
-
-            case TutorialState.Tutorial2_4:
-                if (isServer)
-                {
-                    SC_MainBreakDownManager.Instance.DisplayBreakdownSC.RepairBreakdownDebug();
-                    SC_MainBreakDownManager.Instance.WeaponBreakdownSC.RepairBreakdownDebug();
-                    SC_MainBreakDownManager.Instance.MovementBreakdownSC.RepairBreakdownDebug();
-                    SC_main_breakdown_validation.Instance.Validate();
-
-                }
-                if (!isServer)
-                {
-                    SC_passwordLock.Instance.cheatCode = true;
-                }
-                    StartCoroutine(Swichtuto(0.5f, TutorialState.Tutorial2_5));
-                break;
-
-            case TutorialState.Tutorial2_5:
-                if (!isServer)
-                {
-                   
-                    SC_instruct_op_manager.Instance.Deactivate(0);
-                    SC_instruct_op_manager.Instance.Deactivate(1);
-                    SC_instruct_op_manager.Instance.Deactivate(2);
-                    SC_instruct_op_manager.Instance.Deactivate(3);
-                    SC_instruct_op_manager.Instance.Deactivate(4);
-                    SC_instruct_op_manager.Instance.Deactivate(5);
-                    SC_instruct_op_manager.Instance.Deactivate(6);
-                    SC_instruct_op_manager.Instance.Deactivate(7);
-                    SC_instruct_op_manager.Instance.Deactivate(8);
-                    SC_instruct_op_manager.Instance.Deactivate(9);
-                    SC_instruct_op_manager.Instance.Deactivate(10);
-                    SC_instruct_op_manager.Instance.Deactivate(11);
-                    SC_instruct_op_manager.Instance.Deactivate(12);
-                    SC_instruct_op_manager.Instance.Deactivate(13);
-                    SC_instruct_op_manager.Instance.Deactivate(14);
-
-                }
-                StartCoroutine(Swichtuto(0.5f, TutorialState.TutorialEnd));
-                break;
 
             case TutorialState.TutorialEnd:
-                SC_instruct_op_manager.Instance.Deactivate(0);
-                SC_instruct_op_manager.Instance.Deactivate(1);
-                SC_instruct_op_manager.Instance.Deactivate(2);
-                SC_instruct_op_manager.Instance.Deactivate(3);
-                SC_instruct_op_manager.Instance.Deactivate(4);
-                SC_instruct_op_manager.Instance.Deactivate(5);
-                SC_instruct_op_manager.Instance.Deactivate(6);
-                SC_instruct_op_manager.Instance.Deactivate(7);
-                SC_instruct_op_manager.Instance.Deactivate(8);
-                SC_instruct_op_manager.Instance.Deactivate(9);
-                SC_instruct_op_manager.Instance.Deactivate(10);
-                SC_instruct_op_manager.Instance.Deactivate(11);
-                SC_instruct_op_manager.Instance.Deactivate(12);
-                SC_instruct_op_manager.Instance.Deactivate(13);
-                SC_instruct_op_manager.Instance.Deactivate(14);
-                ChangeGameState(GameState.Game);
 
+                ChangeGameState(GameState.Game);
+                
                 break;
 
         }
@@ -351,6 +268,8 @@ public class SC_GameStates : NetworkBehaviour
         SC_SyncVar_MovementSystem.Instance.CurState = TargetState;
         SC_SyncVar_WeaponSystem.Instance.CurState = TargetState;
     }
+
+    
     void SyncSystemTutoState(TutorialState TargetTutoState)
     {
 

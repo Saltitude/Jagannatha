@@ -64,8 +64,8 @@ public class SC_UI_Display_MapInfos_StateManager : MonoBehaviour
             checkChild(1);
             SC_UI_Display_MapInfos_KoaState.Instance.activated = true;
             SC_UI_Display_Flock.Instance.activateRender();
-            if (SC_GameStates.Instance.CurTutoState == SC_GameStates.TutorialState.Tutorial2_1)
-                SC_CheckList.Instance.NetworkPlayerPilot.GetComponent<SC_Net_Player_TutoState>().CmdChangeTutoState(SC_GameStates.TutorialState.Tutorial2_2);
+           /* if (SC_GameStates.Instance.CurTutoState == SC_GameStates.TutorialState.StartTutorial2)
+                SC_CheckList.Instance.NetworkPlayerPilot.GetComponent<SC_Net_Player_TutoState>().CmdChangeTutoState(SC_GameStates.TutorialState.Tutorial2_2);*/
         }
     }
 

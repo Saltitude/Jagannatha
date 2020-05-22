@@ -17,11 +17,15 @@ public class SC_Display_MechState : MonoBehaviour
     [SerializeField]
     GameObject GeneralOffState;
     [SerializeField]
+    GameObject InitializedState;
+    [SerializeField]
     GameObject ConnectedOffState;
     [SerializeField]
     GameObject InitializeOffState;
     [SerializeField]
     GameObject LaunchedOffState;
+    [SerializeField]
+    GameObject DisconnectedState;
 
     public enum SystemState { Disconnected, Connected, Initialize, Launched }
     public SystemState CurState;
@@ -53,20 +57,19 @@ public class SC_Display_MechState : MonoBehaviour
 
     void CheckState()
     {
-
-        if ( (SC_GameStates.Instance.CurState == SC_GameStates.GameState.Tutorial && SC_passwordLock.Instance.b_IsConnected) || (SC_GameStates.Instance.CurState != SC_GameStates.GameState.Tutorial && !SC_SyncVar_DisplaySystem.Instance.b_BreakEngine) )
+        SystemState newState;
+        if ((SC_GameStates.Instance.CurState == SC_GameStates.GameState.Tutorial && (int)SC_GameStates.Instance.CurTutoState >= (int)SC_GameStates.TutorialState.StartRepairDisplay) || (SC_GameStates.Instance.CurState != SC_GameStates.GameState.Tutorial && !SC_SyncVar_DisplaySystem.Instance.b_BreakEngine) )
         {
 
-            CurState = SystemState.Connected;
+            newState = SystemState.Connected;
 
             if((SC_GameStates.Instance.CurState == SC_GameStates.GameState.Tutorial && SC_SyncVar_DisplaySystem.Instance.f_CurNbOfBd == 0) || (SC_GameStates.Instance.CurState != SC_GameStates.GameState.Tutorial && !SC_SyncVar_DisplaySystem.Instance.b_MaxBreakdown))
             {
-
-                CurState = SystemState.Initialize;
+                newState = SystemState.Initialize;
 
                 if (SC_SyncVar_DisplaySystem.Instance.b_IsLaunch)
                 {
-                    CurState = SystemState.Launched;
+                    newState = SystemState.Launched;
                 }
 
             }
@@ -75,45 +78,99 @@ public class SC_Display_MechState : MonoBehaviour
 
         else
         {
-            CurState = SystemState.Disconnected;
+
+            newState = SystemState.Disconnected;
         }
 
-        ApplyState();
+
+        if (newState != CurState)
+        {
+            CurState = newState;
+            StopAllCoroutines();
+            StartCoroutine(ApplyState());
+        }
 
     }
 
-    void ApplyState()
+    IEnumerator ApplyState()
     {
 
         switch (CurState)
         {
 
-            case SystemState.Disconnected:              
-                ConnectedOffState.SetActive(true);
-                InitializeOffState.SetActive(true);
-                LaunchedOffState.SetActive(true);
-                GeneralOffState.SetActive(true);
+            case SystemState.Disconnected:
+                SC_TutorialUIManager.Instance.ActivateSystem(SC_TutorialUIManager.System.Display, false);
+
+                DisconnectedState.SetActive(true);
+
                 break;
 
-            case SystemState.Connected:               
+            case SystemState.Connected:
+
+
+                SC_TutorialUIManager.Instance.ActivateSystem(SC_TutorialUIManager.System.Display, false);
+
                 ConnectedOffState.SetActive(false);
                 InitializeOffState.SetActive(true);
                 LaunchedOffState.SetActive(true);
                 GeneralOffState.SetActive(true);
+                InitializedState.SetActive(false);
+
+                yield return new WaitForSeconds(0.75f);
+                SC_TutorialUIManager.Instance.ActivateSystem(SC_TutorialUIManager.System.Display, true);
+                DisconnectedState.SetActive(false);
+
+                yield return new WaitForSeconds(0.1f);
+                SC_TutorialUIManager.Instance.ActivateSystem(SC_TutorialUIManager.System.Display, false);
+
+                DisconnectedState.SetActive(true);
+
+                yield return new WaitForSeconds(0.1f);
+                SC_TutorialUIManager.Instance.ActivateSystem(SC_TutorialUIManager.System.Display, true);
+
+                DisconnectedState.SetActive(false);
+
+                yield return new WaitForSeconds(0.1f);
+                SC_TutorialUIManager.Instance.ActivateSystem(SC_TutorialUIManager.System.Display, false);
+
+                DisconnectedState.SetActive(true);
+
+                yield return new WaitForSeconds(0.1f);
+                SC_TutorialUIManager.Instance.ActivateSystem(SC_TutorialUIManager.System.Display, true);
+                SC_TutorialUIManager.Instance.ActivateBlink(SC_TutorialUIManager.System.Display, true);
+                DisconnectedState.SetActive(false);
+
                 break;
 
-            case SystemState.Initialize:               
-                ConnectedOffState.SetActive(false);
-                InitializeOffState.SetActive(false);
-                LaunchedOffState.SetActive(true);
-                GeneralOffState.SetActive(true);
-                break;
+            case SystemState.Initialize:
+                SC_TutorialUIManager.Instance.ActivateSystem(SC_TutorialUIManager.System.Display, true);
 
-            case SystemState.Launched:               
-                ConnectedOffState.SetActive(false);
+                DisconnectedState.SetActive(false);
+
                 InitializeOffState.SetActive(false);
-                LaunchedOffState.SetActive(false);
+
+                yield return new WaitForSeconds(0.75f);
+
                 GeneralOffState.SetActive(false);
+                InitializedState.SetActive(true);
+
+
+                break;
+
+            case SystemState.Launched:
+                SC_TutorialUIManager.Instance.ActivateSystem(SC_TutorialUIManager.System.Display, true);
+
+                DisconnectedState.SetActive(false);
+                LaunchedOffState.SetActive(false);
+                ConnectedOffState.SetActive(false);
+                InitializeOffState.SetActive(false);
+                GeneralOffState.SetActive(false);
+
+
+                yield return new WaitForSeconds(0.75f);
+
+                InitializedState.SetActive(false);
+
                 break;
 
         }
