@@ -355,8 +355,8 @@ public class SC_KoaManager : MonoBehaviour
             _boidsTab[i].SetNewSettings(curBoidSettings);
 
         }
-        if(SC_FixedData.Instance.GetBoidIndex(newSettings) != 14)
-        syncVarKoa.SetNewBehavior(SC_FixedData.Instance.GetBoidIndex(newSettings));
+        if(SC_FixedData.Instance.GetBoidIndex(newSettings) != 14 && syncVarKoa != null)
+            syncVarKoa.SetNewBehavior(SC_FixedData.Instance.GetBoidIndex(newSettings));
 
     }
 
