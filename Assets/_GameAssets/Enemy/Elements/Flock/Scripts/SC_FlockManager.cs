@@ -618,11 +618,19 @@ public class SC_FlockManager : MonoBehaviour
     
     public void EndAttack()
     {
+
         inAttack = false;
         StartNewPath(PathType.Roam);
-        KoaMainAnimator.SetBool("Laser", false);
-        KoaMainAnimator.SetBool("Bullet", false);
-        KoaEmissiveAnimator.SetBool("Bullet", false);
+
+        if(KoaMainAnimator != null)
+            KoaMainAnimator.SetBool("Laser", false);
+
+        if (KoaMainAnimator != null)
+            KoaMainAnimator.SetBool("Bullet", false);
+
+        if (KoaEmissiveAnimator != null)
+            KoaEmissiveAnimator.SetBool("Bullet", false);
+
     }
 
 
