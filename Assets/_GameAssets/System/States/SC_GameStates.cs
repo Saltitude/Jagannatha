@@ -21,6 +21,8 @@ public class SC_GameStates : NetworkBehaviour
     public bool Mov = false;
     public bool Weap = false;
 
+    public bool skipTutoSafety = false;
+
     void Awake()
     {
         if (_instance != null && _instance != this)
@@ -44,7 +46,8 @@ public class SC_GameStates : NetworkBehaviour
     {
         if(Input.GetKeyDown(KeyCode.W))
         {
-            SkipTuto();
+            skipTutoSafety = false;
+            StartCoroutine(SkipTuto());
         }
     }
 
@@ -52,7 +55,6 @@ public class SC_GameStates : NetworkBehaviour
     {
         if (isServer)
         {
-
             RpcSetState(TargetState);
             SyncSystemState(TargetState);
         }
@@ -68,27 +70,35 @@ public class SC_GameStates : NetworkBehaviour
 
     }
 
-    public void SkipTuto()
+    IEnumerator SkipTuto()
     {
         if(isServer)
         {
-            SC_MainBreakDownManager.Instance.DisplayBreakdownSC.RepairBreakdownDebug();
-            SC_MainBreakDownManager.Instance.WeaponBreakdownSC.RepairBreakdownDebug();
-            SC_MainBreakDownManager.Instance.MovementBreakdownSC.RepairBreakdownDebug();
-            SC_main_breakdown_validation.Instance.Validate();
             ChangeGameState(GameState.Tutorial2);
-
+            ChangeTutoGameState(TutorialState.StartTutorial2);
+            while(!skipTutoSafety)
+            {
+                yield return new WaitForEndOfFrame();
+            }
+           
+                SC_MainBreakDownManager.Instance.DisplayBreakdownSC.RepairBreakdownDebug();
+                SC_MainBreakDownManager.Instance.WeaponBreakdownSC.RepairBreakdownDebug();
+                SC_MainBreakDownManager.Instance.MovementBreakdownSC.RepairBreakdownDebug();
+                SC_main_breakdown_validation.Instance.Validate();
+           
         }
         if (!isServer)
         {
+
+            SC_TutorialUIManager.Instance.ActivateSystem(SC_TutorialUIManager.System.Display, true);
+            SC_TutorialUIManager.Instance.ActivateSystem(SC_TutorialUIManager.System.Weapon, true);
+            SC_TutorialUIManager.Instance.ActivateSystem(SC_TutorialUIManager.System.Motion, true);
+
 
             SC_TutorialUIManager.Instance.ActivateBlink(SC_TutorialUIManager.System.Display, false);
             SC_TutorialUIManager.Instance.ActivateBlink(SC_TutorialUIManager.System.Weapon, false);
             SC_TutorialUIManager.Instance.ActivateBlink(SC_TutorialUIManager.System.Motion, false);
 
-            SC_TutorialUIManager.Instance.ActivateSystem(SC_TutorialUIManager.System.Display, true);
-            SC_TutorialUIManager.Instance.ActivateSystem(SC_TutorialUIManager.System.Weapon, true);
-            SC_TutorialUIManager.Instance.ActivateSystem(SC_TutorialUIManager.System.Motion, true);
 
             SC_Display_MechState.Instance.UpdateVar();
             SC_Movement_MechState.Instance.UpdateVar();
@@ -96,6 +106,7 @@ public class SC_GameStates : NetworkBehaviour
 
 
             SC_passwordLock.Instance.cheatCode = true;
+
         }
 
     }
@@ -103,6 +114,7 @@ public class SC_GameStates : NetworkBehaviour
     [ClientRpc]
     public void RpcSetState(GameState TargetState)
     {
+
 
         CurState = TargetState;  
         
@@ -120,9 +132,12 @@ public class SC_GameStates : NetworkBehaviour
 
             case GameState.Tutorial2:
 
-                StartCoroutine(Swichtuto(1f, TutorialState.StartTutorial2));
+                ChangeTutoGameState(TutorialState.StartTutorial2);
 
-            
+                if (isServer)
+                {
+                    skipTutoSafety = true;
+                }
 
                 break;     
 
@@ -147,6 +162,7 @@ public class SC_GameStates : NetworkBehaviour
                 break;
 
         }
+
 
     }
 
@@ -173,7 +189,7 @@ public class SC_GameStates : NetworkBehaviour
                     SC_TutorialUIManager.Instance.ActivateSystem(SC_TutorialUIManager.System.Motion, false);
 
                 }
-                StartCoroutine(Swichtuto(1f, TutorialState.StartRepairDisplay));
+                ChangeTutoGameState(TutorialState.StartRepairDisplay);
 
                 break;
 
@@ -192,7 +208,7 @@ public class SC_GameStates : NetworkBehaviour
                     //Fin Display
                     SC_TutorialUIManager.Instance.ActivateBlink(SC_TutorialUIManager.System.Display, false);
                 }
-                StartCoroutine(Swichtuto(0f, TutorialState.StartRepairWeapon));
+                ChangeTutoGameState(TutorialState.StartRepairWeapon);
 
                 break;
                
@@ -209,7 +225,7 @@ public class SC_GameStates : NetworkBehaviour
                 {
                     SC_TutorialUIManager.Instance.ActivateBlink(SC_TutorialUIManager.System.Weapon, false);
                 }
-                StartCoroutine(Swichtuto(0f, TutorialState.StartRepairMotion));
+                ChangeTutoGameState(TutorialState.StartRepairMotion);
 
                 break;
             
@@ -227,7 +243,7 @@ public class SC_GameStates : NetworkBehaviour
                     SC_TutorialUIManager.Instance.ActivateBlink(SC_TutorialUIManager.System.Motion, false);
 
                 }
-                StartCoroutine(Swichtuto(0f, TutorialState.Reboot));
+                ChangeTutoGameState(TutorialState.Reboot);
 
                 break;
 

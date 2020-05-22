@@ -125,8 +125,12 @@ public class SC_FlockWeaponManager : MonoBehaviour
             {
                 case FlockSettings.AttackType.Bullet: //Bullet
 
-                    emissiveAnimator.SetBool("Bullet", true);
-                    mainAnimator.SetBool("Bullet", true);
+                    if(emissiveAnimator != null)
+                        emissiveAnimator.SetBool("Bullet", true);
+
+                    if (mainAnimator != null)
+                        mainAnimator.SetBool("Bullet", true);
+
                     if (timer >= 1/flockSettings.fireRate )
                     {
                         FireBullet(false);
@@ -207,8 +211,11 @@ public class SC_FlockWeaponManager : MonoBehaviour
     {
         Rigidbody rb = bulletPool[n_CurBullet].GetComponent<Rigidbody>();
 
-        bulletPool[n_CurBullet].transform.position = mainAnimator.transform.position;
-        bulletPool[n_CurBullet].transform.rotation = transform.rotation;
+        if (bulletPool[n_CurBullet] != null && mainAnimator != null)
+            bulletPool[n_CurBullet].transform.position = mainAnimator.transform.position;
+
+        if (bulletPool[n_CurBullet] != null)
+            bulletPool[n_CurBullet].transform.rotation = transform.rotation;  
 
         rb.isKinematic = true;
         rb.isKinematic = false;
