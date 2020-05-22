@@ -465,6 +465,8 @@ public class SC_MainBreakDownManager : MonoBehaviour, IF_BreakdownManager
         {
 
             SC_GameStates.Instance.ChangeTutoGameState(SC_GameStates.TutorialState.EndRepairDisplay);
+            SC_breakdown_displays_screens.Instance.TutoDisplayRepair();
+
         }
 
         else if (SC_GameStates.Instance.CurTutoState == SC_GameStates.TutorialState.StartRepairWeapon && SC_WeaponBreakdown.Instance.CurNbOfBreakdown == 0)

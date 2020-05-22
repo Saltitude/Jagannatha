@@ -75,7 +75,6 @@ public class SC_GameStates : NetworkBehaviour
         if(isServer)
         {
             ChangeGameState(GameState.Tutorial2);
-            ChangeTutoGameState(TutorialState.StartTutorial2);
             while(!skipTutoSafety)
             {
                 yield return new WaitForEndOfFrame();
@@ -202,13 +201,14 @@ public class SC_GameStates : NetworkBehaviour
                 break;
 
             case TutorialState.EndRepairDisplay:
+           
                 if (!isServer)
                 {
                     //Fin Display
                     SC_TutorialUIManager.Instance.ActivateBlink(SC_TutorialUIManager.System.Display, false);
                 }
                 ChangeTutoGameState(TutorialState.StartRepairWeapon);
-
+                
                 break;
                
             //----------------------------WEAPON---------------------------------------//
@@ -257,7 +257,10 @@ public class SC_GameStates : NetworkBehaviour
             //------------------------------------- PART 2 ---------------------------------------//
 
             case TutorialState.StartTutorial2:
-
+                if(isServer)
+                {
+                    SC_EnemyManager.Instance.Initialize();
+                }
                 if (!isServer)
                 {
 
