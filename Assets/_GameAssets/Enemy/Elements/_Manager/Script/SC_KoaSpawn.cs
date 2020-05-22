@@ -106,7 +106,8 @@ public class SC_KoaSpawn : MonoBehaviour
                 GameObject curKoa;           
 
                 int pos = curWave.initialSpawnPosition[j];
-                int orientedPos = (pos + (int)SC_PhaseManager.Instance.curPhaseSettings.WavesOrientation[SC_PhaseManager.Instance.curWaveIndex]) % 8;
+                //int orientedPos = (pos + (int)SC_PhaseManager.Instance.curPhaseSettings.WavesOrientation[SC_PhaseManager.Instance.curWaveIndex]) % 8;
+                int orientedPos = (pos + (int)SC_PhaseManager.Instance.curPhaseSettings.WavesOrientation[i]) % 8;
 
                 koaTab2[i,0,j, orientedPos] = Instantiate(koaPrefab);
                 curKoa = koaTab2[i, 0, j, orientedPos];
@@ -124,7 +125,8 @@ public class SC_KoaSpawn : MonoBehaviour
                 GameObject curKoa;
 
                 int pos = curWave.backupSpawnPosition[k];
-                int orientedPos = (pos + (int)SC_PhaseManager.Instance.curPhaseSettings.WavesOrientation[SC_PhaseManager.Instance.curWaveIndex]) % 8;
+                //int orientedPos = (pos + (int)SC_PhaseManager.Instance.curPhaseSettings.WavesOrientation[SC_PhaseManager.Instance.curWaveIndex]) % 8;
+                int orientedPos = (pos + (int)SC_PhaseManager.Instance.curPhaseSettings.WavesOrientation[i]) % 8;
 
                 koaTab2[i, 1, k, orientedPos] = Instantiate(koaPrefab);
                 curKoa = koaTab2[i, 1, k, orientedPos];
@@ -170,9 +172,12 @@ public class SC_KoaSpawn : MonoBehaviour
     {
 
         int pos = spawnPos;
-        int orientedPos = (pos + (int)SC_PhaseManager.Instance.curPhaseSettings.WavesOrientation[SC_PhaseManager.Instance.curWaveIndex]) % 8;
+        int orientedPos = (pos + (int)SC_PhaseManager.Instance.curPhaseSettings.WavesOrientation[wi]) % 8;
 
         GameObject curKoa = koaTab2[wi,backup,flockrank, orientedPos];
+
+        Debug.Log("SpawnCoro - orientedPos = " + orientedPos);
+        Debug.Log("SpawnCoro - curKoa = " + curKoa);
 
         while (curKoa.transform.position.y > -150)
         {
@@ -187,9 +192,13 @@ public class SC_KoaSpawn : MonoBehaviour
     {
 
         int pos = spawnPos;
-        int orientedPos = (pos + (int)SC_PhaseManager.Instance.curPhaseSettings.WavesOrientation[SC_PhaseManager.Instance.curWaveIndex]) % 8;
+        int orientedPos = (pos + (int)SC_PhaseManager.Instance.curPhaseSettings.WavesOrientation[wi]) % 8;
 
         GameObject curKoa = koaTab2[wi, backup, flockrank, orientedPos];
+
+        Debug.Log("GoTargetPos - orientedPos = " + orientedPos);
+        Debug.Log("GoTargetPos - curKoa = " + curKoa);
+
 
         float curDist = Vector3.Distance(curKoa.transform.position, Player.transform.position);
         float distanceToTravel = curDist - minDist;

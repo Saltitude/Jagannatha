@@ -112,6 +112,7 @@ public class SC_WaveManager : MonoBehaviour
         {
             for (int i = 0; i < _curWaveSettings.backupSpawnFlock.Length; i++)
             {
+                Debug.Log("InitializeWave - Backup");
                 StartCoroutine(SC_KoaSpawn.Instance.GoTargetPos(SC_PhaseManager.Instance.curWaveIndex, 1, i, _curWaveSettings.backupSpawnPosition[i], 350, 3.5f));
             }
         }
@@ -120,6 +121,7 @@ public class SC_WaveManager : MonoBehaviour
             WaveSettings nextWave = SC_PhaseManager.Instance.waves[SC_PhaseManager.Instance.curWaveIndex + 1];
             for (int i = 0; i < nextWave.initialSpawnFlock.Length; i++)
             {
+                Debug.Log("InitializeWave - Normal");
                 StartCoroutine(SC_KoaSpawn.Instance.GoTargetPos(SC_PhaseManager.Instance.curWaveIndex+1, 0, i, nextWave.initialSpawnPosition[i], 350, 3.5f));
             }
         }
@@ -173,7 +175,8 @@ public class SC_WaveManager : MonoBehaviour
         if (nextWave != null)
         for (int i = 0; i < nextWave.initialSpawnFlock.Length; i++)
         {
-            StartCoroutine(SC_KoaSpawn.Instance.GoTargetPos(SC_PhaseManager.Instance.curWaveIndex + 1, 0, i, nextWave.initialSpawnPosition[i], 200, 3.5f));
+                Debug.Log("SpawnBackupFlock");
+                StartCoroutine(SC_KoaSpawn.Instance.GoTargetPos(SC_PhaseManager.Instance.curWaveIndex + 1, 0, i, nextWave.initialSpawnPosition[i], 200, 3.5f));
         }
     }
 
