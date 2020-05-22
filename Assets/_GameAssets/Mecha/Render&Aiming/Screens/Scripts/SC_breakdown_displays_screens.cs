@@ -116,7 +116,7 @@ public class SC_breakdown_displays_screens : MonoBehaviour
             rnd = Random.Range(0.1f, 0.5f);
             yield return new WaitForSeconds(rnd);
         }
-
+        StopAllCoroutines();
     }
     IEnumerator BlinkScreen(int index)
     {
@@ -234,7 +234,7 @@ public class SC_breakdown_displays_screens : MonoBehaviour
         }
 
 
-        if (SC_GameStates.Instance.CurState == SC_GameStates.GameState.Game)
+        if (SC_GameStates.Instance.CurState != SC_GameStates.GameState.Lobby)
             FullPanneDisplay();
 
     }

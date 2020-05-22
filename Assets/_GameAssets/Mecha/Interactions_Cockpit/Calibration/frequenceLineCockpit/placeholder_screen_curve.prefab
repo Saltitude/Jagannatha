@@ -344,6 +344,9 @@ MonoBehaviour:
   Color6:
     serializedVersion: 2
     rgba: 12976056
+  colorBreakdown:
+    serializedVersion: 2
+    rgba: 9211020
   indexDouble1: 4
   indexDouble2: 3
 --- !u!1 &1464007466954495275
