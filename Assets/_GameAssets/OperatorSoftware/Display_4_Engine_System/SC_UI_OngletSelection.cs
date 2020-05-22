@@ -52,10 +52,11 @@ public class SC_UI_OngletSelection : MonoBehaviour, IF_clicableAction, IF_Hover
     {
         SC_UI_OngletContainer.Window newWindow = (SC_UI_OngletContainer.Window)index;
 
-        if (SC_GameStates.Instance.CurState != SC_GameStates.GameState.Game)
-            ActionTuto();
-        else
+        if (SC_GameStates.Instance.CurState != SC_GameStates.GameState.Tutorial)
             ActionGame();
+        else
+            ActionTuto();
+
 
             ongletContainer.ChangeWindow(newWindow);
         
@@ -140,7 +141,7 @@ public class SC_UI_OngletSelection : MonoBehaviour, IF_clicableAction, IF_Hover
 
     public void HoverAction()
     {
-        if (SC_GameStates.Instance.CurState == SC_GameStates.GameState.Game)
+        if (SC_GameStates.Instance.CurState != SC_GameStates.GameState.Tutorial)
             IsHover();
         else
             IsHoverTuto();

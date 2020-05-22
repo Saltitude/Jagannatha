@@ -290,7 +290,7 @@ public class SC_MainBreakDownManager : MonoBehaviour, IF_BreakdownManager
 
         }
 
-        if(SC_GameStates.Instance.CurState == SC_GameStates.GameState.Tutorial || SC_GameStates.Instance.CurState == SC_GameStates.GameState.Tutorial2)
+        if(SC_GameStates.Instance.CurState == SC_GameStates.GameState.Tutorial)
         SetTutoState();
 
         SyncSystemsLifes();
@@ -463,6 +463,7 @@ public class SC_MainBreakDownManager : MonoBehaviour, IF_BreakdownManager
     {
         if (SC_GameStates.Instance.CurTutoState == SC_GameStates.TutorialState.StartRepairDisplay && SC_BreakdownDisplayManager.Instance.CurNbOfBreakdown == 0)
         {
+
             SC_GameStates.Instance.ChangeTutoGameState(SC_GameStates.TutorialState.EndRepairDisplay);
         }
 
@@ -475,6 +476,8 @@ public class SC_MainBreakDownManager : MonoBehaviour, IF_BreakdownManager
         {
             SC_GameStates.Instance.ChangeTutoGameState(SC_GameStates.TutorialState.EndRepairMotion);
         }
+        
+ 
     }
 
     float Ratio(float inputValue, float inputMax, float outputMax, float inputMin = 0.0f, float outputMin = 0.0f)
