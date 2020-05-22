@@ -19,7 +19,7 @@ public class SC_PhaseManager : MonoBehaviour
     PhaseSettings curPhaseSettings;
     public WaveSettings[] waves;
 
-    
+    public PhaseSettings.Orientation[] WavesOrientation;
 
     public int curWaveIndex;
     // Start is called before the first frame update
