@@ -120,7 +120,9 @@ public class SC_GameStates : NetworkBehaviour
 
             case GameState.Tutorial2:
 
-                ChangeTutoGameState(TutorialState.StartTutorial2);
+                StartCoroutine(Swichtuto(1f, TutorialState.StartTutorial2));
+
+            
 
                 break;     
 
