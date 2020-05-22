@@ -133,9 +133,10 @@ public class SC_WaveManager : MonoBehaviour
             SpawnNewFlock(_curWaveSettings.initialSpawnFlock[i], i);
 
 
-            StartCoroutine(SC_KoaSpawn.Instance.SpawnCoro(SC_PhaseManager.Instance.curWaveIndex, 0, i, _curWaveSettings.initialSpawnPosition[i]));
+            //StartCoroutine(SC_KoaSpawn.Instance.SpawnCoro(SC_PhaseManager.Instance.curWaveIndex, 0, i, _curWaveSettings.initialSpawnPosition[i]));
             //Debug.Log("initialSpawnPosition = " + _curWaveSettings.initialSpawnPosition[i]);
             //StartCoroutine(SC_KoaSpawn.Instance.SpawnCoro(SC_PhaseManager.Instance.curWaveIndex, 0, i, 1));
+            StartCoroutine(SC_KoaSpawn.Instance.SpawnCoro(SC_PhaseManager.Instance.curWaveIndex, 0, i, _curWaveSettings.initialSpawnPosition[i]));
 
             yield return new WaitForSeconds(_curWaveSettings.timeBetweenSpawnInitial);            
         }
@@ -319,8 +320,17 @@ public class SC_WaveManager : MonoBehaviour
         _FlockList.Add(curFlock);
 
         BezierSolution.BezierSpline spawnSpline;
-        if (backup) spawnSpline = spawnSplines[_curWaveSettings.backupSpawnPosition[index]];
-        else spawnSpline = spawnSplines[_curWaveSettings.initialSpawnPosition[index]];
+
+        int pos;
+
+        if (backup)
+            pos = _curWaveSettings.backupSpawnPosition[index];
+        else
+            pos = _curWaveSettings.initialSpawnPosition[index];
+
+        int orientedBackupPos = (pos + (int)SC_PhaseManager.Instance.curPhaseSettings.WavesOrientation[SC_PhaseManager.Instance.curWaveIndex]) % 8;
+
+        spawnSpline = spawnSplines[orientedBackupPos];      
 
         //Initialize flock
         curFlock.GetComponent<SC_FlockManager>().InitializeFlock(flockSettings, spawnSpline, newSensitivity);

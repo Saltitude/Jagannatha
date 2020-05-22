@@ -41,8 +41,9 @@ public class SC_PhaseManager : MonoBehaviour
     public void Initialize(PhaseSettings newPhaseSettigns)
     {
 
-        SC_KoaSpawn.Instance.InitNewPhase(newPhaseSettigns);
         curPhaseSettings = newPhaseSettigns;
+        SC_KoaSpawn.Instance.InitNewPhase(newPhaseSettigns);
+        
         resetVariables();
         waves = newPhaseSettigns.waves;
         

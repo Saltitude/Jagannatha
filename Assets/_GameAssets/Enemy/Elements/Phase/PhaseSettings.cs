@@ -12,9 +12,13 @@ public class PhaseSettings : ScriptableObject
     public enum Orientation
     {
         NorthDefault = 0,
+        NorthWest = 1,
         West = 2,
+        SouthWest = 3,
         South = 4,
-        East = 6
+        SouthEast = 5,
+        East = 6,
+        NorthEast = 7
     } 
 
     public Orientation[] WavesOrientation;
