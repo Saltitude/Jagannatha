@@ -333,8 +333,10 @@ public class SC_KoaManager : MonoBehaviour
                 _boidsTab[j].GetComponent<Boid>().target = _guideList[i];
             }
         }
+
         //Si impaire, réparti le dernier boid sur une target
-        _boidsTab[all - 1].GetComponent<Boid>().target = _guideList[div - 1];
+        if(all > 0 && div > 0)
+            _boidsTab[all - 1].GetComponent<Boid>().target = _guideList[div - 1];
 
     }
 

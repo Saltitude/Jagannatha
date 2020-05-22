@@ -315,8 +315,12 @@ public class SC_FlockManager : MonoBehaviour
                 startAttackTimer = 0;
             }
         }
+
         transform.LookAt(_Player.transform);
-        KoaMainAnimator.transform.LookAt(_Player.transform);
+
+        if(KoaMainAnimator != null)
+            KoaMainAnimator.transform.LookAt(_Player.transform);
+
     }
 
     void ReactionUpdate()
