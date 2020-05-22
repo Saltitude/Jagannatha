@@ -28,6 +28,7 @@ public class PhaseSettings : ScriptableObject
         //SetOrientedSpawnpos()
     }
 
+    /*
     void SetOrientedSpawnpos()
     {
 
@@ -45,4 +46,6 @@ public class PhaseSettings : ScriptableObject
         }
 
     }
+    */
+
 }

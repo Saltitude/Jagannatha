@@ -16,7 +16,7 @@ public class WaveSettings : ScriptableObject
     public bool backup;
     public FlockSettings[] backupSpawnFlock;
     public int[] backupSpawnPosition;
-    public int[] backupOrientedSpawnPosition;
+    //public int[] backupOrientedSpawnPosition;
 
     [Tooltip("-1 if no timer condition wanted")]
     public float timeBeforeBackup;
