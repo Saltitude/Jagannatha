@@ -100,9 +100,7 @@ public class SC_Weapon_MechState : MonoBehaviour
                 {
                     newState = SystemState.Launched;
                 }
-
             }
-            
         }
 
         else

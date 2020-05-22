@@ -81,15 +81,14 @@ public class SC_GameStates : NetworkBehaviour
                 yield return new WaitForEndOfFrame();
             }
            
-                SC_MainBreakDownManager.Instance.DisplayBreakdownSC.RepairBreakdownDebug();
-                SC_MainBreakDownManager.Instance.WeaponBreakdownSC.RepairBreakdownDebug();
-                SC_MainBreakDownManager.Instance.MovementBreakdownSC.RepairBreakdownDebug();
-                SC_main_breakdown_validation.Instance.Validate();
-           
+            SC_MainBreakDownManager.Instance.DisplayBreakdownSC.RepairBreakdownDebug();
+            SC_MainBreakDownManager.Instance.WeaponBreakdownSC.RepairBreakdownDebug();
+            SC_MainBreakDownManager.Instance.MovementBreakdownSC.RepairBreakdownDebug();
+            SC_main_breakdown_validation.Instance.Validate();
         }
+
         if (!isServer)
         {
-
             SC_TutorialUIManager.Instance.ActivateSystem(SC_TutorialUIManager.System.Display, true);
             SC_TutorialUIManager.Instance.ActivateSystem(SC_TutorialUIManager.System.Weapon, true);
             SC_TutorialUIManager.Instance.ActivateSystem(SC_TutorialUIManager.System.Motion, true);
@@ -241,7 +240,6 @@ public class SC_GameStates : NetworkBehaviour
                 if (!isServer)
                 {
                     SC_TutorialUIManager.Instance.ActivateBlink(SC_TutorialUIManager.System.Motion, false);
-
                 }
                 ChangeTutoGameState(TutorialState.Reboot);
 
