@@ -5241,14 +5241,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Collider: {fileID: 7346031293512743681}
   DistFromMech: 0
-  MinHeight: 1
-  MaxHeight: 50
+  MinHeight: 15
+  MaxHeight: 100
   MinDistHeight: 1
-  MaxDistHeight: 125
-  MinRadius: 2
-  MaxRadius: 6
+  MaxDistHeight: 200
+  MinRadius: 6
+  MaxRadius: 10
   MinDistRadius: 20
-  MaxDistRadius: 125
+  MaxDistRadius: 200
 --- !u!136 &7346031293512743681
 CapsuleCollider:
   m_ObjectHideFlags: 0
