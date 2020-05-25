@@ -176,8 +176,8 @@ public class SC_KoaSpawn : MonoBehaviour
 
         GameObject curKoa = koaTab2[wi,backup,flockrank, orientedPos];
 
-        Debug.Log("SpawnCoro - orientedPos = " + orientedPos);
-        Debug.Log("SpawnCoro - curKoa = " + curKoa);
+        //Debug.Log("SpawnCoro - orientedPos = " + orientedPos);
+        //Debug.Log("SpawnCoro - curKoa = " + curKoa);
 
         while (curKoa.transform.position.y > -150)
         {
@@ -196,8 +196,8 @@ public class SC_KoaSpawn : MonoBehaviour
 
         GameObject curKoa = koaTab2[wi, backup, flockrank, orientedPos];
 
-        Debug.Log("GoTargetPos - orientedPos = " + orientedPos);
-        Debug.Log("GoTargetPos - curKoa = " + curKoa);
+        //Debug.Log("GoTargetPos - orientedPos = " + orientedPos);
+        //Debug.Log("GoTargetPos - curKoa = " + curKoa);
 
 
         float curDist = Vector3.Distance(curKoa.transform.position, Player.transform.position);
