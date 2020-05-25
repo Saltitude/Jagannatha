@@ -2295,6 +2295,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7707116412919485572, guid: 590248691a86e9446b1bde67611440cd,
         type: 3}
+      propertyPath: mat.Array.size
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7707116412919485572, guid: 590248691a86e9446b1bde67611440cd,
+        type: 3}
       propertyPath: screenPanneTexture.Array.data[0]
       value: 
       objectReference: {fileID: 0}

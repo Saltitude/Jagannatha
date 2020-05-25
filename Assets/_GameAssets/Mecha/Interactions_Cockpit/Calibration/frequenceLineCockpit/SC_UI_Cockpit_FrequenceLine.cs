@@ -33,6 +33,9 @@ public class SC_UI_Cockpit_FrequenceLine : MonoBehaviour
     public Color32 Color5;
     public Color32 Color6;
 
+    [SerializeField]
+    Color32 colorBreakdown;
+
     Renderer lineRenderer;
 
 
@@ -55,15 +58,14 @@ public class SC_UI_Cockpit_FrequenceLine : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        updateLineRender();
+        if (!SC_MainBreakDownManager.Instance.b_BreakEngine)
+            updateLineRender();
+        else
+            UpdateLineBreakdown();
+
         if (sc_syncvar == null || Mng_SyncVar == null)
         {
             GetReferences();
-
-        }
-        if (sc_syncvar != null)
-        {
-            
 
         }
     }
@@ -134,11 +136,31 @@ public class SC_UI_Cockpit_FrequenceLine : MonoBehaviour
 
             lineRenderer.material.color = curColor;
 
-            Sc_LaserFeedBack.Instance.SetColor(curColor);
-            SC_WeaponLaserGun.Instance.AlignColor(curColor);
+        }
+
+        Sc_LaserFeedBack.Instance.SetColor(curColor);
+        SC_WeaponLaserGun.Instance.AlignColor(curColor);
+
+    }
+
+    void UpdateLineBreakdown()
+    {
+        curColor.r = colorBreakdown.r;
+        curColor.g = colorBreakdown.g;
+        curColor.b = colorBreakdown.b; 
+
+        line.positionCount = 2; //Configuration du nombre 
+        for (int i = 0; i < line.positionCount; i++)
+        {
+            float x = (i * taille); //Valeur de X
+            float y = 0;
+            line.SetPosition(i, new Vector3(y, 0f, x)); //Distribution des valeurs dans le tableau (index, Vector3)
+
+            lineRenderer.material.color = curColor;
 
         }
     }
+
     void GetReferences()
     {
         if (Mng_SyncVar == null)

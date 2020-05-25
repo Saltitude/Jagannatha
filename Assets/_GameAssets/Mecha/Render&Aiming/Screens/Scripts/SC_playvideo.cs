@@ -10,12 +10,12 @@ public class SC_playvideo : MonoBehaviour
 
     void Start()
     {
-        PlayVideo();
+        //PlayVideo();
     }
 
     public void PlayVideo()
     {
-
+        
         ((MovieTexture)GetComponent<Renderer>().material.mainTexture).loop = true;
 
         if(!((MovieTexture)GetComponent<Renderer>().material.mainTexture).isPlaying)
@@ -27,11 +27,11 @@ public class SC_playvideo : MonoBehaviour
 
     public void StopVideo()
     {
-
+        
         ((MovieTexture)GetComponent<Renderer>().material.mainTexture).Stop();
 
         b_OnPlay = false;
-
+        
     }
 
 }
