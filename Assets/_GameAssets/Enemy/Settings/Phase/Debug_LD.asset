@@ -10,8 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f540922e84c9ef34aabff828308f0599, type: 3}
-  m_Name: Tuto
+  m_Name: Debug_LD
   m_EditorClassIdentifier: 
   waves:
-  - {fileID: 11400000, guid: c8eaf84ff0ce63b46961ef64026630a7, type: 2}
-  WavesOrientation: 00000000
+  - {fileID: 11400000, guid: ca7878f394dca3449b71f7f79f1b540e, type: 2}
+  - {fileID: 11400000, guid: 35003601e16550042bb7bd7a9f2f761d, type: 2}
+  WavesOrientation: 0000000000000000

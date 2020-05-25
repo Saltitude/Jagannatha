@@ -14,13 +14,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   initialSpawnFlock:
   - {fileID: 11400000, guid: 016999d769f9bda47997e96bfc9fe43b, type: 2}
-  initialSpawnPosition: 06000000
+  initialSpawnPosition: 00000000
+  OrientedSpawnPosition: 
   timeBetweenSpawnInitial: 0
   backup: 1
   backupSpawnFlock:
-  - {fileID: 11400000, guid: 7d8fcc4ac73bd2b47a2739cf3805a44f, type: 2}
-  - {fileID: 11400000, guid: 016999d769f9bda47997e96bfc9fe43b, type: 2}
-  backupSpawnPosition: 0200000002000000
+  - {fileID: 11400000, guid: b9b85c8c7cf4ba944b1345051b58ce63, type: 2}
+  - {fileID: 11400000, guid: 92c610f39cfed7f4c80ee8fba4818dc5, type: 2}
+  backupSpawnPosition: 0400000004000000
+  backupOrientedSpawnPosition: 
   timeBeforeBackup: -1
   flockLeftBeforeBackup: 0
   timeBetweenSpawnBackup: 5

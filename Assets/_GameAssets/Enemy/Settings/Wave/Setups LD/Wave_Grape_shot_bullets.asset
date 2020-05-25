@@ -15,6 +15,7 @@ MonoBehaviour:
   initialSpawnFlock:
   - {fileID: 11400000, guid: e2539410742a3654494ab6ce864428da, type: 2}
   initialSpawnPosition: 00000000
+  OrientedSpawnPosition: 
   timeBetweenSpawnInitial: 0
   backup: 1
   backupSpawnFlock:
@@ -25,7 +26,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: a2e1ee6db55ca5d4793fa4ea58429bc5, type: 2}
   - {fileID: 11400000, guid: 35b2fbc7fd05ed34cb227d96c78f9b4d, type: 2}
   - {fileID: 11400000, guid: 35b2fbc7fd05ed34cb227d96c78f9b4d, type: 2}
-  backupSpawnPosition: 00000000000000000000000000000000000000000000000000000000
+  backupSpawnPosition: 00000000010000000000000000000000000000000700000000000000
+  backupOrientedSpawnPosition: 
   timeBeforeBackup: 12
   flockLeftBeforeBackup: 0
   timeBetweenSpawnBackup: 2

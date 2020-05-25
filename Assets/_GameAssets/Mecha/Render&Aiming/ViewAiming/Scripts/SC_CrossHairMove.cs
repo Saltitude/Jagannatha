@@ -18,6 +18,8 @@ public class SC_CrossHairMove : MonoBehaviour
     bool b_IsVR = false;
     bool b_IsFPS = false;
 
+    Coroutine curSnapCoro;
+
     [Header("CrossHair Parameters")]
     public float f_CrossHairDist = 5f;
 
@@ -151,8 +153,15 @@ public class SC_CrossHairMove : MonoBehaviour
     {
         if(CrossHairTarget != SnapTarget && CoroTarget != SnapTarget)
         {
-            StopAllCoroutines();
-            StartCoroutine(Snapping(SnapTarget));
+
+            //StopAllCoroutines();
+            //StartCoroutine(Snapping(SnapTarget));
+
+            if (curSnapCoro != null)
+                StopCoroutine(curSnapCoro);
+
+            curSnapCoro = StartCoroutine(Snapping(SnapTarget));
+
         }
     }
 
