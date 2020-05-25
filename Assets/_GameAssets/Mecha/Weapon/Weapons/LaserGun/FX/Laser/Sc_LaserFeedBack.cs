@@ -24,6 +24,7 @@ public class Sc_LaserFeedBack : MonoBehaviour
     public Material EnergyBall;
     public GameObject ChargeSpark;
     public GameObject Fioriture;
+    public GameObject Fioriture1;
     public GameObject Ondes;
     public GameObject Elice;
     public GameObject EliceDark;
@@ -36,6 +37,7 @@ public class Sc_LaserFeedBack : MonoBehaviour
     //public ParticleSystem.MainModule EnergyBallPS;
     public ParticleSystem.MainModule ChargeSparkPS;
     public ParticleSystem.MainModule FioriturePS;
+    public ParticleSystem.MainModule FioriturePS1;
     public ParticleSystem.MainModule OndesPS;
     public ParticleSystem.MainModule ElicePS;
     public ParticleSystem.MainModule EliceDarkPS;
@@ -119,6 +121,7 @@ public class Sc_LaserFeedBack : MonoBehaviour
             ChargeSparkPS = ChargeSpark.GetComponent<ParticleSystem>().main;
             //EnergyBallPS = EnergyBall.GetComponent<ParticleSystem>().main;
             FioriturePS = Fioriture.GetComponent<ParticleSystem>().main;
+            FioriturePS1 = Fioriture1.GetComponent<ParticleSystem>().main;
             OndesPS = Ondes.GetComponent<ParticleSystem>().main;
             ElicePS = Elice.GetComponent<ParticleSystem>().main;
             EliceDarkPS = EliceDark.GetComponent<ParticleSystem>().main;
@@ -130,6 +133,7 @@ public class Sc_LaserFeedBack : MonoBehaviour
             ChargeSparkPS.startColor = gradiend;
             EnergyBall.SetColor("_EmissionColor", CurColor);
             FioriturePS.startColor = gradiend;
+            FioriturePS1.startColor = gradiend;
             OndesPS.startColor = gradiend;
             ElicePS.startColor = gradiend;
             EliceDarkPS.startColor = gradiend;
