@@ -25,18 +25,19 @@ public class SC_JoystickMove : MonoBehaviour, IF_BreakdownSystem
     public enum Dir { None, Left, Right, Off }
     public Dir CurBrokenDir = Dir.Left;
 
-
     //Coroutines Infos
-    [Header("Smooth Coroutine Infos")]
+    [Header("Acceleration Parameters")]
     [SerializeField]
     bool b_UseCoroutine = false;
     [Range(0, 2)]
     public float f_Duration = 0.5f;
+    [SerializeField]
+    AnimationCurve Acceleration;
+
+    [Header("Acceleration Coroutine Infos")]
     public Dir CurDir = Dir.None;
     public Dir TargetDir = Dir.None;
     public Dir CoroDir = Dir.Off;
-    [SerializeField]
-    AnimationCurve Acceleration;
 
     //Rotation Horizontale
     [Header("Horizontal Rotation Settings")]
