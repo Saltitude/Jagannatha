@@ -52,8 +52,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 957bf3ca82f20a341ba910e325fe06c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  screenTransform: {fileID: 3140869999937211596}
-  screenBDTransform: {fileID: 495481596806620197}
   shakeDuration: 0
   shakeAmount: 0.01
   decreaseFactor: 1
