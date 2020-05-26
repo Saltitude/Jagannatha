@@ -5,32 +5,29 @@ using UnityEngine;
 public class SC_playvideo : MonoBehaviour
 {
 
-    [SerializeField]
-    bool b_OnPlay = false;
+    Renderer renderer;
 
-    void Start()
+
+    void Awake()
     {
-        //PlayVideo();
+        renderer = GetComponent<Renderer>();
+        renderer.enabled = true;
     }
 
     public void PlayVideo()
     {
         
-        ((MovieTexture)GetComponent<Renderer>().material.mainTexture).loop = true;
+        ((MovieTexture)renderer.material.mainTexture).loop = true;
 
-        if(!((MovieTexture)GetComponent<Renderer>().material.mainTexture).isPlaying)
-            ((MovieTexture)GetComponent<Renderer>().material.mainTexture).Play();
-
-        b_OnPlay = true;
-
+        if(!((MovieTexture)renderer.material.mainTexture).isPlaying)
+            ((MovieTexture)renderer.material.mainTexture).Play();
     }
 
     public void StopVideo()
     {
         
-        ((MovieTexture)GetComponent<Renderer>().material.mainTexture).Stop();
+        ((MovieTexture)renderer.material.mainTexture).Stop();
 
-        b_OnPlay = false;
         
     }
 
