@@ -4,6 +4,13 @@ using UnityEngine;
 
 public class SC_UI_Cockpit_FrequenceLine : MonoBehaviour
 {
+    #region Singleton
+
+    private static SC_UI_Cockpit_FrequenceLine _instance;
+    public static SC_UI_Cockpit_FrequenceLine Instance { get { return _instance; } }
+
+    #endregion
+
     LineRenderer line;
 
     //[Range(0.1f, 1.5f)]
@@ -44,6 +51,18 @@ public class SC_UI_Cockpit_FrequenceLine : MonoBehaviour
 
     public int indexDouble1;
     public int indexDouble2;
+
+    void Awake()
+    {
+        if (_instance != null && _instance != this)
+        {
+            Destroy(gameObject);
+        }
+        else
+        {
+            _instance = this;
+        }
+    }
 
     void Start()
     {
