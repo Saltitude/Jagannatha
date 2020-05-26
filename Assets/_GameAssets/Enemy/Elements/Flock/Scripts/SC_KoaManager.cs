@@ -139,7 +139,7 @@ public class SC_KoaManager : MonoBehaviour
         //Récupération du comportement initial
         curBoidSettings = newSettings;
         if (SC_EnemyManager.Instance.curPhaseIndex != 0) sensitivity = newSensitivity;
-        else sensitivity = new Vector3Int(3, 5, 4);
+        else sensitivity = SC_WaveManager.Instance.GenerateSensitivityP();
         //Ajout du premier guide a la liste
         _guideList.Add(newGuide);
 
