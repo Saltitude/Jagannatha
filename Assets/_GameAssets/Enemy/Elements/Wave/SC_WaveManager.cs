@@ -383,6 +383,39 @@ public class SC_WaveManager : MonoBehaviour
         sensitivityD = new Vector3Int(5, 5, 5);
     }
 
+    public Vector3Int GenerateSensitivityP()
+    {
+
+        int newX;
+        int newY;
+        int newZ;
+
+        newX = Random.Range(0, 6);
+        newY = Random.Range(0, 6);
+        newZ = Random.Range(0, 6);
+
+        Vector3Int newValue = new Vector3Int(newX, newY, newZ);
+
+        Vector3Int pilotValue = SC_WeaponLaserGun.Instance.GetWeaponSensitivity();
+
+        float x = Mathf.Abs(newValue.x - pilotValue.x);
+        float y = Mathf.Abs(newValue.y - pilotValue.y);
+        float z = Mathf.Abs(newValue.z - pilotValue.z);
+
+        float ecart = x + y + z;
+        if (ecart <= 3)
+        {
+            newValue = GenerateSensitivityP();
+        }
+        else
+        {
+            newValue = new Vector3Int(newX, newY, newZ);
+        }
+
+        return newValue;
+
+    }
+
     Vector3Int GenerateNewValue(Vector3Int oldValue)
     {
 
