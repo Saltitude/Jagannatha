@@ -1,14 +1,8 @@
 fileFormatVersion: 2
-<<<<<<< HEAD:Assets/_GameAssets/Mecha/Render&Aiming/Screens/Materials/M_RenderLobby.mat.meta
-guid: 5b5af8a9fb59c164ea765e43d02eca8b
-NativeFormatImporter:
-=======
-guid: a0af37d6cf6471244ad6145441175d2e
+guid: 0a043bdaef989d34c8e220a12b35495e
 folderAsset: yes
 DefaultImporter:
->>>>>>> Trash:Assets/_GameAssets/Enemy/Elements/VFX.meta
   externalObjects: {}
-  mainObjectFileID: 2100000
   userData: 
   assetBundleName: 
   assetBundleVariant: 
