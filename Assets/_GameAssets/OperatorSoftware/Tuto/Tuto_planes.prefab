@@ -485,6 +485,7 @@ MonoBehaviour:
   - {fileID: 8774983765041326093}
   - {fileID: 1233258494432749524}
   - {fileID: 4233978262949059796}
+  instruc_Img: []
 --- !u!1 &1307873592112409079
 GameObject:
   m_ObjectHideFlags: 0

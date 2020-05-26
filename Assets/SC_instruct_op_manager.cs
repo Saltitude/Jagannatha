@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class SC_instruct_op_manager : MonoBehaviour
 {
@@ -14,6 +15,9 @@ public class SC_instruct_op_manager : MonoBehaviour
 
 
     public GameObject[] instruc_Go;
+
+    [SerializeField]
+    Image[] instruc_Img;
 
 
     void Awake()
@@ -60,6 +64,31 @@ public class SC_instruct_op_manager : MonoBehaviour
         {
 
             instruc_Go[index].SetActive(false);
+
+        }
+
+
+    }
+
+
+    public void ActivateImage(int index)
+    {
+        if (index < instruc_Go.Length)
+        {
+
+            instruc_Img[index].enabled = true;
+
+        }
+
+
+    }
+
+    public void DeactivateImage(int index)
+    {
+        if (index < instruc_Go.Length)
+        {
+
+            instruc_Img[index].enabled = false;
 
         }
 

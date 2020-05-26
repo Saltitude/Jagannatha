@@ -145,6 +145,7 @@ public class SC_GameStates : NetworkBehaviour
                 {
                     SC_instruct_op_manager.Instance.Deactivate(2);
                     SC_instruct_op_manager.Instance.Deactivate(3);
+ 
                 }
                     
                 break;
@@ -180,11 +181,23 @@ public class SC_GameStates : NetworkBehaviour
                     SC_main_breakdown_validation.Instance.bringDown();
                 }
                 if(!isServer)
-                { 
-                  
+                {
+
+
                     SC_TutorialUIManager.Instance.ActivateSystem(SC_TutorialUIManager.System.Display, false);
                     SC_TutorialUIManager.Instance.ActivateSystem(SC_TutorialUIManager.System.Weapon, false);
                     SC_TutorialUIManager.Instance.ActivateSystem(SC_TutorialUIManager.System.Motion, false);
+
+
+                    SC_instruct_op_manager.Instance.DeactivateImage(0);
+                    SC_instruct_op_manager.Instance.DeactivateImage(1);
+                    SC_instruct_op_manager.Instance.DeactivateImage(2);
+                    SC_instruct_op_manager.Instance.DeactivateImage(3);
+                    SC_instruct_op_manager.Instance.Deactivate(17);
+                    SC_instruct_op_manager.Instance.Activate(18);
+
+
+
 
                 }
                 ChangeTutoGameState(TutorialState.StartRepairDisplay);
@@ -263,7 +276,13 @@ public class SC_GameStates : NetworkBehaviour
                 }
                 if (!isServer)
                 {
+                    SC_instruct_op_manager.Instance.ActivateImage(0);
+                    SC_instruct_op_manager.Instance.ActivateImage(1);
+                    SC_instruct_op_manager.Instance.ActivateImage(2);
+                    SC_instruct_op_manager.Instance.ActivateImage(3);
 
+                    SC_instruct_op_manager.Instance.Activate(17);
+                    SC_instruct_op_manager.Instance.Deactivate(18);
                 }
                 
 
