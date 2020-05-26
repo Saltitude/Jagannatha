@@ -445,6 +445,18 @@ public class SC_FlockManager : MonoBehaviour
                 KoaEmissiveAnimator.SetBool("Flight", true);
 
                 break;
+            case PathType.Death:
+
+                KoaMainAnimator.SetBool("Deploy", false);
+                KoaEmissiveAnimator.SetBool("Deploy", false);
+
+                KoaMainAnimator.SetBool("Flight", false);
+                KoaEmissiveAnimator.SetBool("Flight", false);
+                KoaMainAnimator.SetBool("Deploy", true);
+                KoaEmissiveAnimator.SetBool("Deploy", true);
+                KoaMainAnimator.SetFloat("SpeedFactor", 1);
+                KoaEmissiveAnimator.SetFloat("SpeedFactor", 1);
+                break;
         }
 
     }
@@ -494,6 +506,10 @@ public class SC_FlockManager : MonoBehaviour
     {
         while(true)
         {
+            if(curtype == PathType.Death)
+            {
+                yield return new WaitForSeconds(1.3f);
+            }
             _curBoidSetting = settings[curSettingsIndex];
 
             int rnd = Random.Range(0, 2);

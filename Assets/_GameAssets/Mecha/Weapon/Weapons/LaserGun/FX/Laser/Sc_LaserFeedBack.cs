@@ -17,7 +17,7 @@ public class Sc_LaserFeedBack : MonoBehaviour
     GameObject SFX_LaserBeam;
     int SoundSourceNumb;
     [SerializeField]
-    Color CurColor;
+    public Color CurColor;
     public GameObject Laser;
     public GameObject Laser1;
     public GameObject Laser2;
