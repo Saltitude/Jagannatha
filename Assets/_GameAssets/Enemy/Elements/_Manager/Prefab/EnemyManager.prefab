@@ -68,8 +68,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9957a927d44864745abb23d7b65deead, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  curPhaseSettings: {fileID: 0}
   waves: []
   curWaveIndex: 0
+  OrientationFactor: 
 --- !u!114 &4763096179457797522
 MonoBehaviour:
   m_ObjectHideFlags: 0

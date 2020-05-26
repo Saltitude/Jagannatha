@@ -369,17 +369,25 @@ public class SC_FlockManager : MonoBehaviour
 
         if(!reactionHit)
         {
+
             if(reactionTimer >0)
             {
+
                 reactionTimer -= Time.deltaTime;
-                KoaMainAnimator.SetFloat("SpeedFactor", -1);
-                KoaEmissiveAnimator.SetFloat("SpeedFactor", -1);
+
+                if(KoaMainAnimator != null)
+                    KoaMainAnimator.SetFloat("SpeedFactor", -1);
+
+                if (KoaEmissiveAnimator != null)
+                    KoaEmissiveAnimator.SetFloat("SpeedFactor", -1);
+
             }
+
             if(reactionTimer <0)
             {
                 EndReaction();
-
             }
+
         }
     }
 

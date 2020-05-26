@@ -102,25 +102,44 @@ public class SC_KoaSpawn : MonoBehaviour
 
             for (int j = 0; j < curWave.initialSpawnFlock.Length; j++)
             {
+
+                GameObject curKoa;           
+
+                int pos = curWave.initialSpawnPosition[j];
+                //int orientedPos = (pos + (int)SC_PhaseManager.Instance.curPhaseSettings.WavesOrientation[SC_PhaseManager.Instance.curWaveIndex]) % 8;
+                int orientedPos = (pos + (int)SC_PhaseManager.Instance.curPhaseSettings.WavesOrientation[i]) % 8;
+
+                koaTab2[i,0,j, orientedPos] = Instantiate(koaPrefab);
+                curKoa = koaTab2[i, 0, j, orientedPos];
+                DisplaceKoaOnSpawn(curKoa, orientedPos);
+
+                StartCoroutine(GoTargetPos(i, 0, j, pos, 700, 8f));
+                curKoa.transform.SetParent(container.transform);
+
+
+            }
+
+            for (int k = 0; k < curWave.backupSpawnFlock.Length; k++)
+            {
+
                 GameObject curKoa;
-                koaTab2[i,0,j, curWave.initialSpawnPosition[j]] = Instantiate(koaPrefab);
-                curKoa = koaTab2[i, 0, j, curWave.initialSpawnPosition[j]];
-                DisplaceKoaOnSpawn(curKoa, curWave.initialSpawnPosition[j]);
-                StartCoroutine(GoTargetPos(i, 0, j, curWave.initialSpawnPosition[j], 700, 8f));
+
+                int pos = curWave.backupSpawnPosition[k];
+                //int orientedPos = (pos + (int)SC_PhaseManager.Instance.curPhaseSettings.WavesOrientation[SC_PhaseManager.Instance.curWaveIndex]) % 8;
+                int orientedPos = (pos + (int)SC_PhaseManager.Instance.curPhaseSettings.WavesOrientation[i]) % 8;
+
+                koaTab2[i, 1, k, orientedPos] = Instantiate(koaPrefab);
+                curKoa = koaTab2[i, 1, k, orientedPos];
+                DisplaceKoaOnSpawn(curKoa, orientedPos);
+
+                StartCoroutine(GoTargetPos(i, 1, k, pos, 700, 8f));
                 curKoa.transform.SetParent(container.transform);
 
             }
-            for (int k = 0; k < curWave.backupSpawnFlock.Length; k++)
-            {
-                GameObject curKoa;
-                koaTab2[i, 1, k, curWave.backupSpawnPosition[k]] = Instantiate(koaPrefab);
-                curKoa = koaTab2[i, 1, k, curWave.backupSpawnPosition[k]];
-                DisplaceKoaOnSpawn(curKoa, curWave.backupSpawnPosition[k]);
-                StartCoroutine(GoTargetPos(i, 1, k, curWave.backupSpawnPosition[k], 700, 8f));
-                curKoa.transform.SetParent(container.transform);
-            }
         }
+
         KoaCountMaster();
+
     }
 
  
@@ -142,21 +161,23 @@ public class SC_KoaSpawn : MonoBehaviour
             koa.transform.GetChild(i).transform.localScale = new Vector3(1,1, koa.transform.GetChild(i).transform.localScale.z*rndscale);
         }
 
-        
-
         koa.transform.position = splineSpawn[spawnPoint].GetPoint(1);
         koa.transform.LookAt(Player.transform);
         koa.transform.Translate(new Vector3(-1200 + rndx , rndy, rndz), Space.Self);
         koa.transform.LookAt(Player.transform);
-
-     
+    
     }
 
     public IEnumerator SpawnCoro(int wi, int backup, int flockrank, int spawnPos )
     {
-        
-        GameObject curKoa = koaTab2[wi,backup,flockrank,spawnPos];
-        curKoa.GetComponent<TrailRenderer>().enabled = true;
+
+        int pos = spawnPos;
+        int orientedPos = (pos + (int)SC_PhaseManager.Instance.curPhaseSettings.WavesOrientation[wi]) % 8;
+
+        GameObject curKoa = koaTab2[wi,backup,flockrank, orientedPos];
+
+        //Debug.Log("SpawnCoro - orientedPos = " + orientedPos);
+        //Debug.Log("SpawnCoro - curKoa = " + curKoa);
 
         while (curKoa.transform.position.y > -150)
         {
@@ -169,7 +190,16 @@ public class SC_KoaSpawn : MonoBehaviour
 
     public IEnumerator GoTargetPos(int wi, int backup, int flockrank, int spawnPos, int minDist, float travelTime)
     {
-        GameObject curKoa = koaTab2[wi, backup, flockrank, spawnPos];
+
+        int pos = spawnPos;
+        int orientedPos = (pos + (int)SC_PhaseManager.Instance.curPhaseSettings.WavesOrientation[wi]) % 8;
+
+        GameObject curKoa = koaTab2[wi, backup, flockrank, orientedPos];
+
+        //Debug.Log("GoTargetPos - orientedPos = " + orientedPos);
+        //Debug.Log("GoTargetPos - curKoa = " + curKoa);
+
+
         float curDist = Vector3.Distance(curKoa.transform.position, Player.transform.position);
         float distanceToTravel = curDist - minDist;
         float distancePerSec = distanceToTravel/ travelTime;
