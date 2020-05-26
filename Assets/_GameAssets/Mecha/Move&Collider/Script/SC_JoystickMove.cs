@@ -62,6 +62,8 @@ public class SC_JoystickMove : MonoBehaviour, IF_BreakdownSystem
     //Rotation Verticale
     [Header("Vertical Rotation Settings")]
     [SerializeField]
+    bool EnableVerticalMovement = false;
+    [SerializeField]
     bool b_InvertAxe = false;  
     [SerializeField]
     Transform TargetTRS;
@@ -100,7 +102,10 @@ public class SC_JoystickMove : MonoBehaviour, IF_BreakdownSystem
         {
             GetImpulses();
             DebugGetImpulses();
-            VerticalRot();
+
+            if(EnableVerticalMovement)
+                VerticalRot();
+
             HorizontalRot();
         }        
     }
