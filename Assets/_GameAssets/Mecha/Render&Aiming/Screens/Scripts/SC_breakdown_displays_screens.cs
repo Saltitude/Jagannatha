@@ -32,6 +32,9 @@ public class SC_breakdown_displays_screens : MonoBehaviour
     [SerializeField]
     int curNbPanne = 0;
 
+    [SerializeField]
+    GameObject sphereReturnCacheMisere;
+
     enum ScreenState
     {
         Tuto,
@@ -103,7 +106,6 @@ public class SC_breakdown_displays_screens : MonoBehaviour
     {
         StartCoroutine(TutoDisplaySequence());
 
-   
     }
 
     IEnumerator TutoDisplaySequence()
@@ -116,6 +118,7 @@ public class SC_breakdown_displays_screens : MonoBehaviour
             rnd = Random.Range(0.1f, 0.5f);
             yield return new WaitForSeconds(rnd);
         }
+        yield return new WaitForSeconds(1);
         StopAllCoroutines();
     }
     IEnumerator BlinkScreen(int index)
@@ -244,7 +247,9 @@ public class SC_breakdown_displays_screens : MonoBehaviour
 
         if (demarage)
         {
+
             demarage = false;
+            sphereReturnCacheMisere.SetActive(false);
             CustomSoundManager.Instance.PlaySound(gameObject, "SFX_p_ScreenActivated", false, 0.1f);
         }
         else
