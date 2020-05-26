@@ -11,7 +11,11 @@ public class SC_playvideo : MonoBehaviour
     void Awake()
     {
         renderer = GetComponent<Renderer>();
-        renderer.enabled = true;
+    }
+
+    void Update()
+    {
+
     }
 
     public void PlayVideo()
