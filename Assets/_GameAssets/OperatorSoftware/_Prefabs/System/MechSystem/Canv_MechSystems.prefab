@@ -10579,6 +10579,11 @@ PrefabInstance:
       propertyPath: ongletContainer
       value: 
       objectReference: {fileID: 3801815549123785550}
+    - target: {fileID: 2933411209875032590, guid: fd6ca9e382de6c84ca6409e7237d6332,
+        type: 3}
+      propertyPath: m_Name
+      value: Text_UM'TARA
+      objectReference: {fileID: 0}
     - target: {fileID: 3571615196284560935, guid: fd6ca9e382de6c84ca6409e7237d6332,
         type: 3}
       propertyPath: m_Mesh
@@ -10828,6 +10833,21 @@ PrefabInstance:
     - target: {fileID: 4978459200488308206, guid: bf2c74096defbfc40aec3dcab80df2c0,
         type: 3}
       propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5100507264090992869, guid: bf2c74096defbfc40aec3dcab80df2c0,
+        type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5100507264090992869, guid: bf2c74096defbfc40aec3dcab80df2c0,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5100507264090992869, guid: bf2c74096defbfc40aec3dcab80df2c0,
+        type: 3}
+      propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5251731307112216821, guid: bf2c74096defbfc40aec3dcab80df2c0,
