@@ -92,10 +92,7 @@ public class SC_GameStates : NetworkBehaviour
             SC_TutorialUIManager.Instance.ActivateSystem(SC_TutorialUIManager.System.Weapon, true);
             SC_TutorialUIManager.Instance.ActivateSystem(SC_TutorialUIManager.System.Motion, true);
 
-
-            SC_TutorialUIManager.Instance.ActivateBlink(SC_TutorialUIManager.System.Display, false);
-            SC_TutorialUIManager.Instance.ActivateBlink(SC_TutorialUIManager.System.Weapon, false);
-            SC_TutorialUIManager.Instance.ActivateBlink(SC_TutorialUIManager.System.Motion, false);
+            SC_instruct_op_manager.Instance.ChangeUIOnMat();
 
 
             SC_Display_MechState.Instance.UpdateVar();
@@ -104,6 +101,11 @@ public class SC_GameStates : NetworkBehaviour
 
 
             SC_passwordLock.Instance.cheatCode = true;
+
+
+            SC_TutorialUIManager.Instance.ActivateBlink(SC_TutorialUIManager.System.Display, false);
+            SC_TutorialUIManager.Instance.ActivateBlink(SC_TutorialUIManager.System.Weapon, false);
+            SC_TutorialUIManager.Instance.ActivateBlink(SC_TutorialUIManager.System.Motion, false);
 
         }
 
@@ -145,6 +147,7 @@ public class SC_GameStates : NetworkBehaviour
                 {
                     SC_instruct_op_manager.Instance.Deactivate(2);
                     SC_instruct_op_manager.Instance.Deactivate(3);
+ 
                 }
                     
                 break;
@@ -180,11 +183,23 @@ public class SC_GameStates : NetworkBehaviour
                     SC_main_breakdown_validation.Instance.bringDown();
                 }
                 if(!isServer)
-                { 
-                  
+                {
+
+
                     SC_TutorialUIManager.Instance.ActivateSystem(SC_TutorialUIManager.System.Display, false);
                     SC_TutorialUIManager.Instance.ActivateSystem(SC_TutorialUIManager.System.Weapon, false);
                     SC_TutorialUIManager.Instance.ActivateSystem(SC_TutorialUIManager.System.Motion, false);
+
+
+                    SC_instruct_op_manager.Instance.DeactivateImage(0);
+                    SC_instruct_op_manager.Instance.DeactivateImage(1);
+                    SC_instruct_op_manager.Instance.DeactivateImage(2);
+                    SC_instruct_op_manager.Instance.DeactivateImage(3);
+                    SC_instruct_op_manager.Instance.Deactivate(17);
+                    SC_instruct_op_manager.Instance.Activate(18);
+
+
+
 
                 }
                 ChangeTutoGameState(TutorialState.StartRepairDisplay);
@@ -206,6 +221,7 @@ public class SC_GameStates : NetworkBehaviour
                 {
                     //Fin Display
                     SC_TutorialUIManager.Instance.ActivateBlink(SC_TutorialUIManager.System.Display, false);
+                    SC_instruct_op_manager.Instance.ChangeMaterial(SC_instruct_op_manager.ChangeMat.ReturnDisplay);
                 }
                 ChangeTutoGameState(TutorialState.StartRepairWeapon);
                 
@@ -223,6 +239,8 @@ public class SC_GameStates : NetworkBehaviour
                 if (!isServer)
                 {
                     SC_TutorialUIManager.Instance.ActivateBlink(SC_TutorialUIManager.System.Weapon, false);
+                    SC_instruct_op_manager.Instance.ChangeMaterial(SC_instruct_op_manager.ChangeMat.ReturnWeapon);
+
                 }
                 ChangeTutoGameState(TutorialState.StartRepairMotion);
 
@@ -240,6 +258,8 @@ public class SC_GameStates : NetworkBehaviour
                 if (!isServer)
                 {
                     SC_TutorialUIManager.Instance.ActivateBlink(SC_TutorialUIManager.System.Motion, false);
+                    SC_instruct_op_manager.Instance.ChangeMaterial(SC_instruct_op_manager.ChangeMat.ReturnMotion);
+
                 }
                 ChangeTutoGameState(TutorialState.Reboot);
 
@@ -263,7 +283,15 @@ public class SC_GameStates : NetworkBehaviour
                 }
                 if (!isServer)
                 {
+                    SC_instruct_op_manager.Instance.ChangeUIOnMat();
 
+                    SC_instruct_op_manager.Instance.ActivateImage(0);
+                    SC_instruct_op_manager.Instance.ActivateImage(1);
+                    SC_instruct_op_manager.Instance.ActivateImage(2);
+                    SC_instruct_op_manager.Instance.ActivateImage(3);
+
+                    SC_instruct_op_manager.Instance.Activate(17);
+                    SC_instruct_op_manager.Instance.Deactivate(18);
                 }
                 
 
@@ -272,6 +300,7 @@ public class SC_GameStates : NetworkBehaviour
 
             case TutorialState.TutorialEnd:
 
+                if(isServer)
                 ChangeGameState(GameState.Game);
                 
                 break;

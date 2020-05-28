@@ -43,8 +43,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f111cc4bfc1c04cf088124af1b2f2549, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _boidPrefab: {fileID: 3105332923154584235, guid: a7d341e1ba86b114d99d3f2cb51c26d0,
-    type: 3}
   _koaPrefab: {fileID: 248730177783554223, guid: 4e70025bb9670db4395a8903d7695907,
     type: 3}
-  compute: {fileID: 7200000, guid: c51b961c8b9d746f1a2f242fa7bf1a31, type: 3}
+  NetPlayerP: {fileID: 0}
+  NetPSpawnKoa: {fileID: 0}
+  syncVarKoa: {fileID: 0}
+  maxLife: 10
+  KoaLife: 10
+  recoveryDuration: 1.5
+  sensitivity: {x: 0, y: 0, z: 0}
+  PS_KoaExplosion: {fileID: 1584633936938735772, guid: 7b76416fbd21ac6448f4780fe05367b3,
+    type: 3}
+  isActive: 0

@@ -280,9 +280,9 @@ public class SC_MainBreakDownManager : MonoBehaviour, IF_BreakdownManager
                     SC_WeaponBreakdown.Instance.EndBreakdown();
                     SC_MovementBreakdown.Instance.EndBreakdown();
 
-                    //changement de state du tuto
-                    if (SC_GameStates.Instance.CurState == SC_GameStates.GameState.Tutorial)
-                        SC_GameStates.Instance.ChangeGameState(SC_GameStates.GameState.Tutorial2);
+                    ////changement de state du tuto (Effectué dans l'action reboot)
+                    //if (SC_GameStates.Instance.CurState == SC_GameStates.GameState.Tutorial)
+                    //    SC_GameStates.Instance.ChangeGameState(SC_GameStates.GameState.Tutorial2);
 
                 }
 
@@ -463,10 +463,9 @@ public class SC_MainBreakDownManager : MonoBehaviour, IF_BreakdownManager
     {
         if (SC_GameStates.Instance.CurTutoState == SC_GameStates.TutorialState.StartRepairDisplay && SC_BreakdownDisplayManager.Instance.CurNbOfBreakdown == 0)
         {
-
             SC_GameStates.Instance.ChangeTutoGameState(SC_GameStates.TutorialState.EndRepairDisplay);
+            
             SC_breakdown_displays_screens.Instance.TutoDisplayRepair();
-
         }
 
         else if (SC_GameStates.Instance.CurTutoState == SC_GameStates.TutorialState.StartRepairWeapon && SC_WeaponBreakdown.Instance.CurNbOfBreakdown == 0)
