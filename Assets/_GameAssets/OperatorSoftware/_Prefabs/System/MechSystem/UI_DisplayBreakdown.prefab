@@ -605,7 +605,7 @@ MonoBehaviour:
   m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Material: {fileID: 2100000, guid: e8bd79c6418a4bb4fb755576a64840ca, type: 2}
+  m_Material: {fileID: 2100000, guid: ace6c768bf3a8924292e1cf93023eea7, type: 2}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
@@ -634,10 +634,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   index: 0
   barrettePanne: {fileID: 7514858736109414442}
+  barretteValueWanted: {fileID: 7152453806481688498}
+  barretteValueWanted2: {fileID: 4481275361923708139}
   warning: {fileID: 1418775773722147574}
   sparkle: {fileID: 4815183476710908901}
   wireBlinkMaster: {fileID: 6905548857572143681}
-  wireIndex: 00000000010000000200000006000000
+  wireIndex: 0000000001000000020000000600000009000000
 --- !u!1 &432564937969544486
 GameObject:
   m_ObjectHideFlags: 0
@@ -3865,7 +3867,7 @@ RectTransform:
   m_GameObject: {fileID: 3848596673290796567}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1, y: 2, z: 1}
   m_Children: []
   m_Father: {fileID: 1745768670405534802}
   m_RootOrder: 2
@@ -3896,7 +3898,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 0.028783847, b: 0, a: 1}
+  m_Color: {r: 1, g: 0.028783847, b: 0, a: 0.5647059}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -4513,7 +4515,7 @@ RectTransform:
   m_GameObject: {fileID: 4374379628599025971}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1, y: 2, z: 1}
   m_Children: []
   m_Father: {fileID: 1581032764614572931}
   m_RootOrder: 2
@@ -4544,7 +4546,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 0.028783847, b: 0, a: 1}
+  m_Color: {r: 1, g: 0.028783847, b: 0, a: 0.5647059}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -4585,7 +4587,7 @@ RectTransform:
   m_GameObject: {fileID: 4377331020131087264}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1, y: 2, z: 1}
   m_Children: []
   m_Father: {fileID: 4455945030339904834}
   m_RootOrder: 1
@@ -4616,7 +4618,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 0.028783847, b: 0, a: 1}
+  m_Color: {r: 1, g: 0.028783847, b: 0, a: 0.5647059}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -7261,7 +7263,7 @@ MonoBehaviour:
   m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Material: {fileID: 2100000, guid: e8bd79c6418a4bb4fb755576a64840ca, type: 2}
+  m_Material: {fileID: 2100000, guid: ace6c768bf3a8924292e1cf93023eea7, type: 2}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
@@ -7290,10 +7292,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   index: 2
   barrettePanne: {fileID: 26159769330453591}
+  barretteValueWanted: {fileID: 4497372169895493992}
+  barretteValueWanted2: {fileID: 1113400176768325412}
   warning: {fileID: 1157578306678835627}
   sparkle: {fileID: 8159128712585961663}
   wireBlinkMaster: {fileID: 6905548857572143681}
-  wireIndex: 0000000001000000030000000500000008000000
+  wireIndex: 00000000010000000300000005000000080000000b000000
 --- !u!1 &6549850835013094798
 GameObject:
   m_ObjectHideFlags: 0
@@ -7581,6 +7585,9 @@ MonoBehaviour:
   - {fileID: 2173441438931774919}
   - {fileID: 3015107762429944818}
   - {fileID: 5297813226780018606}
+  - {fileID: 7514858736109414442}
+  - {fileID: 6693837605317361927}
+  - {fileID: 26159769330453591}
   wireBreakdown: {fileID: 2100000, guid: 88ce785e5a9aa354d975291f072728a5, type: 2}
   wireShutdown: {fileID: 0}
 --- !u!1 &6810522776666841830
@@ -8591,7 +8598,7 @@ MonoBehaviour:
   m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Material: {fileID: 2100000, guid: e8bd79c6418a4bb4fb755576a64840ca, type: 2}
+  m_Material: {fileID: 2100000, guid: ace6c768bf3a8924292e1cf93023eea7, type: 2}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
@@ -8620,10 +8627,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   index: 1
   barrettePanne: {fileID: 6693837605317361927}
+  barretteValueWanted: {fileID: 8576681518656331570}
+  barretteValueWanted2: {fileID: 6198018022404134559}
   warning: {fileID: 2674946219020788743}
   sparkle: {fileID: 6405830916183287330}
   wireBlinkMaster: {fileID: 6905548857572143681}
-  wireIndex: 0000000001000000030000000400000007000000
+  wireIndex: 00000000010000000300000004000000070000000a000000
 --- !u!1 &8132557635251665317
 GameObject:
   m_ObjectHideFlags: 0
