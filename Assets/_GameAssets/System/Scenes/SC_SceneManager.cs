@@ -63,15 +63,8 @@ public class SC_SceneManager : NetworkBehaviour
     // Update is called once per frame
     void Update()
     {
-
         if (SceneManager.GetActiveScene().buildIndex == 2 || SceneManager.GetActiveScene().buildIndex == 1)
             LobbyUpdate();
-
-        /*
-        if (Input.GetKeyDown(KeyCode.Space) && isServer)
-            RpcAllowChangeScene();
-        */
-
     }
 
     void LobbyUpdate()
