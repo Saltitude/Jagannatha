@@ -21,7 +21,8 @@ public class SC_UI_OngletSelection : MonoBehaviour, IF_clicableAction, IF_Hover
     [SerializeField]
     int[] wireIndex;
 
-
+    [SerializeField]
+    GameObject[] BtnReturnComponent;
 
     // Start is called before the first frame update
     void Start()
@@ -100,38 +101,37 @@ public class SC_UI_OngletSelection : MonoBehaviour, IF_clicableAction, IF_Hover
     }
     void ActionTuto()
     {
-        if (index == 0 && SC_GameStates.Instance.CurTutoState == SC_GameStates.TutorialState.StartRepairDisplay)
+        if (index == 0 && (int)SC_GameStates.Instance.CurTutoState >= (int)SC_GameStates.TutorialState.StartRepairDisplay)
         {
             ongletContainer.DisplayIn();
             animator.SetBool("ActivateDisplay", true);
         }
-        else if (index == 1 && SC_GameStates.Instance.CurTutoState == SC_GameStates.TutorialState.StartRepairWeapon)
+        else if (index == 1 && (int)SC_GameStates.Instance.CurTutoState >= (int)SC_GameStates.TutorialState.StartRepairWeapon)
         {
 
             ongletContainer.WeaponIn();
             animator.SetBool("ActivateWeapon", true);
         }
-        else if (index == 2 && SC_GameStates.Instance.CurTutoState == SC_GameStates.TutorialState.StartRepairMotion)
+        else if (index == 2 && (int)SC_GameStates.Instance.CurTutoState >= (int)SC_GameStates.TutorialState.StartRepairMotion)
         {
             ongletContainer.MoveIn();
             animator.SetBool("ActivateMove", true);
         }
 
         //ONGLET OUT
-        if (index == 3 && SC_GameStates.Instance.CurTutoState == SC_GameStates.TutorialState.StartRepairWeapon)
+        if (index == 3 && (int)SC_GameStates.Instance.CurTutoState >= (int)SC_GameStates.TutorialState.StartRepairWeapon)
         {
-
             SC_Weapon_MechState.Instance.UpdateVar();
             ongletContainer.DisplayOut();
             additionalAnimator.SetBool("ActivateDisplay", false);
         }
-        if (index == 4 && SC_GameStates.Instance.CurTutoState == SC_GameStates.TutorialState.StartRepairMotion)
+        if (index == 4 && (int)SC_GameStates.Instance.CurTutoState >= (int)SC_GameStates.TutorialState.StartRepairMotion)
         {
             SC_Movement_MechState.Instance.UpdateVar();
             ongletContainer.WeaponOut();
             additionalAnimator.SetBool("ActivateWeapon", false);
         }
-        if (index == 5 && SC_GameStates.Instance.CurTutoState == SC_GameStates.TutorialState.Reboot)
+        if (index == 5 && (int)SC_GameStates.Instance.CurTutoState >= (int)SC_GameStates.TutorialState.Reboot)
         {
             ongletContainer.MoveOut();
             additionalAnimator.SetBool("ActivateMove", false);
@@ -172,26 +172,38 @@ public class SC_UI_OngletSelection : MonoBehaviour, IF_clicableAction, IF_Hover
     {
         if (animator != null)
         {
+            if (index == 0 && (int)SC_GameStates.Instance.CurTutoState >= (int)SC_GameStates.TutorialState.StartRepairDisplay)
+            {
+                animator.SetBool("Hover", true);
+                StartCoroutine(EndCoroutine("Hover"));
+            }
+            if(index == 3 && (int)SC_GameStates.Instance.CurTutoState >= (int)SC_GameStates.TutorialState.EndRepairDisplay)
+            {
+                animator.SetBool("Hover", true);
+                StartCoroutine(EndCoroutine("Hover"));
+            }
 
-            if ((index == 0 || index == 3)&& (SC_GameStates.Instance.CurTutoState == SC_GameStates.TutorialState.StartRepairDisplay || SC_GameStates.Instance.CurTutoState == SC_GameStates.TutorialState.EndRepairDisplay))
+            if (index == 1 && (int)SC_GameStates.Instance.CurTutoState == (int)SC_GameStates.TutorialState.StartRepairWeapon)
             {
                 animator.SetBool("Hover", true);
                 StartCoroutine(EndCoroutine("Hover"));
             }
-            if ((index == 1 || index == 4)&& (SC_GameStates.Instance.CurTutoState == SC_GameStates.TutorialState.StartRepairWeapon || SC_GameStates.Instance.CurTutoState == SC_GameStates.TutorialState.EndRepairWeapon))
+            if(index == 4 && (int)SC_GameStates.Instance.CurTutoState == (int)SC_GameStates.TutorialState.EndRepairWeapon)
             {
                 animator.SetBool("Hover", true);
                 StartCoroutine(EndCoroutine("Hover"));
             }
-            if ((index == 2 || index == 5)&& (SC_GameStates.Instance.CurTutoState == SC_GameStates.TutorialState.StartRepairMotion || SC_GameStates.Instance.CurTutoState == SC_GameStates.TutorialState.EndRepairMotion))
+            if(index == 2 && (int)SC_GameStates.Instance.CurTutoState == (int)SC_GameStates.TutorialState.StartRepairMotion)
             {
                 animator.SetBool("Hover", true);
                 StartCoroutine(EndCoroutine("Hover"));
             }
-         
-
+            if(index == 5 && (int)SC_GameStates.Instance.CurTutoState == (int)SC_GameStates.TutorialState.EndRepairMotion)
+            {
+                animator.SetBool("Hover", true);
+                StartCoroutine(EndCoroutine("Hover"));
+            }
         }
-
     }
  
 

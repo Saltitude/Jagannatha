@@ -3370,13 +3370,33 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9156293677689053380, guid: 78b71facd05a90948afb67ef687656f4,
         type: 3}
-      propertyPath: instruc_Go.Array.size
-      value: 18
+      propertyPath: instruc_Go.Array.data[17]
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 9156293677689053380, guid: 78b71facd05a90948afb67ef687656f4,
         type: 3}
-      propertyPath: instruc_Img.Array.size
-      value: 4
+      propertyPath: instruc_Go.Array.data[18]
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 9156293677689053380, guid: 78b71facd05a90948afb67ef687656f4,
+        type: 3}
+      propertyPath: instruc_Img.Array.data[0]
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 9156293677689053380, guid: 78b71facd05a90948afb67ef687656f4,
+        type: 3}
+      propertyPath: instruc_Img.Array.data[1]
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 9156293677689053380, guid: 78b71facd05a90948afb67ef687656f4,
+        type: 3}
+      propertyPath: instruc_Img.Array.data[2]
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 9156293677689053380, guid: 78b71facd05a90948afb67ef687656f4,
+        type: 3}
+      propertyPath: instruc_Img.Array.data[3]
+      value: 
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 78b71facd05a90948afb67ef687656f4, type: 3}

@@ -485,7 +485,19 @@ MonoBehaviour:
   - {fileID: 8774983765041326093}
   - {fileID: 1233258494432749524}
   - {fileID: 4233978262949059796}
-  instruc_Img: []
+  - {fileID: 0}
+  - {fileID: 0}
+  instruc_Img:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  returnDisplay: {fileID: 0}
+  returnWeapon: {fileID: 0}
+  returnMotion: {fileID: 0}
+  matLogoReturn: {fileID: 2100000, guid: 0c26cdcba3d1efb47b8b2484603ab46a, type: 2}
+  matUIOn: {fileID: 2100000, guid: fc7e173175405064db1edab0592e2909, type: 2}
+  matUIInizialized: {fileID: 2100000, guid: 8b30c80855e9f5242afe25cffb3bc503, type: 2}
 --- !u!1 &1307873592112409079
 GameObject:
   m_ObjectHideFlags: 0

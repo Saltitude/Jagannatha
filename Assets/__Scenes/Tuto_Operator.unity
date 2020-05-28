@@ -8947,16 +8947,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9142174628867917204, guid: 5868590ac89dbe244a183448a01ec422,
         type: 3}
-      propertyPath: instruc_Go.Array.size
-      value: 19
-      objectReference: {fileID: 0}
-    - target: {fileID: 9142174628867917204, guid: 5868590ac89dbe244a183448a01ec422,
-        type: 3}
-      propertyPath: instruc_Img.Array.size
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 9142174628867917204, guid: 5868590ac89dbe244a183448a01ec422,
-        type: 3}
       propertyPath: instruc_Img.Array.data[0]
       value: 
       objectReference: {fileID: 598862836}
@@ -8985,6 +8975,21 @@ PrefabInstance:
       propertyPath: instruc_Go.Array.data[18]
       value: 
       objectReference: {fileID: 598862839}
+    - target: {fileID: 9142174628867917204, guid: 5868590ac89dbe244a183448a01ec422,
+        type: 3}
+      propertyPath: returnDisplay
+      value: 
+      objectReference: {fileID: 598862842}
+    - target: {fileID: 9142174628867917204, guid: 5868590ac89dbe244a183448a01ec422,
+        type: 3}
+      propertyPath: returnWeapon
+      value: 
+      objectReference: {fileID: 598862841}
+    - target: {fileID: 9142174628867917204, guid: 5868590ac89dbe244a183448a01ec422,
+        type: 3}
+      propertyPath: returnMotion
+      value: 
+      objectReference: {fileID: 598862840}
     - target: {fileID: 9147781581576091217, guid: 5868590ac89dbe244a183448a01ec422,
         type: 3}
       propertyPath: m_AnchorMin.y
@@ -9099,6 +9104,24 @@ MonoBehaviour:
 --- !u!1 &598862839 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6316436669605010457, guid: 5868590ac89dbe244a183448a01ec422,
+    type: 3}
+  m_PrefabInstance: {fileID: 598862831}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &598862840 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7443515456996090293, guid: 5868590ac89dbe244a183448a01ec422,
+    type: 3}
+  m_PrefabInstance: {fileID: 598862831}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &598862841 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 382853188540162242, guid: 5868590ac89dbe244a183448a01ec422,
+    type: 3}
+  m_PrefabInstance: {fileID: 598862831}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &598862842 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4982775458687782231, guid: 5868590ac89dbe244a183448a01ec422,
     type: 3}
   m_PrefabInstance: {fileID: 598862831}
   m_PrefabAsset: {fileID: 0}
