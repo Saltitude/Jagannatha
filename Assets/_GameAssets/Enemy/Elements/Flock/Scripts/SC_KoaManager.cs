@@ -515,7 +515,7 @@ public class SC_KoaManager : MonoBehaviour
             {
                 if (i == 1 && (j == 3 || j == 1))
                 {
-                    Debug.Log(i +"  "+ j);
+                    //Debug.Log(i +"  "+ j);
                     curExplosionPS = curExplosion.transform.GetChild(i).transform.GetChild(j).GetComponent<ParticleSystem>().main;
                     curExplosionPS.startColor = gradiendSpe;
                 }
