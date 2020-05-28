@@ -67,13 +67,16 @@ public class SC_SceneManager : NetworkBehaviour
         if (SceneManager.GetActiveScene().buildIndex == 2 || SceneManager.GetActiveScene().buildIndex == 1)
             LobbyUpdate();
 
+        /*
         if (Input.GetKeyDown(KeyCode.Space) && isServer)
             RpcAllowChangeScene();
+        */
 
     }
 
     void LobbyUpdate()
     {
+
         // on lit le nombre de connexions
         if (isServer)
             n_ConnectionsCount = NetworkServer.connections.Count;
@@ -81,9 +84,14 @@ public class SC_SceneManager : NetworkBehaviour
         //si les deux joueurs sont connectés
         if (n_ConnectionsCount >= 2)
         {
+
             //si pas Server on load la scène opérateur
             if (!isServer && _SC_PasswordLock != null)          
-                _SC_PasswordLock.validatePassword();                                   
+                _SC_PasswordLock.validatePassword();
+
+            if (isServer && b_OperatorReadyToLoad && b_PilotReadyToLoad && !b_LoadingAllowed)
+                RpcAllowChangeScene();
+
         }
 
     }
@@ -139,7 +147,7 @@ public class SC_SceneManager : NetworkBehaviour
 
     void SendReadyOP()
     {
-        Mng_CheckList.GetComponent<SC_CheckList>().NetworkPlayerOperator.GetComponent<SC_NetScene>().CmdSendReadyOP();
+        Mng_CheckList.GetComponent<SC_CheckList>().NetworkPlayerPilot.GetComponent<SC_NetScene>().CmdSendReadyOP();
     }
 
     [ClientRpc]
