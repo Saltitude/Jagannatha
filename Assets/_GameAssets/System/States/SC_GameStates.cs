@@ -92,7 +92,6 @@ public class SC_GameStates : NetworkBehaviour
             SC_TutorialUIManager.Instance.ActivateSystem(SC_TutorialUIManager.System.Weapon, true);
             SC_TutorialUIManager.Instance.ActivateSystem(SC_TutorialUIManager.System.Motion, true);
 
-            SC_instruct_op_manager.Instance.ChangeUIOnMat();
 
 
             SC_Display_MechState.Instance.UpdateVar();
@@ -106,6 +105,7 @@ public class SC_GameStates : NetworkBehaviour
             SC_TutorialUIManager.Instance.ActivateBlink(SC_TutorialUIManager.System.Display, false);
             SC_TutorialUIManager.Instance.ActivateBlink(SC_TutorialUIManager.System.Weapon, false);
             SC_TutorialUIManager.Instance.ActivateBlink(SC_TutorialUIManager.System.Motion, false);
+            SC_instruct_op_manager.Instance.ChangeUIOnMat();
 
         }
 

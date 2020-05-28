@@ -154,7 +154,7 @@ public class SC_SyncVar_WeaponSystem : NetworkBehaviour
 
     void UpdateOnClient()
     {
-        if (!isServer)
+        if (!isServer && SC_Weapon_MechState.Instance)
             SC_Weapon_MechState.Instance.UpdateVar();
     }
 
