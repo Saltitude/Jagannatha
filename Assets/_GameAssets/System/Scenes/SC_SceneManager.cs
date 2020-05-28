@@ -149,4 +149,30 @@ public class SC_SceneManager : NetworkBehaviour
         b_LoadingAllowed = true;
     }
 
+    #region OldMethods
+
+    void LoadTutoLobby()
+    {
+        SceneManager.LoadScene(1);
+    }
+
+    void LoadTutoLobbyOpe()
+    {
+        SceneManager.LoadScene(2);
+        //SC_NetPlayerInit_OP.Instance.CmdSendForceUpdate();
+        Mng_CheckList.GetComponent<SC_CheckList>().NetworkPlayerOperator.GetComponent<SC_NetPlayerInit_OP>().CmdSendForceUpdate();
+    }
+
+    void LoadTutoPilot()
+    {
+        SceneManager.LoadScene(3);
+    }
+
+    void LoadTutoOperator()
+    {
+        SceneManager.LoadScene(4);
+    }
+
+    #endregion OldMethods
+
 }
