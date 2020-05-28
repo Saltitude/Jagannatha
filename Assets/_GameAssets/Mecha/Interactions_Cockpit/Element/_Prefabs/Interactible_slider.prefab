@@ -188,6 +188,7 @@ MonoBehaviour:
   isEnPanne: 0
   precision: 0.08
   LocalBreakdownMng: {fileID: 0}
+  isFLUX: 0
   probability: 1
   precisionPercent: 10
   text_value_display: {fileID: 0}
@@ -491,8 +492,9 @@ MonoBehaviour:
   isEnPanne: 0
   precision: 0.08
   LocalBreakdownMng: {fileID: 0}
+  isFLUX: 0
   probability: 1
-  precisionPercent: 10
+  precisionPercent: 20
   text_value_display: {fileID: 0}
 --- !u!114 &8667573124441522386
 MonoBehaviour:
