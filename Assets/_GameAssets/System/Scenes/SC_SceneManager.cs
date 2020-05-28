@@ -6,13 +6,13 @@ using UnityEngine.SceneManagement;
 
 public class SC_SceneManager : NetworkBehaviour
 {
-    /*
+    
     #region Singleton
 
     private static SC_SceneManager _instance;
     public static SC_SceneManager Instance { get { return _instance; } }
 
-    #endregion*/
+    #endregion
 
     GameObject Mng_CheckList = null;
 
@@ -31,8 +31,7 @@ public class SC_SceneManager : NetworkBehaviour
 
     [SerializeField]
     SC_passwordLock _SC_PasswordLock;
-
-    /*
+  
     private void Awake()
     {
         if (_instance != null && _instance != this)
@@ -43,7 +42,7 @@ public class SC_SceneManager : NetworkBehaviour
         {
             _instance = this;
         }
-    }*/
+    }
 
     void Start()
     {
@@ -94,7 +93,7 @@ public class SC_SceneManager : NetworkBehaviour
 
         yield return null;
 
-        Debug.Log("PreLoadScene ");
+        //Debug.Log("PreLoadScene ");
 
         AsyncOperation asyncOperation = null;
 
@@ -102,7 +101,7 @@ public class SC_SceneManager : NetworkBehaviour
             asyncOperation = SceneManager.LoadSceneAsync(3);
 
         else if (SceneManager.GetActiveScene().buildIndex == 2)
-            asyncOperation = SceneManager.LoadSceneAsync(3);
+            asyncOperation = SceneManager.LoadSceneAsync(4);
 
         asyncOperation.allowSceneActivation = false;
 
@@ -112,7 +111,7 @@ public class SC_SceneManager : NetworkBehaviour
         while (!asyncOperation.isDone)
         {
 
-            Debug.Log("notDone");
+            //Debug.Log("notDone");
 
             //Output the current progress (In Inspector)
             f_LoadingProgress = asyncOperation.progress;

@@ -19,7 +19,7 @@ public class SC_passwordLock : MonoBehaviour
     [SerializeField]
     GameObject objectPassword; //Contient le texte du inputField
 
-    string s_password = "LV426"; //Mot de passe à taper
+    //string s_password = "LV426"; //Mot de passe à taper
 
     [SerializeField]
     GameObject canvasMng; //récupération du DisplayManager
@@ -33,6 +33,7 @@ public class SC_passwordLock : MonoBehaviour
     float countTime = 0; //Compteur 
     public bool unlock = false; //Sécurité
     public bool b_IsConnected = false;
+    [SerializeField]
     bool secu = false;
     //[SerializeField]
     //SC_electricPlug plugObject; //récupération de l'objet prise electrique
@@ -88,24 +89,25 @@ public class SC_passwordLock : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-            if(Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.KeypadEnter)) //Validation
+        if(Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.KeypadEnter)) //Validation
+        {
+            // Debug.Log("Engage password");
+            manager.networkAddress = objectPassword.GetComponent<Text>().text;
+            unlock = true;
+            b_IsConnected = true;
+            secu = true;
+        }
+
+        if (countTime > 0.001f) //Fin de compteur
+        {
+
+            if(secu)
             {
-               // Debug.Log("Engage password");
-                manager.networkAddress = objectPassword.GetComponent<Text>().text;
-                unlock = true;
-                b_IsConnected = true;
-                secu = true;
+                manager.StartClient();
+                secu = false;
             }
 
-            if (countTime > 0.001f) //Fin de compteur
-            {
-                if(secu)
-                {
-                    manager.StartClient();
-                    secu = false;
-                }
-
-            else if (countTime > 2f && !secu)
+            else if (countTime > 2f && SC_SceneManager.Instance.n_ConnectionsCount < 2)
             {
                 //Debug.Log("Connection Failed");
                 
@@ -115,6 +117,7 @@ public class SC_passwordLock : MonoBehaviour
                 secu = false;
                 manager.StopClient();
             }
+
         }
 
         
