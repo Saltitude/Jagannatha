@@ -19,7 +19,30 @@ public class SC_instruct_op_manager : MonoBehaviour
     [SerializeField]
     Image[] instruc_Img;
 
+    public enum ChangeMat
+    {
+        ReturnDisplay,
+        ReturnWeapon,
+        ReturnMotion
+    }
 
+    [SerializeField]
+    Transform returnDisplay;
+    [SerializeField]
+    Transform returnWeapon;
+    [SerializeField]
+    Transform returnMotion;
+
+    [SerializeField]
+    Material matLogoReturn;
+
+    [SerializeField]
+    Material matUIOn;
+    [SerializeField]
+    Material matUIInizialized;
+
+    Color32 initOnColor;
+    
     void Awake()
     {
         if (_instance != null && _instance != this)
@@ -33,10 +56,11 @@ public class SC_instruct_op_manager : MonoBehaviour
     }
 
         // Start is called before the first frame update
-        void Start()
+    void Start()
     {
 
-
+        initOnColor = matUIOn.color;
+        matUIOn.color = matUIInizialized.color;
         
     }
 
@@ -96,5 +120,42 @@ public class SC_instruct_op_manager : MonoBehaviour
     }
 
 
+    public void ChangeMaterial(ChangeMat matToChange)
+    {
+        switch(matToChange)
+        {
+            case ChangeMat.ReturnDisplay:
+
+                for(int i = 0; i < returnDisplay.childCount;i++)
+                {
+                    returnDisplay.GetChild(i).GetComponent<MeshRenderer>().material = matLogoReturn;
+                }
+
+                break;   
+            
+            case ChangeMat.ReturnMotion:
+
+                for(int i = 0; i < returnMotion.childCount; i++)
+                {
+                    returnMotion.GetChild(i).GetComponent<MeshRenderer>().material = matLogoReturn;
+                }
+
+                break;
+            
+            case ChangeMat.ReturnWeapon:
+
+                for(int i = 0; i < returnWeapon.childCount; i++)
+                {
+                    returnWeapon.GetChild(i).GetComponent<MeshRenderer>().material = matLogoReturn;
+                }
+
+                break;
+        }
+    }
+
+    public void ChangeUIOnMat()
+    {
+        matUIOn.color = initOnColor;
+    }
 
 }
