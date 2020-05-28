@@ -15,6 +15,10 @@ public class SC_UI_Update_Slider : MonoBehaviour
 
     [SerializeField]
     Image barrettePanne;
+    [SerializeField]
+    Image barretteValueWanted;
+    [SerializeField]
+    Image barretteValueWanted2;
 
     [SerializeField]
     GameObject warning;
@@ -88,14 +92,16 @@ public class SC_UI_Update_Slider : MonoBehaviour
             warning.SetActive(true);
             sparkle.SetActive(false);
             barrettePanne.gameObject.transform.localPosition = new Vector3(barrettePanne.gameObject.transform.localPosition.x, posY, barrettePanne.gameObject.transform.localPosition.z);
-
+            barretteValueWanted.color = new Color32(255, 0, 0,255);
+            barretteValueWanted2.color = new Color32(255, 0, 0,255);
         }
         else
         {
             barrettePanne.enabled = false;
             warning.SetActive(false);
             sparkle.SetActive(true);
-
+            barretteValueWanted.color = new Color32(255, 255, 255, 255);
+            barretteValueWanted2.color = new Color32(255, 255, 255, 255);
         }
 
         for(int i = 0; i < wireIndex.Length;i++)
