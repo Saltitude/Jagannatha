@@ -227,6 +227,11 @@ public class SC_KoaManager : MonoBehaviour
 
             }
         }
+        else
+        {
+            _koa.transform.position = gameObject.transform.position;
+        }
+
     }
 
     void KoaBehavior()
@@ -466,6 +471,7 @@ public class SC_KoaManager : MonoBehaviour
         //Destroy(_koa.gameObject);
         curExplosion = Instantiate(PS_KoaExplosion, _koa.transform);
         SetColor();
+        syncVarKoa.HideOPMesh(); 
         Invoke("HideTheKoa", 1.3f);
         Invoke("DestroyFlock", 3f);
     }
@@ -530,7 +536,7 @@ public class SC_KoaManager : MonoBehaviour
     }
 
 
-            void HideTheKoa()
+    void HideTheKoa()
     {
         var i = 0;
         while (i <= 4)
@@ -540,7 +546,7 @@ public class SC_KoaManager : MonoBehaviour
         }
     }
 
-        void DestroyFlock()
+    void DestroyFlock()
     {
         Destroy(_koa.gameObject);
         flockManager.DestroyFlock();

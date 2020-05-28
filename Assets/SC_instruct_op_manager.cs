@@ -41,7 +41,8 @@ public class SC_instruct_op_manager : MonoBehaviour
     [SerializeField]
     Material matUIInizialized;
 
-    Color32 initOnColor;
+
+    List<Image> initialized_img;
     
     void Awake()
     {
@@ -58,10 +59,15 @@ public class SC_instruct_op_manager : MonoBehaviour
         // Start is called before the first frame update
     void Start()
     {
-
-        initOnColor = matUIOn.color;
-        matUIOn.color = matUIInizialized.color;
-        
+        initialized_img = new List<Image>();
+        Image[] All = FindObjectsOfType<Image>();
+        foreach (Image b in All)
+        {
+            if (b.material == matUIInizialized)
+            {
+                initialized_img.Add(b);
+            }
+        }
     }
 
     // Update is called once per frame
@@ -155,7 +161,10 @@ public class SC_instruct_op_manager : MonoBehaviour
 
     public void ChangeUIOnMat()
     {
-        matUIOn.color = initOnColor;
+        foreach(Image i in initialized_img)
+        {
+            i.material = matUIOn;
+        }
     }
 
 }

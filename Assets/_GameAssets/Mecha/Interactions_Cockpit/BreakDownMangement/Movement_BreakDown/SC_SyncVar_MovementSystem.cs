@@ -183,7 +183,7 @@ public class SC_SyncVar_MovementSystem : NetworkBehaviour
 
     void CallGetBaseValue()
     {
-        if (!isServer)
+        if (!isServer && SC_CordViewver.Instance)
             SC_CordViewver.Instance.GetBaseValue();
     }
 

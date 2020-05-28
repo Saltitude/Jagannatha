@@ -217,6 +217,8 @@ public class SC_FlockManager : MonoBehaviour
 
             }
         }
+
+
         if(isActive && !isSpawning && curtype!= PathType.Death)
         {
         

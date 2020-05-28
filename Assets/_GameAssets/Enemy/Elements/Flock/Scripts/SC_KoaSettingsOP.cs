@@ -195,8 +195,6 @@ public class SC_KoaSettingsOP : MonoBehaviour, IF_KoaForOperator, IF_Hover
 
     public void SetMaterial(koaSelection newSelction)
     {
-  
-
         if(newSelction != koaSelection.Selected)
         {
             if(!bSelected)
