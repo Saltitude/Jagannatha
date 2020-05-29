@@ -51,7 +51,12 @@ MonoBehaviour:
     type: 3}
   _GuidePrefab: {fileID: 8901173849441854128, guid: 4f1849f585a71774a8f82c51e19c4e61,
     type: 3}
+  moveKoaSync: {fileID: 0}
+  KoaMainAnimator: {fileID: 0}
+  KoaEmissiveAnimator: {fileID: 0}
   _SCKoaManager: {fileID: 0}
+  spawnPosTargetDummy: {fileID: 8901173849441854128, guid: 4f1849f585a71774a8f82c51e19c4e61,
+    type: 3}
   _splited: 0
   _merged: 0
 --- !u!114 &2865312559487441127
@@ -121,8 +126,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   laserPrefab: {fileID: 1107940701737066, guid: 0a0191a953741d940be3195a87c4d91f,
-    type: 3}
-  laserFxPrefab: {fileID: 8640183350906000953, guid: 8d8b3451f168ce74faa33ef569493eea,
     type: 3}
   bulletPrefab: {fileID: 6422795900896979926, guid: 59d83a65fa1321f45b9290a3038260c8,
     type: 3}
