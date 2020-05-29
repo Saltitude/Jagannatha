@@ -186,6 +186,7 @@ public class SC_Weapon_MechState : MonoBehaviour
 
             case SystemState.Launched:
                 SC_TutorialUIManager.Instance.ActivateSystem(SC_TutorialUIManager.System.Weapon, true);
+                SC_TutorialUIManager.Instance.ActivateBlink(SC_TutorialUIManager.System.Weapon, false);
 
                 DisconnectedState.SetActive(false);
                 LaunchedOffState.SetActive(false);

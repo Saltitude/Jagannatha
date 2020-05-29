@@ -472,13 +472,11 @@ public class SC_MainBreakDownManager : MonoBehaviour, IF_BreakdownManager
         {
             SC_GameStates.Instance.ChangeTutoGameState(SC_GameStates.TutorialState.EndRepairWeapon);
         }
-
-        else if (SC_GameStates.Instance.CurTutoState == SC_GameStates.TutorialState.StartRepairMotion && SC_MovementBreakdown.Instance.n_InteractibleInBreakDown == 0)
+        else if (SC_GameStates.Instance.CurTutoState == SC_GameStates.TutorialState.StartRepairMotion && SC_MovementBreakdown.Instance.n_BreakDownLvl == 0)
         {
             SC_GameStates.Instance.ChangeTutoGameState(SC_GameStates.TutorialState.EndRepairMotion);
         }
-        
- 
+    
     }
 
     float Ratio(float inputValue, float inputMax, float outputMax, float inputMin = 0.0f, float outputMin = 0.0f)

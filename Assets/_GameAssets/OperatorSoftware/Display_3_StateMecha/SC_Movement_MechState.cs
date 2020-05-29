@@ -176,6 +176,8 @@ public class SC_Movement_MechState : MonoBehaviour
 
             case SystemState.Launched:
                 SC_TutorialUIManager.Instance.ActivateSystem(SC_TutorialUIManager.System.Motion, true);
+                SC_TutorialUIManager.Instance.ActivateBlink(SC_TutorialUIManager.System.Motion, false);
+
 
                 DisconnectedState.SetActive(false);
                 LaunchedOffState.SetActive(false);
