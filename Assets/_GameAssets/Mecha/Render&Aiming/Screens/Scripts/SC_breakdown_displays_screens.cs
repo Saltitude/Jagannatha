@@ -31,6 +31,7 @@ public class SC_breakdown_displays_screens : MonoBehaviour
     [Header("BreakDown Infos")]
     [SerializeField]
     int curNbPanne = 0;
+    public int CurNbOfScreenBreak = 0;
 
     [SerializeField]
     GameObject sphereReturnCacheMisere;
@@ -93,12 +94,6 @@ public class SC_breakdown_displays_screens : MonoBehaviour
             Mng_SyncVar = GameObject.FindGameObjectWithTag("Mng_SyncVar");
             sc_syncvar_display = Mng_SyncVar.GetComponent<SC_SyncVar_StateMecha_Display>();
         }
-    }
-
-    void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.J))
-            PutOneEnPanne();
     }
 
 
@@ -170,11 +165,16 @@ public class SC_breakdown_displays_screens : MonoBehaviour
     public void PutOneEnPanne()
     {
 
-        if (!gameEnded)
+        if (!gameEnded && !SC_MainBreakDownManager.Instance.b_BreakEngine)
         {
-
+            //&& !SC_MainBreakDownManager.Instance.b_BreakEngine
             for (int i = 0; i < 1; i++)
             {
+
+                if (SC_MainBreakDownManager.Instance.b_BreakEngine)
+                {
+                    break;
+                }                 
 
                 if (curNbPanne < tab_screens_renderers.Length)
                 {
@@ -188,7 +188,6 @@ public class SC_breakdown_displays_screens : MonoBehaviour
                     else
                     {
                         SetScreenState(rand, true);
-
                     }
 
                 }
@@ -231,6 +230,8 @@ public class SC_breakdown_displays_screens : MonoBehaviour
     public void PanneAll()
     {
 
+        CurNbOfScreenBreak = SC_BreakdownDisplayManager.Instance.interactible.Length * 2;
+
         for (int i = 0; i < tab_screens_renderers.Length; i++)
         {
             SetScreenState(i, true);
@@ -244,6 +245,8 @@ public class SC_breakdown_displays_screens : MonoBehaviour
 
     public void RepairAll()
     {
+
+        CurNbOfScreenBreak = 0;
 
         if (demarage)
         {
@@ -289,4 +292,5 @@ public class SC_breakdown_displays_screens : MonoBehaviour
         sc_syncvar_display.displayAll[index] = state;
 
     }
+
 }

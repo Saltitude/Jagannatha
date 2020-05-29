@@ -201,6 +201,7 @@ public class SC_MainBreakDownManager : MonoBehaviour, IF_BreakdownManager
             //on fout tous les systemes en panne à balle
             SC_breakdown_displays_screens.Instance.PanneAll();
 
+
             //descendre le bouton de validation
             SC_main_breakdown_validation.Instance.isValidated = false;
             SC_main_breakdown_validation.Instance.textStopBlink();
