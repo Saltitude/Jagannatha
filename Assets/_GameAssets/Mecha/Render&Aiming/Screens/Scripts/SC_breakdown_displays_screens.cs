@@ -61,16 +61,19 @@ public class SC_breakdown_displays_screens : MonoBehaviour
 
     void Start()
     {
+
         nbOfChildrenAtInit = gameObject.transform.childCount;
 
         tab_screens_renderers = new Renderer[nbOfChildrenAtInit];
 
-        for (int i = 0; i < gameObject.transform.childCount; i++)
+        for (int i = 0; i < nbOfChildrenAtInit; i++)
         {
             tab_screens_renderers[i] = gameObject.transform.GetChild(i).GetComponent<Renderer>();
-            tab_screens_renderers[i].material = mat[(int)ScreenState.Tuto];
             tab_screens_renderers[i].enabled = false;
         }
+
+        for (int i = 0; i < tab_screens_renderers.Length; i++)
+            changeScreenMat(ScreenState.Tuto, i, true);
 
     }
 
