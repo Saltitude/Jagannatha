@@ -29,8 +29,7 @@ public class SC_breakdown_displays_screens : MonoBehaviour
     bool gameEnded = false;
 
     [Header("BreakDown Infos")]
-    [SerializeField]
-    int curNbPanne = 0;
+    public int curNbPanne = 0;
     public int CurNbOfScreenBreak = 0;
 
     [SerializeField]
@@ -62,24 +61,31 @@ public class SC_breakdown_displays_screens : MonoBehaviour
 
     void Start()
     {
+
         nbOfChildrenAtInit = gameObject.transform.childCount;
 
         tab_screens_renderers = new Renderer[nbOfChildrenAtInit];
 
-        for (int i = 0; i < gameObject.transform.childCount; i++)
+        for (int i = 0; i < nbOfChildrenAtInit; i++)
         {
             tab_screens_renderers[i] = gameObject.transform.GetChild(i).GetComponent<Renderer>();
-            tab_screens_renderers[i].material = mat[(int)ScreenState.Tuto];
             tab_screens_renderers[i].enabled = false;
         }
+
+        for (int i = 0; i < tab_screens_renderers.Length; i++)
+            changeScreenMat(ScreenState.Tuto, i, true);
+
     }
 
     void changeScreenMat(ScreenState screenState, int index, bool state = true)
     {
         
-        tab_screens_renderers[index].enabled = state;
+        //tab_screens_renderers[index].enabled = state;
+        AlignMshRenderer(index, state);
+
         tab_screens_renderers[index].material = mat[(int)screenState];
         curScreenState = screenState;
+
         if (screenState != ScreenState.Tuto && screenState != ScreenState.TutoDisplayRepared)
         {
             tab_screens_renderers[index].GetComponent<SC_playvideo>().StopVideo();
@@ -167,14 +173,20 @@ public class SC_breakdown_displays_screens : MonoBehaviour
 
         if (!gameEnded && !SC_MainBreakDownManager.Instance.b_BreakEngine)
         {
+
+            //int machin = 0;
+
             //&& !SC_MainBreakDownManager.Instance.b_BreakEngine
             for (int i = 0; i < 1; i++)
             {
 
-                if (SC_MainBreakDownManager.Instance.b_BreakEngine)
-                {
-                    break;
-                }                 
+                //Debug.Log(machin);
+
+                //if (SC_MainBreakDownManager.Instance.b_BreakEngine)
+                    //break;
+
+                //if (machin > 80)
+                    //break;
 
                 if (curNbPanne < tab_screens_renderers.Length)
                 {
@@ -183,6 +195,7 @@ public class SC_breakdown_displays_screens : MonoBehaviour
                     if (tab_screens_renderers[rand].enabled)
                     {
                         i--;
+                        //machin++;
                     }
 
                     else
@@ -237,7 +250,6 @@ public class SC_breakdown_displays_screens : MonoBehaviour
             SetScreenState(i, true);
         }
 
-
         if (SC_GameStates.Instance.CurState != SC_GameStates.GameState.Lobby)
             FullPanneDisplay();
 
@@ -250,11 +262,11 @@ public class SC_breakdown_displays_screens : MonoBehaviour
 
         if (demarage)
         {
-
             demarage = false;
             sphereReturnCacheMisere.SetActive(false);
             CustomSoundManager.Instance.PlaySound(gameObject, "SFX_p_ScreenActivated", false, 0.1f);
         }
+
         else
             PannePartielleDisplay();
 
@@ -269,18 +281,10 @@ public class SC_breakdown_displays_screens : MonoBehaviour
     private void SetScreenState(int index, bool state)
     {
 
-        if (state == true && tab_screens_renderers[index].enabled != state)
-            curNbPanne++;
-
-        else if (tab_screens_renderers[index].enabled != state)
-            curNbPanne--;
-
-
-        tab_screens_renderers[index].enabled = state;
+        AlignMshRenderer(index, state);
 
         if (curScreenState != ScreenState.Tuto && curScreenState != ScreenState.TutoDisplayRepared)
         {
-
             if (state == true) tab_screens_renderers[index].GetComponent<SC_playvideo>().PlayVideo();
             if (state == false) tab_screens_renderers[index].GetComponent<SC_playvideo>().StopVideo();
         }
@@ -291,6 +295,25 @@ public class SC_breakdown_displays_screens : MonoBehaviour
         //cote operateur
         sc_syncvar_display.displayAll[index] = state;
 
+    }
+
+    void AlignMshRenderer(int index, bool state)
+    {
+        if (state == true && tab_screens_renderers[index].enabled != state)
+        {
+            Debug.Log("TINTIN : " + tab_screens_renderers[index].enabled + " | " + state);
+            curNbPanne++;
+        }
+
+
+        else if (state == false && tab_screens_renderers[index].enabled != state)
+        {
+            Debug.Log("ENCORE VOUS : " + tab_screens_renderers[index].enabled + " | " + state);
+            curNbPanne--;
+        }
+
+
+        tab_screens_renderers[index].enabled = state;
     }
 
 }
