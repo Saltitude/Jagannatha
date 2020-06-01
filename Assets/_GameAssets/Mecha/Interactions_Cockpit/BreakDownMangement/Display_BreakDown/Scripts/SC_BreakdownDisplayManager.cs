@@ -164,18 +164,20 @@ public class SC_BreakdownDisplayManager : MonoBehaviour, IF_BreakdownManager
             SC_SyncVar_DisplaySystem.Instance.b_MaxBreakdown = true;
         }
 
-        /*
-        if(CurNbOfBreakdown*2 > SC_breakdown_displays_screens.Instance.CurNbOfScreenBreak)
+
+        //IN DEBUG
+        
+        if(CurNbOfBreakdown > SC_breakdown_displays_screens.Instance.curNbPanne)
         {
-            int nb_ScreensToBreak = CurNbOfBreakdown * 2 - SC_breakdown_displays_screens.Instance.CurNbOfScreenBreak;
+            int nb_ScreensToBreak = CurNbOfBreakdown - SC_breakdown_displays_screens.Instance.curNbPanne;
             for(int i = 0; i < nb_ScreensToBreak; i++)
             {
                 SC_breakdown_displays_screens.Instance.PutOneEnPanne();
             }
         }
-        */
+        
 
-
+        //OLD
         /*
         else if (CurNbOfBreakdown == 0 && b_MaxBreakdown)
             EndBreakdown();
