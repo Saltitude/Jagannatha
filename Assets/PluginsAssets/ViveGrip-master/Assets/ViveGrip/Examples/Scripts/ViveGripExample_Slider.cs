@@ -192,8 +192,6 @@ public class ViveGripExample_Slider : MonoBehaviour, IInteractible {
 
         desiredValue = gameObject.transform.localPosition.x;
 
-        if (isFLUX)
-            desiredValue = sc_syncvar.SL_sliders[index].value;
 
         SetIsEnPanne(false);
 
@@ -201,6 +199,7 @@ public class ViveGripExample_Slider : MonoBehaviour, IInteractible {
         sc_syncvar.SliderChangeIsPanne(index, false);
 
     }
+
 
     public void IsValueOk()
     {
