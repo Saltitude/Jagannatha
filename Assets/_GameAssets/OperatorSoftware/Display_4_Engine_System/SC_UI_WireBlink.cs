@@ -15,11 +15,15 @@ public class SC_UI_WireBlink : MonoBehaviour
     [SerializeField]
     Material wireShutdown;
 
-    bool[] IndexToActivate;
 
+    public bool[] IndexToActivate;
+
+    int[] IndexValue;
 
     bool isActive;
 
+    [SerializeField]
+    bool test;
     // Start is called before the first frame update
     void Start()
     {
@@ -28,10 +32,12 @@ public class SC_UI_WireBlink : MonoBehaviour
 
         wireSafe = new Material[img_ToBreakDown.Length];
         IndexToActivate = new bool[img_ToBreakDown.Length];
+        IndexValue = new int[img_ToBreakDown.Length];
 
         for (int i = 0; i < wireSafe.Length; i++)
         {
             wireSafe[i] = img_ToBreakDown[i].material;
+            IndexValue[i] = 0;
         }
 
         StartCoroutine(RedWireCoro());
@@ -40,15 +46,28 @@ public class SC_UI_WireBlink : MonoBehaviour
 
     public void SetBreakDown(int index, bool activate)
     {
-        if(activate && !IndexToActivate[index])
-        {
-            img_ToBreakDown[index].material = wireBreakdown;            
-        }
-        if (!activate && IndexToActivate[index])
-        {
-            EndCoroutine(index);
-        }
 
+        if (activate)
+        {
+            
+            IndexValue[index]++;
+            if(!IndexToActivate[index])
+            {
+                img_ToBreakDown[index].material = wireBreakdown;
+            }
+   
+        }
+        else
+        {
+            IndexValue[index]--;
+         
+            if (IndexValue[index] <= 0)
+            {
+                IndexValue[index] = 0;
+                EndCoroutine(index);
+
+            }
+        }
         IndexToActivate[index] = activate;
 
     }

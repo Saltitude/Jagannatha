@@ -4990,6 +4990,7 @@ MonoBehaviour:
   - {fileID: 8162768242756212493}
   wireBreakdown: {fileID: 2100000, guid: 88ce785e5a9aa354d975291f072728a5, type: 2}
   wireShutdown: {fileID: 0}
+  test: 0
 --- !u!1 &4848399197962679071
 GameObject:
   m_ObjectHideFlags: 0
@@ -5753,6 +5754,7 @@ MonoBehaviour:
   - {fileID: 5080178062168048531}
   wireBreakdown: {fileID: 2100000, guid: 88ce785e5a9aa354d975291f072728a5, type: 2}
   wireShutdown: {fileID: 0}
+  test: 1
 --- !u!1 &6208097393163660498
 GameObject:
   m_ObjectHideFlags: 0
@@ -7590,6 +7592,7 @@ MonoBehaviour:
   - {fileID: 26159769330453591}
   wireBreakdown: {fileID: 2100000, guid: 88ce785e5a9aa354d975291f072728a5, type: 2}
   wireShutdown: {fileID: 0}
+  test: 0
 --- !u!1 &6810522776666841830
 GameObject:
   m_ObjectHideFlags: 0

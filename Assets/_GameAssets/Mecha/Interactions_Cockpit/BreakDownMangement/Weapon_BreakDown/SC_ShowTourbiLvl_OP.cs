@@ -16,6 +16,8 @@ public class SC_ShowTourbiLvl_OP : MonoBehaviour
     [SerializeField]
     SC_UI_WireBlink BlinkMaster;
 
+    bool secu1 = false;
+    bool secu2 = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -26,7 +28,7 @@ public class SC_ShowTourbiLvl_OP : MonoBehaviour
     void Update()
     {
         UpdateBar();
-        SetWireBlink();
+        //SetWireBlink();
     }
 
     void UpdateBar()
@@ -37,6 +39,19 @@ public class SC_ShowTourbiLvl_OP : MonoBehaviour
             //On recupere le Statut du Tourbilol
             float TargetValue = SC_SyncVar_BreakdownWeapon.Instance.SL_Tourbilols[i].valueWanted;
             float CurrentValue = SC_SyncVar_BreakdownWeapon.Instance.SL_Tourbilols[i].value;
+
+            if(TargetValue != CurrentValue && !secu1)
+            {
+                secu1 = true;
+                secu2 = false;
+                SetWireBlink();
+            }
+            if (TargetValue == CurrentValue && !secu2)
+            {
+                secu2 = true;
+                secu1 = false;
+                SetWireBlink();
+            }
 
             //Repositionnement selon la valeur actuelle pour pouvoir Scale dans la direction souhaité
             if (CurrentValue >= 0)
@@ -76,12 +91,15 @@ public class SC_ShowTourbiLvl_OP : MonoBehaviour
                 BreakLvl++;
 
                 //Wire
-                BlinkMaster.SetBreakDown(9, true);
+                if (!BlinkMaster.IndexToActivate[9])
+                    BlinkMaster.SetBreakDown(9, true);
 
                 if(BreakLvl >= 2)
                 {
-                    BlinkMaster.SetBreakDown(7, true);
-                    BlinkMaster.SetBreakDown(8, true);
+                    if (!BlinkMaster.IndexToActivate[7])
+                        BlinkMaster.SetBreakDown(7, true);
+                    if (!BlinkMaster.IndexToActivate[8])
+                        BlinkMaster.SetBreakDown(8, true);
                 }
 
                 switch (i)
@@ -90,7 +108,8 @@ public class SC_ShowTourbiLvl_OP : MonoBehaviour
                     //Container du Haut
                     case 0:
 
-                        BlinkMaster.SetBreakDown(0, true);
+                        if (!BlinkMaster.IndexToActivate[0])
+                            BlinkMaster.SetBreakDown(0, true);
 
                         switch (SC_SyncVar_BreakdownWeapon.Instance.SL_Tourbilols[i].valueWanted)
                         {
@@ -98,20 +117,24 @@ public class SC_ShowTourbiLvl_OP : MonoBehaviour
                             //Gauche
                             case 1:
                                 //Gods
-                                BlinkMaster.SetBreakDown(3, true);
+                                if(!BlinkMaster.IndexToActivate[3])
+                                    BlinkMaster.SetBreakDown(3, true);
                                 //BlinkMaster.SetBreakDown(4, false);
                                 BlinkMaster.ShutDownWire(4, true);
                                 //Wire
                                 LeftGods++;
                                 if (LeftGods >= 2)
-                                    BlinkMaster.ShutDownWire(8, true);                               
+                                    BlinkMaster.ShutDownWire(8, true);
+                                
                                 break;
 
                             //Droite
                             case -1:
                                 //Gods
+                               
                                 BlinkMaster.ShutDownWire(3, true);
-                                BlinkMaster.SetBreakDown(4, true);
+                                if (!BlinkMaster.IndexToActivate[4])
+                                    BlinkMaster.SetBreakDown(4, true);
                                 //Wire
                                 RightGods++;
                                 if (RightGods >= 2)
@@ -125,7 +148,8 @@ public class SC_ShowTourbiLvl_OP : MonoBehaviour
                     //Container du Bas
                     case 1:
 
-                        BlinkMaster.SetBreakDown(1, true);
+                        if (!BlinkMaster.IndexToActivate[1])
+                            BlinkMaster.SetBreakDown(1, true);
 
                         switch (SC_SyncVar_BreakdownWeapon.Instance.SL_Tourbilols[i].valueWanted)
                         {
@@ -133,7 +157,8 @@ public class SC_ShowTourbiLvl_OP : MonoBehaviour
                             //Gauche
                             case 1:
                                 //Gods
-                                BlinkMaster.SetBreakDown(5, true);
+                                if (!BlinkMaster.IndexToActivate[5])
+                                    BlinkMaster.SetBreakDown(5, true);
                                 BlinkMaster.ShutDownWire(6, true);
                                 //Wire
                                 LeftGods++;
@@ -145,7 +170,8 @@ public class SC_ShowTourbiLvl_OP : MonoBehaviour
                             case -1:
                                 //Gods
                                 BlinkMaster.ShutDownWire(5, true);
-                                BlinkMaster.SetBreakDown(6, true);
+                                if (!BlinkMaster.IndexToActivate[6])
+                                    BlinkMaster.SetBreakDown(6, true);
                                 //Wire
                                 RightGods++;
                                 if (RightGods >= 2)
@@ -168,18 +194,24 @@ public class SC_ShowTourbiLvl_OP : MonoBehaviour
 
                     //Container du Haut
                     case 0:
-                        BlinkMaster.SetBreakDown(0, false);
-                        BlinkMaster.SetBreakDown(3, false);
-                        BlinkMaster.SetBreakDown(4, false);
+                        if (BlinkMaster.IndexToActivate[9])
+                            BlinkMaster.SetBreakDown(9, false);
+                        if (BlinkMaster.IndexToActivate[3])
+                            BlinkMaster.SetBreakDown(3, false);
+                        if (BlinkMaster.IndexToActivate[4])
+                            BlinkMaster.SetBreakDown(4, false);
                         BlinkMaster.ShutDownWire(3, false);
                         BlinkMaster.ShutDownWire(4, false);
                         break;
 
                     //Container du Bas
                     case 1:
-                        BlinkMaster.SetBreakDown(1, false);
-                        BlinkMaster.SetBreakDown(5, false);
-                        BlinkMaster.SetBreakDown(6, false);
+                        if (BlinkMaster.IndexToActivate[1])
+                            BlinkMaster.SetBreakDown(1, false);
+                        if (BlinkMaster.IndexToActivate[5])
+                            BlinkMaster.SetBreakDown(5, false);
+                        if (BlinkMaster.IndexToActivate[6])
+                            BlinkMaster.SetBreakDown(6, false);
                         BlinkMaster.ShutDownWire(5, false);
                         BlinkMaster.ShutDownWire(6, false);
                         break;
@@ -189,9 +221,12 @@ public class SC_ShowTourbiLvl_OP : MonoBehaviour
                 //System entier
                 if(!SC_SyncVar_BreakdownWeapon.Instance.SL_Tourbilols[0].isEnPanne && !SC_SyncVar_BreakdownWeapon.Instance.SL_Tourbilols[1].isEnPanne)
                 {
-                    BlinkMaster.SetBreakDown(7, false);
-                    BlinkMaster.SetBreakDown(8, false);
-                    BlinkMaster.SetBreakDown(9, false);
+                    if (BlinkMaster.IndexToActivate[7])
+                        BlinkMaster.SetBreakDown(7, false);
+                    if (BlinkMaster.IndexToActivate[8])
+                        BlinkMaster.SetBreakDown(8, false);
+                    if (BlinkMaster.IndexToActivate[9])
+                        BlinkMaster.SetBreakDown(9, false);
                 }
 
             }
