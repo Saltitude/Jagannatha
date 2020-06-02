@@ -159,12 +159,14 @@ public class SC_SceneManager : NetworkBehaviour
 
     void SendReadyOP()
     {
+        Debug.Log("SendReadyOP");
         Mng_CheckList.GetComponent<SC_CheckList>().NetworkPlayerPilot.GetComponent<SC_NetScene>().CmdSendReadyOP();
     }
 
     [ClientRpc]
     void RpcAllowChangeScene()
     {
+        Debug.Log("RpcAllowChangeScene");
         b_LoadingAllowed = true;
     }
 
