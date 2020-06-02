@@ -31,7 +31,18 @@ public class SC_SceneManager : NetworkBehaviour
 
     [SerializeField]
     SC_passwordLock _SC_PasswordLock;
-  
+
+    /*
+    [SerializeField]
+    Scene LobbyPilot;
+    [SerializeField]
+    Scene LobbyOpe;
+    [SerializeField]
+    Scene GamePilot;
+    [SerializeField]
+    Scene GameOpe;
+    */
+
     private void Awake()
     {
         if (_instance != null && _instance != this)
@@ -98,11 +109,19 @@ public class SC_SceneManager : NetworkBehaviour
 
         AsyncOperation asyncOperation = null;
 
+        /*
         if (SceneManager.GetActiveScene().buildIndex == 1)
             asyncOperation = SceneManager.LoadSceneAsync(3);
 
         else if (SceneManager.GetActiveScene().buildIndex == 2)
             asyncOperation = SceneManager.LoadSceneAsync(4);
+        */
+
+        if (SceneManager.GetActiveScene().name == "Lobby")
+            asyncOperation = SceneManager.LoadSceneAsync("Tuto_Pilot");
+
+        else if (SceneManager.GetActiveScene().name == "Lobby Opé")
+            asyncOperation = SceneManager.LoadSceneAsync("Tuto_Operator");
 
         asyncOperation.allowSceneActivation = false;
 
