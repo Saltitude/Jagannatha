@@ -62,14 +62,27 @@ public class SC_ShowTourbiLvl_OP : MonoBehaviour
 
     void SetWireBlink()
     {
+
+        int LeftGods = 0;
+        int RightGods = 0;
+        int BreakLvl = 0;
+
         for (int i = 0; i < tab_TorbiBar.Length; i++)
         {
 
             if (SC_SyncVar_BreakdownWeapon.Instance.SL_Tourbilols[i].isEnPanne)
             {
 
+                BreakLvl++;
+
                 //Wire
                 BlinkMaster.SetBreakDown(9, true);
+
+                if(BreakLvl >= 2)
+                {
+                    BlinkMaster.SetBreakDown(7, true);
+                    BlinkMaster.SetBreakDown(8, true);
+                }
 
                 switch (i)
                 {
@@ -89,17 +102,20 @@ public class SC_ShowTourbiLvl_OP : MonoBehaviour
                                 //BlinkMaster.SetBreakDown(4, false);
                                 BlinkMaster.ShutDownWire(4, true);
                                 //Wire
-                                BlinkMaster.SetBreakDown(7, true);
+                                LeftGods++;
+                                if (LeftGods >= 2)
+                                    BlinkMaster.ShutDownWire(8, true);                               
                                 break;
 
                             //Droite
                             case -1:
                                 //Gods
-                                //BlinkMaster.SetBreakDown(3, false);
                                 BlinkMaster.ShutDownWire(3, true);
                                 BlinkMaster.SetBreakDown(4, true);
                                 //Wire
-                                BlinkMaster.SetBreakDown(8, true);
+                                RightGods++;
+                                if (RightGods >= 2)
+                                    BlinkMaster.ShutDownWire(7, true);                                 
                                 break;
 
                         }
@@ -118,20 +134,22 @@ public class SC_ShowTourbiLvl_OP : MonoBehaviour
                             case 1:
                                 //Gods
                                 BlinkMaster.SetBreakDown(5, true);
-                                //BlinkMaster.SetBreakDown(6, false);
                                 BlinkMaster.ShutDownWire(6, true);
                                 //Wire
-                                BlinkMaster.SetBreakDown(7, true);
+                                LeftGods++;
+                                if (LeftGods >= 2)
+                                    BlinkMaster.ShutDownWire(8, true);                                  
                                 break;
 
                             //Droite
                             case -1:
                                 //Gods
-                                //BlinkMaster.SetBreakDown(5, false);
                                 BlinkMaster.ShutDownWire(5, true);
                                 BlinkMaster.SetBreakDown(6, true);
                                 //Wire
-                                BlinkMaster.SetBreakDown(8, true);
+                                RightGods++;
+                                if (RightGods >= 2)
+                                    BlinkMaster.ShutDownWire(7, true);         
                                 break;
 
                         }

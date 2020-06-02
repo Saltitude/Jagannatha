@@ -24,6 +24,7 @@ public class SC_BreakdownDisplayManager : MonoBehaviour, IF_BreakdownManager
     public int n_MaxBreakInterB4MaxBD = 5;
     public bool b_MaxBreakdown = false;
     public int CurNbOfBreakdown = 0;
+    
 
     [Header("Interactibles"), SerializeField]
     public GameObject[] interactible;
@@ -90,9 +91,9 @@ public class SC_BreakdownDisplayManager : MonoBehaviour, IF_BreakdownManager
     {
 
         int curBreakdown = nbBreakdown;
-        bool newBreakdown = true;
+        bool newBreakdown = true;    
 
-        for(int i=0;i< nbBreakdown;i++)
+        for (int i=0;i< nbBreakdown;i++)
         {
 
             if (newBreakdown && !b_MaxBreakdown && !SC_MainBreakDownManager.Instance.b_BreakEngine)
@@ -102,6 +103,7 @@ public class SC_BreakdownDisplayManager : MonoBehaviour, IF_BreakdownManager
 
                 for (int j = 0; j < interactible.Length; j++)
                 {
+                    
                     if (!interactible[j].GetComponent<IInteractible>().isBreakdown())
                         noBreakdown++;                  
                 }
@@ -121,11 +123,13 @@ public class SC_BreakdownDisplayManager : MonoBehaviour, IF_BreakdownManager
 
                 else
                 {
+
                     interactible[rnd].GetComponent<IInteractible>().ChangeDesired();
                     //on itere le nombre de pannes total
                     CurNbOfBreakdown++;
                     //on met en panne un écran
                     sc_screens_controller.PutOneEnPanne();
+                    sc_screens_controller.CurNbOfScreenBreak++;
 
                     curBreakdown++;
 
@@ -160,6 +164,20 @@ public class SC_BreakdownDisplayManager : MonoBehaviour, IF_BreakdownManager
             SC_SyncVar_DisplaySystem.Instance.b_MaxBreakdown = true;
         }
 
+
+        //IN DEBUG
+        
+        if(CurNbOfBreakdown > SC_breakdown_displays_screens.Instance.curNbPanne)
+        {
+            int nb_ScreensToBreak = CurNbOfBreakdown - SC_breakdown_displays_screens.Instance.curNbPanne;
+            for(int i = 0; i < nb_ScreensToBreak; i++)
+            {
+                SC_breakdown_displays_screens.Instance.PutOneEnPanne();
+            }
+        }
+        
+
+        //OLD
         /*
         else if (CurNbOfBreakdown == 0 && b_MaxBreakdown)
             EndBreakdown();
