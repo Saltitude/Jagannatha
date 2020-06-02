@@ -2445,7 +2445,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: TRANSFERRING BABY
+  m_text: uploading buddha
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: f254d3ab903532946addd2c496d7ba8d, type: 2}
   m_sharedMaterial: {fileID: 21159276106309786, guid: f254d3ab903532946addd2c496d7ba8d,
@@ -2481,7 +2481,7 @@ MonoBehaviour:
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_textAlignment: 513
+  m_textAlignment: 514
   m_characterSpacing: 0
   m_wordSpacing: 0
   m_lineSpacing: 0
