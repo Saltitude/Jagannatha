@@ -134,7 +134,7 @@ public class SC_SceneManager : NetworkBehaviour
             //Debug.Log("notDone");
 
             if (asyncOperation.progress < 0.9f)
-                Debug.Log("f_LoadingProgress = " +  f_LoadingProgress);
+                Debug.LogError("f_LoadingProgress = " +  f_LoadingProgress);
 
             //Output the current progress (In Inspector)
             f_LoadingProgress = asyncOperation.progress;
@@ -143,7 +143,7 @@ public class SC_SceneManager : NetworkBehaviour
             if (asyncOperation.progress >= 0.9f && n_ConnectionsCount >= 2)
             {
 
-                Debug.Log("Progress >= 0.9");
+                Debug.LogError("Progress >= 0.9");
 
                 if (SceneManager.GetActiveScene().buildIndex == 1 && !b_PilotReadyToLoad)
                     b_PilotReadyToLoad = true;
@@ -164,14 +164,14 @@ public class SC_SceneManager : NetworkBehaviour
 
     void SendReadyOP()
     {
-        Debug.Log("SendReadyOP");
+        Debug.LogError("SendReadyOP");
         Mng_CheckList.GetComponent<SC_CheckList>().NetworkPlayerPilot.GetComponent<SC_NetScene>().CmdSendReadyOP();
     }
 
     [ClientRpc]
     void RpcAllowChangeScene()
     {
-        Debug.Log("RpcAllowChangeScene");
+        Debug.LogError("RpcAllowChangeScene");
         b_LoadingAllowed = true;
     }
 
