@@ -134,7 +134,7 @@ public class SC_SceneManager : NetworkBehaviour
             //Debug.Log("notDone");
 
             if (asyncOperation.progress < 0.9f)
-                Debug.LogError("f_LoadingProgress = " +  f_LoadingProgress);
+                //Debug.LogError("f_LoadingProgress = " +  f_LoadingProgress);
 
             //Output the current progress (In Inspector)
             f_LoadingProgress = asyncOperation.progress;
@@ -143,12 +143,12 @@ public class SC_SceneManager : NetworkBehaviour
             if (asyncOperation.progress >= 0.9f && n_ConnectionsCount >= 2)
             {
 
-                Debug.LogError("Progress >= 0.9");
+                //Debug.LogError("Progress >= 0.9");
 
-                if (SceneManager.GetActiveScene().buildIndex == 1 && !b_PilotReadyToLoad)
+                if (SceneManager.GetActiveScene().name == "Lobby" && !b_PilotReadyToLoad)
                     b_PilotReadyToLoad = true;
 
-                else if (SceneManager.GetActiveScene().buildIndex == 2 && !b_OperatorReadyToLoad)
+                else if (SceneManager.GetActiveScene().name == "Lobby Opé" && !b_OperatorReadyToLoad)
                     SendReadyOP();
 
                 //Activate the Scene
