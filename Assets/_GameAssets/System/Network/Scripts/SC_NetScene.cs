@@ -9,7 +9,7 @@ public class SC_NetScene : NetworkBehaviour
     [Command]
     public void CmdSendReadyOP()
     {
-        Debug.LogError("CmdSendReadyOP");
+        //Debug.LogError("CmdSendReadyOP");
         SC_SceneManager.Instance.b_OperatorReadyToLoad = true;
     }
 
