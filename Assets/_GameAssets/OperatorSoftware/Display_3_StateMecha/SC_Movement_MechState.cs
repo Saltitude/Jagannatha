@@ -70,7 +70,13 @@ public class SC_Movement_MechState : MonoBehaviour
         CheckState();
 
     }
+    public void IncrementBuffer()
+    {
+        _SystmShield.bufferCounter++;
+        if (!_SystmShield.bufferIsRunning)
+            _SystmShield.LaunchCoroutine();
 
+    }
     #region States
 
     void CheckState()
@@ -123,7 +129,10 @@ public class SC_Movement_MechState : MonoBehaviour
                 break;
 
             case SystemState.Connected:
-
+                while (_SystmShield.bufferIsRunning)
+                {
+                    yield return 0;
+                }
 
                 SC_TutorialUIManager.Instance.ActivateSystem(SC_TutorialUIManager.System.Motion, false);
 
