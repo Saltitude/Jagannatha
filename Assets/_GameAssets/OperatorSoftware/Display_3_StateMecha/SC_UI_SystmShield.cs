@@ -92,7 +92,7 @@ public class SC_UI_SystmShield : MonoBehaviour
                 
                 fRatioValue = Mathf.Lerp(fRatioValue, 0, Time.deltaTime * speedBar);
                 _ratioValue = Mathf.RoundToInt(fRatioValue);
-                Debug.Log("ratio value "+ fRatioValue);
+
                 for (int i = nbImage - 1; i >= 0; i--)
                 {
                     if (i >= _ratioValue)
