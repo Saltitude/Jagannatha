@@ -2129,6 +2129,12 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4763096179457797522, guid: 364effdb1be511241839715462ca19c8,
+        type: 3}
+      propertyPath: phases.Array.data[1]
+      value: 
+      objectReference: {fileID: 11400000, guid: a175abe6e0ea1ff4bb7f0c04181a6a57,
+        type: 2}
     - target: {fileID: 4763096179457797523, guid: 364effdb1be511241839715462ca19c8,
         type: 3}
       propertyPath: m_LocalPosition.x
