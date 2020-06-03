@@ -535,6 +535,7 @@ public class SC_FlockManager : MonoBehaviour
         {
             if(curtype == PathType.Death)
             {
+                bezierWalkerSpeed.speed = 0;
                 yield return new WaitForSeconds(1.3f);
             }
             _curBoidSetting = settings[curSettingsIndex];
