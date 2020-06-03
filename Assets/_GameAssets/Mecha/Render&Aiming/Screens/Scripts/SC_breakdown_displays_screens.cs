@@ -301,14 +301,14 @@ public class SC_breakdown_displays_screens : MonoBehaviour
     {
         if (state == true && tab_screens_renderers[index].enabled != state)
         {
-            Debug.Log("TINTIN : " + tab_screens_renderers[index].enabled + " | " + state);
+            //Debug.Log("TINTIN : " + tab_screens_renderers[index].enabled + " | " + state);
             curNbPanne++;
         }
 
 
         else if (state == false && tab_screens_renderers[index].enabled != state)
         {
-            Debug.Log("ENCORE VOUS : " + tab_screens_renderers[index].enabled + " | " + state);
+            //Debug.Log("ENCORE VOUS : " + tab_screens_renderers[index].enabled + " | " + state);
             curNbPanne--;
         }
 

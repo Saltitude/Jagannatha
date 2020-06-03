@@ -227,9 +227,10 @@ public class SC_FlockManager : MonoBehaviour
                     if (_splineTab[i] != null)
                     { 
                         _splineTab[i].transform.position = transform.position;
+                        if(i != 4)
                         _splineTab[i].transform.rotation = Random.rotation;
 
-                        if(i == 4)
+                        else
                         {
                             _splineTab[i].transform.position = new Vector3(0, 50, 0);
                         }
