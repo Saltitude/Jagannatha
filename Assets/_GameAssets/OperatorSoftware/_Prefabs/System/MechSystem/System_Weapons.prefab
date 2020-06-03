@@ -863,7 +863,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3070839560719162438}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 20f3b6fa64289be4491a62f8a7445cb1, type: 3}
   m_Name: 
@@ -881,6 +881,7 @@ MonoBehaviour:
   - {fileID: 3330676354288739649}
   wireBreakdown: {fileID: 2100000, guid: 88ce785e5a9aa354d975291f072728a5, type: 2}
   wireShutdown: {fileID: 2100000, guid: 1cd9a6abb11c2614c8cb6120ba502bb0, type: 2}
+  IndexToActivate: 
 --- !u!1 &3210258781982272169
 GameObject:
   m_ObjectHideFlags: 0
@@ -1647,7 +1648,19 @@ MonoBehaviour:
   - {fileID: 1332028369162521027}
   - {fileID: 1569091901309148568}
   f_MaxLenght: 552.5
-  BlinkMaster: {fileID: 3022954991444842965}
+  img_ToBreakDown:
+  - {fileID: 7867186620584623297}
+  - {fileID: 169721539238693049}
+  - {fileID: 8404025423172328523}
+  - {fileID: 5211566302451900972}
+  - {fileID: 2405362095888389336}
+  - {fileID: 4594303468748397022}
+  - {fileID: 3054259515555561928}
+  - {fileID: 7755303882961174742}
+  - {fileID: 3108633449475483744}
+  - {fileID: 3330676354288739649}
+  wireBreakdown: {fileID: 2100000, guid: 88ce785e5a9aa354d975291f072728a5, type: 2}
+  wireShutdown: {fileID: 2100000, guid: 1cd9a6abb11c2614c8cb6120ba502bb0, type: 2}
 --- !u!1 &7721296558538596869
 GameObject:
   m_ObjectHideFlags: 0

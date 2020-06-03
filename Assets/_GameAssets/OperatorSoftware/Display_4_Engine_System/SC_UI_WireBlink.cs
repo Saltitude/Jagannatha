@@ -20,15 +20,10 @@ public class SC_UI_WireBlink : MonoBehaviour
 
     int[] IndexValue;
 
-    bool isActive;
 
-    [SerializeField]
-    bool test;
     // Start is called before the first frame update
     void Start()
     {
-
-
 
         wireSafe = new Material[img_ToBreakDown.Length];
         IndexToActivate = new bool[img_ToBreakDown.Length];
@@ -124,7 +119,7 @@ public class SC_UI_WireBlink : MonoBehaviour
 
                 for (int i = 0; i < img_ToBreakDown.Length; i++)
                 {
-                    if(IndexToActivate[i])
+                    if(IndexValue[i] > 0)
                     img_ToBreakDown[i].color = new Vector4(ColorTampon.x, ColorTampon.y, ColorTampon.z, curOpacity);
                 }
 
