@@ -175,6 +175,16 @@ public class SC_FlockManager : MonoBehaviour
                 }
         }
 
+        //Raccourci l'attente avant le premier tir des lasers
+        if (flockSettings.timeBeforeFirstAttack == -1) startAttackTimer = 0;
+        else
+        {
+            startAttackTimer = flockSettings.timeBetweenAttacks-flockSettings.timeBeforeFirstAttack;
+        }
+
+
+
+
         Invoke("ActivateFlock", flockSettings.spawnTimer);
     }
     #endregion
