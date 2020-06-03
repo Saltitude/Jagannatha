@@ -111,7 +111,7 @@ public class SC_UI_Update_SliderSolo : MonoBehaviour
 
             textWanted.text = Mathf.FloorToInt(ratio(sc_syncvar.SL_sliders[index].valueWanted, 0.45f, 10, -0.45f, 1)).ToString();
             textWanted.material = Orange;
-            Debug.Log("u are orange bitch");
+
         }
 
         for (int i = 0; i < wireIndex.Length; i++)
