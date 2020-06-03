@@ -103,7 +103,7 @@ public class SC_UI_Update_SliderSolo : MonoBehaviour
 
             textWanted.text = Mathf.FloorToInt(ratio(sc_syncvar.SL_sliders[index].valueWanted, 0.45f, 10, -0.45f, 1)).ToString();
             textWanted.material = Red;
-            Debug.Log("u are red bitch");
+           // Debug.Log("u are red bitch");
         }
         else
         {
