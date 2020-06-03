@@ -16,8 +16,10 @@ public class SC_ShowTourbiLvl_OP : MonoBehaviour
     //BlinkDanceFLoor
     SC_ShowTourbiLvl_OP BlinkMaster;
 
-    bool secu1 = false;
-    bool secu2 = false;
+    bool secu1_1 = false;
+    bool secu1_2 = false;
+    bool secu2_1 = false;
+    bool secu2_2 = false;
 
     /// Blink Part ///
     bool[] IndexToActivate;
@@ -29,6 +31,9 @@ public class SC_ShowTourbiLvl_OP : MonoBehaviour
     [SerializeField]
     Material wireShutdown;
 
+
+    bool LeftGods = false;
+    bool RightGods = false;
     void Start()
     {
 
@@ -49,7 +54,7 @@ public class SC_ShowTourbiLvl_OP : MonoBehaviour
     void Update()
     {
         UpdateBar();
-        SetWireBlink();
+        //SetWireBlink();
     }
 
     void UpdateBar()
@@ -61,18 +66,43 @@ public class SC_ShowTourbiLvl_OP : MonoBehaviour
             float TargetValue = SC_SyncVar_BreakdownWeapon.Instance.SL_Tourbilols[i].valueWanted;
             float CurrentValue = SC_SyncVar_BreakdownWeapon.Instance.SL_Tourbilols[i].value;
 
-            //if(TargetValue != CurrentValue && !secu1)
-            //{
-            //    secu1 = true;
-            //    secu2 = false;
-            //    SetWireBlink();
-            //}
-            //if (TargetValue == CurrentValue && !secu2)
-            //{
-            //    secu2 = true;
-            //    secu1 = false;
-            //    SetWireBlink();
-            //}
+            switch(i)
+            {
+                case 0:
+
+                    if (TargetValue != CurrentValue && !secu1_1)
+                    {
+                        secu1_1 = true;
+                        secu2_1 = false;
+                        SetWireBlink();
+                    }
+                    if (TargetValue == CurrentValue && !secu2_1)
+                    {
+                        secu2_1 = true;
+                        secu1_1 = false;
+                        SetWireBlink();
+                    }
+
+                    break;
+
+                case 1:
+
+                    if (TargetValue != CurrentValue && !secu1_2)
+                    {
+                        secu1_2 = true;
+                        secu2_2 = false;
+                        SetWireBlink();
+                    }
+                    if (TargetValue == CurrentValue && !secu2_2)
+                    {
+                        secu2_2 = true;
+                        secu1_2 = false;
+                        SetWireBlink();
+                    }
+
+                    break;
+            }
+    
 
             //Repositionnement selon la valeur actuelle pour pouvoir Scale dans la direction souhaité
             if (CurrentValue >= 0)
@@ -99,9 +129,10 @@ public class SC_ShowTourbiLvl_OP : MonoBehaviour
     void SetWireBlink()
     {
 
-        int LeftGods = 0;
-        int RightGods = 0;
+
         int BreakLvl = 0;
+
+        
 
         for (int i = 0; i < tab_TorbiBar.Length; i++)
         {
@@ -114,10 +145,30 @@ public class SC_ShowTourbiLvl_OP : MonoBehaviour
                 //Wire
                 BlinkMaster.SetBreakDown(9, true);
 
-                if(BreakLvl >= 2)
+                if (SC_SyncVar_BreakdownWeapon.Instance.SL_Tourbilols[i].isEnPanne && SC_SyncVar_BreakdownWeapon.Instance.SL_Tourbilols[i].valueWanted == 1)
                 {
-                    BlinkMaster.SetBreakDown(7, true);
-                    BlinkMaster.SetBreakDown(8, true);
+                    LeftGods = true;
+                }
+                if (SC_SyncVar_BreakdownWeapon.Instance.SL_Tourbilols[i].isEnPanne && SC_SyncVar_BreakdownWeapon.Instance.SL_Tourbilols[i].valueWanted == -1)
+                {
+                    RightGods = true;
+                }
+
+                if (BreakLvl >= 2)
+                {
+               
+
+
+                    if (LeftGods) BlinkMaster.SetBreakDown(7, true); else BlinkMaster.ShutDownWire(7, true);
+                    if (RightGods) BlinkMaster.SetBreakDown(8, true); else BlinkMaster.ShutDownWire(8, true);
+
+                }
+                else
+                {
+                    BlinkMaster.SetBreakDown(7, false);
+                    BlinkMaster.SetBreakDown(8, false);
+                    BlinkMaster.ShutDownWire(7, false);
+                    BlinkMaster.ShutDownWire(8, false);
                 }
 
                 switch (i)
@@ -138,9 +189,9 @@ public class SC_ShowTourbiLvl_OP : MonoBehaviour
                                 //BlinkMaster.SetBreakDown(4, false);
                                 BlinkMaster.ShutDownWire(4, true);
                                 //Wire
-                                LeftGods++;
-                                if (LeftGods >= 2)
-                                    BlinkMaster.ShutDownWire(8, true);
+                                //LeftGods++;
+                                //if (LeftGods >= 2)
+                                //    BlinkMaster.ShutDownWire(8, true);
                                 
                                 break;
 
@@ -151,9 +202,9 @@ public class SC_ShowTourbiLvl_OP : MonoBehaviour
                                 BlinkMaster.ShutDownWire(3, true);
                                 BlinkMaster.SetBreakDown(4, true);
                                 //Wire
-                                RightGods++;
-                                if (RightGods >= 2)
-                                    BlinkMaster.ShutDownWire(7, true);                                 
+                                //RightGods++;
+                                //if (RightGods >= 2)
+                                //    BlinkMaster.ShutDownWire(7, true);                                 
                                 break;
 
                         }
@@ -176,9 +227,9 @@ public class SC_ShowTourbiLvl_OP : MonoBehaviour
                                 BlinkMaster.SetBreakDown(5, true);
                                 BlinkMaster.ShutDownWire(6, true);
                                 //Wire
-                                LeftGods++;
-                                if (LeftGods >= 2)
-                                    BlinkMaster.ShutDownWire(8, true);                                  
+                                //LeftGods++;
+                                //if (LeftGods >= 2)
+                                //    BlinkMaster.ShutDownWire(8, true);                                  
                                 break;
 
                             //Droite
@@ -186,10 +237,10 @@ public class SC_ShowTourbiLvl_OP : MonoBehaviour
                                 //Gods
                                 BlinkMaster.ShutDownWire(5, true);
                                 BlinkMaster.SetBreakDown(6, true);
-                                //Wire
-                                RightGods++;
-                                if (RightGods >= 2)
-                                    BlinkMaster.ShutDownWire(7, true);         
+                                ////Wire
+                                //RightGods++;
+                                //if (RightGods >= 2)
+                                //    BlinkMaster.ShutDownWire(7, true);         
                                 break;
 
                         }
@@ -208,7 +259,7 @@ public class SC_ShowTourbiLvl_OP : MonoBehaviour
 
                     //Container du Haut
                     case 0:
-                        BlinkMaster.SetBreakDown(9, false);    
+                        BlinkMaster.SetBreakDown(0, false);    
                         BlinkMaster.SetBreakDown(3, false);
                         BlinkMaster.SetBreakDown(4, false);
                         BlinkMaster.ShutDownWire(3, false);
@@ -233,6 +284,10 @@ public class SC_ShowTourbiLvl_OP : MonoBehaviour
                     BlinkMaster.SetBreakDown(7, false);
                     BlinkMaster.SetBreakDown(8, false);
                     BlinkMaster.SetBreakDown(9, false);
+                    BlinkMaster.ShutDownWire(7, false);
+                    BlinkMaster.ShutDownWire(8, false);
+                    LeftGods = false;
+                    RightGods = false;
                 }
 
             }

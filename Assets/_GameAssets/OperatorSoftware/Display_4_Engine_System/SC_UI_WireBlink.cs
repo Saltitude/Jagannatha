@@ -120,7 +120,9 @@ public class SC_UI_WireBlink : MonoBehaviour
                 for (int i = 0; i < img_ToBreakDown.Length; i++)
                 {
                     if(IndexValue[i] > 0)
-                    img_ToBreakDown[i].color = new Vector4(ColorTampon.x, ColorTampon.y, ColorTampon.z, curOpacity);
+                    {
+                        img_ToBreakDown[i].color = new Vector4(ColorTampon.x, ColorTampon.y, ColorTampon.z, curOpacity);
+                    }
                 }
 
             }
