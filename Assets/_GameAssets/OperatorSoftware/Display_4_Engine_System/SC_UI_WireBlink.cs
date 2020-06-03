@@ -15,23 +15,24 @@ public class SC_UI_WireBlink : MonoBehaviour
     [SerializeField]
     Material wireShutdown;
 
-    bool[] IndexToActivate;
 
+    public bool[] IndexToActivate;
 
-    bool isActive;
+    int[] IndexValue;
+
 
     // Start is called before the first frame update
     void Start()
     {
 
-
-
         wireSafe = new Material[img_ToBreakDown.Length];
         IndexToActivate = new bool[img_ToBreakDown.Length];
+        IndexValue = new int[img_ToBreakDown.Length];
 
         for (int i = 0; i < wireSafe.Length; i++)
         {
             wireSafe[i] = img_ToBreakDown[i].material;
+            IndexValue[i] = 0;
         }
 
         StartCoroutine(RedWireCoro());
@@ -40,15 +41,28 @@ public class SC_UI_WireBlink : MonoBehaviour
 
     public void SetBreakDown(int index, bool activate)
     {
-        if(activate && !IndexToActivate[index])
-        {
-            img_ToBreakDown[index].material = wireBreakdown;            
-        }
-        if (!activate && IndexToActivate[index])
-        {
-            EndCoroutine(index);
-        }
 
+        if (activate)
+        {
+            
+            IndexValue[index]++;
+            if(!IndexToActivate[index])
+            {
+                img_ToBreakDown[index].material = wireBreakdown;
+            }
+   
+        }
+        else
+        {
+            IndexValue[index]--;
+         
+            if (IndexValue[index] <= 0)
+            {
+                IndexValue[index] = 0;
+                EndCoroutine(index);
+
+            }
+        }
         IndexToActivate[index] = activate;
 
     }
@@ -105,8 +119,10 @@ public class SC_UI_WireBlink : MonoBehaviour
 
                 for (int i = 0; i < img_ToBreakDown.Length; i++)
                 {
-                    if(IndexToActivate[i])
-                    img_ToBreakDown[i].color = new Vector4(ColorTampon.x, ColorTampon.y, ColorTampon.z, curOpacity);
+                    if(IndexValue[i] > 0)
+                    {
+                        img_ToBreakDown[i].color = new Vector4(ColorTampon.x, ColorTampon.y, ColorTampon.z, curOpacity);
+                    }
                 }
 
             }
