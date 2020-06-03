@@ -31,6 +31,9 @@ public class FlockSettings : ScriptableObject
     [Tooltip("in Second")]
     public int timeBetweenAttacks;
 
+    [Tooltip("in Second")]
+    public int timeBeforeFirstAttack = -1;
+
 
     [Header("Bullet")]
     
