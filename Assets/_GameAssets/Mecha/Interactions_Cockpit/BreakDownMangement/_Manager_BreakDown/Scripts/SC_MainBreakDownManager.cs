@@ -56,6 +56,7 @@ public class SC_MainBreakDownManager : MonoBehaviour, IF_BreakdownManager
     [SerializeField]
     int NbOfBreakWeapon = 0;
 
+
     [Header("Movement System Infos")]
     [SerializeField, Range(0, 10)]
     int MovementLife = 10;
@@ -360,7 +361,7 @@ public class SC_MainBreakDownManager : MonoBehaviour, IF_BreakdownManager
                     if (MovementLife <= 0)
                     {
                         SC_MovementBreakdown.Instance.StartNewBreakdown(1);
-                        MovementLife = 10;
+                        StartCoroutine(resetLifeMovement());
                     }
 
                     break;
@@ -382,8 +383,9 @@ public class SC_MainBreakDownManager : MonoBehaviour, IF_BreakdownManager
                     if (WeaponLife <= 0)
                     {
                         SC_WeaponBreakdown.Instance.StartNewBreakdown(1);
-                        WeaponLife = 10;
+                        StartCoroutine(resetLifeWeapon());
                     }
+
 
                     break;
 
@@ -393,6 +395,19 @@ public class SC_MainBreakDownManager : MonoBehaviour, IF_BreakdownManager
 
         CheckBreakdown();
 
+    }
+
+    IEnumerator resetLifeWeapon ()
+    {
+        yield return 0;
+        WeaponLife = 10;
+        SyncSystemsLifes();
+    }
+    IEnumerator resetLifeMovement()
+    {
+        yield return 0;
+        MovementLife = 10;
+        SyncSystemsLifes();
     }
 
     /// <summary>
