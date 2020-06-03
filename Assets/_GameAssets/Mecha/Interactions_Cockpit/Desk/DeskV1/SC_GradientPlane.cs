@@ -7,11 +7,11 @@ using UnityEngine.UI;
 public class SC_GradientPlane : MonoBehaviour
 {
     //[SerializeField]
-    Color32 startColor = new Color32(221,22,22, 255);
+    Color32 startColor = new Color32(204,61,00, 255);
 
     //[SerializeField]
 
-    Color32 endColor = new Color32(255, 159, 0, 255);
+    Color32 endColor = new Color32(253, 255, 185, 255);
 
     float factor = 1f;
 
