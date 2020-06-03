@@ -86,6 +86,8 @@ public class SC_KoaManager : MonoBehaviour
     ParticleSystem vfx_Hit;
     GameObject SFX_Explosion;
 
+    bool deathAnimation = false;
+
     /// <summary>
     /// Avant le start, instanciation
     /// </summary>
@@ -226,6 +228,10 @@ public class SC_KoaManager : MonoBehaviour
                     regeneration = true;
 
             }
+        }
+        else if(deathAnimation &&  _koa != null)
+        {
+            KoaBehavior();
         }
         else
         {
@@ -468,6 +474,7 @@ public class SC_KoaManager : MonoBehaviour
         //SetBehavior(DeathSettings);
         foreach (Boid b in _boidsTab) b.DestroyBoid(Boid.DestructionType.Massive);
         isActive = false;
+        deathAnimation = true;
         //Destroy(_koa.gameObject);
         curExplosion = Instantiate(PS_KoaExplosion, _koa.transform);
         SetColor();
@@ -538,6 +545,7 @@ public class SC_KoaManager : MonoBehaviour
 
     void HideTheKoa()
     {
+        deathAnimation = false;
         var i = 0;
         while (i <= 4)
         {
