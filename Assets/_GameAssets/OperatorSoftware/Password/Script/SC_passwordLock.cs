@@ -185,7 +185,7 @@ public class SC_passwordLock : MonoBehaviour
         if (Field01.isFocused && objectPassword.text.Length < 3 && FieldSecu01)
             FieldSecu01 = false;
 
-        if (Field01.isFocused && objectPassword.text.Length >= 3 && !FieldSecu01)
+        if (Field01.isFocused && ((objectPassword.text.Length >= 3 && !FieldSecu01) || Input.GetKeyDown(KeyCode.Tab)))
         {
             FieldSecu01 = true;
             Field02.Select();
@@ -194,7 +194,7 @@ public class SC_passwordLock : MonoBehaviour
         if (Field02.isFocused && objectPassword02.text.Length < 3 && FieldSecu01)
             FieldSecu02 = false;
 
-        if (Field02.isFocused && objectPassword02.text.Length >= 3 && !FieldSecu02)
+        if (Field02.isFocused && ((objectPassword02.text.Length >= 3 && !FieldSecu02) || Input.GetKeyDown(KeyCode.Tab)))
         {
             FieldSecu02 = true;
             Field03.Select();
@@ -203,10 +203,15 @@ public class SC_passwordLock : MonoBehaviour
         if (Field03.isFocused && objectPassword03.text.Length < 3 && FieldSecu03)
             FieldSecu03 = false;
 
-        if (Field03.isFocused && objectPassword03.text.Length >= 3 && !FieldSecu03)
+        if (Field03.isFocused && ((objectPassword03.text.Length >= 3 && !FieldSecu03) || Input.GetKeyDown(KeyCode.Tab)))
         {
             FieldSecu03 = true;
             Field04.Select();
+        }
+
+        if (Field04.isFocused && Input.GetKeyDown(KeyCode.Tab))
+        {
+            Field01.Select();
         }
 
     }
