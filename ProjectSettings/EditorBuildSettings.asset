@@ -9,11 +9,11 @@ EditorBuildSettings:
     path: Assets/__Scenes/Logo_intro.unity
     guid: 910d8e65773c5a7408498f303d274301
   - enabled: 1
-    path: Assets/__Scenes/Lobby.unity
-    guid: 5230e165fa04fc641b98694903630417
-  - enabled: 1
     path: "Assets/__Scenes/Lobby Op\xE9.unity"
     guid: 243e1624fb12db24eb007ee1fe0e06ce
+  - enabled: 1
+    path: Assets/__Scenes/Lobby.unity
+    guid: 5230e165fa04fc641b98694903630417
   - enabled: 1
     path: Assets/__Scenes/Tuto_Pilot.unity
     guid: 9a7053be72ef5c94782ae2b7f0a31e4d

@@ -229,11 +229,8 @@ public class SC_KoaManager : MonoBehaviour
 
             }
         }
-        else if(deathAnimation &&  _koa != null)
-        {
-            KoaBehavior();
-        }
-        else
+       
+        else if (!deathAnimation)
         {
             _koa.transform.position = gameObject.transform.position;
         }
@@ -545,7 +542,6 @@ public class SC_KoaManager : MonoBehaviour
 
     void HideTheKoa()
     {
-        deathAnimation = false;
         var i = 0;
         while (i <= 4)
         {
@@ -556,6 +552,8 @@ public class SC_KoaManager : MonoBehaviour
 
     void DestroyFlock()
     {
+        deathAnimation = false;
+
         Destroy(_koa.gameObject);
         flockManager.DestroyFlock();
         Destroy(this.gameObject);
