@@ -149,10 +149,16 @@ public class SC_MovementBreakdown : MonoBehaviour, IF_BreakdownManager
         }
         else
         {
+
             if(b_ResetSeqIfFail)
                 SetSequences();
+
             else
+            {
                 InitPilotSeq();
+                SyncCurPilotSeqLenght();
+            }
+                
         }
 
         CheckBreakdown();
