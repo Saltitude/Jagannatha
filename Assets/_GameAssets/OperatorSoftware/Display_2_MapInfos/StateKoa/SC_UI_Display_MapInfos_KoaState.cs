@@ -41,7 +41,7 @@ public class SC_UI_Display_MapInfos_KoaState : MonoBehaviour
 
 
     string[] StringState = { "Spawning", "Roaming", "Attacking", "Death", "Fleeing", "Absorbing" };
-    enum KoaState
+    public enum KoaState
     {
         Spawning = 0,
         Roam = 1,
@@ -51,7 +51,7 @@ public class SC_UI_Display_MapInfos_KoaState : MonoBehaviour
         Absorbtion = 5
     }
 
-    KoaState curState;
+    public KoaState curState;
 
 
     [SerializeField]
@@ -144,12 +144,17 @@ public class SC_UI_Display_MapInfos_KoaState : MonoBehaviour
                 displayOptiBar();
                 type.text = "Type " + curKoaScriptKoaSettings.GetKoaID().ToString();
                 koaStateTxt.text = StringState[curKoaScriptKoaSettings.GetKoaState()].ToUpper();
+                curState = (KoaState)curKoaScriptKoaSettings.GetKoaState();
                 //koaStateTxt.text = curState.ToString().ToUpper();
 
                 if (curfKoaLife != fKoaLife)
                 {
 
                     SC_UI_Display_MapInfos_KOAShake.Instance.ShakeIt(5f,0.5f);
+                    SC_UI_Display_MapInfos_StateManager.Instance.checkState();
+                }
+                else if (curfKoaLife <= 0)
+                {
                     SC_UI_Display_MapInfos_StateManager.Instance.checkState();
                 }
 
@@ -230,5 +235,4 @@ public class SC_UI_Display_MapInfos_KoaState : MonoBehaviour
             barOpti[3].enabled = false;
         }
     }
-
 }
