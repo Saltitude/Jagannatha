@@ -79,30 +79,13 @@ public class SC_RaycastOPMapPerspective : MonoBehaviour
                         script.SetMaterial(SC_KoaSettingsOP.koaSelection.Selected);
 
                     }
-
-
-                    //CHANGEMENT ETAT TUTO
-                    //Debug.Log(SC_GameStates.Instance.CurState);
-                    if (SC_GameStates.Instance.CurState == SC_GameStates.GameState.Tutorial2)
-                    {
-                        SC_instruct_op_manager.Instance.Deactivate(0);
-                        SC_instruct_op_manager.Instance.Activate(2);
-                        SC_instruct_op_manager.Instance.Activate(3);
-                        SC_instruct_op_manager.Instance.Deactivate(4);
-                        SC_instruct_op_manager.Instance.Deactivate(5);
-
-
-                        //Debug.Log("babar");
-                    }
-                    //Debug.Log("Sensi à " + sensi);
-                    //debugText.text = sensi.ToString();
                 }
-                else
-                {
-                    //Debug.Log("Clic on nothing on Map");
-                    //objectOnclic = null;
-                    //SC_UI_Display_MapInfos_KoaState.Instance.activated = false;
-                }
+                //else
+                //{
+                //    Debug.Log("Clic on nothing on Map");
+                //    objectOnclic = null;
+                //    SC_UI_Display_MapInfos_KoaState.Instance.activated = false;
+                //}
             }
             
 
