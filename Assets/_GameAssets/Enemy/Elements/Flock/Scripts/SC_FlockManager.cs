@@ -485,6 +485,8 @@ public class SC_FlockManager : MonoBehaviour
                 break;
             case PathType.Death:
 
+                flockWeaponManager.SetBoolCanFire(false);
+
                 KoaMainAnimator.SetBool("Deploy", false);
                 KoaEmissiveAnimator.SetBool("Deploy", false);
 
@@ -538,7 +540,8 @@ public class SC_FlockManager : MonoBehaviour
         bezierWalkerSpeed.SetNewSpline(_curSpline);
 
 
-        if (curtype == PathType.AttackPlayer && flockSettings.attackType == FlockSettings.AttackType.Boss)
+        if (curtype 
+            PathType.AttackPlayer && flockSettings.attackType == FlockSettings.AttackType.Boss)
         {
             BoidSettings[] settings;
             if (laserBoss)

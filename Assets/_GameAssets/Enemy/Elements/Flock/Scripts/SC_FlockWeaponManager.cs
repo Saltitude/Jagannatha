@@ -50,6 +50,8 @@ public class SC_FlockWeaponManager : MonoBehaviour
     bool animation = false;
 
     bool laserBoss;
+
+    bool canFire = true;
     ////////////////////////////////////////////////////////
 
 
@@ -119,8 +121,8 @@ public class SC_FlockWeaponManager : MonoBehaviour
 
         if (NetPlayerP == null || NetPFloackSC == null)
             GetReferences();
-
-        FireUpdate();
+        if(canFire)
+            FireUpdate();
     
     }
 
@@ -438,5 +440,10 @@ public class SC_FlockWeaponManager : MonoBehaviour
         timer = 0;
         laserTimer = 0;
         isFiring = false;
+    }
+
+    public void SetBoolCanFire(bool value)
+    {
+        canFire = value;
     }
 }
