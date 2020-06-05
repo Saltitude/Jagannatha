@@ -213,20 +213,8 @@ public class SC_ShowSequence_OP : MonoBehaviour
                         BlinkMaster.ShutDownWire(4, true);
 
                         //Logo
-                        BlinkMaster.ShutDownWire(6, false);
-                        BlinkMaster.ShutDownWire(7, false);
-                        BlinkMaster.ShutDownWire(8, false);
-                        BlinkMaster.ShutDownWire(9, false);
-                        BlinkMaster.ShutDownWire(10, false);
-                        BlinkMaster.ShutDownWire(11, false);
-
                         BlinkMaster.SetBreakDown(6, b_InBreakDown);
                         BlinkMaster.SetBreakDown(7, b_InBreakDown);
-
-                        BlinkMaster.ShutDownWire(8, true);
-                        BlinkMaster.ShutDownWire(9, true);
-                        BlinkMaster.ShutDownWire(10, true);
-                        BlinkMaster.ShutDownWire(11, true);
 
                         break;
 
@@ -241,9 +229,7 @@ public class SC_ShowSequence_OP : MonoBehaviour
 
                         BlinkMaster.ShutDownWire(3, true);
 
-                        //Logo
-                        BlinkMaster.ShutDownWire(8, false);
-                        BlinkMaster.ShutDownWire(9, false);
+                        //Logo);
                         BlinkMaster.SetBreakDown(8, b_InBreakDown);
                         BlinkMaster.SetBreakDown(9, b_InBreakDown);
 
@@ -259,8 +245,6 @@ public class SC_ShowSequence_OP : MonoBehaviour
                         BlinkMaster.ShutDownWire(4, true);
 
                         //Logo
-                        BlinkMaster.ShutDownWire(10, false);
-                        BlinkMaster.ShutDownWire(11, false);
                         BlinkMaster.SetBreakDown(10, b_InBreakDown);
                         BlinkMaster.SetBreakDown(11, b_InBreakDown);
 
@@ -292,13 +276,6 @@ public class SC_ShowSequence_OP : MonoBehaviour
             BlinkMaster.ShutDownWire(3, false);
             BlinkMaster.ShutDownWire(4, false);
             BlinkMaster.ShutDownWire(5, false);
-
-            BlinkMaster.ShutDownWire(6, false);
-            BlinkMaster.ShutDownWire(7, false);
-            BlinkMaster.ShutDownWire(8, false);
-            BlinkMaster.ShutDownWire(9, false);
-            BlinkMaster.ShutDownWire(10, false);
-            BlinkMaster.ShutDownWire(11, false);
 
         }
 
