@@ -183,6 +183,10 @@ public class SC_Cord : MonoBehaviour
             UnityEditor.Selection.SetActiveObjectWithContext(null, null);
         #endif
         */
+
+        DeleteFixedJoint();
+        HandKinematic(false);
+
     }
     
     void SetMaterial(bool State)

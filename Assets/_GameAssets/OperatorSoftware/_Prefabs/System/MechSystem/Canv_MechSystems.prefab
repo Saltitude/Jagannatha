@@ -11010,6 +11010,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: System_Hub
       objectReference: {fileID: 0}
+    - target: {fileID: 8854808707546395099, guid: bf2c74096defbfc40aec3dcab80df2c0,
+        type: 3}
+      propertyPath: m_textInfo.characterCount
+      value: 16
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bf2c74096defbfc40aec3dcab80df2c0, type: 3}
 --- !u!1 &5898684993403439824 stripped
@@ -11637,11 +11642,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalPosition.x
       value: -254
-      objectReference: {fileID: 0}
-    - target: {fileID: 6508665453777725999, guid: 953684a80472adf41b9a1eb0d111ec03,
-        type: 3}
-      propertyPath: m_Material
-      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 6993192164825342185, guid: 953684a80472adf41b9a1eb0d111ec03,
         type: 3}
