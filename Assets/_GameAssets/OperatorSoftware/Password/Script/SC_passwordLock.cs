@@ -182,6 +182,7 @@ public class SC_passwordLock : MonoBehaviour
     void CheckFocus()
     {
 
+        //
         if (Field01.isFocused && Input.GetKeyDown(KeyCode.Tab) && Input.GetKey(KeyCode.LeftShift))
         {
             FieldSecu01 = true;
@@ -197,7 +198,8 @@ public class SC_passwordLock : MonoBehaviour
             Field02.Select();
         }
 
-        if(Field02.isFocused && Input.GetKeyDown(KeyCode.Tab) && Input.GetKey(KeyCode.LeftShift))
+        //
+        if(Field02.isFocused && ((Input.GetKeyDown(KeyCode.Tab) && Input.GetKey(KeyCode.LeftShift)) || (objectPassword02.text.Length == 0 && Input.GetKeyDown(KeyCode.Backspace))))
         {
             FieldSecu02 = true;
             Field01.Select();
@@ -212,7 +214,8 @@ public class SC_passwordLock : MonoBehaviour
             Field03.Select();
         }
 
-        if (Field03.isFocused && Input.GetKeyDown(KeyCode.Tab) && Input.GetKey(KeyCode.LeftShift))
+        //
+        if (Field03.isFocused && ((Input.GetKeyDown(KeyCode.Tab) && Input.GetKey(KeyCode.LeftShift)) || (objectPassword03.text.Length == 0 && Input.GetKeyDown(KeyCode.Backspace))))
         {
             FieldSecu03 = true;
             Field02.Select();
@@ -227,10 +230,12 @@ public class SC_passwordLock : MonoBehaviour
             Field04.Select();
         }
 
-        if (Field04.isFocused && Input.GetKeyDown(KeyCode.Tab) && Input.GetKey(KeyCode.LeftShift))
+        //
+        if (Field04.isFocused && ((Input.GetKeyDown(KeyCode.Tab) && Input.GetKey(KeyCode.LeftShift)) || (objectPassword04.text.Length == 0 && Input.GetKeyDown(KeyCode.Backspace))))
         {
             FieldSecu04 = true;
             Field03.Select();
+            //Field03.selectionAnchorPosition.ToString(" ");
         }
 
         if (Field04.isFocused && Input.GetKeyDown(KeyCode.Tab))
