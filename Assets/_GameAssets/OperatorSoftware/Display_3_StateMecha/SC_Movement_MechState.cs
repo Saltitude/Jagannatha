@@ -70,13 +70,19 @@ public class SC_Movement_MechState : MonoBehaviour
         CheckState();
 
     }
+    public void IncrementBuffer()
+    {
+        _SystmShield.bufferCounter++;
+        if (!_SystmShield.bufferIsRunning)
+            _SystmShield.LaunchCoroutine();
 
+    }
     #region States
 
     void CheckState()
     {
         SystemState newState;
-        if ((SC_GameStates.Instance.CurState == SC_GameStates.GameState.Tutorial && (int)SC_GameStates.Instance.CurTutoState >= (int)SC_GameStates.TutorialState.StartRepairDisplay) || (SC_GameStates.Instance.CurState != SC_GameStates.GameState.Tutorial && !SC_SyncVar_MovementSystem.Instance.b_BreakEngine) )
+        if ((SC_GameStates.Instance.CurState == SC_GameStates.GameState.Tutorial && (int)SC_GameStates.Instance.CurTutoState >= (int)SC_GameStates.TutorialState.StartRepairMotion) || (SC_GameStates.Instance.CurState != SC_GameStates.GameState.Tutorial && !SC_SyncVar_MovementSystem.Instance.b_BreakEngine) )
         {
             newState = SystemState.Connected;
 
@@ -88,9 +94,7 @@ public class SC_Movement_MechState : MonoBehaviour
                 {
                     newState = SystemState.Launched;
                 }
-
             }
-
         }
 
         else
@@ -123,7 +127,10 @@ public class SC_Movement_MechState : MonoBehaviour
                 break;
 
             case SystemState.Connected:
-
+                while (_SystmShield.bufferIsRunning)
+                {
+                    yield return 0;
+                }
 
                 SC_TutorialUIManager.Instance.ActivateSystem(SC_TutorialUIManager.System.Motion, false);
 
@@ -176,6 +183,8 @@ public class SC_Movement_MechState : MonoBehaviour
 
             case SystemState.Launched:
                 SC_TutorialUIManager.Instance.ActivateSystem(SC_TutorialUIManager.System.Motion, true);
+                SC_TutorialUIManager.Instance.ActivateBlink(SC_TutorialUIManager.System.Motion, false);
+
 
                 DisconnectedState.SetActive(false);
                 LaunchedOffState.SetActive(false);

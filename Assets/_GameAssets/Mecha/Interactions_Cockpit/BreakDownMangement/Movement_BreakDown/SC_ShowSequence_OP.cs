@@ -28,14 +28,26 @@ public class SC_ShowSequence_OP : MonoBehaviour
     Material ProgressOff;
     [SerializeField]
     Material ProgressDisable;
-    [SerializeField]
-    SC_UI_WireBlink BlinkMaster;
+
+    SC_ShowSequence_OP BlinkMaster;
 
     [Header("Debug References")]
     [SerializeField]
     bool b_UseDebugContent = false;
     [SerializeField]
     GameObject[] DebugContents;
+
+
+    /// Blink Part ///
+    bool[] IndexToActivate;
+    [SerializeField]
+    Image[] img_ToBreakDown;
+    Material[] wireSafe;
+    [SerializeField]
+    Material wireBreakdown;
+    [SerializeField]
+    Material wireShutdown;
+
 
     void Awake()
     {
@@ -51,10 +63,22 @@ public class SC_ShowSequence_OP : MonoBehaviour
 
     void Start()
     {
+        BlinkMaster = this;
 
         if (!b_UseDebugContent)
             for (int i = 0; i < DebugContents.Length; i++)
                 DebugContents[i].SetActive(false);
+
+
+        wireSafe = new Material[img_ToBreakDown.Length];
+        IndexToActivate = new bool[img_ToBreakDown.Length];
+    
+        for (int i = 0; i < wireSafe.Length; i++)
+        {
+            wireSafe[i] = img_ToBreakDown[i].material;
+        }
+
+        StartCoroutine(RedWireCoro());
 
     }
 
@@ -110,8 +134,30 @@ public class SC_ShowSequence_OP : MonoBehaviour
 
         for (int i = 0; i < PlayerSeqLenght; i++)
         {
+
             tab_Progress[i].GetComponent<Image>().material = ProgressOn;
             BlinkMaster.SetBreakDown(i, false);
+
+            switch (i)
+            {
+
+                case 0:
+                    BlinkMaster.SetBreakDown(6, false);
+                    BlinkMaster.SetBreakDown(7, false);
+                    break;
+
+                case 1:
+                    BlinkMaster.SetBreakDown(8, false);
+                    BlinkMaster.SetBreakDown(9, false);
+                    break;
+
+                case 2:
+                    BlinkMaster.SetBreakDown(10, false);
+                    BlinkMaster.SetBreakDown(11, false);
+                    break;
+
+            }
+
         }    
 
         //Debug.Log("DispProg | " + PlayerSeqLenght + " | " + SC_SyncVar_MovementSystem.Instance.BreakdownList.Count);
@@ -166,6 +212,10 @@ public class SC_ShowSequence_OP : MonoBehaviour
                         BlinkMaster.ShutDownWire(2, true);
                         BlinkMaster.ShutDownWire(4, true);
 
+                        //Logo
+                        BlinkMaster.SetBreakDown(6, b_InBreakDown);
+                        BlinkMaster.SetBreakDown(7, b_InBreakDown);
+
                         break;
 
                     case 1:
@@ -179,6 +229,10 @@ public class SC_ShowSequence_OP : MonoBehaviour
 
                         BlinkMaster.ShutDownWire(3, true);
 
+                        //Logo);
+                        BlinkMaster.SetBreakDown(8, b_InBreakDown);
+                        BlinkMaster.SetBreakDown(9, b_InBreakDown);
+
                         break;
 
                     case 2:
@@ -189,6 +243,10 @@ public class SC_ShowSequence_OP : MonoBehaviour
                         BlinkMaster.SetBreakDown(4, false);
 
                         BlinkMaster.ShutDownWire(4, true);
+
+                        //Logo
+                        BlinkMaster.SetBreakDown(10, b_InBreakDown);
+                        BlinkMaster.SetBreakDown(11, b_InBreakDown);
 
                         break;
 
@@ -205,6 +263,13 @@ public class SC_ShowSequence_OP : MonoBehaviour
             BlinkMaster.SetBreakDown(4, false);
             BlinkMaster.SetBreakDown(5, false);
 
+            BlinkMaster.SetBreakDown(6, false);
+            BlinkMaster.SetBreakDown(7, false);
+            BlinkMaster.SetBreakDown(8, false);
+            BlinkMaster.SetBreakDown(9, false);
+            BlinkMaster.SetBreakDown(10, false);
+            BlinkMaster.SetBreakDown(11, false);
+
             BlinkMaster.ShutDownWire(0, false);
             BlinkMaster.ShutDownWire(1, false);
             BlinkMaster.ShutDownWire(2, false);
@@ -216,23 +281,94 @@ public class SC_ShowSequence_OP : MonoBehaviour
 
     }
 
-    void RepearWireBlink()
+    #region Blink
+    //////////////////////---BLINK---//////////////////////////////
+    void SetBreakDown(int index, bool activate)
     {
 
-        BlinkMaster.SetBreakDown(0, false);
-        BlinkMaster.SetBreakDown(1, false);
-        BlinkMaster.SetBreakDown(2, false);
-        BlinkMaster.SetBreakDown(3, false);
-        BlinkMaster.SetBreakDown(4, false);
-        BlinkMaster.SetBreakDown(5, false);
+        if (activate)
+        {
 
-        BlinkMaster.ShutDownWire(0, false);
-        BlinkMaster.ShutDownWire(1, false);
-        BlinkMaster.ShutDownWire(2, false);
-        BlinkMaster.ShutDownWire(3, false);
-        BlinkMaster.ShutDownWire(4, false);
-        BlinkMaster.ShutDownWire(5, false);
+            if (!IndexToActivate[index])
+            {
+                img_ToBreakDown[index].material = wireBreakdown;
+            }
+
+        }
+        else
+        {
+            if(IndexToActivate[index])
+                EndCoroutine(index);
+
+        }
+        IndexToActivate[index] = activate;
+
+    }
+    void ShutDownWire(int index, bool activate)
+    {
+        if (activate)
+            img_ToBreakDown[index].material = wireShutdown;
+        else
+            img_ToBreakDown[index].material = wireSafe[index];
+
 
     }
 
+
+    void EndCoroutine(int index)
+    {
+        img_ToBreakDown[index].material = wireSafe[index];
+        img_ToBreakDown[index].color = Color.white;
+    }
+
+
+    IEnumerator RedWireCoro()
+    {
+        float animTime = 0.5f;
+        float maxOpacity = 1;
+        float minOpacity = 0f;
+        float ratePerSec = (maxOpacity - minOpacity / animTime) * 2;
+        float curOpacity;
+        bool Add = true;
+        float t = 0;
+
+        Vector4 ColorTampon = Color.white;
+        curOpacity = minOpacity;
+
+        while (true)
+        {
+            if (t < animTime)
+            {
+                t += Time.deltaTime;
+                if (Add)
+                {
+
+                    if (curOpacity < maxOpacity)
+                        curOpacity = Mathf.Lerp(curOpacity, maxOpacity, ratePerSec * Time.deltaTime);
+                }
+                else
+                {
+
+                    if (curOpacity > minOpacity)
+                        curOpacity = Mathf.Lerp(curOpacity, minOpacity, ratePerSec * Time.deltaTime);
+
+                }
+
+                for (int i = 0; i < img_ToBreakDown.Length; i++)
+                {
+                    if (IndexToActivate[i])
+                        img_ToBreakDown[i].color = new Vector4(ColorTampon.x, ColorTampon.y, ColorTampon.z, curOpacity);
+                }
+
+            }
+            else
+            {
+                Add = !Add;
+                t = 0;
+            }
+            yield return 0;
+        }
+
+    }
+    #endregion
 }

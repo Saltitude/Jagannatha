@@ -17,9 +17,28 @@ public class SC_passwordLock : MonoBehaviour
     #endregion
 
     [SerializeField]
-    GameObject objectPassword; //Contient le texte du inputField
+    InputField Field01;
+    [SerializeField]
+    Text objectPassword; //Contient le texte du inputField
+    [SerializeField]
+    InputField Field02;
+    [SerializeField]
+    Text objectPassword02;
+    [SerializeField]
+    InputField Field03;
+    [SerializeField]
+    Text objectPassword03;
+    [SerializeField]
+    InputField Field04;
+    [SerializeField]
+    Text objectPassword04;
 
-    string s_password = "LV426"; //Mot de passe à taper
+    private bool FieldSecu01 = false;
+    private bool FieldSecu02 = false;
+    private bool FieldSecu03 = false;
+    private bool FieldSecu04 = false;
+
+    //string s_password = "LV426"; //Mot de passe à taper
 
     [SerializeField]
     GameObject canvasMng; //récupération du DisplayManager
@@ -33,6 +52,7 @@ public class SC_passwordLock : MonoBehaviour
     float countTime = 0; //Compteur 
     public bool unlock = false; //Sécurité
     public bool b_IsConnected = false;
+    [SerializeField]
     bool secu = false;
     //[SerializeField]
     //SC_electricPlug plugObject; //récupération de l'objet prise electrique
@@ -88,24 +108,31 @@ public class SC_passwordLock : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-            if(Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.KeypadEnter)) //Validation
+
+        CheckFocus();
+
+        if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.KeypadEnter)) //Validation
+        {
+
+            // Debug.Log("Engage password");
+            manager.networkAddress = objectPassword.text + "." + objectPassword02.text + "." + objectPassword03.text + "." + objectPassword04.text;
+
+            unlock = true;
+            b_IsConnected = true;
+            secu = true;
+
+        }
+
+        if (countTime > 0.001f) //Fin de compteur
+        {
+
+            if(secu)
             {
-               // Debug.Log("Engage password");
-                manager.networkAddress = objectPassword.GetComponent<Text>().text;
-                unlock = true;
-                b_IsConnected = true;
-                secu = true;
+                manager.StartClient();
+                secu = false;
             }
 
-            if (countTime > 0.001f) //Fin de compteur
-            {
-                if(secu)
-                {
-                    manager.StartClient();
-                    secu = false;
-                }
-
-            else if (countTime > 2f && !secu)
+            else if (countTime > 2f && SC_SceneManager.Instance.n_ConnectionsCount < 2)
             {
                 //Debug.Log("Connection Failed");
                 
@@ -115,9 +142,8 @@ public class SC_passwordLock : MonoBehaviour
                 secu = false;
                 manager.StopClient();
             }
-        }
 
-        
+        }
 
         if(unlock)
         {
@@ -152,4 +178,42 @@ public class SC_passwordLock : MonoBehaviour
         textFeedbackFunction("Wrong password", new Color32(255, 0, 0, 255)); //Feedback textuel vert
         
     }
+
+    void CheckFocus()
+    {
+
+        if (Field01.isFocused && objectPassword.text.Length < 3 && FieldSecu01)
+            FieldSecu01 = false;
+
+        if (Field01.isFocused && ((objectPassword.text.Length >= 3 && !FieldSecu01) || Input.GetKeyDown(KeyCode.Tab)))
+        {
+            FieldSecu01 = true;
+            Field02.Select();
+        }
+
+        if (Field02.isFocused && objectPassword02.text.Length < 3 && FieldSecu01)
+            FieldSecu02 = false;
+
+        if (Field02.isFocused && ((objectPassword02.text.Length >= 3 && !FieldSecu02) || Input.GetKeyDown(KeyCode.Tab)))
+        {
+            FieldSecu02 = true;
+            Field03.Select();
+        }
+
+        if (Field03.isFocused && objectPassword03.text.Length < 3 && FieldSecu03)
+            FieldSecu03 = false;
+
+        if (Field03.isFocused && ((objectPassword03.text.Length >= 3 && !FieldSecu03) || Input.GetKeyDown(KeyCode.Tab)))
+        {
+            FieldSecu03 = true;
+            Field04.Select();
+        }
+
+        if (Field04.isFocused && Input.GetKeyDown(KeyCode.Tab))
+        {
+            Field01.Select();
+        }
+
+    }
+
 }

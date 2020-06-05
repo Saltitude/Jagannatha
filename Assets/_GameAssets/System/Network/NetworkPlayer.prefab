@@ -18,6 +18,7 @@ GameObject:
   - component: {fileID: 8587024730155883385}
   - component: {fileID: 9029850876185771557}
   - component: {fileID: 114527038320127134}
+  - component: {fileID: 3347022098517588126}
   m_Layer: 0
   m_Name: NetworkPlayer
   m_TagString: NetPlayer
@@ -177,3 +178,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   FBullet: {fileID: 6422795900896979926, guid: 59d83a65fa1321f45b9290a3038260c8, type: 3}
   FLaser: {fileID: 1107940701737066, guid: 0a0191a953741d940be3195a87c4d91f, type: 3}
+--- !u!114 &3347022098517588126
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8050195657067471805}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4f477460b55feb6409263e9cb083ed7c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

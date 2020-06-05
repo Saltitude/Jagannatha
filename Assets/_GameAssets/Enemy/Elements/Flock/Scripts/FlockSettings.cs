@@ -13,6 +13,7 @@ public class FlockSettings : ScriptableObject
         Bullet,
         Laser,
         Kamikaze,
+        Boss,
 
         none
     }
@@ -30,6 +31,9 @@ public class FlockSettings : ScriptableObject
 
     [Tooltip("in Second")]
     public int timeBetweenAttacks;
+
+    [Tooltip("in Second")]
+    public int timeBeforeFirstAttack = -1;
 
 
     [Header("Bullet")]
@@ -81,10 +85,10 @@ public class FlockSettings : ScriptableObject
 
     public int spawnTimer = 10;
 
-    [Range(10,200)]
+    [Range(10,1000)]
     public int boidSpawn;
 
-    [Range(10,200)]
+    [Range(10,1000)]
     public int maxBoid;
 
     [Tooltip("boids per min")]

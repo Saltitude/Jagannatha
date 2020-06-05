@@ -26,7 +26,7 @@ public class SC_KoaManager : MonoBehaviour
     [SerializeField]
     float maxLife = 10;
     [SerializeField]
-    float KoaLife = 10;
+    public float KoaLife = 10;
     [SerializeField]
     float recoveryDuration = 1.5f;
 
@@ -54,7 +54,7 @@ public class SC_KoaManager : MonoBehaviour
     Color32 AmenoColor;
 
     public GameObject Explosion;
-
+    bool changeSensitivity = false;
     /// <summary>
     /// Current BoidSettings
     /// </summary>
@@ -85,6 +85,8 @@ public class SC_KoaManager : MonoBehaviour
 
     ParticleSystem vfx_Hit;
     GameObject SFX_Explosion;
+
+    bool deathAnimation = false;
 
     /// <summary>
     /// Avant le start, instanciation
@@ -126,10 +128,19 @@ public class SC_KoaManager : MonoBehaviour
                 koaCharID = "Kamikaze";
                 type = 3;
                 break;
+
+            case FlockSettings.AttackType.Boss:
+
+                koaCharID = "SUPERBOSSKILLERDEADDEADEAD";
+                type = 4;
+                changeSensitivity = true;
+                break;
         }
 
         koaNumID = SC_BoidPool.Instance.GetFlockID();
-        koaID = koaCharID + " #" + koaNumID;
+        if (flockSettings.attackType != FlockSettings.AttackType.Boss)
+            koaID = koaCharID + " #" + koaNumID;
+        else koaID = koaCharID;
 
         //Instanciation des list de Boid et de Guide
         _boidsTab = SC_BoidPool.Instance.GetBoid(curFlockSettings.maxBoid);
@@ -162,6 +173,8 @@ public class SC_KoaManager : MonoBehaviour
             syncVarKoa.InitOPKoaSettings(sensitivity, flockSettings.spawnTimer, koaID, KoaLife, maxLife, type, newGuide);
             syncVarKoa.curboidNumber = spawnCount;
             syncVarKoa.curboidNumber = flockSettings.maxBoid;
+            if (flockSettings.attackType == FlockSettings.AttackType.Boss)
+                syncVarKoa.SetBiggerMeshBoss(2);
         }
 
     }
@@ -227,7 +240,8 @@ public class SC_KoaManager : MonoBehaviour
 
             }
         }
-        else
+       
+        else if (!deathAnimation)
         {
             _koa.transform.position = gameObject.transform.position;
         }
@@ -438,6 +452,13 @@ public class SC_KoaManager : MonoBehaviour
                 SC_HitMarker.Instance.HitMark(SC_HitMarker.HitType.Koa);
 
                 vfx_Hit.Play();
+
+                if(KoaLife <=5 && changeSensitivity)
+                {
+                    changeSensitivity = false;
+                    sensitivity = SC_WaveManager.Instance.GenerateSensitivityP();
+                    syncVarKoa.SetNewSensitivity(sensitivity);
+                }
             }
 
             if (powerPerCent >= curFlockSettings.flightReactionMinSensibility)
@@ -453,8 +474,17 @@ public class SC_KoaManager : MonoBehaviour
             if (gunSensitivity.x == 100)
             {
                 KoaLife = 0;
-                syncVarKoa.SetCurLife(0);
-                AnimDestroy();
+                syncVarKoa.SetCurLife(KoaLife);
+                if (KoaLife <= 0)
+                {
+                    AnimDestroy();
+                }
+                if (KoaLife <= 5 && changeSensitivity)
+                {
+                    changeSensitivity = false;
+                    sensitivity = SC_WaveManager.Instance.GenerateSensitivityP();
+                    syncVarKoa.SetNewSensitivity(sensitivity);
+                }
             }
         }
 
@@ -468,6 +498,7 @@ public class SC_KoaManager : MonoBehaviour
         //SetBehavior(DeathSettings);
         foreach (Boid b in _boidsTab) b.DestroyBoid(Boid.DestructionType.Massive);
         isActive = false;
+        deathAnimation = true;
         //Destroy(_koa.gameObject);
         curExplosion = Instantiate(PS_KoaExplosion, _koa.transform);
         SetColor();
@@ -548,6 +579,8 @@ public class SC_KoaManager : MonoBehaviour
 
     void DestroyFlock()
     {
+        deathAnimation = false;
+
         Destroy(_koa.gameObject);
         flockManager.DestroyFlock();
         Destroy(this.gameObject);

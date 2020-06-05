@@ -5369,6 +5369,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   simpleValue: 0
   speedBar: 2
+  bufferCounter: 0
+  bufferIsRunning: 0
 --- !u!114 &2761876002946576259
 MonoBehaviour:
   m_ObjectHideFlags: 0

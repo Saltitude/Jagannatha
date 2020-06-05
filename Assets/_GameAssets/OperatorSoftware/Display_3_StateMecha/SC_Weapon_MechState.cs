@@ -81,6 +81,14 @@ public class SC_Weapon_MechState : MonoBehaviour
 
     }
 
+    public void IncrementBuffer()
+    {
+        _SystmShield.bufferCounter++;
+        if(!_SystmShield.bufferIsRunning)
+            _SystmShield.LaunchCoroutine();
+
+    }
+
     #region States
 
     void CheckState()
@@ -109,7 +117,7 @@ public class SC_Weapon_MechState : MonoBehaviour
         }
 
 
-        if(newState != CurState)
+        if (newState != CurState)
         {
             CurState = newState;
             StopAllCoroutines();
@@ -132,7 +140,10 @@ public class SC_Weapon_MechState : MonoBehaviour
                 break;
 
             case SystemState.Connected:
-
+                while(_SystmShield.bufferIsRunning)
+                {
+                    yield return 0;
+                }
                 SC_TutorialUIManager.Instance.ActivateSystem(SC_TutorialUIManager.System.Weapon, false);
 
                 ConnectedOffState.SetActive(false);
@@ -186,6 +197,7 @@ public class SC_Weapon_MechState : MonoBehaviour
 
             case SystemState.Launched:
                 SC_TutorialUIManager.Instance.ActivateSystem(SC_TutorialUIManager.System.Weapon, true);
+                SC_TutorialUIManager.Instance.ActivateBlink(SC_TutorialUIManager.System.Weapon, false);
 
                 DisconnectedState.SetActive(false);
                 LaunchedOffState.SetActive(false);
