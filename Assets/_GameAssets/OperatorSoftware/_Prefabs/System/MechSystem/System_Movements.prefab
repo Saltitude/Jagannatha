@@ -17,7 +17,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1267461870254856209
 RectTransform:
   m_ObjectHideFlags: 0
@@ -857,6 +857,10 @@ MonoBehaviour:
   - {fileID: 2698569061489869970}
   - {fileID: 2778057923909060834}
   - {fileID: 789536965871063031}
+  tab_CordCursor:
+  - {fileID: 473598999824214076}
+  - {fileID: 6287951196730783329}
+  - {fileID: 8211895361379180612}
   BarMaxLenght: 825
   BarValidLenght: 650
   RatioFactor: 0.93
@@ -1578,7 +1582,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &452629593908572503
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2645,7 +2649,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2922088197519044892
 RectTransform:
   m_ObjectHideFlags: 0

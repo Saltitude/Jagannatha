@@ -154,6 +154,8 @@ public class SC_SyncVar_MovementSystem : NetworkBehaviour
     #region SC_Cord
 
     [Header("Var SC_Cord")]
+    [SyncVar(hook = "OnChangeSelectedCord")]
+    public float CurSelectedCord;
     [SyncVar]
     public float CordLenght01;
     [SyncVar]
@@ -166,6 +168,13 @@ public class SC_SyncVar_MovementSystem : NetworkBehaviour
     public float DeadZone;
     [SyncVar(hook = "OnChangeAddMaxRange")]
     public float AddMaxRange;
+
+    void OnChangeSelectedCord(float Target)
+    {
+        CurSelectedCord = Target;
+        if (!isServer && SC_CordViewver.Instance)
+            SC_CordViewver.Instance.ShowSelection();
+    }
 
     void OnChangeConstraintRange(float Target)
     {
