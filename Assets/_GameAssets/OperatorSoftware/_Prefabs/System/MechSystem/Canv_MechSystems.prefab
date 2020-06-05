@@ -10860,6 +10860,11 @@ PrefabInstance:
       propertyPath: m_Material
       value: 
       objectReference: {fileID: 2100000, guid: 5f9dcf0d052b0524dbb3580bbe2e034a, type: 2}
+    - target: {fileID: 5683190465968537147, guid: bf2c74096defbfc40aec3dcab80df2c0,
+        type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 5945748732519674830, guid: bf2c74096defbfc40aec3dcab80df2c0,
         type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -11004,6 +11009,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: System_Hub
+      objectReference: {fileID: 0}
+    - target: {fileID: 8854808707546395099, guid: bf2c74096defbfc40aec3dcab80df2c0,
+        type: 3}
+      propertyPath: m_textInfo.characterCount
+      value: 16
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bf2c74096defbfc40aec3dcab80df2c0, type: 3}
@@ -11632,11 +11642,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalPosition.x
       value: -254
-      objectReference: {fileID: 0}
-    - target: {fileID: 6508665453777725999, guid: 953684a80472adf41b9a1eb0d111ec03,
-        type: 3}
-      propertyPath: m_Material
-      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 6993192164825342185, guid: 953684a80472adf41b9a1eb0d111ec03,
         type: 3}
