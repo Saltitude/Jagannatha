@@ -54,7 +54,7 @@ public class SC_KoaManager : MonoBehaviour
     Color32 AmenoColor;
 
     public GameObject Explosion;
-    bool changeSensitivity = true;
+    bool changeSensitivity = false;
     /// <summary>
     /// Current BoidSettings
     /// </summary>
@@ -133,6 +133,7 @@ public class SC_KoaManager : MonoBehaviour
 
                 koaCharID = "SUPERBOSSKILLERDEADDEADEAD";
                 type = 4;
+                changeSensitivity = true;
                 break;
         }
 
@@ -472,7 +473,7 @@ public class SC_KoaManager : MonoBehaviour
             ///DEBUG
             if (gunSensitivity.x == 100)
             {
-                KoaLife -= 1;
+                KoaLife = 0;
                 syncVarKoa.SetCurLife(KoaLife);
                 if (KoaLife <= 0)
                 {
