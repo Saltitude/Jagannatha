@@ -12,7 +12,7 @@ public class SC_UI_Display_MapInfos_KoaState : MonoBehaviour
 
     #endregion
 
-    SC_KoaSettingsOP curKoaScriptKoaSettings;
+    public SC_KoaSettingsOP curKoaScriptKoaSettings;
 
     GameObject Mng_SyncVar = null;
     SC_SyncVar_calibr sc_syncvar;

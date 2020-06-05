@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
+using TMPro;
 
 public class SC_TargetMap : MonoBehaviour
 {
@@ -12,7 +12,7 @@ public class SC_TargetMap : MonoBehaviour
 
     #endregion
 
-    Text textContainer;
+    TextMeshPro textContainer;
 
     [SerializeField]
     float animTime;
@@ -35,6 +35,8 @@ public class SC_TargetMap : MonoBehaviour
         {
             _instance = this;
         }
+
+        textContainer = this.GetComponent<TextMeshPro>();
 
     }
 
