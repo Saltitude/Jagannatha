@@ -8570,6 +8570,11 @@ PrefabInstance:
       propertyPath: m_SizeDelta.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8567081809805112255, guid: 5868590ac89dbe244a183448a01ec422,
+        type: 3}
+      propertyPath: Phrase.Array.data[0]
+      value: Sonny je t'aime
+      objectReference: {fileID: 0}
     - target: {fileID: 8696631454392867059, guid: 5868590ac89dbe244a183448a01ec422,
         type: 3}
       propertyPath: m_AnchorMin.y
