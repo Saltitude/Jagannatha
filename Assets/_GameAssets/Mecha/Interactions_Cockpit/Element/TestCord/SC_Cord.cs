@@ -183,6 +183,10 @@ public class SC_Cord : MonoBehaviour
             UnityEditor.Selection.SetActiveObjectWithContext(null, null);
         #endif
         */
+
+        DeleteFixedJoint();
+        HandKinematic(false);
+
     }
     
     void SetMaterial(bool State)
@@ -213,6 +217,8 @@ public class SC_Cord : MonoBehaviour
 
         //Debug.Log("CreateFixedJoint");
 
+        SC_SyncVar_MovementSystem.Instance.CurSelectedCord = n_Index;
+
         GameObject RightHand = SC_GetRightController.Instance.getGameObject();
 
         CurJoint = AddFixedJoint(RightHand);
@@ -226,6 +232,8 @@ public class SC_Cord : MonoBehaviour
         {
 
             //Debug.Log("DeleteFixedJoint");
+
+            SC_SyncVar_MovementSystem.Instance.CurSelectedCord = 0;
 
             CurJoint.connectedBody = null;
             Destroy(CurJoint);

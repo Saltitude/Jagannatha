@@ -48,6 +48,8 @@ public class SC_FlockWeaponManager : MonoBehaviour
     Coroutine superLaserCoro;
 
     bool animation = false;
+
+    bool laserBoss;
     ////////////////////////////////////////////////////////
 
 
@@ -79,6 +81,12 @@ public class SC_FlockWeaponManager : MonoBehaviour
             case FlockSettings.AttackType.Laser: //Laser
                 InitLaser();
                 break;
+
+            case FlockSettings.AttackType.Boss:
+                InitBulletPool();
+                InitLaser();
+
+                break;
         }
         this.mainAnimator = mainAnimator;
         this.emissiveAnimator = emissiveAnimator;
@@ -92,12 +100,13 @@ public class SC_FlockWeaponManager : MonoBehaviour
             NetPFloackSC = NetPlayerP.GetComponent<SC_NetPlayer_Flock_P>();
     }
 
-    public void StartFire()
+    public void StartFire(bool isBoss = false, bool laserBoss = false)
     {
         isFiring = true;
         startLaser = true;
         animation = false;
-        if (flockSettings.attackType == FlockSettings.AttackType.Laser)
+        this.laserBoss = laserBoss;
+        if (flockSettings.attackType == FlockSettings.AttackType.Laser || (isBoss && laserBoss))
         {
             emissiveAnimator.SetBool("LaserCharge", true);
 
@@ -176,6 +185,46 @@ public class SC_FlockWeaponManager : MonoBehaviour
                         SC_CockpitShake.Instance.ShakeIt(0.025f, flockSettings.activeDuration);
                         SC_MainBreakDownManager.Instance.CauseDamageOnSystem(flockSettings.attackFocus, flockSettings.damageOnSystem);
                     
+                    }
+                    break;
+                case FlockSettings.AttackType.Boss:
+                    {
+                        if (!laserBoss)
+                        {
+                            if (emissiveAnimator != null)
+                                emissiveAnimator.SetBool("Bullet", true);
+
+                            if (mainAnimator != null)
+                                mainAnimator.SetBool("Bullet", true);
+
+                            if (timer >= 1 / flockSettings.fireRate)
+                            {
+                                FireBullet(false);
+                                timer = 0;
+                                if (nbBulletFire >= flockSettings.nbBulletToShoot)
+                                {
+                                    EndOfAttack();
+                                }
+                            }
+                        }
+                        else
+                        {
+                            if (timer >= flockSettings.chargingAttackTime - 1f)
+                            {
+                                if (!animation)
+                                {
+                                    emissiveAnimator.SetBool("Laser", true);
+                                    mainAnimator.SetBool("Laser", true);
+                                    resetBoolCoro = StartCoroutine(ResetBool());
+                                    animation = true;
+                                }
+                            }
+
+                            if (timer >= flockSettings.chargingAttackTime)
+                            {
+                                FireLaser();
+                            }
+                        }
                     }
                     break;
 

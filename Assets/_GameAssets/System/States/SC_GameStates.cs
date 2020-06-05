@@ -269,7 +269,7 @@ public class SC_GameStates : NetworkBehaviour
             case TutorialState.Reboot:
                 if(!isServer)
                 {
-
+                    SC_TutorialUIManager.Instance.ActivateBlink(SC_TutorialUIManager.System.Reboot, true);
                 }
                 break;
 
@@ -292,6 +292,8 @@ public class SC_GameStates : NetworkBehaviour
 
                     SC_instruct_op_manager.Instance.Activate(17);
                     SC_instruct_op_manager.Instance.Deactivate(18);
+
+                    SC_TutorialUIManager.Instance.ActivateBlink(SC_TutorialUIManager.System.Reboot, false);
                 }
                 
 

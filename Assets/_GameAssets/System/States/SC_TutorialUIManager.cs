@@ -24,8 +24,11 @@ public class SC_TutorialUIManager : MonoBehaviour
     [SerializeField]
     Image[] weaponHub; 
     [SerializeField]
-    Image[] motionHub;  
-    
+    Image[] motionHub;
+
+    [SerializeField]
+    Image[] rebootHub;
+
     [SerializeField]
     GameObject displayState;
     [SerializeField]
@@ -42,7 +45,8 @@ public class SC_TutorialUIManager : MonoBehaviour
     {
         Display = 0,
         Weapon,
-        Motion
+        Motion,
+        Reboot
     }
 
     void Awake()
@@ -70,13 +74,15 @@ public class SC_TutorialUIManager : MonoBehaviour
     void SetTab()
     {
         img_Blink = new List<Image>();
-        imageBlink = new Image[3][];
+        imageBlink = new Image[4][];
         imageState = new Image[3][];
 
 
         imageBlink[0] = displayHub;
         imageBlink[1] = weaponHub;
         imageBlink[2] = motionHub;
+        imageBlink[3] = rebootHub;
+
 
         imageState[0] = displayState.GetComponentsInChildren<Image>();
         imageState[1] = weaponState.GetComponentsInChildren<Image>();
@@ -160,7 +166,7 @@ public class SC_TutorialUIManager : MonoBehaviour
         float animTime = 0.5f;
         float maxOpacity = 1;
         float minOpacity = 0f;
-        float ratePerSec = (maxOpacity - minOpacity / animTime) * 2;
+        float ratePerSec = ((maxOpacity - minOpacity) / animTime);
         float curOpacity;
         bool Add = true;
         float t = 0;
