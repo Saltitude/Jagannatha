@@ -608,8 +608,8 @@ Light:
   m_Enabled: 1
   serializedVersion: 8
   m_Type: 0
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 0.8
+  m_Color: {r: 1, g: 0.44737726, b: 0.11792451, a: 1}
+  m_Intensity: 1.68
   m_Range: 1.3000501
   m_SpotAngle: 58.9
   m_CookieSize: 10
@@ -1356,8 +1356,8 @@ Light:
   m_Enabled: 1
   serializedVersion: 8
   m_Type: 0
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 1
+  m_Color: {r: 1, g: 0.97611904, b: 0.8352941, a: 1}
+  m_Intensity: 1.19
   m_Range: 1.424356
   m_SpotAngle: 58.9
   m_CookieSize: 10
@@ -1585,9 +1585,9 @@ Light:
   m_Enabled: 1
   serializedVersion: 8
   m_Type: 0
-  m_Color: {r: 0.9339623, g: 0.9185115, b: 0.8326362, a: 1}
-  m_Intensity: 2
-  m_Range: 7.654886
+  m_Color: {r: 0.6226415, g: 0.60501957, b: 0.50809896, a: 1}
+  m_Intensity: 2.63
+  m_Range: 6.3026476
   m_SpotAngle: 25.8
   m_CookieSize: 10
   m_Shadows:
@@ -1789,13 +1789,13 @@ Light:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1544462468}
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 8
   m_Type: 0
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 3
-  m_Range: 4.912734
-  m_SpotAngle: 58.9
+  m_Intensity: 0.98
+  m_Range: 5.1
+  m_SpotAngle: 31.9
   m_CookieSize: 10
   m_Shadows:
     m_Type: 1
@@ -2086,7 +2086,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1680269099
 Transform:
   m_ObjectHideFlags: 0
@@ -3306,7 +3306,7 @@ ReflectionProbe:
   m_CullingMask:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IntensityMultiplier: 0.6
+  m_IntensityMultiplier: 1.6
   m_BlendDistance: 1
   m_HDR: 1
   m_BoxProjection: 0
@@ -3468,7 +3468,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: 02d4b7065a431a449875a6065ea2a4a0, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 02d4b7065a431a449875a6065ea2a4a0, type: 3}
       propertyPath: m_LocalPosition.x
