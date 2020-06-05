@@ -82,7 +82,7 @@ public class SC_Movement_MechState : MonoBehaviour
     void CheckState()
     {
         SystemState newState;
-        if ((SC_GameStates.Instance.CurState == SC_GameStates.GameState.Tutorial && (int)SC_GameStates.Instance.CurTutoState >= (int)SC_GameStates.TutorialState.StartRepairDisplay) || (SC_GameStates.Instance.CurState != SC_GameStates.GameState.Tutorial && !SC_SyncVar_MovementSystem.Instance.b_BreakEngine) )
+        if ((SC_GameStates.Instance.CurState == SC_GameStates.GameState.Tutorial && (int)SC_GameStates.Instance.CurTutoState >= (int)SC_GameStates.TutorialState.StartRepairMotion) || (SC_GameStates.Instance.CurState != SC_GameStates.GameState.Tutorial && !SC_SyncVar_MovementSystem.Instance.b_BreakEngine) )
         {
             newState = SystemState.Connected;
 
@@ -94,9 +94,7 @@ public class SC_Movement_MechState : MonoBehaviour
                 {
                     newState = SystemState.Launched;
                 }
-
             }
-
         }
 
         else

@@ -14,7 +14,11 @@ public class SC_MovementBreakdown : MonoBehaviour, IF_BreakdownManager
 
     #region Variables
 
-    [Header("BreakDown Var")]
+    [Header("BreakDown Parameters")]
+    [SerializeField]
+    bool b_ResetSeqIfFail = false;
+
+    [Header("BreakDown Infos")]
     public bool b_MaxBreakdown = false;
     [SerializeField]
     int n_MaxBreakdownLvl = 3;
@@ -90,7 +94,8 @@ public class SC_MovementBreakdown : MonoBehaviour, IF_BreakdownManager
     {
 
         ResizeTab();
-        CurPilotSeqLenght = 0;
+        InitPilotSeq();
+        //CurPilotSeqLenght = 0;
         SyncCurPilotSeqLenght();
         SetSequenceState(false);
 
@@ -144,9 +149,16 @@ public class SC_MovementBreakdown : MonoBehaviour, IF_BreakdownManager
         }
         else
         {
-            //Debug.Log("Reset Mov");
-            //Ranger les Cords
-            SetSequences();
+
+            if(b_ResetSeqIfFail)
+                SetSequences();
+
+            else
+            {
+                InitPilotSeq();
+                SyncCurPilotSeqLenght();
+            }
+                
         }
 
         CheckBreakdown();
@@ -200,6 +212,12 @@ public class SC_MovementBreakdown : MonoBehaviour, IF_BreakdownManager
     #endregion MainFunctions
 
     #region OtherFunctions
+
+    public void InitPilotSeq()
+    {
+        tab_PilotSequence = new int[n_BreakDownLvl];
+        CurPilotSeqLenght = 0;
+    }
 
     public void AddToPilotSeq(int CordIndex)
     {

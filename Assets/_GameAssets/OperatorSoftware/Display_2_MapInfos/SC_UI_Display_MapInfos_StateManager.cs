@@ -55,7 +55,7 @@ public class SC_UI_Display_MapInfos_StateManager : MonoBehaviour
             //patch de la gruge de l'infini de ta mère pour effacer le koa en memoire et permettre la discrimination des conditions
             SC_UI_Display_MapInfos_KoaState.Instance.curState = SC_UI_Display_MapInfos_KoaState.KoaState.Spawning;
             scriptRaycast.objectOnclic = null;
-
+            SC_TargetMap.Instance.SetText("No Target Selected");
             return;
         }
 
@@ -68,6 +68,8 @@ public class SC_UI_Display_MapInfos_StateManager : MonoBehaviour
                 checkChild(1);
                 SC_UI_Display_MapInfos_KoaState.Instance.activated = true;
                 SC_UI_Display_Flock.Instance.activateRender();
+                SC_TargetMap.Instance.SetText(SC_UI_Display_MapInfos_KoaState.Instance.curKoaScriptKoaSettings.GetKoaID().ToString());
+
                 /* if (SC_GameStates.Instance.CurTutoState == SC_GameStates.TutorialState.StartTutorial2)
                      SC_CheckList.Instance.NetworkPlayerPilot.GetComponent<SC_Net_Player_TutoState>().CmdChangeTutoState(SC_GameStates.TutorialState.Tutorial2_2);*/
             }

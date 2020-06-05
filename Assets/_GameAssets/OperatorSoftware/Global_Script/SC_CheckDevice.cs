@@ -78,9 +78,10 @@ public class SC_CheckDevice : MonoBehaviour
         {
             Display.displays[i].Activate(1920, 1080, 120); //Active les écrans (build)
         }
-
-        tab_Cam[0].enabled = false;
-        tab_Canv[0].enabled = false;
+        if(tab_Cam[0] != null)
+            tab_Cam[0].enabled = false;
+        if (tab_Canv[0] != null)
+            tab_Canv[0].enabled = false;
 
     }
 

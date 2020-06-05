@@ -5021,6 +5021,8 @@ MonoBehaviour:
     rgba: 4278273277
   - serializedVersion: 2
     rgba: 4278190335
+  - serializedVersion: 2
+    rgba: 4279107839
   Tab_colorSpawn:
   - serializedVersion: 2
     rgba: 4294792872
@@ -5030,6 +5032,8 @@ MonoBehaviour:
     rgba: 4278283261
   - serializedVersion: 2
     rgba: 4281545215
+  - serializedVersion: 2
+    rgba: 4278321407
   bSelected: 0
   VFX_koadeath: {fileID: 8764311545272859674, guid: fcc1029c7e5d57548a5bf37d5c374b01,
     type: 3}

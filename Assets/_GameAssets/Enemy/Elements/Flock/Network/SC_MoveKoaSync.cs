@@ -54,6 +54,22 @@ public class SC_MoveKoaSync : NetworkBehaviour
         }
     }
 
+    public void SetBiggerMeshBoss(float scale)
+    {
+        if(isServer)
+        {
+            mr_P.transform.localScale *= scale;
+            RpcSendVt3Scale(scale);
+        }
+    }
+
+    [ClientRpc]
+    public void RpcSendVt3Scale(float scaleFactor)
+    {
+        if (!isServer)
+            mr_OP.transform.localScale *= scaleFactor;
+    }
+
     // Update is called once per frame
     void Update()
     {
@@ -132,6 +148,14 @@ public class SC_MoveKoaSync : NetworkBehaviour
         }
     }
 
+    [ClientRpc]
+    public void RpcSetNewSensitivity(GameObject Target,Vector3 sensibility)
+    {
+        SC_KoaSettingsOP sc_KoaSettings = Target.transform.GetChild(1).GetComponent<SC_KoaSettingsOP>();
+        sc_KoaSettings.SetSensibility(sensibility);
+    }
+
+
     public void InitOPKoaSettings(Vector3 sensibility, int timeBeforeSpawn, string KoaID,float curLife, float maxLife, int type, Transform guide)
     {
         if (isServer)
@@ -141,6 +165,11 @@ public class SC_MoveKoaSync : NetworkBehaviour
         }
     }
 
+
+    public void SetNewSensitivity(Vector3 sensibility)
+    {
+        RpcSetNewSensitivity(gameObject,sensibility);
+    }
     public void SetCurLife(float curLife)
     {
         RpcSendIntCurLife(gameObject, curLife);
