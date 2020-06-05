@@ -53,6 +53,12 @@ public class SC_SyncVar_WeaponSystem : NetworkBehaviour
     {
         f_WeaponLife = newLife;
         UpdateOnClient();
+
+        if (newLife <= 0 && !isServer)
+        {
+            SC_Weapon_MechState.Instance.IncrementBuffer();
+        }
+
     }
 
     void OnChangeBreakEngine(bool Breakdown)
@@ -154,7 +160,7 @@ public class SC_SyncVar_WeaponSystem : NetworkBehaviour
 
     void UpdateOnClient()
     {
-        if (!isServer)
+        if (!isServer && SC_Weapon_MechState.Instance)
             SC_Weapon_MechState.Instance.UpdateVar();
     }
 

@@ -112,6 +112,7 @@ public class SC_WaveManager : MonoBehaviour
         {
             for (int i = 0; i < _curWaveSettings.backupSpawnFlock.Length; i++)
             {
+                //Debug.Log("InitializeWave - Backup");
                 StartCoroutine(SC_KoaSpawn.Instance.GoTargetPos(SC_PhaseManager.Instance.curWaveIndex, 1, i, _curWaveSettings.backupSpawnPosition[i], 350, 3.5f));
             }
         }
@@ -120,6 +121,7 @@ public class SC_WaveManager : MonoBehaviour
             WaveSettings nextWave = SC_PhaseManager.Instance.waves[SC_PhaseManager.Instance.curWaveIndex + 1];
             for (int i = 0; i < nextWave.initialSpawnFlock.Length; i++)
             {
+                //Debug.Log("InitializeWave - Normal");
                 StartCoroutine(SC_KoaSpawn.Instance.GoTargetPos(SC_PhaseManager.Instance.curWaveIndex+1, 0, i, nextWave.initialSpawnPosition[i], 350, 3.5f));
             }
         }
@@ -133,6 +135,9 @@ public class SC_WaveManager : MonoBehaviour
             SpawnNewFlock(_curWaveSettings.initialSpawnFlock[i], i);
 
 
+            //StartCoroutine(SC_KoaSpawn.Instance.SpawnCoro(SC_PhaseManager.Instance.curWaveIndex, 0, i, _curWaveSettings.initialSpawnPosition[i]));
+            //Debug.Log("initialSpawnPosition = " + _curWaveSettings.initialSpawnPosition[i]);
+            //StartCoroutine(SC_KoaSpawn.Instance.SpawnCoro(SC_PhaseManager.Instance.curWaveIndex, 0, i, 1));
             StartCoroutine(SC_KoaSpawn.Instance.SpawnCoro(SC_PhaseManager.Instance.curWaveIndex, 0, i, _curWaveSettings.initialSpawnPosition[i]));
 
             yield return new WaitForSeconds(_curWaveSettings.timeBetweenSpawnInitial);            
@@ -153,37 +158,41 @@ public class SC_WaveManager : MonoBehaviour
 
     IEnumerator SpawnBackupFlock()
     {
+
         for (int i = 0; i < _curWaveSettings.backupSpawnFlock.Length; i++)
         {
+
             SpawnNewFlock(_curWaveSettings.backupSpawnFlock[i], i, true);
 
             StartCoroutine(SC_KoaSpawn.Instance.SpawnCoro(SC_PhaseManager.Instance.curWaveIndex,1,i, _curWaveSettings.backupSpawnPosition[i]));
 
             yield return new WaitForSeconds(_curWaveSettings.timeBetweenSpawnBackup);
+
         }
 
         WaveSettings nextWave = null;
-        if (SC_PhaseManager.Instance.curWaveIndex+1 <= SC_PhaseManager.Instance.waves.Length)
-             nextWave = SC_PhaseManager.Instance.waves[SC_PhaseManager.Instance.curWaveIndex + 1];
-
+        if (SC_PhaseManager.Instance.curWaveIndex < SC_PhaseManager.Instance.waves.Length - 1)
+        {
+            //Debug.Log("Waves : " + SC_PhaseManager.Instance.curWaveIndex + " / " + SC_PhaseManager.Instance.waves.Length);
+            nextWave = SC_PhaseManager.Instance.waves[SC_PhaseManager.Instance.curWaveIndex + 1];
+        }
 
         if (nextWave != null)
-        for (int i = 0; i < nextWave.initialSpawnFlock.Length; i++)
-        {
-            StartCoroutine(SC_KoaSpawn.Instance.GoTargetPos(SC_PhaseManager.Instance.curWaveIndex + 1, 0, i, nextWave.initialSpawnPosition[i], 200, 3.5f));
-        }
+            for (int i = 0; i < nextWave.initialSpawnFlock.Length; i++)
+            {
+                //Debug.Log("SpawnBackupFlock");
+                StartCoroutine(SC_KoaSpawn.Instance.GoTargetPos(SC_PhaseManager.Instance.curWaveIndex + 1, 0, i, nextWave.initialSpawnPosition[i], 200, 3.5f));
+            }
+
     }
 
-
-
     void BackupUpdate()
-    {
-       
+    {      
         if(waveStarted)
-        {
-            
+        {          
             if (_curWaveSettings.backup && !backupSend)
             {
+
                 curBackupTimer += Time.deltaTime;
 
                 if (_FlockList.Count <= _curWaveSettings.flockLeftBeforeBackup)
@@ -191,15 +200,16 @@ public class SC_WaveManager : MonoBehaviour
                     StartCoroutine(SpawnBackupFlock());
                     backupSend = true;
                 }
+
                 else if (curBackupTimer >= _curWaveSettings.timeBeforeBackup && _curWaveSettings.timeBeforeBackup!=-1)
                 {
                     StartCoroutine(SpawnBackupFlock());
                     backupSend = true;
 
                 }
+
             }
         }
-
     }
 
     #endregion
@@ -317,8 +327,17 @@ public class SC_WaveManager : MonoBehaviour
         _FlockList.Add(curFlock);
 
         BezierSolution.BezierSpline spawnSpline;
-        if (backup) spawnSpline = spawnSplines[_curWaveSettings.backupSpawnPosition[index]];
-        else spawnSpline = spawnSplines[_curWaveSettings.initialSpawnPosition[index]];
+
+        int pos;
+
+        if (backup)
+            pos = _curWaveSettings.backupSpawnPosition[index];
+        else
+            pos = _curWaveSettings.initialSpawnPosition[index];
+
+        int orientedBackupPos = (pos + (int)SC_PhaseManager.Instance.curPhaseSettings.WavesOrientation[SC_PhaseManager.Instance.curWaveIndex]) % 8;
+
+        spawnSpline = spawnSplines[orientedBackupPos];      
 
         //Initialize flock
         curFlock.GetComponent<SC_FlockManager>().InitializeFlock(flockSettings, spawnSpline, newSensitivity);
@@ -362,6 +381,39 @@ public class SC_WaveManager : MonoBehaviour
         sensitivityC = new Vector3Int(GetRangedValue(sensitivityB.x), GetRangedValue(sensitivityB.y), GetRangedValue(sensitivityB.z));
 
         sensitivityD = new Vector3Int(5, 5, 5);
+    }
+
+    public Vector3Int GenerateSensitivityP()
+    {
+
+        int newX;
+        int newY;
+        int newZ;
+
+        newX = Random.Range(0, 6);
+        newY = Random.Range(0, 6);
+        newZ = Random.Range(0, 6);
+
+        Vector3Int newValue = new Vector3Int(newX, newY, newZ);
+
+        Vector3Int pilotValue = SC_WeaponLaserGun.Instance.GetWeaponSensitivity();
+
+        float x = Mathf.Abs(newValue.x - pilotValue.x);
+        float y = Mathf.Abs(newValue.y - pilotValue.y);
+        float z = Mathf.Abs(newValue.z - pilotValue.z);
+
+        float ecart = x + y + z;
+        if (ecart <= 3)
+        {
+            newValue = GenerateSensitivityP();
+        }
+        else
+        {
+            newValue = new Vector3Int(newX, newY, newZ);
+        }
+
+        return newValue;
+
     }
 
     Vector3Int GenerateNewValue(Vector3Int oldValue)

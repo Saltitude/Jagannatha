@@ -56,6 +56,7 @@ public class SC_MainBreakDownManager : MonoBehaviour, IF_BreakdownManager
     [SerializeField]
     int NbOfBreakWeapon = 0;
 
+
     [Header("Movement System Infos")]
     [SerializeField, Range(0, 10)]
     int MovementLife = 10;
@@ -201,6 +202,7 @@ public class SC_MainBreakDownManager : MonoBehaviour, IF_BreakdownManager
             //on fout tous les systemes en panne à balle
             SC_breakdown_displays_screens.Instance.PanneAll();
 
+
             //descendre le bouton de validation
             SC_main_breakdown_validation.Instance.isValidated = false;
             SC_main_breakdown_validation.Instance.textStopBlink();
@@ -280,9 +282,9 @@ public class SC_MainBreakDownManager : MonoBehaviour, IF_BreakdownManager
                     SC_WeaponBreakdown.Instance.EndBreakdown();
                     SC_MovementBreakdown.Instance.EndBreakdown();
 
-                    //changement de state du tuto
-                    if (SC_GameStates.Instance.CurState == SC_GameStates.GameState.Tutorial)
-                        SC_GameStates.Instance.ChangeGameState(SC_GameStates.GameState.Tutorial2);
+                    ////changement de state du tuto (Effectué dans l'action reboot)
+                    //if (SC_GameStates.Instance.CurState == SC_GameStates.GameState.Tutorial)
+                    //    SC_GameStates.Instance.ChangeGameState(SC_GameStates.GameState.Tutorial2);
 
                 }
 
@@ -359,7 +361,7 @@ public class SC_MainBreakDownManager : MonoBehaviour, IF_BreakdownManager
                     if (MovementLife <= 0)
                     {
                         SC_MovementBreakdown.Instance.StartNewBreakdown(1);
-                        MovementLife = 10;
+                        StartCoroutine(resetLifeMovement());
                     }
 
                     break;
@@ -381,8 +383,9 @@ public class SC_MainBreakDownManager : MonoBehaviour, IF_BreakdownManager
                     if (WeaponLife <= 0)
                     {
                         SC_WeaponBreakdown.Instance.StartNewBreakdown(1);
-                        WeaponLife = 10;
+                        StartCoroutine(resetLifeWeapon());
                     }
+
 
                     break;
 
@@ -392,6 +395,19 @@ public class SC_MainBreakDownManager : MonoBehaviour, IF_BreakdownManager
 
         CheckBreakdown();
 
+    }
+
+    IEnumerator resetLifeWeapon ()
+    {
+        yield return 0;
+        WeaponLife = 10;
+        SyncSystemsLifes();
+    }
+    IEnumerator resetLifeMovement()
+    {
+        yield return 0;
+        MovementLife = 10;
+        SyncSystemsLifes();
     }
 
     /// <summary>
@@ -463,23 +479,20 @@ public class SC_MainBreakDownManager : MonoBehaviour, IF_BreakdownManager
     {
         if (SC_GameStates.Instance.CurTutoState == SC_GameStates.TutorialState.StartRepairDisplay && SC_BreakdownDisplayManager.Instance.CurNbOfBreakdown == 0)
         {
-
             SC_GameStates.Instance.ChangeTutoGameState(SC_GameStates.TutorialState.EndRepairDisplay);
+            
             SC_breakdown_displays_screens.Instance.TutoDisplayRepair();
-
         }
 
         else if (SC_GameStates.Instance.CurTutoState == SC_GameStates.TutorialState.StartRepairWeapon && SC_WeaponBreakdown.Instance.CurNbOfBreakdown == 0)
         {
             SC_GameStates.Instance.ChangeTutoGameState(SC_GameStates.TutorialState.EndRepairWeapon);
         }
-
-        else if (SC_GameStates.Instance.CurTutoState == SC_GameStates.TutorialState.StartRepairMotion && SC_MovementBreakdown.Instance.n_InteractibleInBreakDown == 0)
+        else if (SC_GameStates.Instance.CurTutoState == SC_GameStates.TutorialState.StartRepairMotion && SC_MovementBreakdown.Instance.n_BreakDownLvl == 0)
         {
             SC_GameStates.Instance.ChangeTutoGameState(SC_GameStates.TutorialState.EndRepairMotion);
         }
-        
- 
+    
     }
 
     float Ratio(float inputValue, float inputMax, float outputMax, float inputMin = 0.0f, float outputMin = 0.0f)

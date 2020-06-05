@@ -45,6 +45,16 @@ public class SC_KoaManager : MonoBehaviour
     GameObject _koa; //Koa du 
     Animator koaEmissiveAnimator;
 
+    [SerializeField]
+    GameObject PS_KoaExplosion;
+    [SerializeField]
+    GameObject curExplosion;
+    [SerializeField]
+    ParticleSystem.MainModule curExplosionPS;
+    Color32 AmenoColor;
+
+    public GameObject Explosion;
+
     /// <summary>
     /// Current BoidSettings
     /// </summary>
@@ -75,6 +85,8 @@ public class SC_KoaManager : MonoBehaviour
 
     ParticleSystem vfx_Hit;
     GameObject SFX_Explosion;
+
+    bool deathAnimation = false;
 
     /// <summary>
     /// Avant le start, instanciation
@@ -129,7 +141,7 @@ public class SC_KoaManager : MonoBehaviour
         //Récupération du comportement initial
         curBoidSettings = newSettings;
         if (SC_EnemyManager.Instance.curPhaseIndex != 0) sensitivity = newSensitivity;
-        else sensitivity = new Vector3Int(3, 5, 4);
+        else sensitivity = SC_WaveManager.Instance.GenerateSensitivityP();
         //Ajout du premier guide a la liste
         _guideList.Add(newGuide);
 
@@ -217,6 +229,12 @@ public class SC_KoaManager : MonoBehaviour
 
             }
         }
+       
+        else if (!deathAnimation)
+        {
+            _koa.transform.position = gameObject.transform.position;
+        }
+
     }
 
     void KoaBehavior()
@@ -450,16 +468,92 @@ public class SC_KoaManager : MonoBehaviour
     {
         CustomSoundManager.Instance.PlaySound(_koa.gameObject, "SFX_Explosion_Flock", false, 0.1f, false);
         flockManager.AnimDestroy();
-
         //SetBehavior(DeathSettings);
         foreach (Boid b in _boidsTab) b.DestroyBoid(Boid.DestructionType.Massive);
         isActive = false;
-        Destroy(_koa.gameObject);
-        Invoke("DestroyFlock", 1);
+        deathAnimation = true;
+        //Destroy(_koa.gameObject);
+        curExplosion = Instantiate(PS_KoaExplosion, _koa.transform);
+        SetColor();
+        syncVarKoa.HideOPMesh(); 
+        Invoke("HideTheKoa", 1.3f);
+        Invoke("DestroyFlock", 3f);
+    }
+
+    public void SetColor()
+    {
+        AmenoColor = SC_UI_Cockpit_FrequenceLine.Instance.Color1;
+        Gradient gradiend = new Gradient();
+        GradientColorKey [] colorKeys = new GradientColorKey [3];
+        GradientAlphaKey [] alphaKeys = new GradientAlphaKey [2];
+
+        alphaKeys [0].time = 0;
+        alphaKeys [0].alpha = 1;
+
+        alphaKeys [1].time = 1;
+        alphaKeys [1].alpha = 1;
+
+        colorKeys [0].color = AmenoColor;
+        colorKeys [1].color = AmenoColor;
+        colorKeys [2].color = AmenoColor;
+
+        gradiend.SetKeys(colorKeys, alphaKeys);
+        gradiend.SetKeys(colorKeys, alphaKeys);
+
+        Gradient gradiendSpe = new Gradient();
+        GradientColorKey [] colorKeysSpe = new GradientColorKey [3];
+        GradientAlphaKey [] alphaKeysSpe = new GradientAlphaKey [2];
+
+        alphaKeysSpe [0].time = 0;
+        alphaKeysSpe [0].alpha = 1;
+
+        alphaKeysSpe [1].time = 1;
+        alphaKeysSpe [1].alpha = 1;
+
+        colorKeysSpe [0].color = Sc_LaserFeedBack.Instance.CurColor;
+        colorKeysSpe [1].color = Sc_LaserFeedBack.Instance.CurColor;
+        colorKeysSpe [2].color = Sc_LaserFeedBack.Instance.CurColor;
+
+        gradiendSpe.SetKeys(colorKeysSpe, alphaKeysSpe);
+        gradiendSpe.SetKeys(colorKeysSpe, alphaKeysSpe);
+
+        for(int i = 0; i < curExplosion.transform.childCount; i++)
+        {
+            curExplosionPS = curExplosion.transform.GetChild(i).GetComponent<ParticleSystem>().main;
+            curExplosionPS.startColor = gradiend;
+            for (int j = 0; j < curExplosion.transform.GetChild(i).transform.childCount; j++)
+            {
+                if (i == 1 && (j == 3 || j == 1))
+                {
+                    //Debug.Log(i +"  "+ j);
+                    curExplosionPS = curExplosion.transform.GetChild(i).transform.GetChild(j).GetComponent<ParticleSystem>().main;
+                    curExplosionPS.startColor = gradiendSpe;
+                }
+                else
+                {
+                    curExplosionPS = curExplosion.transform.GetChild(i).transform.GetChild(j).GetComponent<ParticleSystem>().main;
+                    curExplosionPS.startColor = gradiend;
+                }
+            }
+        }
+
+    }
+
+
+    void HideTheKoa()
+    {
+        var i = 0;
+        while (i <= 4)
+        {
+            _koa.transform.GetChild(0).GetChild(i).GetComponent<MeshRenderer>().enabled = false;
+            i++;
+        }
     }
 
     void DestroyFlock()
     {
+        deathAnimation = false;
+
         Destroy(_koa.gameObject);
         flockManager.DestroyFlock();
         Destroy(this.gameObject);

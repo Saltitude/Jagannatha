@@ -1,14 +1,8 @@
 fileFormatVersion: 2
-<<<<<<< HEAD:Assets/_GameAssets/Mecha/Render&Aiming/Screens/Materials/M_Render_Tuto.mat.meta
-guid: 0bde16ee212f42c49a11375e9948264e
-NativeFormatImporter:
-=======
-guid: 4be17141ab3de1246b6a293fbac46864
+guid: 853da4b4a62d64e4cb47996a14f650a0
 folderAsset: yes
 DefaultImporter:
->>>>>>> Trash:Assets/_GameAssets/Enemy/Elements/VFX/ExplosionKoa.meta
   externalObjects: {}
-  mainObjectFileID: 2100000
   userData: 
   assetBundleName: 
   assetBundleVariant: 

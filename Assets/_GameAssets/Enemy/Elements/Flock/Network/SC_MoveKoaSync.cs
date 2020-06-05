@@ -58,7 +58,7 @@ public class SC_MoveKoaSync : NetworkBehaviour
     void Update()
     {
         if (isServer)
-            RpcSendVt3Position(gameObject, guide.position);
+            RpcSendVt3Position(gameObject, gameObject.transform.position);
     }
 
     /// <summary>
@@ -68,7 +68,7 @@ public class SC_MoveKoaSync : NetworkBehaviour
     public void RpcSendVt3Position(GameObject Target, Vector3 vt3_Position)
     {
         if (!isServer)
-            Target.transform.position = new Vector3(vt3_Position.x, 50, vt3_Position.z);
+            Target.transform.position = new Vector3(vt3_Position.x, 50, vt3_Position.z);       
     }
 
     [ClientRpc]
@@ -113,8 +113,23 @@ public class SC_MoveKoaSync : NetworkBehaviour
     [ClientRpc]
     public void RpcSendAnimationBool(GameObject Target,bool deploy, bool flight, bool bullet, bool laser, float speedFactor, bool chargeLaser)
     {
-        SC_KoaSettingsOP sc_KoaSettings = Target.transform.GetChild(1).GetComponent<SC_KoaSettingsOP>();
-        sc_KoaSettings.SetBoolAnimation(deploy, flight, bullet, laser, speedFactor, chargeLaser);
+        if(!isServer)
+        {
+            SC_KoaSettingsOP sc_KoaSettings = Target.transform.GetChild(1).GetComponent<SC_KoaSettingsOP>();
+            sc_KoaSettings.SetBoolAnimation(deploy, flight, bullet, laser, speedFactor, chargeLaser);
+        }
+     
+    }
+
+
+    [ClientRpc]
+    public void RpcSendHideOPMesh()
+    {
+        if(!isServer)
+        {
+            mr_OP.GetComponent<MeshRenderer>().enabled = false;
+
+        }
     }
 
     public void InitOPKoaSettings(Vector3 sensibility, int timeBeforeSpawn, string KoaID,float curLife, float maxLife, int type, Transform guide)
@@ -148,5 +163,10 @@ public class SC_MoveKoaSync : NetworkBehaviour
     {
 
         RpcSendAnimationBool(gameObject ,deploy, flight, bullet, laser, speedFactor, chargeLaser);
+    }
+
+    public void HideOPMesh()
+    {
+        RpcSendHideOPMesh();
     }
 }

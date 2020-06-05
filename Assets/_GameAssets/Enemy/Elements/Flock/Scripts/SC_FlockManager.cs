@@ -61,8 +61,14 @@ public class SC_FlockManager : MonoBehaviour
     bool inAttack;
     bool isActive;
     bool isSpawning;
+    bool startSpawning = true;
+
+    Vector3 spawnPos;
 
     Quaternion flockInitialRot;
+
+    [SerializeField]
+    GameObject spawnPosTargetDummy;
     //---------------------------------------------      MultiGuide Variables  (Split)   ----------------------------------------------------------//
 
     [HideInInspector]
@@ -169,6 +175,16 @@ public class SC_FlockManager : MonoBehaviour
                 }
         }
 
+        //Raccourci l'attente avant le premier tir des lasers
+        if (flockSettings.timeBeforeFirstAttack == -1) startAttackTimer = 0;
+        else
+        {
+            startAttackTimer = flockSettings.timeBetweenAttacks-flockSettings.timeBeforeFirstAttack;
+        }
+
+
+
+
         Invoke("ActivateFlock", flockSettings.spawnTimer);
     }
     #endregion
@@ -192,20 +208,39 @@ public class SC_FlockManager : MonoBehaviour
 
         if(isActive && isSpawning)
         {
-            float speed = 0.9f;
-            int rndRangePilote = Random.Range(200, 250);
-            Vector3 target = new Vector3(_Player.transform.position.x, rndRangePilote, _Player.transform.position.z);
-            transform.position = Vector3.MoveTowards(transform.position, target, speed);
-            if (transform.position.y >= 60)
-            {
+           
+            float speed = 3f;
 
+            if (startSpawning)
+            {
+                int rndRangePilote = Random.Range(180, 200);
+                int rndRangeAngle = 25;
+
+                GameObject targetDummy = Instantiate(spawnPosTargetDummy, transform);//Instantiate Koa
+
+                targetDummy.transform.position = _Player.transform.position;
+                targetDummy.transform.LookAt(transform.position);
+
+                transform.transform.Rotate(0, Random.Range(-rndRangeAngle, rndRangeAngle), 0);
+
+                //targetDummy.transform.rotation.SetEulerRotation(transform.rotation.eulerAngles.x + Random.Range(-30, 30), transform.rotation.eulerAngles.y + Random.Range(-30, 30), transform.rotation.eulerAngles.z + Random.Range(-30, 30));
+                targetDummy.transform.Translate(Vector3.forward*rndRangePilote);
+                spawnPos = new Vector3 (targetDummy.transform.position.x, targetDummy.transform.position.y +80, targetDummy.transform.position.z);
+                startSpawning = false;
+            }
+            transform.position = Vector3.MoveTowards(transform.position, spawnPos, speed);
+
+            if (Vector3.Distance(transform.position,spawnPos)<1)
+            {
                 for (int i = 0; i < _BoidSettings.Length; i++)
                 {
                     if (_splineTab[i] != null)
                     { 
                         _splineTab[i].transform.position = transform.position;
+                        if(i != 4)
+                        _splineTab[i].transform.rotation = Random.rotation;
 
-                        if(i == 4)
+                        else
                         {
                             _splineTab[i].transform.position = new Vector3(0, 50, 0);
                         }
@@ -217,6 +252,8 @@ public class SC_FlockManager : MonoBehaviour
 
             }
         }
+
+
         if(isActive && !isSpawning && curtype!= PathType.Death)
         {
         
@@ -369,17 +406,25 @@ public class SC_FlockManager : MonoBehaviour
 
         if(!reactionHit)
         {
+
             if(reactionTimer >0)
             {
+
                 reactionTimer -= Time.deltaTime;
-                KoaMainAnimator.SetFloat("SpeedFactor", -1);
-                KoaEmissiveAnimator.SetFloat("SpeedFactor", -1);
+
+                if(KoaMainAnimator != null)
+                    KoaMainAnimator.SetFloat("SpeedFactor", -1);
+
+                if (KoaEmissiveAnimator != null)
+                    KoaEmissiveAnimator.SetFloat("SpeedFactor", -1);
+
             }
+
             if(reactionTimer <0)
             {
                 EndReaction();
-
             }
+
         }
     }
 
@@ -437,6 +482,18 @@ public class SC_FlockManager : MonoBehaviour
                 KoaEmissiveAnimator.SetBool("Flight", true);
 
                 break;
+            case PathType.Death:
+
+                KoaMainAnimator.SetBool("Deploy", false);
+                KoaEmissiveAnimator.SetBool("Deploy", false);
+
+                KoaMainAnimator.SetBool("Flight", false);
+                KoaEmissiveAnimator.SetBool("Flight", false);
+                KoaMainAnimator.SetBool("Deploy", true);
+                KoaEmissiveAnimator.SetBool("Deploy", true);
+                KoaMainAnimator.SetFloat("SpeedFactor", 1);
+                KoaEmissiveAnimator.SetFloat("SpeedFactor", 1);
+                break;
         }
 
     }
@@ -486,6 +543,11 @@ public class SC_FlockManager : MonoBehaviour
     {
         while(true)
         {
+            if(curtype == PathType.Death)
+            {
+                bezierWalkerSpeed.speed = 0;
+                yield return new WaitForSeconds(1.3f);
+            }
             _curBoidSetting = settings[curSettingsIndex];
 
             int rnd = Random.Range(0, 2);

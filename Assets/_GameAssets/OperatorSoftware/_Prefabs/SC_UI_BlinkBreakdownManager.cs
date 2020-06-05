@@ -16,6 +16,7 @@ public class SC_UI_BlinkBreakdownManager : MonoBehaviour
 
     [SerializeField]
     public Image vision;
+
     private void Awake()
     {
 

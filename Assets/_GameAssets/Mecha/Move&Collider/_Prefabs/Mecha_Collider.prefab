@@ -264,9 +264,6 @@ MonoBehaviour:
   CurBrokenDir: 1
   b_UseCoroutine: 1
   f_Duration: 0.5
-  CurDir: 0
-  TargetDir: 0
-  CoroDir: 3
   Acceleration:
     serializedVersion: 2
     m_Curve:
@@ -291,10 +288,17 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  CurDir: 0
+  TargetDir: 0
+  CoroDir: 3
   f_RotationSpeedZ: 1
   f_LerpRotZ: 1
-  TypeRotationZ: 0
+  TypeRotationZ: 3
   CurImpulse: 0
+  n_JoyNumToUse: 0
+  tab_TorqueAxes: 
+  f_TorqueImpulseZ: 0
+  EnableVerticalMovement: 0
   b_InvertAxe: 1
   TargetTRS: {fileID: 1283266316766246386}
   f_RotationSpeedX: 0.5

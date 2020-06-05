@@ -17,23 +17,31 @@ public class Sc_LaserFeedBack : MonoBehaviour
     GameObject SFX_LaserBeam;
     int SoundSourceNumb;
     [SerializeField]
-    Color CurColor;
+    public Color CurColor;
     public GameObject Laser;
+    public GameObject Laser1;
+    public GameObject Laser2;
     public Material EnergyBall;
     public GameObject ChargeSpark;
     public GameObject Fioriture;
+    public GameObject Fioriture1;
     public GameObject Ondes;
     public GameObject Elice;
     public GameObject EliceDark;
+    public GameObject Electricity;
     [SerializeField]
     SC_WeaponLaserGun WeapMainSC;
     public ParticleSystem.MainModule LaserPS;
+    public ParticleSystem.MainModule LaserPS1;
+    public ParticleSystem.MainModule LaserPS2;
     //public ParticleSystem.MainModule EnergyBallPS;
     public ParticleSystem.MainModule ChargeSparkPS;
     public ParticleSystem.MainModule FioriturePS;
+    public ParticleSystem.MainModule FioriturePS1;
     public ParticleSystem.MainModule OndesPS;
     public ParticleSystem.MainModule ElicePS;
     public ParticleSystem.MainModule EliceDarkPS;
+    public ParticleSystem.MainModule ElectricityPS;
     [SerializeField]
     Animator Kahme;
 
@@ -108,20 +116,28 @@ public class Sc_LaserFeedBack : MonoBehaviour
             gradiend.SetKeys(colorKeys, alphaKeys);
 
             LaserPS = Laser.GetComponent<ParticleSystem>().main;
+            LaserPS1 = Laser1.GetComponent<ParticleSystem>().main;
+            LaserPS2 = Laser2.GetComponent<ParticleSystem>().main;
             ChargeSparkPS = ChargeSpark.GetComponent<ParticleSystem>().main;
             //EnergyBallPS = EnergyBall.GetComponent<ParticleSystem>().main;
             FioriturePS = Fioriture.GetComponent<ParticleSystem>().main;
+            FioriturePS1 = Fioriture1.GetComponent<ParticleSystem>().main;
             OndesPS = Ondes.GetComponent<ParticleSystem>().main;
             ElicePS = Elice.GetComponent<ParticleSystem>().main;
             EliceDarkPS = EliceDark.GetComponent<ParticleSystem>().main;
+            ElectricityPS = Electricity.GetComponent<ParticleSystem>().main;
 
             LaserPS.startColor = gradiend;
+            LaserPS1.startColor = gradiend;
+            LaserPS2.startColor = gradiend;
             ChargeSparkPS.startColor = gradiend;
             EnergyBall.SetColor("_EmissionColor", CurColor);
             FioriturePS.startColor = gradiend;
+            FioriturePS1.startColor = gradiend;
             OndesPS.startColor = gradiend;
             ElicePS.startColor = gradiend;
             EliceDarkPS.startColor = gradiend;
+            ElectricityPS.startColor = gradiend;
 
         }
 

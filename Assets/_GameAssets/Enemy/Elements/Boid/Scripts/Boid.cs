@@ -91,7 +91,7 @@ public class Boid : MonoBehaviour {
         
         float startSpeed = (settings.minSpeed + settings.maxSpeed) / 2; //Vitesse d'initialisation
         velocity = transform.forward * startSpeed; //Stockage de la vélocité selon la vitesse de départ
-        destructionTimer = 1f;
+        destructionTimer = 3f;
         curTimer = 0;
         meshRenderer.material = baseMat;
         isActive = true;

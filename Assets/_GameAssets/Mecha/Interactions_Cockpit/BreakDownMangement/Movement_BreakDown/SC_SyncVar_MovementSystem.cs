@@ -53,6 +53,10 @@ public class SC_SyncVar_MovementSystem : NetworkBehaviour
     {
         f_MovementLife = newLife;
         UpdateOnClient();
+        if (newLife <= 0 && !isServer)
+        {
+            SC_Movement_MechState.Instance.IncrementBuffer();
+        }
     }
 
     void OnChangeBreakEngine(bool Breakdown)
@@ -183,7 +187,7 @@ public class SC_SyncVar_MovementSystem : NetworkBehaviour
 
     void CallGetBaseValue()
     {
-        if (!isServer)
+        if (!isServer && SC_CordViewver.Instance)
             SC_CordViewver.Instance.GetBaseValue();
     }
 
