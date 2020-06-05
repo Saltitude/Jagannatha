@@ -88,20 +88,14 @@ public class SC_IPManager : NetworkBehaviour
 
                     //Debug.Log("Find Ipv4 : " + item.Name + " | " + ip.Address.ToString());
 
-                    //if (item.Name == "Ethernet")
-                        //EthernetIpv4 = ip.Address.ToString();
-
                     if (item.Name == "Hamachi")
                     {
                         hamachiUsed = true;
                         HamachiIpv4 = ip.Address.ToString();
                     }      
                     
-                    //else if (item.Name == "Hamachi")
-                    else
+                    else if (item.Name == "Ethernet")
                     {
-                        //hamachiUsed = true;
-                        //HamachiIpv4 = ip.Address.ToString();
                         EthernetIpv4 = ip.Address.ToString();
                     }
 

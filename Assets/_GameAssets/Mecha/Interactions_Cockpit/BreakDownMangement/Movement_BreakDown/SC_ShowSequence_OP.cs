@@ -134,8 +134,30 @@ public class SC_ShowSequence_OP : MonoBehaviour
 
         for (int i = 0; i < PlayerSeqLenght; i++)
         {
+
             tab_Progress[i].GetComponent<Image>().material = ProgressOn;
             BlinkMaster.SetBreakDown(i, false);
+
+            switch (i)
+            {
+
+                case 0:
+                    BlinkMaster.SetBreakDown(6, false);
+                    BlinkMaster.SetBreakDown(7, false);
+                    break;
+
+                case 1:
+                    BlinkMaster.SetBreakDown(8, false);
+                    BlinkMaster.SetBreakDown(9, false);
+                    break;
+
+                case 2:
+                    BlinkMaster.SetBreakDown(10, false);
+                    BlinkMaster.SetBreakDown(11, false);
+                    break;
+
+            }
+
         }    
 
         //Debug.Log("DispProg | " + PlayerSeqLenght + " | " + SC_SyncVar_MovementSystem.Instance.BreakdownList.Count);
@@ -190,6 +212,22 @@ public class SC_ShowSequence_OP : MonoBehaviour
                         BlinkMaster.ShutDownWire(2, true);
                         BlinkMaster.ShutDownWire(4, true);
 
+                        //Logo
+                        BlinkMaster.ShutDownWire(6, false);
+                        BlinkMaster.ShutDownWire(7, false);
+                        BlinkMaster.ShutDownWire(8, false);
+                        BlinkMaster.ShutDownWire(9, false);
+                        BlinkMaster.ShutDownWire(10, false);
+                        BlinkMaster.ShutDownWire(11, false);
+
+                        BlinkMaster.SetBreakDown(6, b_InBreakDown);
+                        BlinkMaster.SetBreakDown(7, b_InBreakDown);
+
+                        BlinkMaster.ShutDownWire(8, true);
+                        BlinkMaster.ShutDownWire(9, true);
+                        BlinkMaster.ShutDownWire(10, true);
+                        BlinkMaster.ShutDownWire(11, true);
+
                         break;
 
                     case 1:
@@ -203,6 +241,12 @@ public class SC_ShowSequence_OP : MonoBehaviour
 
                         BlinkMaster.ShutDownWire(3, true);
 
+                        //Logo
+                        BlinkMaster.ShutDownWire(8, false);
+                        BlinkMaster.ShutDownWire(9, false);
+                        BlinkMaster.SetBreakDown(8, b_InBreakDown);
+                        BlinkMaster.SetBreakDown(9, b_InBreakDown);
+
                         break;
 
                     case 2:
@@ -213,6 +257,12 @@ public class SC_ShowSequence_OP : MonoBehaviour
                         BlinkMaster.SetBreakDown(4, false);
 
                         BlinkMaster.ShutDownWire(4, true);
+
+                        //Logo
+                        BlinkMaster.ShutDownWire(10, false);
+                        BlinkMaster.ShutDownWire(11, false);
+                        BlinkMaster.SetBreakDown(10, b_InBreakDown);
+                        BlinkMaster.SetBreakDown(11, b_InBreakDown);
 
                         break;
 
@@ -229,6 +279,13 @@ public class SC_ShowSequence_OP : MonoBehaviour
             BlinkMaster.SetBreakDown(4, false);
             BlinkMaster.SetBreakDown(5, false);
 
+            BlinkMaster.SetBreakDown(6, false);
+            BlinkMaster.SetBreakDown(7, false);
+            BlinkMaster.SetBreakDown(8, false);
+            BlinkMaster.SetBreakDown(9, false);
+            BlinkMaster.SetBreakDown(10, false);
+            BlinkMaster.SetBreakDown(11, false);
+
             BlinkMaster.ShutDownWire(0, false);
             BlinkMaster.ShutDownWire(1, false);
             BlinkMaster.ShutDownWire(2, false);
@@ -236,28 +293,17 @@ public class SC_ShowSequence_OP : MonoBehaviour
             BlinkMaster.ShutDownWire(4, false);
             BlinkMaster.ShutDownWire(5, false);
 
+            BlinkMaster.ShutDownWire(6, false);
+            BlinkMaster.ShutDownWire(7, false);
+            BlinkMaster.ShutDownWire(8, false);
+            BlinkMaster.ShutDownWire(9, false);
+            BlinkMaster.ShutDownWire(10, false);
+            BlinkMaster.ShutDownWire(11, false);
+
         }
 
     }
 
-    void RepearWireBlink()
-    {
-
-        BlinkMaster.SetBreakDown(0, false);
-        BlinkMaster.SetBreakDown(1, false);
-        BlinkMaster.SetBreakDown(2, false);
-        BlinkMaster.SetBreakDown(3, false);
-        BlinkMaster.SetBreakDown(4, false);
-        BlinkMaster.SetBreakDown(5, false);
-
-        BlinkMaster.ShutDownWire(0, false);
-        BlinkMaster.ShutDownWire(1, false);
-        BlinkMaster.ShutDownWire(2, false);
-        BlinkMaster.ShutDownWire(3, false);
-        BlinkMaster.ShutDownWire(4, false);
-        BlinkMaster.ShutDownWire(5, false);
-
-    }
     #region Blink
     //////////////////////---BLINK---//////////////////////////////
     void SetBreakDown(int index, bool activate)
