@@ -105,7 +105,7 @@ public class SC_FlockManager : MonoBehaviour
 
     PathType curtype;
 
-
+    bool laserBoss = false;
     #endregion
     //---------------------------------------------------------------------//
 
@@ -444,7 +444,6 @@ public class SC_FlockManager : MonoBehaviour
         _SCKoaManager.ChangeKoaState((int)pathType);
         curtype = pathType;
 
-        StartNewBehavior((int)pathType);
 
 
         switch (pathType)
@@ -457,7 +456,9 @@ public class SC_FlockManager : MonoBehaviour
                 KoaMainAnimator.SetBool("Flight", false);
                 KoaEmissiveAnimator.SetBool("Flight", false);
 
-                flockWeaponManager.StartFire();
+                if (flockSettings.attackType == FlockSettings.AttackType.Boss)
+                    laserBoss = !laserBoss;
+                flockWeaponManager.StartFire(true, laserBoss);
 
                 break;
 
@@ -495,6 +496,7 @@ public class SC_FlockManager : MonoBehaviour
                 KoaEmissiveAnimator.SetFloat("SpeedFactor", 1);
                 break;
         }
+        StartNewBehavior((int)pathType);
 
     }
 
@@ -535,6 +537,25 @@ public class SC_FlockManager : MonoBehaviour
         _curSpline = _splineTab[behaviorIndex];
         bezierWalkerSpeed.SetNewSpline(_curSpline);
 
+
+        if (curtype == PathType.AttackPlayer && flockSettings.attackType == FlockSettings.AttackType.Boss)
+        {
+            BoidSettings[] settings;
+            if (laserBoss)
+            {
+                settings = new BoidSettings[1];
+                settings[0] = attackSettings[0];
+            }
+            else
+            {
+                settings = new BoidSettings[2];
+                settings[0] = attackSettings[1];
+                settings[1] = attackSettings[2];
+            }
+            StartCoroutine(SwitchSettings(settings));
+
+        }
+        else
         StartCoroutine(SwitchSettings(_BoidSettings[behaviorIndex]));
 
     }
@@ -543,11 +564,13 @@ public class SC_FlockManager : MonoBehaviour
     {
         while(true)
         {
+         
             if(curtype == PathType.Death)
             {
                 bezierWalkerSpeed.speed = 0;
                 yield return new WaitForSeconds(1.3f);
             }
+
             _curBoidSetting = settings[curSettingsIndex];
 
             int rnd = Random.Range(0, 2);
