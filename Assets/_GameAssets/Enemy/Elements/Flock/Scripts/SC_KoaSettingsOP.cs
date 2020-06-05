@@ -24,6 +24,9 @@ public class SC_KoaSettingsOP : MonoBehaviour, IF_KoaForOperator, IF_Hover
     [SerializeField]
     Color32[] Tab_colorSpawn;
 
+    [SerializeField]
+    Color32 colorCTA;
+
     public bool bSelected;
 
     //Animation
@@ -45,7 +48,17 @@ public class SC_KoaSettingsOP : MonoBehaviour, IF_KoaForOperator, IF_Hover
 
     [SerializeField]
     GameObject VFX_koadeath;
- 
+    [SerializeField]
+    GameObject VFX_clicOnMe;
+    [SerializeField]
+    float timeBeforeCallToAction = 2;
+    float timerCTA = 0;
+    bool boolCTA = true;
+    bool PSInstantiate = false;
+
+    GameObject PS_CTA;
+
+
     public enum koaState
     {
         Spawn = 0,
@@ -179,6 +192,8 @@ public class SC_KoaSettingsOP : MonoBehaviour, IF_KoaForOperator, IF_Hover
     {
         if(!spawn)
         {
+          
+
             float scale = ((initialScale.x*factor / timeBeforeSpawn) * Time.deltaTime);
             float radius = ((initialRadius / factor / timeBeforeSpawn) * Time.deltaTime);
             transform.localScale += new Vector3(scale, scale, scale);
@@ -190,18 +205,42 @@ public class SC_KoaSettingsOP : MonoBehaviour, IF_KoaForOperator, IF_Hover
                 spawn = true;
             }           
         }
+        if (type == 0)
+        {
+            timerCTA += Time.deltaTime;
+            if (timerCTA > timeBeforeCallToAction && boolCTA)
+            {
+                if (!PSInstantiate)
+                {
+                    PSInstantiate = true;
+                    PS_CTA = Instantiate(VFX_clicOnMe,this.transform);
+                    PS_CTA.GetComponent<ParticleSystem>().startColor = colorCTA;
+                    PS_CTA.GetComponent<ParticleSystem>().Play();
+                }
+               
+
+            }
+        }
     }
 
-    public void SetMaterial(koaSelection newSelction)
+    public void SetMaterial(koaSelection newSelection)
     {
-        if(newSelction != koaSelection.Selected)
+        if(newSelection != koaSelection.Selected)
         {
             if(!bSelected)
-                GetComponent<MeshRenderer>().material = Tab_mat[(int)newSelction];
+                GetComponent<MeshRenderer>().material = Tab_mat[(int)newSelection];
         }
         else
         {
-            GetComponent<MeshRenderer>().material = Tab_mat[(int)newSelction];
+            GetComponent<MeshRenderer>().material = Tab_mat[(int)newSelection];
+        }
+        if(newSelection == koaSelection.Selected)
+        {
+            boolCTA = false;
+            if(PSInstantiate && PS_CTA != null)
+            {
+                Destroy(PS_CTA);
+            }
         }
         setMeshColor();
     }
