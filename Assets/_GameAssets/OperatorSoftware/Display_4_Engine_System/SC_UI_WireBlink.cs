@@ -90,13 +90,13 @@ public class SC_UI_WireBlink : MonoBehaviour
         float animTime = 0.5f;
         float maxOpacity = 1;
         float minOpacity = 0f;
-        float ratePerSec = (maxOpacity - minOpacity / animTime) * 2;
+        float ratePerSec = ((maxOpacity - minOpacity) / animTime);
         float curOpacity;
-        bool Add = false;
+        bool Add = true;
         float t = 0;
 
         Vector4 ColorTampon = Color.white;
-        curOpacity = maxOpacity;
+        curOpacity = minOpacity;
 
         while (true)
         {
