@@ -182,31 +182,55 @@ public class SC_passwordLock : MonoBehaviour
     void CheckFocus()
     {
 
+        if (Field01.isFocused && Input.GetKeyDown(KeyCode.Tab) && Input.GetKey(KeyCode.LeftShift))
+        {
+            FieldSecu01 = true;
+            Field04.Select();
+        }
+
         if (Field01.isFocused && objectPassword.text.Length < 3 && FieldSecu01)
             FieldSecu01 = false;
 
-        if (Field01.isFocused && ((objectPassword.text.Length >= 3 && !FieldSecu01) || Input.GetKeyDown(KeyCode.Tab)))
+        if ( ( Field01.isFocused && ( ( objectPassword.text.Length >= 3 && !FieldSecu01 ) || ( Input.GetKeyDown(KeyCode.Tab) && !Input.GetKey(KeyCode.LeftShift) ) ) ) )
         {
             FieldSecu01 = true;
             Field02.Select();
         }
 
+        if(Field02.isFocused && Input.GetKeyDown(KeyCode.Tab) && Input.GetKey(KeyCode.LeftShift))
+        {
+            FieldSecu02 = true;
+            Field01.Select();
+        }
+
         if (Field02.isFocused && objectPassword02.text.Length < 3 && FieldSecu01)
             FieldSecu02 = false;
 
-        if (Field02.isFocused && ((objectPassword02.text.Length >= 3 && !FieldSecu02) || Input.GetKeyDown(KeyCode.Tab)))
+        if (Field02.isFocused && ((objectPassword02.text.Length >= 3 && !FieldSecu02) || (Input.GetKeyDown(KeyCode.Tab) && !Input.GetKey(KeyCode.LeftShift))))
         {
             FieldSecu02 = true;
             Field03.Select();
         }
 
+        if (Field03.isFocused && Input.GetKeyDown(KeyCode.Tab) && Input.GetKey(KeyCode.LeftShift))
+        {
+            FieldSecu03 = true;
+            Field02.Select();
+        }
+
         if (Field03.isFocused && objectPassword03.text.Length < 3 && FieldSecu03)
             FieldSecu03 = false;
 
-        if (Field03.isFocused && ((objectPassword03.text.Length >= 3 && !FieldSecu03) || Input.GetKeyDown(KeyCode.Tab)))
+        if (Field03.isFocused && ((objectPassword03.text.Length >= 3 && !FieldSecu03) || (Input.GetKeyDown(KeyCode.Tab) && !Input.GetKey(KeyCode.LeftShift))))
         {
             FieldSecu03 = true;
             Field04.Select();
+        }
+
+        if (Field04.isFocused && Input.GetKeyDown(KeyCode.Tab) && Input.GetKey(KeyCode.LeftShift))
+        {
+            FieldSecu04 = true;
+            Field03.Select();
         }
 
         if (Field04.isFocused && Input.GetKeyDown(KeyCode.Tab))
