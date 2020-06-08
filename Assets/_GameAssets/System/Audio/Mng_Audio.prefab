@@ -77,6 +77,9 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 694e62839ab8ece499e2c6738f69abce, type: 3}
   - {fileID: 8300000, guid: 39aacf442268a0a409deacfc99324ae9, type: 3}
   - {fileID: 8300000, guid: a53675a5f6477d14b980c92d2f1d55f7, type: 3}
+  - {fileID: 8300000, guid: 87c02a6e8a6382343ac4ce89bda9ce45, type: 3}
+  - {fileID: 8300000, guid: 91b641e9e7bb7fc4c8cdbf95b212e307, type: 3}
+  - {fileID: 8300000, guid: bca407d385d44434f9a0e45a884d75ff, type: 3}
   tSoundsAmbient: []
   hAudioSourcePrefab: {fileID: 5001806401243472562, guid: 68ac4e988a21bd94789c1ed545c20803,
     type: 3}
