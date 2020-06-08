@@ -169,13 +169,13 @@ public class SC_passwordLock : MonoBehaviour
     
     public void validatePassword()
     {
-        textFeedbackFunction("Valid password", new Color32(0, 255, 0, 255)); //Feedback textuel vert
+        textFeedbackFunction("Valid address", new Color32(0, 255, 0, 255)); //Feedback textuel vert
         CustomSoundManager.Instance.PlaySound(gameObject, "SFX_o_opening", false, 0.4f);
     }
 
     void failPassword()
     {
-        textFeedbackFunction("Wrong password", new Color32(255, 0, 0, 255)); //Feedback textuel vert
+        textFeedbackFunction("Wrong address", new Color32(255, 0, 0, 255)); //Feedback textuel vert
         
     }
 

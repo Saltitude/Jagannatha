@@ -24,8 +24,8 @@ public class SC_AttackPathInfo : MonoBehaviour
 
     void Start()
     {
-
-        Player = SC_CheckList_Mecha.Instance.MechCollider.transform;
+        
+        //Player = SC_CheckList_Mecha.Instance.MechCollider.transform;
 
     }
 
