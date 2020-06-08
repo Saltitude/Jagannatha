@@ -34,6 +34,11 @@ public class SC_ShowTourbiLvl_OP : MonoBehaviour
 
     bool LeftGods = false;
     bool RightGods = false;
+
+    [SerializeField]
+    GameObject sparkleUmTara;
+    [SerializeField]
+    GameObject sparkleChenRezig;
     void Start()
     {
 
@@ -178,7 +183,7 @@ public class SC_ShowTourbiLvl_OP : MonoBehaviour
                     case 0:
 
                         BlinkMaster.SetBreakDown(0, true);
-
+                        sparkleUmTara.SetActive(false);
                         switch (SC_SyncVar_BreakdownWeapon.Instance.SL_Tourbilols[i].valueWanted)
                         {
 
@@ -216,7 +221,7 @@ public class SC_ShowTourbiLvl_OP : MonoBehaviour
 
                         
                         BlinkMaster.SetBreakDown(1, true);
-
+                        sparkleChenRezig.SetActive(false);
                         switch (SC_SyncVar_BreakdownWeapon.Instance.SL_Tourbilols[i].valueWanted)
                         {
 
@@ -264,6 +269,7 @@ public class SC_ShowTourbiLvl_OP : MonoBehaviour
                         BlinkMaster.SetBreakDown(4, false);
                         BlinkMaster.ShutDownWire(3, false);
                         BlinkMaster.ShutDownWire(4, false);
+                        sparkleUmTara.SetActive(true);
                         break;
 
                     //Container du Bas
@@ -274,6 +280,7 @@ public class SC_ShowTourbiLvl_OP : MonoBehaviour
                         BlinkMaster.SetBreakDown(6, false);
                         BlinkMaster.ShutDownWire(5, false);
                         BlinkMaster.ShutDownWire(6, false);
+                        sparkleChenRezig.SetActive(true);
                         break;
 
                 }
