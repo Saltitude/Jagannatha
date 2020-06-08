@@ -2339,12 +2339,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 35bac6455a4e92a4aa85dbd33eff864a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  curKoaScriptKoaSettings: {fileID: 0}
   activated: 0
   type: {fileID: 6618960835284616268}
   koaLife: {fileID: 7720264694159103143}
   life: {fileID: 8224563564553770888}
   _triangle: {fileID: 3132087497364896522}
   koaStateTxt: {fileID: 1488439290589671480}
+  VoiceActivated: {fileID: 12800000, guid: b3a087a938df3eb42aa0acd284487893, type: 3}
+  sanskritFont: {fileID: 12800000, guid: f47f6e7b209bf514a8a2c736b0a64573, type: 3}
+  curState: 0
   barOpti:
   - {fileID: 1293552196873469773}
   - {fileID: 1426454718006284902}
@@ -4138,7 +4142,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -619, y: -11}
+  m_AnchoredPosition: {x: -619, y: 396}
   m_SizeDelta: {x: 834.01, y: 110.94}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4455312991113135138
@@ -4180,7 +4184,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Select a target
+  m_Text: No target selected
 --- !u!1 &6590532448241423812
 GameObject:
   m_ObjectHideFlags: 0
@@ -7448,12 +7452,12 @@ PrefabInstance:
     - target: {fileID: 1480573331388611412, guid: ba4bdb8a621454545a4472d5f4eb62fd,
         type: 3}
       propertyPath: m_position.x
-      value: 1678.127
+      value: 1241.627
       objectReference: {fileID: 0}
     - target: {fileID: 1480573331388611412, guid: ba4bdb8a621454545a4472d5f4eb62fd,
         type: 3}
       propertyPath: m_position.y
-      value: 604.4452
+      value: 507.44522
       objectReference: {fileID: 0}
     - target: {fileID: 1480573331388611412, guid: ba4bdb8a621454545a4472d5f4eb62fd,
         type: 3}
@@ -7463,12 +7467,12 @@ PrefabInstance:
     - target: {fileID: 1480573331388611412, guid: ba4bdb8a621454545a4472d5f4eb62fd,
         type: 3}
       propertyPath: m_precedingControlPointPosition.x
-      value: 2021.807
+      value: 1585.307
       objectReference: {fileID: 0}
     - target: {fileID: 1480573331388611412, guid: ba4bdb8a621454545a4472d5f4eb62fd,
         type: 3}
       propertyPath: m_precedingControlPointPosition.y
-      value: 604.44525
+      value: 507.44525
       objectReference: {fileID: 0}
     - target: {fileID: 1480573331388611412, guid: ba4bdb8a621454545a4472d5f4eb62fd,
         type: 3}
@@ -7478,12 +7482,12 @@ PrefabInstance:
     - target: {fileID: 1480573331388611412, guid: ba4bdb8a621454545a4472d5f4eb62fd,
         type: 3}
       propertyPath: m_followingControlPointPosition.x
-      value: 1334.4469
+      value: 897.9469
       objectReference: {fileID: 0}
     - target: {fileID: 1480573331388611412, guid: ba4bdb8a621454545a4472d5f4eb62fd,
         type: 3}
       propertyPath: m_followingControlPointPosition.y
-      value: 604.4452
+      value: 507.4452
       objectReference: {fileID: 0}
     - target: {fileID: 1480573331388611412, guid: ba4bdb8a621454545a4472d5f4eb62fd,
         type: 3}
@@ -7493,12 +7497,12 @@ PrefabInstance:
     - target: {fileID: 1480573332341920717, guid: ba4bdb8a621454545a4472d5f4eb62fd,
         type: 3}
       propertyPath: m_position.x
-      value: 1678.127
+      value: 1241.627
       objectReference: {fileID: 0}
     - target: {fileID: 1480573332341920717, guid: ba4bdb8a621454545a4472d5f4eb62fd,
         type: 3}
       propertyPath: m_position.y
-      value: 146.20517
+      value: 49.20517
       objectReference: {fileID: 0}
     - target: {fileID: 1480573332341920717, guid: ba4bdb8a621454545a4472d5f4eb62fd,
         type: 3}
@@ -7508,12 +7512,12 @@ PrefabInstance:
     - target: {fileID: 1480573332341920717, guid: ba4bdb8a621454545a4472d5f4eb62fd,
         type: 3}
       propertyPath: m_precedingControlPointPosition.x
-      value: 1334.4469
+      value: 897.9469
       objectReference: {fileID: 0}
     - target: {fileID: 1480573332341920717, guid: ba4bdb8a621454545a4472d5f4eb62fd,
         type: 3}
       propertyPath: m_precedingControlPointPosition.y
-      value: 146.20514
+      value: 49.20514
       objectReference: {fileID: 0}
     - target: {fileID: 1480573332341920717, guid: ba4bdb8a621454545a4472d5f4eb62fd,
         type: 3}
@@ -7523,12 +7527,12 @@ PrefabInstance:
     - target: {fileID: 1480573332341920717, guid: ba4bdb8a621454545a4472d5f4eb62fd,
         type: 3}
       propertyPath: m_followingControlPointPosition.x
-      value: 2021.807
+      value: 1585.307
       objectReference: {fileID: 0}
     - target: {fileID: 1480573332341920717, guid: ba4bdb8a621454545a4472d5f4eb62fd,
         type: 3}
       propertyPath: m_followingControlPointPosition.y
-      value: 146.2052
+      value: 49.2052
       objectReference: {fileID: 0}
     - target: {fileID: 1480573332341920717, guid: ba4bdb8a621454545a4472d5f4eb62fd,
         type: 3}

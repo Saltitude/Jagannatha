@@ -188,6 +188,10 @@ public class SC_KoaSettingsOP : MonoBehaviour, IF_KoaForOperator, IF_Hover
         return chargeLaser;
     }
 
+    public int GetKoaType()
+    {
+        return type;
+    }
     void Update()
     {
         if(!spawn)

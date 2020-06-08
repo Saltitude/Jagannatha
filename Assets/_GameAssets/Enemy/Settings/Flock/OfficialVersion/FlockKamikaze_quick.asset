@@ -23,9 +23,9 @@ MonoBehaviour:
   activeDuration: 0
   speedToTarget: 0.7
   flightDuration: 3
-  flightReactionMinSensibility: 75
+  flightReactionMinSensibility: 101
   hitReactionDelay: 3
-  hitReactionMaxSensibility: 50
+  hitReactionMaxSensibility: 0
   attackFocusHitReaction: 0
   damageOnSystemHitReaction: 0
   laserDurationHitReaction: 2

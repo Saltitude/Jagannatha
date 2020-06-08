@@ -24,6 +24,20 @@ public class SC_TargetMap : MonoBehaviour
     float ratePerSec;
 
     Vector4 colorTampon;
+
+    [SerializeField]
+    TMP_FontAsset VoiceActivated;
+    [SerializeField]
+    TMP_FontAsset sanskritFont;
+
+    public enum FontList
+    {
+        Sanskri,
+        VoiceActivated
+    }
+
+   
+
     void Awake()
     {
 
@@ -45,6 +59,24 @@ public class SC_TargetMap : MonoBehaviour
         textContainer.text = txt;
         ratePerSec = ((maxOpacity - minOpacity) / animTime);
         colorTampon = textContainer.color;
+    }
+
+    public void SetFont(FontList font)
+    {
+        switch (font)
+        {
+            case FontList.Sanskri:
+
+                textContainer.font = sanskritFont;
+
+            break;
+
+            case FontList.VoiceActivated:
+
+                textContainer.font = VoiceActivated;
+
+            break;
+        }
     }
 
     public void StartAnimation()

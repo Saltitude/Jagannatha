@@ -83,6 +83,14 @@ public class SC_PhaseManager : MonoBehaviour
         {
             if (SC_WaveManager.Instance.b_nextWave == true)
             {
+                while(waves[curWaveIndex].initialSpawnFlock.Length == 0)
+                {
+                    curWaveIndex++;
+                }
+                Debug.Log("/////////////////////////////////////");
+                Debug.Log("index : "+ curWaveIndex);
+                Debug.Log("nom : "+ waves[curWaveIndex].name);
+                Debug.Log("/////////////////////////////////////");
                 SC_WaveManager.Instance.InitializeWave(waves[curWaveIndex]);
                 //SC_EnemyManager.Instance.Progress.value = curWaveIndex * 10f;
             }

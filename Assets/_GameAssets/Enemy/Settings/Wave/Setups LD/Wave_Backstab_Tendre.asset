@@ -13,15 +13,14 @@ MonoBehaviour:
   m_Name: Wave_Backstab_Tendre
   m_EditorClassIdentifier: 
   initialSpawnFlock:
-  - {fileID: 11400000, guid: e2539410742a3654494ab6ce864428da, type: 2}
+  - {fileID: 11400000, guid: 3bddde137ffe43f4486d4250b33a9092, type: 2}
   initialSpawnPosition: 00000000
   OrientedSpawnPosition: 
   timeBetweenSpawnInitial: 0
   backup: 1
   backupSpawnFlock:
-  - {fileID: 11400000, guid: 92c610f39cfed7f4c80ee8fba4818dc5, type: 2}
+  - {fileID: 11400000, guid: b9b85c8c7cf4ba944b1345051b58ce63, type: 2}
   backupSpawnPosition: 04000000
-  backupOrientedSpawnPosition: 
   timeBeforeBackup: -1
   flockLeftBeforeBackup: 0
   timeBetweenSpawnBackup: 0
