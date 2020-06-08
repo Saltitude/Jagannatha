@@ -485,6 +485,8 @@ public class SC_FlockManager : MonoBehaviour
                 break;
             case PathType.Death:
 
+                flockWeaponManager.SetBoolCanFire(false);
+
                 KoaMainAnimator.SetBool("Deploy", false);
                 KoaEmissiveAnimator.SetBool("Deploy", false);
 
