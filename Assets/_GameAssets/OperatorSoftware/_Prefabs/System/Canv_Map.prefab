@@ -835,6 +835,8 @@ MonoBehaviour:
   animTime: 1
   maxOpacity: 1
   minOpacity: 0.75
+  VoiceActivated: {fileID: 11400000, guid: f254d3ab903532946addd2c496d7ba8d, type: 2}
+  sanskritFont: {fileID: 11400000, guid: 72eaa0435cf79ff4eb484c218ed0ade1, type: 2}
 --- !u!1 &4320390209758040860
 GameObject:
   m_ObjectHideFlags: 0

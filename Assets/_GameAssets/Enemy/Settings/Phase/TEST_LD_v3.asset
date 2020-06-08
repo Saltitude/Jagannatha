@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: TEST_LD_v3
   m_EditorClassIdentifier: 
   waves:
-  - {fileID: 11400000, guid: 2fddad019fb3bd942a9d0a90aece76a9, type: 2}
+  - {fileID: 11400000, guid: 527b1c50b62fd2c41b2c469f245f2693, type: 2}
   - {fileID: 11400000, guid: 0fc7a17a96e22ff4fbb6bcb8aead90a7, type: 2}
   - {fileID: 11400000, guid: d5dd33d0509c99f4e98af5f319cfaf44, type: 2}
   - {fileID: 11400000, guid: 14e1c25d067879341afae17e4f1fba2f, type: 2}

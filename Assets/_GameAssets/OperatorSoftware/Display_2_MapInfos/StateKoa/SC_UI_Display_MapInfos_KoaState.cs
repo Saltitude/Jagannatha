@@ -39,6 +39,10 @@ public class SC_UI_Display_MapInfos_KoaState : MonoBehaviour
     //[SerializeField]
     //Text optiWeapon;
 
+    [SerializeField]
+    Font VoiceActivated;
+    [SerializeField]
+    Font sanskritFont;
 
     string[] StringState = { "Spawning", "Roaming", "Attacking", "Death", "Fleeing", "Absorbing" };
     public enum KoaState
@@ -143,7 +147,24 @@ public class SC_UI_Display_MapInfos_KoaState : MonoBehaviour
                 gunSensibility = new Vector3(sc_syncvar.CalibrInts[0], sc_syncvar.CalibrInts[1], sc_syncvar.CalibrInts[2]);
 
                 displayOptiBar();
-                type.text = "Type " + curKoaScriptKoaSettings.GetKoaID().ToString();
+                if(curKoaScriptKoaSettings.GetKoaType() == 4)
+                {
+                    type.font = sanskritFont;
+                    type.text = "lenigrosfdplapute";
+
+                    SC_TargetMap.Instance.SetFont(SC_TargetMap.FontList.Sanskri);
+                    SC_TargetMap.Instance.SetText("lenigrosfdplapute");
+                }
+                else
+                {
+                    type.font = VoiceActivated;
+                    type.text = "Type " + curKoaScriptKoaSettings.GetKoaID();
+
+                    SC_TargetMap.Instance.SetFont(SC_TargetMap.FontList.VoiceActivated);
+                    SC_TargetMap.Instance.SetText(type.text);
+                }
+
+
                 koaStateTxt.text = StringState[curKoaScriptKoaSettings.GetKoaState()].ToUpper();
                 curState = (KoaState)curKoaScriptKoaSettings.GetKoaState();
                 //koaStateTxt.text = curState.ToString().ToUpper();
