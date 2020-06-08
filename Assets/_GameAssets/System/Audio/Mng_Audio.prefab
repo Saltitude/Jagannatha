@@ -80,7 +80,28 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 87c02a6e8a6382343ac4ce89bda9ce45, type: 3}
   - {fileID: 8300000, guid: 91b641e9e7bb7fc4c8cdbf95b212e307, type: 3}
   - {fileID: 8300000, guid: bca407d385d44434f9a0e45a884d75ff, type: 3}
-  tSoundsAmbient: []
+  tAmbiancePilot:
+  - {fileID: 8300000, guid: 34c39b93b3310684185cd4eb2c5fc768, type: 3}
+  - {fileID: 8300000, guid: 375fd8e85d1d344418e5d5716b3fb908, type: 3}
+  - {fileID: 8300000, guid: 4d8c9707bd349494286d17277cdd7476, type: 3}
+  - {fileID: 8300000, guid: b8182844e1ab63f498e5a1d082b5954c, type: 3}
+  - {fileID: 8300000, guid: 4ca8ce091eeb6b64fa5e84c446cac2ce, type: 3}
+  - {fileID: 8300000, guid: 60432c72b6feab84c9c3c028abc8a32f, type: 3}
+  - {fileID: 8300000, guid: 31d7c8638be6efa46aa038524e3594cb, type: 3}
+  - {fileID: 8300000, guid: 319551aa56b924740b488d3ff0462898, type: 3}
+  - {fileID: 8300000, guid: d6fe0146d8ca0904287b7dabc96e0965, type: 3}
+  - {fileID: 8300000, guid: afa0c720387312149bf5fa1ddd23fb2a, type: 3}
+  - {fileID: 8300000, guid: 73bf8aa898bd68d4bb76dbcae9521df8, type: 3}
+  - {fileID: 8300000, guid: 8216db4183424734f8a2f0ddd57f438d, type: 3}
+  - {fileID: 8300000, guid: 7a21a3e3a3c03f041b99cc2560e94cfb, type: 3}
+  - {fileID: 8300000, guid: b0f28d4aaf65d594fbfb9edfac37b151, type: 3}
+  - {fileID: 8300000, guid: 62227b72dbbcfef4cb142854ff73f492, type: 3}
+  - {fileID: 8300000, guid: 503445f1bfc6bf0448e4fb1d1a15e92f, type: 3}
+  - {fileID: 8300000, guid: 145eeca01ae599e4fb4bedd6e391aa46, type: 3}
+  - {fileID: 8300000, guid: f7ea52be26569874298efefe9941805c, type: 3}
+  - {fileID: 8300000, guid: d9925cd7420a8c24188a296d8ca8cf78, type: 3}
+  - {fileID: 8300000, guid: edfb4ff31c1a8b448953ad058e2c18ba, type: 3}
+  - {fileID: 8300000, guid: e45ff5a0463d8814db972c9635304d05, type: 3}
   hAudioSourcePrefab: {fileID: 5001806401243472562, guid: 68ac4e988a21bd94789c1ed545c20803,
     type: 3}
   bStartWithNoSound: 0

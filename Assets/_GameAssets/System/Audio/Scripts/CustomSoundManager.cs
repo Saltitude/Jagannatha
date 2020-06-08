@@ -13,11 +13,11 @@ public class CustomSoundManager : MonoBehaviour
     GameObject Mng_CheckList = null;
 
     [SerializeField] AudioClip[] tSounds = new AudioClip[0];
-    [SerializeField] string[] tSoundsAmbient = new string[0];
+    [SerializeField] public AudioClip[] tAmbiancePilot = new AudioClip[0];
     [SerializeField] GameObject hAudioSourcePrefab = null;
     [SerializeField] bool bStartWithNoSound = false;
     [SerializeField] float fFirstEnvironmentSoundTimeBeforePlay = 1;
-    [SerializeField] int nNbAudioSource = 50;
+    [SerializeField] int nNbAudioSource = 150;
     [SerializeField] Vector2 vRandomTimeBetweenAmbianceSound = new Vector2(2, 5);
     [SerializeField] float fVolumeAmbiance = 0.5f;
     [SerializeField] Vector2 vRandomAndFixedPitchAmbiance = new Vector2(0.5f, 0.4f);
@@ -49,6 +49,7 @@ public class CustomSoundManager : MonoBehaviour
             _instance = this;
         }
 
+        
         hAudioSources = new GameObject[nNbAudioSource];
         for (int i = 0; i < hAudioSources.Length; i++)
         {
@@ -133,6 +134,46 @@ public class CustomSoundManager : MonoBehaviour
             PlaySound(GameObject.Find("Main Camera"), tSoundsAmbient[Random.Range(0, tSoundsAmbient.Length)], false, fVolumeAmbiance, vRandomAndFixedPitchAmbiance.x, vRandomAndFixedPitchAmbiance.y);
         }
     }*/
+
+    public GameObject PlayAmbiance(GameObject hSource, int indexSound, bool bLoop, float fVolume, string sSoundName = "", bool parent = true, float fPitchRandom = 0, float fPitchConstantModifier = 0)
+    {
+        int IndexSound = -1;
+
+        if (sSoundName != "")
+        {
+            for (int i = 0; i < tAmbiancePilot.Length; i++)
+            {
+                if (tAmbiancePilot[i].name == sSoundName)
+                {
+                    IndexSound = i;
+                    break;
+                }
+            }
+
+        }
+        else
+        {
+            IndexSound = indexSound;
+        }
+
+        for (int i = 0; i < hAudioSources.Length; i++)
+        {
+            if (!hAudioSources[i].GetComponent<AudioSource>().isPlaying && hAudioSources[i] != null)
+            {
+                if(parent == true) hAudioSources[i].transform.SetParent(hSource.transform);
+
+                hAudioSources[i].transform.position = hSource.transform.position;
+                hAudioSources[i].GetComponent<AudioSource>().clip = tAmbiancePilot[IndexSound];
+                hAudioSources[i].GetComponent<AudioSource>().loop = bLoop;
+                hAudioSources[i].GetComponent<AudioSource>().pitch = 1 + Random.Range(-fPitchRandom, fPitchRandom) + fPitchConstantModifier;
+                hAudioSources[i].GetComponent<AudioSource>().volume = fVolume;
+                hAudioSources[i].GetComponent<AudioSource>().Play();
+                return hAudioSources[i];
+                
+            }
+        }
+        return null;
+    }
 
     public GameObject PlaySound(GameObject hSource, string sSoundName, bool bLoop, float fVolume, bool parent = true, float fPitchRandom = 0, float fPitchConstantModifier = 0)
     {
