@@ -9616,6 +9616,31 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6593492623612342725, guid: 8a55f547b3bc9dc48902990f4dd81dbc,
+        type: 3}
+      propertyPath: ShapeModule.m_Position.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6593492623612342725, guid: 8a55f547b3bc9dc48902990f4dd81dbc,
+        type: 3}
+      propertyPath: ShapeModule.m_Position.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6593492623612342725, guid: 8a55f547b3bc9dc48902990f4dd81dbc,
+        type: 3}
+      propertyPath: ShapeModule.m_Scale.x
+      value: 152.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6593492623612342725, guid: 8a55f547b3bc9dc48902990f4dd81dbc,
+        type: 3}
+      propertyPath: ShapeModule.m_Scale.y
+      value: 234.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 6593492623612342725, guid: 8a55f547b3bc9dc48902990f4dd81dbc,
+        type: 3}
+      propertyPath: UVModule.tilesX
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 7688259979476252964, guid: 8a55f547b3bc9dc48902990f4dd81dbc,
         type: 3}
       propertyPath: m_AnchoredPosition.x
@@ -9802,6 +9827,31 @@ PrefabInstance:
         type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6593492623612342725, guid: 8a55f547b3bc9dc48902990f4dd81dbc,
+        type: 3}
+      propertyPath: ShapeModule.m_Position.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6593492623612342725, guid: 8a55f547b3bc9dc48902990f4dd81dbc,
+        type: 3}
+      propertyPath: ShapeModule.m_Position.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6593492623612342725, guid: 8a55f547b3bc9dc48902990f4dd81dbc,
+        type: 3}
+      propertyPath: ShapeModule.m_Scale.x
+      value: 152.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6593492623612342725, guid: 8a55f547b3bc9dc48902990f4dd81dbc,
+        type: 3}
+      propertyPath: ShapeModule.m_Scale.y
+      value: 234.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 6593492623612342725, guid: 8a55f547b3bc9dc48902990f4dd81dbc,
+        type: 3}
+      propertyPath: UVModule.tilesX
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 7688259979476252964, guid: 8a55f547b3bc9dc48902990f4dd81dbc,
         type: 3}
@@ -10140,7 +10190,7 @@ PrefabInstance:
     - target: {fileID: 1449074127440727917, guid: 8a55f547b3bc9dc48902990f4dd81dbc,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4637082232500015576, guid: 8a55f547b3bc9dc48902990f4dd81dbc,
         type: 3}
@@ -10635,6 +10685,31 @@ PrefabInstance:
         type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6593492623612342725, guid: 8a55f547b3bc9dc48902990f4dd81dbc,
+        type: 3}
+      propertyPath: ShapeModule.m_Position.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6593492623612342725, guid: 8a55f547b3bc9dc48902990f4dd81dbc,
+        type: 3}
+      propertyPath: ShapeModule.m_Position.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6593492623612342725, guid: 8a55f547b3bc9dc48902990f4dd81dbc,
+        type: 3}
+      propertyPath: ShapeModule.m_Scale.x
+      value: 152.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6593492623612342725, guid: 8a55f547b3bc9dc48902990f4dd81dbc,
+        type: 3}
+      propertyPath: ShapeModule.m_Scale.y
+      value: 234.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 6593492623612342725, guid: 8a55f547b3bc9dc48902990f4dd81dbc,
+        type: 3}
+      propertyPath: UVModule.tilesX
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 7688259979476252964, guid: 8a55f547b3bc9dc48902990f4dd81dbc,
         type: 3}
@@ -11200,6 +11275,31 @@ PrefabInstance:
         type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6593492623612342725, guid: 8a55f547b3bc9dc48902990f4dd81dbc,
+        type: 3}
+      propertyPath: ShapeModule.m_Position.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6593492623612342725, guid: 8a55f547b3bc9dc48902990f4dd81dbc,
+        type: 3}
+      propertyPath: ShapeModule.m_Position.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6593492623612342725, guid: 8a55f547b3bc9dc48902990f4dd81dbc,
+        type: 3}
+      propertyPath: ShapeModule.m_Scale.x
+      value: 152.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6593492623612342725, guid: 8a55f547b3bc9dc48902990f4dd81dbc,
+        type: 3}
+      propertyPath: ShapeModule.m_Scale.y
+      value: 234.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 6593492623612342725, guid: 8a55f547b3bc9dc48902990f4dd81dbc,
+        type: 3}
+      propertyPath: UVModule.tilesX
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 7688259979476252964, guid: 8a55f547b3bc9dc48902990f4dd81dbc,
         type: 3}
