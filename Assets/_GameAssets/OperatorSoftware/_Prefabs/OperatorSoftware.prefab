@@ -11917,6 +11917,16 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.x
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 627635535263691210, guid: 91a3de5b1511ac644aa9cc9fa3631323,
+        type: 3}
+      propertyPath: ShapeModule.m_Scale.x
+      value: 252.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 627635535263691210, guid: 91a3de5b1511ac644aa9cc9fa3631323,
+        type: 3}
+      propertyPath: ShapeModule.m_Scale.y
+      value: 33.4
+      objectReference: {fileID: 0}
     - target: {fileID: 678450083152347788, guid: 91a3de5b1511ac644aa9cc9fa3631323,
         type: 3}
       propertyPath: m_AnchoredPosition.x
@@ -12035,6 +12045,11 @@ PrefabInstance:
     - target: {fileID: 3605967398962377385, guid: 91a3de5b1511ac644aa9cc9fa3631323,
         type: 3}
       propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4145328287231981867, guid: 91a3de5b1511ac644aa9cc9fa3631323,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4215859848761446596, guid: 91a3de5b1511ac644aa9cc9fa3631323,
@@ -12361,6 +12376,11 @@ PrefabInstance:
         type: 3}
       propertyPath: UVModule.tilesX
       value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 9125821163833152211, guid: 91a3de5b1511ac644aa9cc9fa3631323,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 91a3de5b1511ac644aa9cc9fa3631323, type: 3}
