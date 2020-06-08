@@ -134,14 +134,16 @@ public class SC_UI_Display_KoaManager : MonoBehaviour
                     }
                 }
 
+                if (nbActive != 0)
+                {
+                    x /= nbActive;
+                    y /= nbActive;
+                    z /= nbActive;
+                    _koa.transform.position = Vector3.Lerp(_koa.transform.position, new Vector3(x, y, z), 5 * Time.deltaTime);
 
-                x /= nbActive;
-                y /= nbActive;
-                z /= nbActive;
+                }
 
 
-
-                _koa.transform.position = Vector3.Lerp(_koa.transform.position, new Vector3(x, y, z), 5 * Time.deltaTime);
 
 
 
@@ -193,11 +195,13 @@ public class SC_UI_Display_KoaManager : MonoBehaviour
         {
             for (int j = Mathf.CeilToInt(val * i); j < Mathf.CeilToInt(val * (i + 1)); j++)
             {
-                _boidsTab[j].GetComponent<Boid>().target = _guideList[i];
+                if(_boidsTab[j] != null && _guideList[i] != null)
+                    _boidsTab[j].GetComponent<Boid>().target = _guideList[i];
             }
         }
         //Si impaire, réparti le dernier boid sur une target
-        _boidsTab[all - 1].GetComponent<Boid>().target = _guideList[div - 1];
+        if (_boidsTab[all-1] != null && _guideList[div - 1] != null)
+            _boidsTab[all - 1].GetComponent<Boid>().target = _guideList[div - 1];
 
     }
 

@@ -59,6 +59,10 @@ public class SC_Cord : MonoBehaviour
     ViveGrip_GripPoint RightHandGripPoint;
     ViveGrip_ControllerHandler RightHandController;
 
+    //Sound Design
+    int SoundSourceNumb = 0;
+    GameObject SFX_Saron;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -195,10 +199,26 @@ public class SC_Cord : MonoBehaviour
         //ici j'ai un peu bidouillé pour que ca change l'emissive à la place de changer le mat, du coup ton tableau de mat sert plus à rien ;}
 
         if (!State)
+        {
             Renderer.material.SetColor("_EmissionColor", (Color.grey));
+            SoundSourceNumb = 0;
+        }
 
         if (State)
-            Renderer.material.SetColor("_EmissionColor", (Color.white * f_ColorFactor));   
+        {
+            Renderer.material.SetColor("_EmissionColor", (Color.white * f_ColorFactor));
+
+            if (SoundSourceNumb == 0)
+            {
+                if(n_Index == 1)
+                    SFX_Saron = CustomSoundManager.Instance.PlaySound(gameObject, "SFX_p_Tirette1", false, 0.4f);
+                else if(n_Index == 2)
+                    SFX_Saron = CustomSoundManager.Instance.PlaySound(gameObject, "SFX_p_Tirette2", false, 0.4f);
+                else
+                    SFX_Saron = CustomSoundManager.Instance.PlaySound(gameObject, "SFX_p_Tirette3", false, 0.4f);
+                SoundSourceNumb += 1;
+            }
+        }
 
     }
 

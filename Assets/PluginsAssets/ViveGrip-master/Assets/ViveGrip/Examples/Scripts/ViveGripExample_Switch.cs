@@ -91,22 +91,22 @@ public class ViveGripExample_Switch : MonoBehaviour, IInteractible
         curState = !curState;
         sendToSynchVar(curState);
         StartCoroutine(animGemme());
-
+        CustomSoundManager.Instance.PlaySound(gameObject, "SFX_p_ButtonClick", false, 0.5f, true, 0.05f, 0.5f);
         //SON
-        if (curState == false)
-        {
-            CustomSoundManager.Instance.PlaySound(gameObject, "SFX_p_click_button_1", false, 1, true,0.05f, 0.5f);
+        //if (curState == false)
+        //{
+        //    CustomSoundManager.Instance.PlaySound(gameObject, "SFX_p_click_button_1", false, 1, true,0.05f, 0.5f);
 
-        }
-        else
-        {
-            CustomSoundManager.Instance.PlaySound(gameObject, "SFX_p_click_button_2", false, 1, true, 0.05f, 0.4f);
+        //}
+        //else
+        //{
+        //    CustomSoundManager.Instance.PlaySound(gameObject, "SFX_p_click_button_2", false, 1, true, 0.05f, 0.4f);
 
-        }
-        
+        //}
 
 
-  }
+
+    }
 
     void ViveGripInteractionStart(ViveGrip_GripPoint gripPoint)
     {
