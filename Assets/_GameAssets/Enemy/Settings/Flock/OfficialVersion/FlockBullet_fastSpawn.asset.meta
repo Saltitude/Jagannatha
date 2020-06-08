@@ -1,15 +1,8 @@
 fileFormatVersion: 2
-<<<<<<< HEAD:Assets/_GameAssets/OperatorSoftware/Material/Particles Material/MAT_Sanskrit.mat.meta
-guid: eb824866417515544a7f4c4108f6dff1
+guid: 19fd46c23688a7c4bb833226d7a27b92
 NativeFormatImporter:
   externalObjects: {}
   mainObjectFileID: 0
-=======
-guid: 3bddde137ffe43f4486d4250b33a9092
-NativeFormatImporter:
-  externalObjects: {}
-  mainObjectFileID: 11400000
->>>>>>> Trash:Assets/_GameAssets/Enemy/Settings/Flock/OfficialVersion/FlockBullet_fastSpawn.asset.meta
   userData: 
   assetBundleName: 
   assetBundleVariant: 
