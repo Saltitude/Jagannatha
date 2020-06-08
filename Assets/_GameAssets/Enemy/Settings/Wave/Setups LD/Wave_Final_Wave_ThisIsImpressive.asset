@@ -17,7 +17,7 @@ MonoBehaviour:
   initialSpawnPosition: 00000000
   OrientedSpawnPosition: 
   timeBetweenSpawnInitial: 1.5
-  backup: 1
+  backup: 0
   backupSpawnFlock:
   - {fileID: 11400000, guid: cd108983525798845b76d27be2a5d411, type: 2}
   - {fileID: 11400000, guid: cd108983525798845b76d27be2a5d411, type: 2}

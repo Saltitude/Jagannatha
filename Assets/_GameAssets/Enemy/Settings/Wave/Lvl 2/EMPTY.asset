@@ -10,11 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2f853b98b2e469d4682403b69d26ee96, type: 3}
-  m_Name: Wave_Solo_Bullet_midi
+  m_Name: EMPTY
   m_EditorClassIdentifier: 
-  initialSpawnFlock:
-  - {fileID: 11400000, guid: cf1b74afa5c01ba46b7e72419b0b1bcb, type: 2}
-  initialSpawnPosition: 00000000
+  initialSpawnFlock: []
+  initialSpawnPosition: 
   OrientedSpawnPosition: 
   timeBetweenSpawnInitial: 0
   backup: 0
@@ -23,4 +22,4 @@ MonoBehaviour:
   timeBeforeBackup: 0
   flockLeftBeforeBackup: 0
   timeBetweenSpawnBackup: 0
-  timeBeforeNextWave: 2
+  timeBeforeNextWave: 0

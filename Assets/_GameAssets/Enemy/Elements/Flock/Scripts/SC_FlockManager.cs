@@ -465,7 +465,7 @@ public class SC_FlockManager : MonoBehaviour
 
             case PathType.ReactionHit:
 
-                if(reactionHit != true)
+                if (reactionHit != true)
                 {
                     KoaMainAnimator.SetBool("Deploy", true);
                     KoaEmissiveAnimator.SetBool("Deploy", true);

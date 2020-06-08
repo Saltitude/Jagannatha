@@ -16,15 +16,16 @@ MonoBehaviour:
   attackFocus: 2
   damageOnSystem: 10
   timeBetweenAttacks: 5
+  timeBeforeFirstAttack: -1
   fireRate: 5
   nbBulletToShoot: 50
   chargingAttackTime: 1
   activeDuration: 1
   speedToTarget: 0.7
   flightDuration: 3
-  flightReactionMinSensibility: 75
+  flightReactionMinSensibility: 101
   hitReactionDelay: 3
-  hitReactionMaxSensibility: 50
+  hitReactionMaxSensibility: 0
   attackFocusHitReaction: 0
   damageOnSystemHitReaction: 0
   laserDurationHitReaction: 2
@@ -51,3 +52,4 @@ MonoBehaviour:
   boidSpawn: 50
   maxBoid: 50
   regenerationRate: 0
+  damageMultiplicator: 1
