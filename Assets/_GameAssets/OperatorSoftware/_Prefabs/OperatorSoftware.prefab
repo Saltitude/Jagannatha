@@ -10408,6 +10408,11 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6282062592848370389, guid: d488a50e825517f43ad878df3e1b7019,
+        type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 7491828250500552408, guid: d488a50e825517f43ad878df3e1b7019,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -11912,6 +11917,16 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.x
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 627635535263691210, guid: 91a3de5b1511ac644aa9cc9fa3631323,
+        type: 3}
+      propertyPath: ShapeModule.m_Scale.x
+      value: 252.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 627635535263691210, guid: 91a3de5b1511ac644aa9cc9fa3631323,
+        type: 3}
+      propertyPath: ShapeModule.m_Scale.y
+      value: 33.4
+      objectReference: {fileID: 0}
     - target: {fileID: 678450083152347788, guid: 91a3de5b1511ac644aa9cc9fa3631323,
         type: 3}
       propertyPath: m_AnchoredPosition.x
@@ -12012,6 +12027,46 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3337639711904778477, guid: 91a3de5b1511ac644aa9cc9fa3631323,
+        type: 3}
+      propertyPath: ShapeModule.m_Position.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3337639711904778477, guid: 91a3de5b1511ac644aa9cc9fa3631323,
+        type: 3}
+      propertyPath: ShapeModule.m_Position.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3337639711904778477, guid: 91a3de5b1511ac644aa9cc9fa3631323,
+        type: 3}
+      propertyPath: UVModule.tilesX
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 3605967398962377385, guid: 91a3de5b1511ac644aa9cc9fa3631323,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4145328287231981867, guid: 91a3de5b1511ac644aa9cc9fa3631323,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4215859848761446596, guid: 91a3de5b1511ac644aa9cc9fa3631323,
+        type: 3}
+      propertyPath: ShapeModule.m_Position.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4215859848761446596, guid: 91a3de5b1511ac644aa9cc9fa3631323,
+        type: 3}
+      propertyPath: ShapeModule.m_Position.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4215859848761446596, guid: 91a3de5b1511ac644aa9cc9fa3631323,
+        type: 3}
+      propertyPath: UVModule.tilesX
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 4320298639383628251, guid: 91a3de5b1511ac644aa9cc9fa3631323,
         type: 3}
       propertyPath: m_Mesh
@@ -12056,6 +12111,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5814661458740187308, guid: 91a3de5b1511ac644aa9cc9fa3631323,
+        type: 3}
+      propertyPath: ShapeModule.m_Position.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5814661458740187308, guid: 91a3de5b1511ac644aa9cc9fa3631323,
+        type: 3}
+      propertyPath: ShapeModule.m_Position.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5814661458740187308, guid: 91a3de5b1511ac644aa9cc9fa3631323,
+        type: 3}
+      propertyPath: UVModule.tilesX
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 5940653574524030842, guid: 91a3de5b1511ac644aa9cc9fa3631323,
         type: 3}
@@ -12262,15 +12332,55 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.x
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8249298181266683786, guid: 91a3de5b1511ac644aa9cc9fa3631323,
+        type: 3}
+      propertyPath: ShapeModule.m_Position.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8249298181266683786, guid: 91a3de5b1511ac644aa9cc9fa3631323,
+        type: 3}
+      propertyPath: ShapeModule.m_Position.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8249298181266683786, guid: 91a3de5b1511ac644aa9cc9fa3631323,
+        type: 3}
+      propertyPath: UVModule.tilesX
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 8285756933540195812, guid: 91a3de5b1511ac644aa9cc9fa3631323,
         type: 3}
       propertyPath: m_textInfo.characterCount
       value: 16
       objectReference: {fileID: 0}
+    - target: {fileID: 8617431384176153266, guid: 91a3de5b1511ac644aa9cc9fa3631323,
+        type: 3}
+      propertyPath: looping
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8666301254745679502, guid: 91a3de5b1511ac644aa9cc9fa3631323,
         type: 3}
       propertyPath: m_Enabled
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9049446446306724865, guid: 91a3de5b1511ac644aa9cc9fa3631323,
+        type: 3}
+      propertyPath: ShapeModule.m_Position.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9049446446306724865, guid: 91a3de5b1511ac644aa9cc9fa3631323,
+        type: 3}
+      propertyPath: ShapeModule.m_Position.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9049446446306724865, guid: 91a3de5b1511ac644aa9cc9fa3631323,
+        type: 3}
+      propertyPath: UVModule.tilesX
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 9125821163833152211, guid: 91a3de5b1511ac644aa9cc9fa3631323,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 91a3de5b1511ac644aa9cc9fa3631323, type: 3}
