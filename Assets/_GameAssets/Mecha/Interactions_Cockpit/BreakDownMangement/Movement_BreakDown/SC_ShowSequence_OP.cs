@@ -48,6 +48,12 @@ public class SC_ShowSequence_OP : MonoBehaviour
     [SerializeField]
     Material wireShutdown;
 
+    [SerializeField]
+    GameObject sparkleSeq1;
+    [SerializeField]
+    GameObject sparkleSeq2;
+    [SerializeField]
+    GameObject sparkleSeq3;
 
     void Awake()
     {
@@ -144,16 +150,20 @@ public class SC_ShowSequence_OP : MonoBehaviour
                 case 0:
                     BlinkMaster.SetBreakDown(6, false);
                     BlinkMaster.SetBreakDown(7, false);
+                    sparkleSeq1.SetActive(true);
                     break;
 
                 case 1:
                     BlinkMaster.SetBreakDown(8, false);
                     BlinkMaster.SetBreakDown(9, false);
+                    sparkleSeq1.SetActive(false);
+                    sparkleSeq2.SetActive(true);
                     break;
 
                 case 2:
                     BlinkMaster.SetBreakDown(10, false);
                     BlinkMaster.SetBreakDown(11, false);
+                    sparkleSeq3.SetActive(true);
                     break;
 
             }
@@ -215,7 +225,7 @@ public class SC_ShowSequence_OP : MonoBehaviour
                         //Logo
                         BlinkMaster.SetBreakDown(6, b_InBreakDown);
                         BlinkMaster.SetBreakDown(7, b_InBreakDown);
-
+                        sparkleSeq1.SetActive(false);
                         break;
 
                     case 1:
@@ -232,7 +242,7 @@ public class SC_ShowSequence_OP : MonoBehaviour
                         //Logo);
                         BlinkMaster.SetBreakDown(8, b_InBreakDown);
                         BlinkMaster.SetBreakDown(9, b_InBreakDown);
-
+                        sparkleSeq2.SetActive(false);
                         break;
 
                     case 2:
@@ -247,7 +257,7 @@ public class SC_ShowSequence_OP : MonoBehaviour
                         //Logo
                         BlinkMaster.SetBreakDown(10, b_InBreakDown);
                         BlinkMaster.SetBreakDown(11, b_InBreakDown);
-
+                        sparkleSeq3.SetActive(false);
                         break;
 
                 }
