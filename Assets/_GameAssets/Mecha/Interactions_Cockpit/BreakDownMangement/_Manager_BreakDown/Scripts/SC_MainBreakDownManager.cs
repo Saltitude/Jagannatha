@@ -196,7 +196,7 @@ public class SC_MainBreakDownManager : MonoBehaviour, IF_BreakdownManager
                 SC_LightAlarm.Instance.BreakDownLight();
                 if (SoundSourceNumb == 0)
                 {
-                    BreakDownAudioSource = CustomSoundManager.Instance.PlaySound(gameObject, "SFX_p_breackdown_alarm", true, 0.1f);
+                    BreakDownAudioSource = CustomSoundManager.Instance.PlaySound(gameObject, "SFX_p_RaggaMantra", true, 0.1f);
                     SoundSourceNumb += 1;
                 }
             }
