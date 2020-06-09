@@ -94,7 +94,8 @@ public class SC_IPManager : NetworkBehaviour
                         HamachiIpv4 = ip.Address.ToString();
                     }      
                     
-                    else if (item.Name == "Ethernet")
+                    //else if (item.Name == "Ethernet")
+                    else if (item.Name.Contains("Ethernet"))
                     {
                         EthernetIpv4 = ip.Address.ToString();
                     }

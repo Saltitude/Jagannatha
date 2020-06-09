@@ -30,6 +30,9 @@ public class SC_UI_Update_SliderSolo : MonoBehaviour
 
     public Material Red;
     public Material Orange;
+
+    [SerializeField]
+    GameObject sparkle;
     //private Color _orange = new Color(255, 159, 0);
     //private Color _red = new Color(255, 0, 0);
 
@@ -103,7 +106,8 @@ public class SC_UI_Update_SliderSolo : MonoBehaviour
 
             textWanted.text = Mathf.FloorToInt(ratio(sc_syncvar.SL_sliders[index].valueWanted, 0.45f, 10, -0.45f, 1)).ToString();
             textWanted.material = Red;
-           // Debug.Log("u are red bitch");
+            sparkle.SetActive(false);
+            // Debug.Log("u are red bitch");
         }
         else
         {
@@ -111,6 +115,7 @@ public class SC_UI_Update_SliderSolo : MonoBehaviour
 
             textWanted.text = Mathf.FloorToInt(ratio(sc_syncvar.SL_sliders[index].valueWanted, 0.45f, 10, -0.45f, 1)).ToString();
             textWanted.material = Orange;
+            sparkle.SetActive(true);
 
         }
 
