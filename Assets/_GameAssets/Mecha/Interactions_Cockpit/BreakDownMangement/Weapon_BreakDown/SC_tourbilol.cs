@@ -92,13 +92,18 @@ public class SC_tourbilol : MonoBehaviour, IInteractible
         ///////////vibration pti crancrans
         if (Mathf.Abs(Mathf.Abs(oldRot) - Mathf.Abs(curRot)) > 2)
         {
+
             //vibrate
             _handle1_grabbable.Vibrate(10, 0.02f);
             _handle2_grabbable.Vibrate(10, 0.02f);
+
+            
             if (Mathf.Abs(normalizedAngle) != 1)
             {
                 SFX_Clic = CustomSoundManager.Instance.PlaySound(gameObject, "SFX_p_Tourbilol", false, 0.3f, true, 0.05f);
             }
+            
+
         }
 
 
@@ -109,14 +114,18 @@ public class SC_tourbilol : MonoBehaviour, IInteractible
             _handle1_grabbable.Vibrate(10, 2f);
             _handle2_grabbable.Vibrate(10, 2f);
 
+            
             if (SoundSourceNumb == 0)
             {
                 SFX_Clic = CustomSoundManager.Instance.PlaySound(gameObject, "SFX_p_TourbilolEnd", false, 0.4f);
                 SoundSourceNumb += 1;
             }
+            
+
         }
         else
             SoundSourceNumb = 0;
+
 
 
         oldRot = curRot;
