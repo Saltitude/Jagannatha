@@ -190,6 +190,8 @@ public class SC_MainBreakDownManager : MonoBehaviour, IF_BreakdownManager
             {
                 SC_WaveManager.Instance.b_nextWave = false;
                 SC_BreakdownOnBreakdownAlert.Instance.LaunchGlobalAlert();
+                SC_AmbiancePilot.Instance.StopAmbiance();
+
                 SC_FogBreakDown.Instance.BreakDownDensity();
                 SC_LightAlarm.Instance.BreakDownLight();
                 if (SoundSourceNumb == 0)

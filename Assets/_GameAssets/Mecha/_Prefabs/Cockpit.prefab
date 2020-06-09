@@ -916,7 +916,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   source: {fileID: 3389299566338779546}
-  ambianceVolume: 0.5
+  ambianceVolume: 0.2
   fadeSpeed: 0.2
   Ambiance1: 04000000060000000b000000
   Ambiance2: 04000000060000000b00000007000000

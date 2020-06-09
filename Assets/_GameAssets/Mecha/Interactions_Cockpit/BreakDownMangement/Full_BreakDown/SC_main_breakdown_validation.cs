@@ -76,6 +76,11 @@ public class SC_main_breakdown_validation : MonoBehaviour
             {
                 SC_GameStates.Instance.RpcSetState(SC_GameStates.GameState.Tutorial2);
             }
+            else
+            {
+                Debug.Log("valideate");
+                SC_AmbiancePilot.Instance.RestartAmbiance();
+            }
         }
 
         else

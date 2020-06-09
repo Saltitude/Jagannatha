@@ -43,6 +43,10 @@ public class SC_AmbiancePilot : MonoBehaviour
     [SerializeField]
     int[] Ambiance8;
 
+    
+
+    Ambiance curAmbiance;
+
     int[][] AmbianceTotal;
     public enum Ambiance
     {
@@ -93,48 +97,39 @@ public class SC_AmbiancePilot : MonoBehaviour
 
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        //InputTest();
-    }
+    //void Update()
+    //{
+    //    InputTest();
+    //}
 
-    void InputTest()
-    {
-        if(Input.GetKeyDown(KeyCode.KeypadPlus))
-        {
-            index++;
-            if(index > (int)Ambiance.ClimaxMaxMax)
-            {
-                index = 0;
-            }
-            Debug.Log(index + " :" + (Ambiance)index);
+    //void InputTest()
+    //{
+    //    if(Input.GetKeyDown(KeyCode.KeypadPlus))
+    //    {
+    //        StopAmbiance();
 
-        }
-        if (Input.GetKeyDown(KeyCode.KeypadMinus))
-        {
-            index--;
-            if(index < 0)
-            {
-                index = (int)Ambiance.ClimaxMaxMax;
-            }
-            Debug.Log(index + " :" + (Ambiance)index);
-        }
-        if(Input.GetKeyDown(KeyCode.KeypadEnter))
-        {
+    //    }
+    //    if (Input.GetKeyDown(KeyCode.KeypadMinus))
+    //    {
+    //        RestartAmbiance();
 
-            PlayAmbiance((Ambiance)index);
+    //    }
+    //    if (Input.GetKeyDown(KeyCode.KeypadEnter))
+    //    {
 
-            //if (soundSource[index].volume == 0)
-            //    soundSource[index].volume = 1;
+    //        PlayAmbiance((Ambiance)index);
 
-            //else if (soundSource[index].volume == 1)
-            //    soundSource[index].volume = 0;
-        }
-    }
+    //        //if (soundSource[index].volume == 0)
+    //        //    soundSource[index].volume = 1;
+
+    //        //else if (soundSource[index].volume == 1)
+    //        //    soundSource[index].volume = 0;
+    //    }
+    //}
 
     public void PlayAmbiance(Ambiance newAmbiance)
     {
+        curAmbiance = newAmbiance;
         //source actuel
         List<AudioSource> curSources = new List<AudioSource>();
         //Nouvelle sources
@@ -207,7 +202,7 @@ public class SC_AmbiancePilot : MonoBehaviour
     {
         sourcePlaying[sourceIndex] = true;
         AudioSource newSource = soundSource[sourceIndex];
-        while(newSource.volume != ambianceVolume)
+        while(newSource.volume != ambianceVolume && sourcePlaying[sourceIndex])
         {
             newSource.volume += (Time.deltaTime*fadeSpeed);
             if(newSource.volume > ambianceVolume)
@@ -222,7 +217,8 @@ public class SC_AmbiancePilot : MonoBehaviour
     {
         sourcePlaying[sourceIndex] = false;
         AudioSource newSource = soundSource[sourceIndex];
-        while (newSource.volume != 0)
+
+        while (newSource.volume != 0 && !sourcePlaying[sourceIndex])
         {
             newSource.volume -= (Time.deltaTime * fadeSpeed);
             if (newSource.volume < 0)
@@ -231,5 +227,19 @@ public class SC_AmbiancePilot : MonoBehaviour
             }
             yield return 0;
         }
+    }
+
+    public void StopAmbiance()
+    {
+
+        for (int i = 0; i < soundSource.Length; i++)
+        {
+            StartCoroutine(FadeOut(i));
+        }
+    }
+
+    public void RestartAmbiance()
+    {
+        PlayAmbiance(curAmbiance);
     }
 }
