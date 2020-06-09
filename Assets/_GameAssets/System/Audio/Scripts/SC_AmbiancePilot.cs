@@ -203,12 +203,19 @@ public class SC_AmbiancePilot : MonoBehaviour
     {
         sourcePlaying[sourceIndex] = true;
         AudioSource newSource = soundSource[sourceIndex];
-        while(newSource.volume != ambianceVolume && sourcePlaying[sourceIndex])
+        float newAmbianceVolume = ambianceVolume;
+        if(sourceIndex == 4)
+        {
+            newAmbianceVolume = ambianceVolume / 3;
+        }
+
+
+        while(newSource.volume != newAmbianceVolume && sourcePlaying[sourceIndex])
         {
             newSource.volume += (Time.deltaTime*fadeSpeed);
-            if(newSource.volume > ambianceVolume)
+            if(newSource.volume > newAmbianceVolume)
             {
-                newSource.volume = ambianceVolume;
+                newSource.volume = newAmbianceVolume;
             }
             yield return 0;
         }
