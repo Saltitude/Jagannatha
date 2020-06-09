@@ -78,7 +78,6 @@ public class SC_main_breakdown_validation : MonoBehaviour
             }
             else
             {
-                Debug.Log("valideate");
                 SC_AmbiancePilot.Instance.RestartAmbiance();
             }
         }

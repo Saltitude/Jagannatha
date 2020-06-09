@@ -158,16 +158,18 @@ public class CustomSoundManager : MonoBehaviour
 
         for (int i = 0; i < hAudioSources.Length; i++)
         {
+
             if (!hAudioSources[i].GetComponent<AudioSource>().isPlaying && hAudioSources[i] != null)
             {
-                if(parent == true) hAudioSources[i].transform.SetParent(hSource.transform);
+                AudioSource curSource = hAudioSources[i].GetComponent<AudioSource>();
+                if (parent == true) hAudioSources[i].transform.SetParent(hSource.transform);
 
                 hAudioSources[i].transform.position = hSource.transform.position;
-                hAudioSources[i].GetComponent<AudioSource>().clip = tAmbiancePilot[IndexSound];
-                hAudioSources[i].GetComponent<AudioSource>().loop = bLoop;
-                hAudioSources[i].GetComponent<AudioSource>().pitch = 1 + Random.Range(-fPitchRandom, fPitchRandom) + fPitchConstantModifier;
-                hAudioSources[i].GetComponent<AudioSource>().volume = fVolume;
-                hAudioSources[i].GetComponent<AudioSource>().Play();
+                curSource.clip = tAmbiancePilot[IndexSound];
+                curSource.loop = bLoop;
+                curSource.pitch = 1 + Random.Range(-fPitchRandom, fPitchRandom) + fPitchConstantModifier;
+                curSource.volume = fVolume;
+                curSource.Play();
                 return hAudioSources[i];
                 
             }
@@ -192,12 +194,13 @@ public class CustomSoundManager : MonoBehaviour
             {
                 if(parent == true) hAudioSources[i].transform.SetParent(hSource.transform);
 
+                AudioSource curSource = hAudioSources[i].GetComponent<AudioSource>();
                 hAudioSources[i].transform.position = hSource.transform.position;
-                hAudioSources[i].GetComponent<AudioSource>().clip = tSounds[IndexSound];
-                hAudioSources[i].GetComponent<AudioSource>().loop = bLoop;
-                hAudioSources[i].GetComponent<AudioSource>().pitch = 1 + Random.Range(-fPitchRandom, fPitchRandom) + fPitchConstantModifier;
-                hAudioSources[i].GetComponent<AudioSource>().volume = fVolume;
-                hAudioSources[i].GetComponent<AudioSource>().Play();
+                curSource.clip = tSounds[IndexSound];
+                curSource.loop = bLoop;
+                curSource.pitch = 1 + Random.Range(-fPitchRandom, fPitchRandom) + fPitchConstantModifier;
+                curSource.volume = fVolume;
+                curSource.Play();
                 return hAudioSources[i];
                 
             }
