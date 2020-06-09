@@ -11106,11 +11106,6 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2149435830759296614, guid: a0e47d0d631f926469202ef2f02a6d69,
-        type: 3}
-      propertyPath: m_Material
-      value: 
-      objectReference: {fileID: 2100000, guid: eb824866417515544a7f4c4108f6dff1, type: 2}
     - target: {fileID: 2157742961263108315, guid: a0e47d0d631f926469202ef2f02a6d69,
         type: 3}
       propertyPath: ongletContainer
