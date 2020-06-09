@@ -27,10 +27,11 @@ public class SC_AmbianceManager : MonoBehaviour
         ambianceplayed = false;
         switch (Player)
         {
+            /*
             case player.pilote:
                 ambianceName = "SFX_p_ambiance";
                 GetReference();
-                break;
+                break;*/
 
 
             case player.operateur:
@@ -63,7 +64,8 @@ public class SC_AmbianceManager : MonoBehaviour
 
     public void StartCockpitAmbiance()
     {
-        CustomSoundManager.Instance.PlaySound(source, ambianceName, true, 0.4f);
+        
+        //CustomSoundManager.Instance.PlaySound(source, ambianceName, true, 0.4f);
         ambianceplayed = true;
     }
 }

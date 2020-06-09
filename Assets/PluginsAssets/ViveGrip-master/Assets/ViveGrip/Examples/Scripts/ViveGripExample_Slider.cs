@@ -42,6 +42,9 @@ public class ViveGripExample_Slider : MonoBehaviour, IInteractible {
     [SerializeField]
     bool isFLUX = false;
 
+    //SoundDesign
+    GameObject SFX_Flux;
+    int SoundSourceNumb = 0;
 
     [Range(0, 1)]
     public float probability = 1;
@@ -117,10 +120,16 @@ public class ViveGripExample_Slider : MonoBehaviour, IInteractible {
             transform.localPosition = new Vector3(limit, transform.localPosition.y,  transform.localPosition.z);
 
         }
-     
 
         float newX = gameObject.transform.localPosition.x;
-
+        //if (newX != oldX && SoundSourceNumb == 0)
+        //{
+        //    SFX_Flux = CustomSoundManager.Instance.PlaySound(gameObject, "SFX_p_ClicFlux", false, 0.3f, true, 0.05f);
+        //    SoundSourceNumb += 1;
+        //}
+        //Debug.Log(newX + " = " + oldX);
+        //if (newX == oldX)
+        //    SoundSourceNumb = 0;
         //on envoie la valeur à la syncvar si celle ci a changé
         if (newX != oldX) sendToSynchVar(-Mathf.Round(Ratio(gameObject.transform.localPosition.x,limit,0.45f,-limit,-0.45f)*100)/100);
         //if (newX != oldX) sendToSynchVar(-Mathf.FloorToInt(Ratio(gameObject.transform.localPosition.x, limit, 0.45f, -limit, -0.45f)));

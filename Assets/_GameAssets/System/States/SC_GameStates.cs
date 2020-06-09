@@ -181,6 +181,7 @@ public class SC_GameStates : NetworkBehaviour
                     SC_main_breakdown_validation.Instance.isValidated = false;
                     SC_main_breakdown_validation.Instance.textStopBlink();
                     SC_main_breakdown_validation.Instance.bringDown();
+                    SC_AmbiancePilot.Instance.PlayAmbiance(SC_AmbiancePilot.Ambiance.TutoRepa);
                 }
                 if(!isServer)
                 {
@@ -280,6 +281,8 @@ public class SC_GameStates : NetworkBehaviour
                 if(isServer)
                 {
                     SC_EnemyManager.Instance.Initialize();
+                    SC_AmbiancePilot.Instance.PlayAmbiance(SC_AmbiancePilot.Ambiance.TutoFlock);
+
                 }
                 if (!isServer)
                 {

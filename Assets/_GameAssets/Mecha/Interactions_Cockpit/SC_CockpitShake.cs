@@ -20,6 +20,8 @@ public class SC_CockpitShake : MonoBehaviour
     public float shakeDuration = 0f;
     public float soundDuration = 0f;
 
+    float maxShakeDuration = 2f;
+    bool maxShakeReach = false;
     // Amplitude of the shake. A larger value shakes the camera harder.
     public float shakeAmount = 0.7f;
     public float decreaseFactor = 1.0f;
@@ -47,17 +49,34 @@ public class SC_CockpitShake : MonoBehaviour
         originalPos = screenTransform.localPosition;
     }
 
-    public void ShakeIt(float amplitude, float duration)
+    public void ShakeIt(float amplitude, float duration, bool playSound = true)
     {
-        shakeAmount = amplitude;
-        shakeDuration = shakeDuration + duration;
-
-        SFX_DamageTaken = CustomSoundManager.Instance.PlaySound(gameObject, "SFX_p_DamageTaken", false, 0.1f);
-        SoundSourceNumb += 1;
-        soundDuration = 0.4f;
+        float newShakeDuration = shakeDuration + duration;
     
-    }
+        if (newShakeDuration < maxShakeDuration && !maxShakeReach)
+        {
 
+            shakeAmount = amplitude;
+            shakeDuration = shakeDuration + duration;
+
+            if(playSound)
+            SFX_DamageTaken = CustomSoundManager.Instance.PlaySound(gameObject, "SFX_p_DamageTaken", false, 0.1f);
+            SoundSourceNumb += 1;
+            soundDuration = 0.4f;
+        }
+        else
+        {
+            maxShakeReach = true;
+        }
+        
+        if(shakeDuration <= 0)
+        {
+            maxShakeReach = false;
+        }
+
+
+
+    }
     void Update()
     {
         if (shakeDuration > 0.4f)

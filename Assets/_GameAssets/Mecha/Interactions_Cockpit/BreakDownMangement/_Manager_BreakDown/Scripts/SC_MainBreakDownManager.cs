@@ -248,15 +248,25 @@ public class SC_MainBreakDownManager : MonoBehaviour, IF_BreakdownManager
 
                     if (SC_GameStates.Instance.CurState == SC_GameStates.GameState.Game)
                     {
-                        if (BreakDownAudioSource.GetComponent<AudioSource>() != null)
+                        
+                        if (BreakDownAudioSource != null)
                         {
-                            if (BreakDownAudioSource.GetComponent<AudioSource>().isPlaying)
+
+                            if (BreakDownAudioSource.GetComponent<AudioSource>() != null)
                             {
-                                //Debug.Log(BreakDownAudioSource.GetComponent<AudioClip>().name);
-                                BreakDownAudioSource.GetComponent<AudioSource>().Stop();
-                                SoundSourceNumb = 0;
-                            }
+                                if (BreakDownAudioSource.GetComponent<AudioSource>().isPlaying)
+                                {
+                                    //Debug.Log(BreakDownAudioSource.GetComponent<AudioClip>().name);
+                                    BreakDownAudioSource.GetComponent<AudioSource>().Stop();
+                                    SoundSourceNumb = 0;
+                                }
                    
+                            }
+                        }
+                        else
+                        {
+                            Debug.LogError("BreakDownAudioSource est null ;)");
+
                         }
 
                         SC_BreakdownOnBreakdownAlert.Instance.StopGlobalAlert();
