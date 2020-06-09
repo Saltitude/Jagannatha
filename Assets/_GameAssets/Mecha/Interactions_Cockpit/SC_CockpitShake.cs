@@ -60,7 +60,7 @@ public class SC_CockpitShake : MonoBehaviour
             shakeDuration = shakeDuration + duration;
 
             if(playSound)
-            SFX_DamageTaken = CustomSoundManager.Instance.PlaySound(gameObject, "SFX_p_DamageTaken", false, 0.1f);
+            SFX_DamageTaken = CustomSoundManager.Instance.PlaySound(gameObject, "SFX_p_DamageTaken2", false, 0.3f);
             SoundSourceNumb += 1;
             soundDuration = 0.4f;
         }

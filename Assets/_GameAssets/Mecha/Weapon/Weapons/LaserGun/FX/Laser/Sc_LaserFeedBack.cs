@@ -69,7 +69,7 @@ public class Sc_LaserFeedBack : MonoBehaviour
     {
         if (SoundSourceNumb == 0)
         {
-            SFX_LaserBeam = CustomSoundManager.Instance.PlaySound(gameObject, "SFX_p_LaserBeam2", true, 0.1f);
+            SFX_LaserBeam = CustomSoundManager.Instance.PlaySound(gameObject, "SFX_p_isShooting", true, 0.5f);
             SoundSourceNumb += 1;
         }
 

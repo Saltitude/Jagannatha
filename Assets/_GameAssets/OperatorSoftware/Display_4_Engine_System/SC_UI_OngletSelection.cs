@@ -162,10 +162,14 @@ public class SC_UI_OngletSelection : MonoBehaviour, IF_clicableAction, IF_Hover
     public void isBreakdownSystem(bool state)
     {
         if(SC_GameStates.Instance.CurState == SC_GameStates.GameState.Game)
-        for (int i = 0; i < wireIndex.Length; i++)
         {
-            wireBlink.SetBreakDown(wireIndex[i], state);
+            for (int i = 0; i < wireIndex.Length; i++)
+            {
+                wireBlink.SetBreakDown(wireIndex [i], state);
+            }
+            CustomSoundManager.Instance.PlaySound(gameObject, "SFX_o_panneSoundOpe", false, 1f);
         }
+
 
     }
 

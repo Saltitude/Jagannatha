@@ -493,7 +493,7 @@ public class SC_KoaManager : MonoBehaviour
 
     void AnimDestroy()
     {
-        CustomSoundManager.Instance.PlaySound(_koa.gameObject, "SFX_Explosion_Flock", false, 0.1f, false);
+        SFX_Explosion = CustomSoundManager.Instance.PlaySound(_koa.gameObject, "SFX_Explosion_Flock", false, 1f, false);
         flockManager.AnimDestroy();
         //SetBehavior(DeathSettings);
         foreach (Boid b in _boidsTab) b.DestroyBoid(Boid.DestructionType.Massive);

@@ -70,7 +70,7 @@ public class SC_main_breakdown_validation : MonoBehaviour
             //Debug.Log("Validation");
             isValidated = true;
             SyncVariables();
-            SFX_Validate = CustomSoundManager.Instance.PlaySound(gameObject, "SFX_p_voice_rebooting_system", false, 1f);
+            SFX_Validate = CustomSoundManager.Instance.PlaySound(gameObject, "SFX_p_rebootSystem", false, 0.5f);
             SFX_ValidateSound = CustomSoundManager.Instance.PlaySound(gameObject, "SFX_p_reboot_button_validate", false, 0.1f);
             if(SC_GameStates.Instance.CurTutoState == SC_GameStates.TutorialState.Reboot)
             {
@@ -84,7 +84,7 @@ public class SC_main_breakdown_validation : MonoBehaviour
 
         else
         {
-            SFX_Validate = CustomSoundManager.Instance.PlaySound(gameObject, "SFX_p_voice_system_failure", false, 0.5f);
+            //SFX_Validate = CustomSoundManager.Instance.PlaySound(gameObject, "SFX_p_voice_system_failure", false, 0.5f);
             SFX_ValidateSound = CustomSoundManager.Instance.PlaySound(gameObject, "SFX_p_reboot_button_fail", false, 0.1f);
         }
 
