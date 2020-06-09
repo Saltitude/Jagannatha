@@ -40,6 +40,51 @@ public class SC_SyncVar_DisplaySystem : NetworkBehaviour
 
     #endregion Var SC_EnemyManager
 
+    #region Var SC_WaveManager
+
+    [Header("Var Wave")]
+    [SyncVar(hook = "OnDownload")]
+    public int curWave = 0;
+
+    public void OnChangeWave(int newValue)
+    {
+        curWave = newValue;
+        if(!isServer)
+        {
+            PlayAmbiance(curWave);
+        }
+    }
+    void PlayAmbiance(int waveIndex)
+    {
+        switch (waveIndex)
+        {
+            case 3:
+                SC_AmbiancePilot.Instance.PlayAmbiance(SC_AmbiancePilot.Ambiance.Rising1);
+                break;
+
+            case 6:
+                SC_AmbiancePilot.Instance.PlayAmbiance(SC_AmbiancePilot.Ambiance.Rising2);
+                break;
+
+            case 11:
+                SC_AmbiancePilot.Instance.PlayAmbiance(SC_AmbiancePilot.Ambiance.Climax1);
+                break;
+
+            case 12:
+                SC_AmbiancePilot.Instance.PlayAmbiance(SC_AmbiancePilot.Ambiance.Slow1);
+                break;
+
+            case 13:
+                SC_AmbiancePilot.Instance.PlayAmbiance(SC_AmbiancePilot.Ambiance.Rising3);
+                break;
+
+            case 14:
+                SC_AmbiancePilot.Instance.PlayAmbiance(SC_AmbiancePilot.Ambiance.ClimaxMaxMax);
+                break;
+        }
+    }
+    #endregion
+
     #region Var SC_main_breakdown_validation
 
     [Header("Var SC_main_breakdown_validation")]

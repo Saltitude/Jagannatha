@@ -91,6 +91,7 @@ public class SC_PhaseManager : MonoBehaviour
                 SC_WaveManager.Instance.InitializeWave(waves[curWaveIndex]);
                 //SC_EnemyManager.Instance.Progress.value = curWaveIndex * 10f;
                 PlayAmbiance(curWaveIndex);
+                SC_SyncVar_DisplaySystem.Instance.curWave = curWaveIndex;
             }
             else
             {

@@ -181,7 +181,6 @@ public class SC_GameStates : NetworkBehaviour
                     SC_main_breakdown_validation.Instance.isValidated = false;
                     SC_main_breakdown_validation.Instance.textStopBlink();
                     SC_main_breakdown_validation.Instance.bringDown();
-                    SC_AmbiancePilot.Instance.PlayAmbiance(SC_AmbiancePilot.Ambiance.TutoRepa);
                 }
                 if(!isServer)
                 {
@@ -198,11 +197,9 @@ public class SC_GameStates : NetworkBehaviour
                     SC_instruct_op_manager.Instance.DeactivateImage(3);
                     SC_instruct_op_manager.Instance.Deactivate(17);
                     SC_instruct_op_manager.Instance.Activate(18);
-
-
-
-
                 }
+                SC_AmbiancePilot.Instance.PlayAmbiance(SC_AmbiancePilot.Ambiance.TutoRepa);
+
                 ChangeTutoGameState(TutorialState.StartRepairDisplay);
 
                 break;
@@ -281,7 +278,6 @@ public class SC_GameStates : NetworkBehaviour
                 if(isServer)
                 {
                     SC_EnemyManager.Instance.Initialize();
-                    SC_AmbiancePilot.Instance.PlayAmbiance(SC_AmbiancePilot.Ambiance.TutoFlock);
 
                 }
                 if (!isServer)
@@ -298,7 +294,8 @@ public class SC_GameStates : NetworkBehaviour
 
                     SC_TutorialUIManager.Instance.ActivateBlink(SC_TutorialUIManager.System.Reboot, false);
                 }
-                
+
+                SC_AmbiancePilot.Instance.PlayAmbiance(SC_AmbiancePilot.Ambiance.TutoFlock);
 
                 break;
 
