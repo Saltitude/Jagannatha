@@ -43,7 +43,7 @@ public class SC_SyncVar_DisplaySystem : NetworkBehaviour
     #region Var SC_WaveManager
 
     [Header("Var Wave")]
-    [SyncVar(hook = "OnDownload")]
+    [SyncVar(hook = "OnChangeWave")]
     public int curWave = 0;
 
     public void OnChangeWave(int newValue)

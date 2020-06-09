@@ -129,6 +129,7 @@ public class SC_AmbiancePilot : MonoBehaviour
 
     public void PlayAmbiance(Ambiance newAmbiance)
     {
+        Debug.Log(newAmbiance);
         curAmbiance = newAmbiance;
         //source actuel
         List<AudioSource> curSources = new List<AudioSource>();
