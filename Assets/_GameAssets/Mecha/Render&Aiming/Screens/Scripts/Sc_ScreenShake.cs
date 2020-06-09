@@ -23,6 +23,9 @@ public class Sc_ScreenShake : MonoBehaviour
     public float shakeAmount = 0.7f;
     public float decreaseFactor = 1.0f;
 
+    float maxShakeDuration = 2f;
+    bool maxShakeReach = false;
+
     Vector3 originalPos;
     Vector3 originalPosBD;
 
@@ -51,8 +54,20 @@ public class Sc_ScreenShake : MonoBehaviour
 
     public void ShakeIt(float amplitude, float duration)
     {
-        shakeAmount = amplitude;
-        shakeDuration = shakeDuration + duration;
+        if (shakeDuration < maxShakeDuration && !maxShakeReach)
+        {
+            shakeAmount = amplitude;
+            shakeDuration = shakeDuration + duration;
+        }
+        else
+        {
+            maxShakeReach = true;
+        }
+
+        if (shakeDuration <= 0)
+        {
+            maxShakeReach = false;
+        }
     }
 
     void Update()

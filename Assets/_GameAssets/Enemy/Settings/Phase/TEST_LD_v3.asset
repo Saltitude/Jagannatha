@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: TEST_LD_v3
   m_EditorClassIdentifier: 
   waves:
-  - {fileID: 11400000, guid: 527b1c50b62fd2c41b2c469f245f2693, type: 2}
+  - {fileID: 11400000, guid: 42cf993f6b9497c48a59e3c45d6f7041, type: 2}
   - {fileID: 11400000, guid: 0fc7a17a96e22ff4fbb6bcb8aead90a7, type: 2}
-  - {fileID: 11400000, guid: d5dd33d0509c99f4e98af5f319cfaf44, type: 2}
+  - {fileID: 11400000, guid: 42cf993f6b9497c48a59e3c45d6f7041, type: 2}
   - {fileID: 11400000, guid: 14e1c25d067879341afae17e4f1fba2f, type: 2}
   - {fileID: 11400000, guid: b809fb35b67bd2e428be396c86823ae6, type: 2}
   - {fileID: 11400000, guid: dcc5f8ab24cdaa5478a2ff494601d5d7, type: 2}

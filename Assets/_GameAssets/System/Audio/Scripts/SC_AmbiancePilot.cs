@@ -15,6 +15,14 @@ public class SC_AmbiancePilot : MonoBehaviour
     GameObject source;
 
     AudioSource[] soundSource;
+    bool[] sourcePlaying;
+
+    [SerializeField]
+    float ambianceVolume = 1;
+
+    [SerializeField]
+    float fadeSpeed = 1;
+
 
     int index = 0;
 
@@ -65,10 +73,12 @@ public class SC_AmbiancePilot : MonoBehaviour
     {
         AmbianceTotal = new int[8][];
         soundSource = new AudioSource[CustomSoundManager.Instance.tAmbiancePilot.Length];
-        for(int i = 0; i < CustomSoundManager.Instance.tAmbiancePilot.Length;i++)
+        sourcePlaying = new bool[soundSource.Length];
+        for (int i = 0; i < CustomSoundManager.Instance.tAmbiancePilot.Length;i++)
         {
             var tamp =  CustomSoundManager.Instance.PlayAmbiance(source, i, true, 0);
             soundSource[i] = tamp.GetComponent<AudioSource>();
+            sourcePlaying[i] = false;
         }
 
         AmbianceTotal[0] = Ambiance1;
@@ -86,7 +96,7 @@ public class SC_AmbiancePilot : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        InputTest();
+        //InputTest();
     }
 
     void InputTest()
@@ -94,11 +104,11 @@ public class SC_AmbiancePilot : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.KeypadPlus))
         {
             index++;
-            if(index > soundSource.Length-1)
+            if(index > (int)Ambiance.ClimaxMaxMax)
             {
                 index = 0;
             }
-            Debug.Log(index + " :" + soundSource[index].clip.name);
+            Debug.Log(index + " :" + (Ambiance)index);
 
         }
         if (Input.GetKeyDown(KeyCode.KeypadMinus))
@@ -106,30 +116,120 @@ public class SC_AmbiancePilot : MonoBehaviour
             index--;
             if(index < 0)
             {
-                index = soundSource.Length-1;
+                index = (int)Ambiance.ClimaxMaxMax;
             }
-            Debug.Log(index + " :" +soundSource[index].clip.name);
+            Debug.Log(index + " :" + (Ambiance)index);
         }
         if(Input.GetKeyDown(KeyCode.KeypadEnter))
         {
-            if (soundSource[index].volume == 0)
-                soundSource[index].volume = 1;
 
-            else if (soundSource[index].volume == 1)
-                soundSource[index].volume = 0;
+            PlayAmbiance((Ambiance)index);
+
+            //if (soundSource[index].volume == 0)
+            //    soundSource[index].volume = 1;
+
+            //else if (soundSource[index].volume == 1)
+            //    soundSource[index].volume = 0;
         }
     }
 
     public void PlayAmbiance(Ambiance newAmbiance)
-    {      
-        for(int i =0; i <soundSource.Length; i++)
+    {
+        //source actuel
+        List<AudioSource> curSources = new List<AudioSource>();
+        //Nouvelle sources
+        int[] newSource = AmbianceTotal[(int)newAmbiance];
+
+        //Source restant actives
+        List<AudioSource> lastingSource = new List<AudioSource>();
+
+        //Récupère toutes les sources active
+        for(int i = 0;i<soundSource.Length;i++)
         {
-            soundSource[i].volume = 0;
+            if(sourcePlaying[i])
+            {
+                curSources.Add(soundSource[i]);
+            }
         }
-        var curTab = AmbianceTotal[(int)newAmbiance];
-        for(int j = 0; j < curTab.Length; j++)
+
+        //Récupère les lasting sources et lance la désactivation des sources inutiles
+        foreach(AudioSource source in curSources)
         {
-            soundSource[curTab[j]].volume = 1;
+            bool lasting = false;
+            for(int i = 0; i< newSource.Length; i++)
+            {
+                if (source == soundSource[newSource[i]])
+                {
+                    lasting = true;
+
+
+                }
+            }
+            if(lasting)
+            {
+                lastingSource.Add(source);
+            }
+            else
+            {
+                for(int i =0;i<soundSource.Length;i++)
+                {
+                    if(source == soundSource[i])
+                    {
+                        StartCoroutine(FadeOut(i));
+                    }
+
+                }
+            }
+        }
+
+
+
+        //Play new sounds
+        for (int j = 0; j < newSource.Length; j++)
+        {
+            bool lasting = false;
+            for(int k = 0; k < lastingSource.Count;k++)
+            {
+
+                if (soundSource[newSource[j]] == lastingSource[k])
+                    lasting = true;
+            }
+            if(!lasting)
+            {
+                StartCoroutine(FadeIn(newSource[j]));
+            }
+        }
+           
+
+    }
+
+    IEnumerator FadeIn(int sourceIndex)
+    {
+        sourcePlaying[sourceIndex] = true;
+        AudioSource newSource = soundSource[sourceIndex];
+        while(newSource.volume != ambianceVolume)
+        {
+            newSource.volume += (Time.deltaTime*fadeSpeed);
+            if(newSource.volume > ambianceVolume)
+            {
+                newSource.volume = ambianceVolume;
+            }
+            yield return 0;
+        }
+    }
+
+    IEnumerator FadeOut(int sourceIndex)
+    {
+        sourcePlaying[sourceIndex] = false;
+        AudioSource newSource = soundSource[sourceIndex];
+        while (newSource.volume != 0)
+        {
+            newSource.volume -= (Time.deltaTime * fadeSpeed);
+            if (newSource.volume < 0)
+            {
+                newSource.volume = 0;
+            }
+            yield return 0;
         }
     }
 }
