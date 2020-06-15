@@ -97,8 +97,10 @@ public class SC_KoaSettingsOP : MonoBehaviour, IF_KoaForOperator, IF_Hover
 
     public void SetKoaLife(float curLife)
     {
-        this.curKoaLife = Mathf.Round(curLife);
-        if(curLife <= 0)
+        //this.curKoaLife = Mathf.Round(curLife);
+        this.curKoaLife = curLife;
+
+        if (curLife <= 0)
         {
 
             //https://www.youtube.com/watch?v=VUjn2Vs65Z8
