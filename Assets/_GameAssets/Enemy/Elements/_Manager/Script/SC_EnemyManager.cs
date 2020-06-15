@@ -74,13 +74,13 @@ public class SC_EnemyManager : MonoBehaviour
     IEnumerator ProgressUpdate(float newValue)
     {
         var i = 0;
-        Debug.Log("ProgressVal" + Progress.value + " NewVal" + newValue);
-        while (Progress.value != newValue && i <= 1000)
+        //Debug.Log("ProgressVal" + Progress.value + " NewVal" + newValue);
+        while (Progress.value <= newValue - 0.0001f && i <= 1000)
         {
             sc_syncvar.OnUpdate(true);
-            Progress.value = Mathf.Lerp(Progress.value, newValue, Time.deltaTime * 10f);
+            Progress.value = Mathf.Lerp(Progress.value, newValue, Time.deltaTime * 5f);
             sendToSynchVar(Progress.value);
-            Debug.Log("CurValue " + Progress.value);
+            //Debug.Log("CurValue " + Progress.value);
             i++;
             yield return null;
         }

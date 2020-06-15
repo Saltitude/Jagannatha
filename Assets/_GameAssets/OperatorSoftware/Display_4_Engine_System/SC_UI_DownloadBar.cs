@@ -7,6 +7,9 @@ public class SC_UI_DownloadBar : MonoBehaviour
 {
     Slider progressBar;
     bool updating = false;
+
+    [SerializeField]
+    GameObject SP_advance;
     // Start is called before the first frame update
     void Start()
     {
@@ -18,5 +21,9 @@ public class SC_UI_DownloadBar : MonoBehaviour
     {
         progressBar.value = SC_SyncVar_DisplaySystem.Instance.Progress;
         updating = SC_SyncVar_DisplaySystem.Instance.Updating;
+        if (!updating)
+            SP_advance.SetActive(false);
+        else
+            SP_advance.SetActive(true);
     }
 }
