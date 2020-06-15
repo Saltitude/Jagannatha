@@ -20,6 +20,8 @@ public class SC_UI_Reboot_btn : MonoBehaviour
     [SerializeField]
     Material breakdownMat;
     [SerializeField]
+    Material curLotusMat;
+    [SerializeField]
     GameObject warning;
     [SerializeField]
     GameObject sparkle;
@@ -34,6 +36,11 @@ public class SC_UI_Reboot_btn : MonoBehaviour
     Material[] wireSafe;
     [SerializeField]
     Material wireBreakdown;
+
+    [SerializeField]
+    Image LotusUpImg;
+    [SerializeField]
+    Image LotusDownImg;
 
     // Start is called before the first frame update
     void Start()
@@ -64,6 +71,9 @@ public class SC_UI_Reboot_btn : MonoBehaviour
                 stateInterrupteur.material = breakdownMat;
                 //warning.SetActive(true);
                 sparkle.SetActive(false);
+
+                LotusUpImg.material = breakdownMat;
+                LotusDownImg.material = breakdownMat;
                 bBlink = true;
                 if(SC_GameStates.Instance.CurState == SC_GameStates.GameState.Game)
                     SetBreakDown(0, true);
@@ -81,7 +91,9 @@ public class SC_UI_Reboot_btn : MonoBehaviour
                 bBlink = false;
                 CorouIsRunning = false;
                 SetBreakDown(0, false);
-                
+                LotusUpImg.material = curLotusMat;
+                LotusDownImg.material = curLotusMat;
+
             }
 
         }
@@ -101,7 +113,7 @@ public class SC_UI_Reboot_btn : MonoBehaviour
         CorouIsRunning = true;
         while (bBlink == true)
         {
-            SReboot.SetText("SYSTEM");
+            SReboot.SetText("PILOT");
             yield return new WaitForSeconds(0.5f);
             SReboot.SetText(" ");
             yield return new WaitForSeconds(0.5f);
