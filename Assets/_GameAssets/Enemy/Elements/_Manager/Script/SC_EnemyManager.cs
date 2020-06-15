@@ -71,7 +71,26 @@ public class SC_EnemyManager : MonoBehaviour
 
     }
 
-    void GetReferences()
+    IEnumerator ProgressUpdate(float newValue)
+    {
+        var i = 0;
+        Debug.Log("ProgressVal" + Progress.value + " NewVal" + newValue);
+        while (Progress.value != newValue && i <= 1000)
+        {
+            sc_syncvar.OnUpdate(true);
+            Progress.value = Mathf.Lerp(Progress.value, newValue, Time.deltaTime * 10f);
+            sendToSynchVar(Progress.value);
+            Debug.Log("CurValue " + Progress.value);
+            i++;
+            yield return null;
+        }
+        sendToSynchVar(Progress.value);
+        sc_syncvar.OnUpdate(false);
+        yield return null;
+
+    }
+
+        void GetReferences()
     {
         if (Mng_SyncVar == null)
             Mng_SyncVar = GameObject.FindGameObjectWithTag("Mng_SyncVar");

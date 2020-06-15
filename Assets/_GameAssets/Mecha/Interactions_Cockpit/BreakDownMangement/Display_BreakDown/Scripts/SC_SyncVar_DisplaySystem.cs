@@ -32,10 +32,16 @@ public class SC_SyncVar_DisplaySystem : NetworkBehaviour
     [Header("Var Download")]
     [SyncVar(hook = "OnDownload")]
     public float Progress = 0;
+    [SyncVar(hook = "OnUpdate")]
+    public bool Updating = false;
 
     public void OnDownload(float newValue)
     {
         Progress = newValue;
+    }
+    public void OnUpdate(bool newBool)
+    {
+        Updating = newBool;
     }
 
     #endregion Var SC_EnemyManager

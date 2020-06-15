@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class SC_UI_DownloadBar : MonoBehaviour
 {
     Slider progressBar;
+    bool updating = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -16,5 +17,6 @@ public class SC_UI_DownloadBar : MonoBehaviour
     void Update()
     {
         progressBar.value = SC_SyncVar_DisplaySystem.Instance.Progress;
+        updating = SC_SyncVar_DisplaySystem.Instance.Updating;
     }
 }
