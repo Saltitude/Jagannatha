@@ -5021,9 +5021,9 @@ MonoBehaviour:
   - serializedVersion: 2
     rgba: 4278273277
   - serializedVersion: 2
-    rgba: 4278190335
+    rgba: 4285477375
   - serializedVersion: 2
-    rgba: 4279107839
+    rgba: 4280031721
   Tab_colorSpawn:
   - serializedVersion: 2
     rgba: 4294792872
@@ -5032,9 +5032,9 @@ MonoBehaviour:
   - serializedVersion: 2
     rgba: 4278283261
   - serializedVersion: 2
-    rgba: 4281545215
+    rgba: 4287836671
   - serializedVersion: 2
-    rgba: 4278321407
+    rgba: 4280031721
   colorCTA:
     serializedVersion: 2
     rgba: 4290965759
@@ -5043,7 +5043,7 @@ MonoBehaviour:
     type: 3}
   VFX_clicOnMe: {fileID: 7236235277087340786, guid: 915a5a8466db6ff458f9226bcd129ba1,
     type: 3}
-  timeBeforeCallToAction: 20
+  timeBeforeCallToAction: 2
 --- !u!135 &9208746028493815770
 SphereCollider:
   m_ObjectHideFlags: 0

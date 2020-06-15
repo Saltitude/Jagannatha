@@ -4945,7 +4945,7 @@ Transform:
   m_GameObject: {fileID: 7406684084623344483}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 20, y: 20, z: 20}
+  m_LocalScale: {x: 15, y: 15, z: 15}
   m_Children:
   - {fileID: 1814169529051092201}
   m_Father: {fileID: 2568608992375402328}
@@ -5021,9 +5021,9 @@ MonoBehaviour:
   - serializedVersion: 2
     rgba: 4278273277
   - serializedVersion: 2
-    rgba: 4278190335
+    rgba: 4285477375
   - serializedVersion: 2
-    rgba: 4279107839
+    rgba: 4280031721
   Tab_colorSpawn:
   - serializedVersion: 2
     rgba: 4294792872
@@ -5032,9 +5032,9 @@ MonoBehaviour:
   - serializedVersion: 2
     rgba: 4278283261
   - serializedVersion: 2
-    rgba: 4281545215
+    rgba: 4287836671
   - serializedVersion: 2
-    rgba: 4278321407
+    rgba: 4280031721
   colorCTA:
     serializedVersion: 2
     rgba: 4290965759
