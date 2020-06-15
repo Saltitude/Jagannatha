@@ -33,6 +33,7 @@ public class SC_JoystickMove : MonoBehaviour, IF_BreakdownSystem
     public float f_Duration = 0.5f;
     [SerializeField]
     AnimationCurve Acceleration;
+    Coroutine CurMovementCoro;
 
     [Header("Acceleration Coroutine Infos")]
     public Dir CurDir = Dir.None;
@@ -298,18 +299,30 @@ public class SC_JoystickMove : MonoBehaviour, IF_BreakdownSystem
 
             if(CurBrokenDir == CurDir)
             {
+
                 if (b_UseCoroutine && CurDir != TargetDir && CoroDir != TargetDir && n_BreakDownLvl < 3)
+                {
+                    //Debug.Log("CheckDir01");
                     CheckDir();
+                }
+                    
                 else if ( ( !b_UseCoroutine || ( CoroDir == Dir.Off && CurDir == TargetDir ) ) && n_BreakDownLvl < 2 )
                     transform.rotation = Quaternion.Slerp(transform.rotation, TargetRotY, f_LerpRotZ);
+
             }
 
             else
             {
+
                 if (b_UseCoroutine && CurDir != TargetDir && CoroDir != TargetDir)
+                {
+                    //Debug.Log("CheckDir02");
                     CheckDir();
+                }      
+                
                 else if (!b_UseCoroutine || (CoroDir == Dir.Off && CurDir == TargetDir))
                     transform.rotation = Quaternion.Slerp(transform.rotation, TargetRotY, f_LerpRotZ);
+
             }        
 
         }
@@ -317,11 +330,18 @@ public class SC_JoystickMove : MonoBehaviour, IF_BreakdownSystem
         //Pas de Direction
         else
         {
+
             TargetDir = Dir.None;
             TargetRotY = this.transform.rotation;
+
             if (b_UseCoroutine && CurDir != TargetDir && CoroDir != TargetDir)
+            {
+                //Debug.Log("CheckDir03");
                 CheckDir();
+            }
+                
             CurImpulse = 0; 
+
         }
 
     }
@@ -332,13 +352,23 @@ public class SC_JoystickMove : MonoBehaviour, IF_BreakdownSystem
 
     void CheckDir()
     {
-        StopAllCoroutines();
+
+        if(CurMovementCoro != null)
+            StopCoroutine(CurMovementCoro);
+
         if (TargetDir == Dir.None)
-            StartCoroutine(GoTargetRot(f_Duration, Dir.None));
+        {
+            CurMovementCoro = StartCoroutine(GoTargetRot(f_Duration, Dir.None));
+        }         
         else if (CurDir == Dir.None)
-            StartCoroutine(GoTargetRot(f_Duration, TargetDir));
+        {
+            CurMovementCoro = StartCoroutine(GoTargetRot(f_Duration, TargetDir));
+        }
         else
-            StartCoroutine(GoTargetRot(f_Duration*2, TargetDir));
+        {
+            CurMovementCoro = StartCoroutine(GoTargetRot(f_Duration * 2, TargetDir));
+        }
+            
     }
 
     IEnumerator GoTargetRot(float Duration, Dir ToDir)
@@ -346,6 +376,8 @@ public class SC_JoystickMove : MonoBehaviour, IF_BreakdownSystem
 
         CoroDir = ToDir;
         SC_SyncVar_MovementSystem.Instance.CoroDir = CoroDir;
+
+        SetCurDir(ToDir);
 
         float t = 0;
         float rate = 1 / Duration;
@@ -364,8 +396,10 @@ public class SC_JoystickMove : MonoBehaviour, IF_BreakdownSystem
 
         }
 
-        SetCurDir(ToDir);
+        
+
         CoroDir = Dir.Off;
+
         SC_SyncVar_MovementSystem.Instance.CoroDir = CoroDir;
 
     }
