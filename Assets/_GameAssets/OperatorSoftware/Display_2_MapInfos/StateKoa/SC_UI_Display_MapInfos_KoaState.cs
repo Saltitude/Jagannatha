@@ -139,7 +139,9 @@ public class SC_UI_Display_MapInfos_KoaState : MonoBehaviour
 
                 _triangle.b_Init = false;
 
-                fKoaLife = (curKoaScriptKoaSettings.GetCurKoaLife() / curKoaScriptKoaSettings.GetMaxKoaLife()) * 100;
+                //Old Version
+                //fKoaLife = (curKoaScriptKoaSettings.GetCurKoaLife() / curKoaScriptKoaSettings.GetMaxKoaLife()) * 100;
+                fKoaLife = Mathf.Round(curKoaScriptKoaSettings.GetCurKoaLife() * 10);
 
                 koaLife.text = fKoaLife.ToString();
                 life.simpleValue = fKoaLife/100;
