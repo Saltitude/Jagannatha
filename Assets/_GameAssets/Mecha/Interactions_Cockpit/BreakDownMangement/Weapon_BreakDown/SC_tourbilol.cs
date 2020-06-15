@@ -75,7 +75,7 @@ public class SC_tourbilol : MonoBehaviour, IInteractible
 
         curRot = this.transform.localEulerAngles.z;
 
-        if (Mathf.Abs(oldRot - curRot) < 260)
+        if (Mathf.Abs(oldRot - curRot) < 260 && isEnPanne)
             totalAngle += oldRot - curRot;
 
 
