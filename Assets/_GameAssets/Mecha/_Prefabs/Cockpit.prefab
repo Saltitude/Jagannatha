@@ -7842,6 +7842,11 @@ PrefabInstance:
       propertyPath: UmptyTheBoss
       value: 
       objectReference: {fileID: 3070051240909563585}
+    - target: {fileID: 5319593709105597607, guid: 0a877c1a56a7ed544b9ebda4a87461dd,
+        type: 3}
+      propertyPath: HumptyTheBoss
+      value: 
+      objectReference: {fileID: 3070051240909563585}
     - target: {fileID: 5368374909636787982, guid: 0a877c1a56a7ed544b9ebda4a87461dd,
         type: 3}
       propertyPath: m_Mesh
