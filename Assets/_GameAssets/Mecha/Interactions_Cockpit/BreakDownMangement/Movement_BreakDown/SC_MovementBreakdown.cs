@@ -117,7 +117,7 @@ public class SC_MovementBreakdown : MonoBehaviour, IF_BreakdownManager
 
         SendSequences();
 
-        if (SC_GameStates.Instance.CurState == SC_GameStates.GameState.Tutorial && tab_BreakdownSequence[0] != tab_BreakdownSequence[2])
+        if (SC_GameStates.Instance.CurState != SC_GameStates.GameState.Game && tab_BreakdownSequence[0] != tab_BreakdownSequence[2])
             SetSequences();
 
         //Call les Cords
