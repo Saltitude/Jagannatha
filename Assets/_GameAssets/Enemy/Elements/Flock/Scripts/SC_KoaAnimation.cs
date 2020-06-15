@@ -9,7 +9,10 @@ public class SC_KoaAnimation : MonoBehaviour
     Color color;
 
     Transform papa;
-    
+
+
+    [SerializeField]
+    bool boss = false;
     // Start is called before the first frame update
 
     Renderer[] renderer;
@@ -23,10 +26,12 @@ public class SC_KoaAnimation : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
-        for (int i = 0; i < renderer.Length; i++)
+        if(!boss)
         {
-            renderer[i].material.SetColor("_EmissionColor", color);
+            for (int i = 0; i < renderer.Length; i++)
+            {
+                renderer[i].material.SetColor("_EmissionColor", color);
+            }
         }
     }
 }
