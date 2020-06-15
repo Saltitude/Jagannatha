@@ -11,7 +11,6 @@ public class SC_AmbiancePilot : MonoBehaviour
 
     #endregion
 
-    [SerializeField]
     GameObject source;
 
     AudioSource[] soundSource;
@@ -75,6 +74,7 @@ public class SC_AmbiancePilot : MonoBehaviour
 
     void Start()
     {
+        source = gameObject;
         AmbianceTotal = new int[8][];
         soundSource = new AudioSource[CustomSoundManager.Instance.tAmbiancePilot.Length];
         sourcePlaying = new bool[soundSource.Length];
@@ -129,7 +129,6 @@ public class SC_AmbiancePilot : MonoBehaviour
 
     public void PlayAmbiance(Ambiance newAmbiance)
     {
-        Debug.Log(newAmbiance);
         curAmbiance = newAmbiance;
         //source actuel
         List<AudioSource> curSources = new List<AudioSource>();
