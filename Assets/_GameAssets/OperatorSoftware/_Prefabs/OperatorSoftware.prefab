@@ -12086,6 +12086,11 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 5250783643333583546, guid: 91a3de5b1511ac644aa9cc9fa3631323,
+        type: 3}
+      propertyPath: playOnAwake
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5630489915148899228, guid: 91a3de5b1511ac644aa9cc9fa3631323,
         type: 3}
       propertyPath: m_Mesh
@@ -12135,6 +12140,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.z
       value: 4.986417
+      objectReference: {fileID: 0}
+    - target: {fileID: 6465431526684382190, guid: 91a3de5b1511ac644aa9cc9fa3631323,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6993432904231128526, guid: 91a3de5b1511ac644aa9cc9fa3631323,
         type: 3}
@@ -12349,6 +12359,11 @@ PrefabInstance:
     - target: {fileID: 8617431384176153266, guid: 91a3de5b1511ac644aa9cc9fa3631323,
         type: 3}
       propertyPath: looping
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8617431384176153266, guid: 91a3de5b1511ac644aa9cc9fa3631323,
+        type: 3}
+      propertyPath: playOnAwake
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8666301254745679502, guid: 91a3de5b1511ac644aa9cc9fa3631323,

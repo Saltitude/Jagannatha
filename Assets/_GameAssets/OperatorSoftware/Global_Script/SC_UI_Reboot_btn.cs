@@ -24,7 +24,7 @@ public class SC_UI_Reboot_btn : MonoBehaviour
     [SerializeField]
     GameObject warning;
     [SerializeField]
-    GameObject sparkle;
+    ParticleSystem sparkle;
     [SerializeField]
     TextMeshProUGUI SReboot;
     bool bBlink = false;
@@ -42,6 +42,10 @@ public class SC_UI_Reboot_btn : MonoBehaviour
     [SerializeField]
     Image LotusDownImg;
 
+
+    bool firstReboot = false;
+
+    bool curReboot = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -55,6 +59,10 @@ public class SC_UI_Reboot_btn : MonoBehaviour
             wireSafe[i] = img_ToBreakDown[i].material;
         }
         //StartCoroutine(RedWireCoro());
+        if (sc_syncvar != null)
+        {
+            curReboot = sc_syncvar.mustReboot;
+        }
     }
 
     // Update is called once per frame
@@ -65,36 +73,50 @@ public class SC_UI_Reboot_btn : MonoBehaviour
 
         if (sc_syncvar != null)
         {
-            if (sc_syncvar.mustReboot)
+            if(curReboot != sc_syncvar.mustReboot)
             {
-                //Debug.Log("OP : Must Reboot");
-                stateInterrupteur.material = breakdownMat;
-                //warning.SetActive(true);
-                sparkle.SetActive(false);
+                if (sc_syncvar.mustReboot)
+                {
+                    //Debug.Log("OP : Must Reboot");
+                    stateInterrupteur.material = breakdownMat;
+                    //warning.SetActive(true);
+                    sparkle.Stop();
 
-                LotusUpImg.material = breakdownMat;
-                LotusDownImg.material = breakdownMat;
-                bBlink = true;
-                if(SC_GameStates.Instance.CurState == SC_GameStates.GameState.Game)
-                    SetBreakDown(0, true);
-                if (!CorouIsRunning)
-                    StartCoroutine(BlinkSystem());
+                    LotusUpImg.material = breakdownMat;
+                    LotusDownImg.material = breakdownMat;
+                    bBlink = true;
+                    if (SC_GameStates.Instance.CurState == SC_GameStates.GameState.Game)
+                        SetBreakDown(0, true);
+                    if (!CorouIsRunning)
+                        StartCoroutine(BlinkSystem());
 
+
+                }
+                else
+                {
+                    //Debug.Log(" OP : No need reboot");
+                    stateInterrupteur.material = curMat;
+                    //warning.SetActive(false);
+                    if (firstReboot == false && SC_GameStates.Instance.CurTutoState >= SC_GameStates.TutorialState.Reboot)
+                    {
+                        firstReboot = true;
+                        sparkle.gameObject.SetActive(true);
+                    }
+                    if (firstReboot)
+                    {
+                        sparkle.Stop();
+                        sparkle.Play();
+                    }
+                    bBlink = false;
+                    CorouIsRunning = false;
+                    SetBreakDown(0, false);
+                    LotusUpImg.material = curLotusMat;
+                    LotusDownImg.material = curLotusMat;
+                }
+                curReboot = sc_syncvar.mustReboot;
 
             }
-            else
-            {
-                //Debug.Log(" OP : No need reboot");
-                stateInterrupteur.material = curMat;
-                //warning.SetActive(false);
-                sparkle.SetActive(true);
-                bBlink = false;
-                CorouIsRunning = false;
-                SetBreakDown(0, false);
-                LotusUpImg.material = curLotusMat;
-                LotusDownImg.material = curLotusMat;
 
-            }
 
         }
     }
