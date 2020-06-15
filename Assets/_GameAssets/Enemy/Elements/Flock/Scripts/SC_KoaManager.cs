@@ -131,16 +131,22 @@ public class SC_KoaManager : MonoBehaviour
 
             case FlockSettings.AttackType.Boss:
 
-                koaCharID = "SUPERBOSSKILLERDEADDEADEAD";
+                koaCharID = "Boss";
                 type = 4;
                 changeSensitivity = true;
                 break;
+        }           
+     
+
+        if(flockSettings.attackType == FlockSettings.AttackType.Boss)
+        {
+            koaID = koaCharID;
         }
 
-        koaNumID = SC_BoidPool.Instance.GetFlockID();
-        if (flockSettings.attackType != FlockSettings.AttackType.Boss)
-            koaID = koaCharID + " #" + koaNumID;
-        else koaID = koaCharID;
+        else
+        {
+                koaID = koaCharID + " #" + koaNumID;
+        }
 
         //Instanciation des list de Boid et de Guide
         _boidsTab = SC_BoidPool.Instance.GetBoid(curFlockSettings.maxBoid);
@@ -157,12 +163,17 @@ public class SC_KoaManager : MonoBehaviour
         respawnTimer = 0;
         if (_koaPrefab != null)
         {
-            _koa = NetPSpawnKoa.SpawnKoa();
+            if (flockSettings.attackType == FlockSettings.AttackType.Boss)
+            {
+                _koa = NetPSpawnKoa.SpawnKoa(true);
+            }
+            else _koa = NetPSpawnKoa.SpawnKoa(false);
+
+
             _koa.transform.position = transform.position;
             _koa.GetComponent<SC_KoaCollider>().Initialize(this);
 
             flockManager.KoaMainAnimator = _koa.transform.GetChild(0).GetComponent<Animator>();
-
             koaEmissiveAnimator  = _koa.transform.GetChild(0).GetChild(0).GetComponent<Animator>();
             flockManager.KoaEmissiveAnimator = koaEmissiveAnimator;
 
@@ -170,11 +181,12 @@ public class SC_KoaManager : MonoBehaviour
 
             syncVarKoa = _koa.GetComponent<SC_MoveKoaSync>();
             flockManager.moveKoaSync = syncVarKoa;
+
             syncVarKoa.InitOPKoaSettings(sensitivity, flockSettings.spawnTimer, koaID, KoaLife, maxLife, type, newGuide);
             syncVarKoa.curboidNumber = spawnCount;
             syncVarKoa.curboidNumber = flockSettings.maxBoid;
-            if (flockSettings.attackType == FlockSettings.AttackType.Boss)
-                syncVarKoa.SetBiggerMeshBoss(2);
+            //if (flockSettings.attackType == FlockSettings.AttackType.Boss)
+            //    syncVarKoa.SetBiggerMeshBoss(2);
         }
 
     }

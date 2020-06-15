@@ -54,21 +54,21 @@ public class SC_MoveKoaSync : NetworkBehaviour
         }
     }
 
-    public void SetBiggerMeshBoss(float scale)
-    {
-        if(isServer)
-        {
-            mr_P.transform.localScale *= scale;
-            RpcSendVt3Scale(scale);
-        }
-    }
+    //public void SetBiggerMeshBoss(float scale)
+    //{
+    //    if(isServer)
+    //    {
+    //        mr_P.transform.localScale *= scale;
+    //        RpcSendVt3Scale(scale);
+    //    }
+    //}
 
-    [ClientRpc]
-    public void RpcSendVt3Scale(float scaleFactor)
-    {
-        if (!isServer)
-            mr_OP.transform.localScale *= scaleFactor;
-    }
+    //[ClientRpc]
+    //public void RpcSendVt3Scale(float scaleFactor)
+    //{
+    //    if (!isServer)
+    //        mr_OP.transform.localScale *= scaleFactor;
+    //}
 
     // Update is called once per frame
     void Update()
