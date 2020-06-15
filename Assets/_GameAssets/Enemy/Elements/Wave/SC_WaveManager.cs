@@ -403,7 +403,7 @@ public class SC_WaveManager : MonoBehaviour
         float z = Mathf.Abs(newValue.z - pilotValue.z);
 
         float ecart = x + y + z;
-        if (ecart <= 3)
+        if (ecart <= 6)
         {
             newValue = GenerateSensitivityP();
         }
