@@ -267,9 +267,10 @@ public class SC_breakdown_displays_screens : MonoBehaviour
             CustomSoundManager.Instance.PlaySound(gameObject, "SFX_p_ScreenActivated", false, 0.1f);
         }
 
-        else
+        else if (SC_GameStates.Instance.CurState != SC_GameStates.GameState.GameEnd)
             PannePartielleDisplay();
 
+        if (SC_GameStates.Instance.CurState != SC_GameStates.GameState.GameEnd)
         for (int i = 0; i < tab_screens_renderers.Length; i++)
         {
             SetScreenState(i, false);
@@ -312,7 +313,7 @@ public class SC_breakdown_displays_screens : MonoBehaviour
             curNbPanne--;
         }
 
-
+        
         tab_screens_renderers[index].enabled = state;
     }
 

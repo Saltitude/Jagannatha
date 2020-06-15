@@ -1250,13 +1250,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   stateInterrupteur: {fileID: 2217822615184469940}
   curMat: {fileID: 2100000, guid: e8bd79c6418a4bb4fb755576a64840ca, type: 2}
-  breakdownMat: {fileID: 2100000, guid: 97e03cbd94065564ea4d3417797d06e4, type: 2}
+  breakdownMat: {fileID: 2100000, guid: b9f230053010021498f9c5f556b4708f, type: 2}
+  curLotusMat: {fileID: 2100000, guid: 0c26cdcba3d1efb47b8b2484603ab46a, type: 2}
   warning: {fileID: 1088212967967876223}
-  sparkle: {fileID: 5883854141428617169}
+  sparkle: {fileID: 2178415711931756921}
   SReboot: {fileID: 4937397997871983983}
   img_ToBreakDown:
   - {fileID: 543081058379654059}
   wireBreakdown: {fileID: 2100000, guid: 88ce785e5a9aa354d975291f072728a5, type: 2}
+  LotusUpImg: {fileID: 577403637638793106}
+  LotusDownImg: {fileID: 3599333417310539658}
 --- !u!1 &5971105819087256075
 GameObject:
   m_ObjectHideFlags: 0
@@ -3333,7 +3336,7 @@ PrefabInstance:
     - target: {fileID: 1449074127440727917, guid: 8a55f547b3bc9dc48902990f4dd81dbc,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4637082232500015576, guid: 8a55f547b3bc9dc48902990f4dd81dbc,
         type: 3}
@@ -3470,6 +3473,11 @@ PrefabInstance:
       propertyPath: ShapeModule.m_Position.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6593492623612342725, guid: 8a55f547b3bc9dc48902990f4dd81dbc,
+        type: 3}
+      propertyPath: playOnAwake
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7688259979476252964, guid: 8a55f547b3bc9dc48902990f4dd81dbc,
         type: 3}
       propertyPath: m_AnchoredPosition.x
@@ -3482,9 +3490,9 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8a55f547b3bc9dc48902990f4dd81dbc, type: 3}
---- !u!1 &5883854141428617169 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1449074127440727917, guid: 8a55f547b3bc9dc48902990f4dd81dbc,
+--- !u!198 &2178415711931756921 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 6593492623612342725, guid: 8a55f547b3bc9dc48902990f4dd81dbc,
     type: 3}
   m_PrefabInstance: {fileID: 5024753944627249340}
   m_PrefabAsset: {fileID: 0}

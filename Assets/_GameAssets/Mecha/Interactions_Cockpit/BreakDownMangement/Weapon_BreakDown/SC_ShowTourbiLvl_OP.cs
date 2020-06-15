@@ -39,6 +39,18 @@ public class SC_ShowTourbiLvl_OP : MonoBehaviour
     GameObject sparkleUmTara;
     [SerializeField]
     GameObject sparkleChenRezig;
+
+
+
+
+    [SerializeField]
+    Image slider1flecheGauche;
+    [SerializeField]
+    Image slider1flecheDroite;
+    [SerializeField]
+    Image slider2flecheGauche;
+    [SerializeField]
+    Image slider2flecheDroite;
     void Start()
     {
 
@@ -88,7 +100,26 @@ public class SC_ShowTourbiLvl_OP : MonoBehaviour
                         SetWireBlink();
                     }
 
-                    break;
+                    if (SC_SyncVar_BreakdownWeapon.Instance.SL_Tourbilols[i].valueWanted == -1 && SC_SyncVar_BreakdownWeapon.Instance.SL_Tourbilols[i].isEnPanne)
+                    {
+                        slider1flecheGauche.enabled = false;
+                        slider1flecheDroite.enabled = true;
+
+                    }
+                    else if (SC_SyncVar_BreakdownWeapon.Instance.SL_Tourbilols[i].valueWanted == 1 && SC_SyncVar_BreakdownWeapon.Instance.SL_Tourbilols[i].isEnPanne)
+                    {
+                        slider1flecheGauche.enabled = true;
+                        slider1flecheDroite.enabled = false;
+
+                    }
+                    else
+                    {
+                        slider1flecheGauche.enabled = false;
+                        slider1flecheDroite.enabled = false;
+                    }
+
+
+                break;
 
                 case 1:
 
@@ -105,7 +136,28 @@ public class SC_ShowTourbiLvl_OP : MonoBehaviour
                         SetWireBlink();
                     }
 
-                    break;
+
+
+                    if (SC_SyncVar_BreakdownWeapon.Instance.SL_Tourbilols[i].valueWanted == -1 && SC_SyncVar_BreakdownWeapon.Instance.SL_Tourbilols[i].isEnPanne)
+                    {
+                        slider2flecheGauche.enabled = false;
+                        slider2flecheDroite.enabled = true;
+
+                    }
+                    else if (SC_SyncVar_BreakdownWeapon.Instance.SL_Tourbilols[i].valueWanted == 1 && SC_SyncVar_BreakdownWeapon.Instance.SL_Tourbilols[i].isEnPanne)
+                    {
+                        slider2flecheGauche.enabled = true;
+                        slider2flecheDroite.enabled = false;
+
+                    }
+                    else
+                    {
+                        slider2flecheGauche.enabled = false;
+                        slider2flecheDroite.enabled = false;
+                    }
+
+
+               break;
             }
     
 
@@ -127,6 +179,13 @@ public class SC_ShowTourbiLvl_OP : MonoBehaviour
 
             //On rescale la barre selon cette valeur
             tab_TorbiBar[i].SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, CurrentValue * f_MaxLenght);
+
+            
+
+
+
+
+
 
         }
     }
