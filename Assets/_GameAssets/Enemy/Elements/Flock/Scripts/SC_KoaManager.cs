@@ -463,9 +463,14 @@ public class SC_KoaManager : MonoBehaviour
                 }
                 SC_HitMarker.Instance.HitMark(SC_HitMarker.HitType.Koa);
 
-                vfx_Hit.Play();
+                if(!vfx_Hit.isPlaying)
+                {
+                    vfx_Hit.Stop();
+                    vfx_Hit.Play();
 
-                if(KoaLife <=5 && changeSensitivity)
+                }
+
+                if (KoaLife <=5 && changeSensitivity)
                 {
                     changeSensitivity = false;
                     sensitivity = SC_WaveManager.Instance.GenerateSensitivityP();
