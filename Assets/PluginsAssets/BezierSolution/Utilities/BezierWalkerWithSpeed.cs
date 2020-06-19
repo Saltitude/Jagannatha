@@ -72,6 +72,12 @@ namespace BezierSolution
             }
         }
 
+
+        public void SetNewTarget(GameObject newTarget)
+        {
+            target = newTarget;
+        }
+
         /// <summary>
         /// Effectue le déplacement sur la spline actuel, code conçu par les auteurs du plugg-in, ne pas me demandé
         /// </summary>
