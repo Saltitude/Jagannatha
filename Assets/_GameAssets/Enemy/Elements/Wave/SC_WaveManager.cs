@@ -229,9 +229,10 @@ public class SC_WaveManager : MonoBehaviour
                 _FlockList.RemoveAt(i);
                 if (SC_GameStates.Instance.CurState == SC_GameStates.GameState.Game)
                 {
-
-                    SC_EnemyManager.Instance.Progress.value += 100 * 1f / SC_KoaSpawn.Instance.nb_totalFlock;
-                    SC_EnemyManager.Instance.sendToSynchVar(SC_EnemyManager.Instance.Progress.value);
+                    //Debug.Log(SC_EnemyManager.Instance.Progress.value);
+                    //SC_EnemyManager.Instance.Progress.value += 100 * 1f / SC_KoaSpawn.Instance.nb_totalFlock;
+                    //Debug.Log(SC_EnemyManager.Instance.Progress.value += 100 * 1f / SC_KoaSpawn.Instance.nb_totalFlock);
+                    SC_EnemyManager.Instance.StartCoroutine("ProgressUpdate",SC_EnemyManager.Instance.Progress.value + 100 * 1f / SC_KoaSpawn.Instance.nb_totalFlock);
                 }
 
             }
