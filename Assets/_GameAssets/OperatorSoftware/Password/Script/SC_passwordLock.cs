@@ -170,7 +170,7 @@ public class SC_passwordLock : MonoBehaviour
     public void validatePassword()
     {
         textFeedbackFunction("Valid address", new Color32(0, 255, 0, 255)); //Feedback textuel vert
-        CustomSoundManager.Instance.PlaySound(gameObject, "SFX_o_opening", false, 0.4f);
+        //CustomSoundManager.Instance.PlaySound(gameObject, "SFX_o_opening", false, 0.4f);
     }
 
     void failPassword()
