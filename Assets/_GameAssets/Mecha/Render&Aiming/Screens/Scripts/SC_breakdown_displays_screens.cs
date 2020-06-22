@@ -32,6 +32,8 @@ public class SC_breakdown_displays_screens : MonoBehaviour
     public int curNbPanne = 0;
     public int CurNbOfScreenBreak = 0;
 
+    GameObject SFX_ScreenStart;
+
     [SerializeField]
     GameObject sphereReturnCacheMisere;
 
@@ -118,6 +120,7 @@ public class SC_breakdown_displays_screens : MonoBehaviour
             StartCoroutine(BlinkScreen(i));
             rnd = Random.Range(0.1f, 0.5f);
             yield return new WaitForSeconds(rnd);
+            CustomSoundManager.Instance.PlaySound(gameObject, "SFX_p_ScreenStart", false, 1f, false, 0.3f);
         }
         yield return new WaitForSeconds(1);
         StopAllCoroutines();
@@ -133,8 +136,6 @@ public class SC_breakdown_displays_screens : MonoBehaviour
         changeScreenMat(ScreenState.Tuto, index);
         yield return new WaitForSeconds(0.1f);
         changeScreenMat(ScreenState.TutoDisplayRepared, index);
-
-
     }
 
 
