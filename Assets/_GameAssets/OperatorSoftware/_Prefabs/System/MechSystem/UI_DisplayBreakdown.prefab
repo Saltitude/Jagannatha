@@ -678,7 +678,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -326.6, y: -182.6}
+  m_AnchoredPosition: {x: -336.2, y: -186.1}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3412070851155925772
@@ -707,9 +707,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'A
-
-'
+  m_text: eka
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: f254d3ab903532946addd2c496d7ba8d, type: 2}
   m_sharedMaterial: {fileID: 21159276106309786, guid: f254d3ab903532946addd2c496d7ba8d,
@@ -738,8 +736,8 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 45
-  m_fontSizeBase: 45
+  m_fontSize: 36
+  m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -776,12 +774,12 @@ MonoBehaviour:
   m_firstVisibleCharacter: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 155.32411, w: 0}
+  m_margin: {x: 0, y: 0, z: 101.05953, w: 0}
   m_textInfo:
     textComponent: {fileID: 2144572826326840366}
-    characterCount: 2
+    characterCount: 3
     spriteCount: 0
-    spaceCount: 1
+    spaceCount: 0
     wordCount: 1
     linkCount: 0
     lineCount: 1
@@ -3339,7 +3337,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 16, y: -182.6}
+  m_AnchoredPosition: {x: 0.9, y: -186.5}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4153259691620992363
@@ -3368,7 +3366,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'C
+  m_text: 'tri
 
 '
   m_isRightToLeft: 0
@@ -3399,8 +3397,8 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 45
-  m_fontSizeBase: 45
+  m_fontSize: 36
+  m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -3437,10 +3435,10 @@ MonoBehaviour:
   m_firstVisibleCharacter: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 155.32411, w: 0}
+  m_margin: {x: 0, y: 0, z: 111.31226, w: 0}
   m_textInfo:
     textComponent: {fileID: 4507381398507668803}
-    characterCount: 2
+    characterCount: 4
     spriteCount: 0
     spaceCount: 1
     wordCount: 1
@@ -8157,7 +8155,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &7070655555890904675
 RectTransform:
   m_ObjectHideFlags: 0
@@ -9631,7 +9629,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -157.00002, y: -182.6}
+  m_AnchoredPosition: {x: -157.00002, y: -186.1}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2611550807708628304
@@ -9660,9 +9658,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'B
-
-'
+  m_text: dva
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: f254d3ab903532946addd2c496d7ba8d, type: 2}
   m_sharedMaterial: {fileID: 21159276106309786, guid: f254d3ab903532946addd2c496d7ba8d,
@@ -9691,8 +9687,8 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 45
-  m_fontSizeBase: 45
+  m_fontSize: 36
+  m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -9729,12 +9725,12 @@ MonoBehaviour:
   m_firstVisibleCharacter: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 155.32411, w: 0}
+  m_margin: {x: 0, y: 0, z: 113.58468, w: 0}
   m_textInfo:
     textComponent: {fileID: 8355346680150534967}
-    characterCount: 2
+    characterCount: 3
     spriteCount: 0
-    spaceCount: 1
+    spaceCount: 0
     wordCount: 1
     linkCount: 0
     lineCount: 1
