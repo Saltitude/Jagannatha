@@ -71,18 +71,21 @@ public class Sc_LaserFeedBack : MonoBehaviour
 
     private void Update()
     {
-        if (SFX_LaserBeam != null)
+        if (SFX_LaserBeam != null && !SFX_LaserBeam.isPlaying)
         {
+            //Debug.Log("is not playing no null");
+            //Debug.Log(SoundSourceNumb);
             //SFX_LaserBeam.transform.position = new Vector3(Laser.transform.position.x, -1000, Laser.transform.position.z);
             //Debug.Log(SFX_LaserBeam.transform.position);
         }
+
     }
     public void EnableLaser(RaycastHit hit)
     {
         if (SoundSourceNumb == 0)
         {
             //SFX_LaserBeam = CustomSoundManager.Instance.PlaySound(gameObject, "SFX_p_isShooting", true, 0.5f);
-            Debug.Log("EnableLaser");
+            //Debug.Log("EnableLaser");
             StartCoroutine(PlayLaserSound());
             SoundSourceNumb += 1;
             
@@ -96,11 +99,11 @@ public class Sc_LaserFeedBack : MonoBehaviour
         if(SFX_LaserBeam != null && SFX_LaserBeam.isPlaying/*&& SFX_LaserBeam.GetComponent<AudioSource>().isPlaying*/)
         {
             //SFX_LaserBeam.GetComponent<AudioSource>().Stop();
-            Debug.Log("DisableLaser");
+            //Debug.Log("DisableLaser");
+            StopAllCoroutines();
             StartCoroutine(StopLaserSound());
-
-            SoundSourceNumb = 0;
         }
+        SoundSourceNumb = 0;
         Kahme.SetBool("IsFire", false);
     }
 
@@ -108,21 +111,23 @@ public class Sc_LaserFeedBack : MonoBehaviour
     {
         SFX_LaserBeam.clip = LaserStart;
         SFX_LaserBeam.Play();
-        Debug.Log("PlayStart");
+        //Debug.Log("PlayStart");
         yield return new WaitForSeconds(SFX_LaserBeam.clip.length);
-        Debug.Log("PlayLoop");
+        //Debug.Log("PlayLoop");
+        SFX_LaserBeam.loop = true;
         SFX_LaserBeam.clip = LaserLoop;
         SFX_LaserBeam.Play();
+        yield return null;
     }
         IEnumerator StopLaserSound()
     {
         //SFX_LaserBeam.loop = false;
         SFX_LaserBeam.clip = LaserEnd;
         SFX_LaserBeam.Play();
-        Debug.Log("PlayStop");
+        //Debug.Log("PlayStop");
         yield return new WaitForSeconds(SFX_LaserBeam.clip.length);
         SFX_LaserBeam.Stop();
-        Debug.Log("Stop");
+        //Debug.Log("Stop");
     }
 
 
