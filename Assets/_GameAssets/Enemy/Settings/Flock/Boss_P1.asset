@@ -32,6 +32,7 @@ MonoBehaviour:
   bossAttackType: 1
   startingLife: 10
   fleeingLife: 5
+  fleeingTime: 2
   spawnSettings:
   - {fileID: 11400000, guid: e296a302f05e8a343841bc22be4c0709, type: 2}
   roamSettings:
@@ -46,6 +47,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: f67cf1b0c782c94409e9ddcb032844c0, type: 2}
   hitReactionSettings:
   - {fileID: 11400000, guid: ee712d4740f201d4da7d91c136b5b6f8, type: 2}
+  BossFlightSettings:
+  - {fileID: 11400000, guid: 8241a6c65e4b8e4488218c6992d4efdb, type: 2}
   splines:
   - {fileID: 0}
   - {fileID: 8158630672628145991, guid: 8ea37c0b91aaf30478085ced69bac832, type: 3}
@@ -53,8 +56,9 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 7590711955548368644, guid: 2d80bbddcfd75f74b968524747323c54, type: 3}
   - {fileID: 0}
+  - {fileID: 7419457857040129422, guid: 6a11dcca73afa2545ae3507a7fbba235, type: 3}
   spawnTimer: 5
   boidSpawn: 500
   maxBoid: 500
   regenerationRate: 99999
-  damageMultiplicator: 0.02
+  damageMultiplicator: 0.03

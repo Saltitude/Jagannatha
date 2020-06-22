@@ -82,6 +82,7 @@ public class FlockSettings : ScriptableObject
     public float startingLife = 10;
     public float fleeingLife = 0;
 
+    public float fleeingTime = 2f;
 
 
     [Header("Boids")]
@@ -94,6 +95,7 @@ public class FlockSettings : ScriptableObject
     public BoidSettings[] destructionSettings;
     public BoidSettings[] getAwaySettings;
     public BoidSettings[] hitReactionSettings;
+    public BoidSettings[] BossFlightSettings;
 
     public BezierSolution.BezierSpline[] splines;
 

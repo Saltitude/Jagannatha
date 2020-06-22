@@ -138,7 +138,7 @@ public class SC_KoaManager : MonoBehaviour
         }
 
 
-        if (flockSettings.attackType == FlockSettings.AttackType.Boss)
+        if (flockSettings.attackType == FlockSettings.FlockType.Boss)
 
         {
             koaID = koaCharID;
@@ -491,6 +491,15 @@ public class SC_KoaManager : MonoBehaviour
                 flockManager.ReactionFlock(SC_FlockManager.PathType.ReactionHit);
             }
 
+            if(curFlockSettings.attackType == FlockSettings.FlockType.Boss)
+            {
+                if(KoaLife <= curFlockSettings.fleeingLife)
+                {
+                    KoaLife = curFlockSettings.fleeingLife;
+                    flockManager.ReactionFlock(SC_FlockManager.PathType.bossFlight);
+                }
+            }
+
             ///DEBUG
             if (gunSensitivity.x == 100)
             {
@@ -512,7 +521,7 @@ public class SC_KoaManager : MonoBehaviour
 
     }
 
-    void AnimDestroy()
+    public void AnimDestroy()
     {
         SFX_Explosion = CustomSoundManager.Instance.PlaySound(_koa.gameObject, "SFX_Explosion_Flock", false, 1f, false);
         flockManager.AnimDestroy();
