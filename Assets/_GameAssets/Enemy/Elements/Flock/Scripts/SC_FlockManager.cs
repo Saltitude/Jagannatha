@@ -341,7 +341,7 @@ public class SC_FlockManager : MonoBehaviour
 
     void AttackUpdate()
     {
-        if (flockSettings.attackType != FlockSettings.AttackType.none && curtype != PathType.Flight && curtype != PathType.ReactionHit)
+        if (flockSettings.attackType != FlockSettings.FlockType.none && curtype != PathType.Flight && curtype != PathType.ReactionHit)
         {
             if (inAttack == false) startAttackTimer += Time.deltaTime;
 
@@ -398,7 +398,7 @@ public class SC_FlockManager : MonoBehaviour
                 reactionHit = false;
                 reactionTimer = 0;
                 flockWeaponManager.FireSuperBullet();
-                if (flockSettings.attackType != FlockSettings.AttackType.Laser)
+                if (flockSettings.attackType != FlockSettings.FlockType.Laser)
                     EndReaction();
 
             }
@@ -456,7 +456,7 @@ public class SC_FlockManager : MonoBehaviour
                 KoaMainAnimator.SetBool("Flight", false);
                 KoaEmissiveAnimator.SetBool("Flight", false);
 
-                if (flockSettings.attackType == FlockSettings.AttackType.Boss)
+                if (flockSettings.attackType == FlockSettings.FlockType.Boss)
                     laserBoss = !laserBoss;
                 flockWeaponManager.StartFire(true, laserBoss);
 
@@ -540,7 +540,7 @@ public class SC_FlockManager : MonoBehaviour
         bezierWalkerSpeed.SetNewSpline(_curSpline);
 
 
-        if (curtype == PathType.AttackPlayer && flockSettings.attackType == FlockSettings.AttackType.Boss)
+        if (curtype == PathType.AttackPlayer && flockSettings.attackType == FlockSettings.FlockType.Boss)
         {
             BoidSettings[] settings;
             if (laserBoss)

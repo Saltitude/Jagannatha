@@ -72,19 +72,19 @@ public class SC_FlockWeaponManager : MonoBehaviour
         flockSettings = curFlockSettings;
         switch (flockSettings.attackType)
         {
-            case FlockSettings.AttackType.Bullet: //Bullet
+            case FlockSettings.FlockType.Bullet: //Bullet
                 InitBulletPool();
                 break;
 
-            case FlockSettings.AttackType.none: //Bullet
+            case FlockSettings.FlockType.none: //Bullet
                 InitBulletPool();
                 break;
 
-            case FlockSettings.AttackType.Laser: //Laser
+            case FlockSettings.FlockType.Laser: //Laser
                 InitLaser();
                 break;
 
-            case FlockSettings.AttackType.Boss:
+            case FlockSettings.FlockType.Boss:
                 InitBulletPool();
                 InitLaser();
 
@@ -108,7 +108,7 @@ public class SC_FlockWeaponManager : MonoBehaviour
         startLaser = true;
         animation = false;
         this.laserBoss = laserBoss;
-        if (flockSettings.attackType == FlockSettings.AttackType.Laser || (isBoss && laserBoss))
+        if (flockSettings.attackType == FlockSettings.FlockType.Laser || (isBoss && laserBoss))
         {
             emissiveAnimator.SetBool("LaserCharge", true);
 
@@ -134,7 +134,7 @@ public class SC_FlockWeaponManager : MonoBehaviour
             timer += Time.deltaTime;
             switch (flockSettings.attackType)
             {
-                case FlockSettings.AttackType.Bullet: //Bullet
+                case FlockSettings.FlockType.Bullet: //Bullet
 
                     if(emissiveAnimator != null)
                         emissiveAnimator.SetBool("Bullet", true);
@@ -153,7 +153,7 @@ public class SC_FlockWeaponManager : MonoBehaviour
                     }
                     break;
 
-                case FlockSettings.AttackType.Laser: //Laser
+                case FlockSettings.FlockType.Laser: //Laser
 
                     
                     if(timer >= flockSettings.chargingAttackTime -1f)
@@ -176,7 +176,7 @@ public class SC_FlockWeaponManager : MonoBehaviour
 
                     break;
 
-                case FlockSettings.AttackType.Kamikaze:
+                case FlockSettings.FlockType.Kamikaze:
 
                     transform.position = Vector3.Lerp(transform.position, target.position, flockSettings.speedToTarget*Time.deltaTime);
                     if(Vector3.Distance(transform.position,target.position) < 20)
@@ -189,44 +189,94 @@ public class SC_FlockWeaponManager : MonoBehaviour
                     
                     }
                     break;
-                case FlockSettings.AttackType.Boss:
+                case FlockSettings.FlockType.Boss:
                     {
-                        if (!laserBoss)
+                        switch (flockSettings.bossAttackType)
                         {
-                            if (emissiveAnimator != null)
-                                emissiveAnimator.SetBool("Bullet", true);
+                            case FlockSettings.BossAttackType.Bullet:
 
-                            if (mainAnimator != null)
-                                mainAnimator.SetBool("Bullet", true);
+                                if (emissiveAnimator != null)
+                                    emissiveAnimator.SetBool("Bullet", true);
 
-                            if (timer >= 1 / flockSettings.fireRate)
-                            {
-                                FireBullet(false);
-                                timer = 0;
-                                if (nbBulletFire >= flockSettings.nbBulletToShoot)
+                                if (mainAnimator != null)
+                                    mainAnimator.SetBool("Bullet", true);
+
+                                if (timer >= 1 / flockSettings.fireRate)
                                 {
-                                    EndOfAttack();
+                                    FireBullet(false);
+                                    timer = 0;
+                                    if (nbBulletFire >= flockSettings.nbBulletToShoot)
+                                    {
+                                        EndOfAttack();
+                                    }
                                 }
-                            }
-                        }
-                        else
-                        {
-                            if (timer >= flockSettings.chargingAttackTime - 1f)
-                            {
-                                if (!animation)
-                                {
-                                    emissiveAnimator.SetBool("Laser", true);
-                                    mainAnimator.SetBool("Laser", true);
-                                    resetBoolCoro = StartCoroutine(ResetBool());
-                                    animation = true;
-                                }
-                            }
 
-                            if (timer >= flockSettings.chargingAttackTime)
-                            {
-                                FireLaser();
-                            }
+                                break;
+
+
+                            case FlockSettings.BossAttackType.Laser:
+
+                                if (timer >= flockSettings.chargingAttackTime - 1f)
+                                {
+                                    if (!animation)
+                                    {
+                                        emissiveAnimator.SetBool("Laser", true);
+                                        mainAnimator.SetBool("Laser", true);
+                                        resetBoolCoro = StartCoroutine(ResetBool());
+                                        animation = true;
+                                    }
+                                }
+
+                                if (timer >= flockSettings.chargingAttackTime)
+                                {
+                                    FireLaser();
+                                }
+
+                                break;
+
+                            case FlockSettings.BossAttackType.Both:
+
+                                if (!laserBoss)
+                                {
+                                    if (emissiveAnimator != null)
+                                        emissiveAnimator.SetBool("Bullet", true);
+
+                                    if (mainAnimator != null)
+                                        mainAnimator.SetBool("Bullet", true);
+
+                                    if (timer >= 1 / flockSettings.fireRate)
+                                    {
+                                        FireBullet(false);
+                                        timer = 0;
+                                        if (nbBulletFire >= flockSettings.nbBulletToShoot)
+                                        {
+                                            EndOfAttack();
+                                        }
+                                    }
+                                }
+                                else
+                                {
+                                    if (timer >= flockSettings.chargingAttackTime - 1f)
+                                    {
+                                        if (!animation)
+                                        {
+                                            emissiveAnimator.SetBool("Laser", true);
+                                            mainAnimator.SetBool("Laser", true);
+                                            resetBoolCoro = StartCoroutine(ResetBool());
+                                            animation = true;
+                                        }
+                                    }
+
+                                    if (timer >= flockSettings.chargingAttackTime)
+                                    {
+                                        FireLaser();
+                                    }
+                                }
+
+                                break;
+                        
                         }
+                     
                     }
                     break;
 
@@ -292,17 +342,17 @@ public class SC_FlockWeaponManager : MonoBehaviour
     {
         switch (flockSettings.attackType)
         {
-            case FlockSettings.AttackType.Bullet: //Bullet
+            case FlockSettings.FlockType.Bullet: //Bullet
 
                 FireBullet(true);
 
                 break;
-            case FlockSettings.AttackType.none: //Bullet
+            case FlockSettings.FlockType.none: //Bullet
 
                 FireBullet(true);
 
                 break;
-            case FlockSettings.AttackType.Laser:
+            case FlockSettings.FlockType.Laser:
 
                 Reset();
                 startLaser = true;

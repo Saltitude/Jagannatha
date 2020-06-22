@@ -233,7 +233,22 @@ public class SC_KoaSettingsOP : MonoBehaviour, IF_KoaForOperator, IF_Hover
     {
         if(newSelection != koaSelection.Selected)
         {
+<<<<<<< Updated upstream
             if(!bSelected)
+=======
+            case koaSelection.None:
+
+                if (!bSelected)
+                {
+                    textDisplay.SetTextActive(false);
+                    GetComponent<MeshRenderer>().material = Tab_mat[(int)newSelection];
+                }
+
+                break;
+            case koaSelection.Selected:
+                
+                textDisplay.SetTextActive();
+>>>>>>> Stashed changes
                 GetComponent<MeshRenderer>().material = Tab_mat[(int)newSelection];
         }
         else

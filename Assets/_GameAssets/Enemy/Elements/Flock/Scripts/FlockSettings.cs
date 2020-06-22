@@ -6,9 +6,9 @@ using UnityEngine;
 public class FlockSettings : ScriptableObject
 {
     [Header("General Attack Settings")]
-    public AttackType attackType;
+    public FlockType attackType;
 
-    public enum AttackType
+    public enum FlockType
     {
         Bullet,
         Laser,
@@ -16,6 +16,12 @@ public class FlockSettings : ScriptableObject
         Boss,
 
         none
+    }
+    public enum BossAttackType
+    {
+        Bullet,
+        Laser,
+        Both
     }
 
     public AttackFocus attackFocus ;
@@ -68,6 +74,14 @@ public class FlockSettings : ScriptableObject
     public AttackFocus attackFocusHitReaction = AttackFocus.Display;
     public int damageOnSystemHitReaction = 5;
     public float laserDurationHitReaction = 2;
+
+
+    [Header("Boss Specifics")]
+
+    public BossAttackType bossAttackType;
+    public float startingLife = 10;
+    public float fleeingLife = 0;
+
 
 
     [Header("Boids")]

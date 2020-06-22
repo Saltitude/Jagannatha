@@ -105,31 +105,31 @@ public class SC_KoaManager : MonoBehaviour
      
         switch (flockSettings.attackType)
         {
-            case FlockSettings.AttackType.none:
+            case FlockSettings.FlockType.none:
 
                 koaCharID = "Neutral";
                 type = 0;
                 break;
 
-            case FlockSettings.AttackType.Bullet:
+            case FlockSettings.FlockType.Bullet:
 
                 koaCharID = "Bullet";
                 type = 1;
                 break;
 
-            case FlockSettings.AttackType.Laser:
+            case FlockSettings.FlockType.Laser:
 
                 koaCharID = "Laser";
                 type = 2;
                 break;
 
-            case FlockSettings.AttackType.Kamikaze:
+            case FlockSettings.FlockType.Kamikaze:
 
                 koaCharID = "Kamikaze";
                 type = 3;
                 break;
 
-            case FlockSettings.AttackType.Boss:
+            case FlockSettings.FlockType.Boss:
 
                 koaCharID = "Boss";
                 type = 4;
@@ -138,9 +138,14 @@ public class SC_KoaManager : MonoBehaviour
         }           
      
 
+<<<<<<< Updated upstream
         if(flockSettings.attackType == FlockSettings.AttackType.Boss)
+=======
+        if (flockSettings.attackType == FlockSettings.FlockType.Boss)
+>>>>>>> Stashed changes
         {
             koaID = koaCharID;
+            KoaLife = flockSettings.startingLife;
         }
 
         else
@@ -163,7 +168,7 @@ public class SC_KoaManager : MonoBehaviour
         respawnTimer = 0;
         if (_koaPrefab != null)
         {
-            if (flockSettings.attackType == FlockSettings.AttackType.Boss)
+            if (flockSettings.attackType == FlockSettings.FlockType.Boss)
             {
                 _koa = NetPSpawnKoa.SpawnKoa(true);
             }

@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d89286e30a111f14cbdde113f04bc4aa, type: 3}
-  m_Name: Boss
+  m_Name: Boss_P3
   m_EditorClassIdentifier: 
   attackType: 3
   attackFocus: 0
@@ -29,6 +29,9 @@ MonoBehaviour:
   attackFocusHitReaction: 0
   damageOnSystemHitReaction: 5
   laserDurationHitReaction: 1
+  bossAttackType: 0
+  startingLife: 10
+  fleeingLife: 0
   spawnSettings:
   - {fileID: 11400000, guid: e296a302f05e8a343841bc22be4c0709, type: 2}
   roamSettings:
