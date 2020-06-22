@@ -3546,7 +3546,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: -90}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 1580.127, y: -153.6748}
+  m_AnchoredPosition: {x: -29370, y: -153.6748}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &5429184690681495260
@@ -7452,7 +7452,7 @@ PrefabInstance:
     - target: {fileID: 1480573331388611412, guid: ba4bdb8a621454545a4472d5f4eb62fd,
         type: 3}
       propertyPath: m_position.x
-      value: 1678.127
+      value: -29272
       objectReference: {fileID: 0}
     - target: {fileID: 1480573331388611412, guid: ba4bdb8a621454545a4472d5f4eb62fd,
         type: 3}
@@ -7467,7 +7467,7 @@ PrefabInstance:
     - target: {fileID: 1480573331388611412, guid: ba4bdb8a621454545a4472d5f4eb62fd,
         type: 3}
       propertyPath: m_precedingControlPointPosition.x
-      value: 2021.807
+      value: -28928.32
       objectReference: {fileID: 0}
     - target: {fileID: 1480573331388611412, guid: ba4bdb8a621454545a4472d5f4eb62fd,
         type: 3}
@@ -7482,7 +7482,7 @@ PrefabInstance:
     - target: {fileID: 1480573331388611412, guid: ba4bdb8a621454545a4472d5f4eb62fd,
         type: 3}
       propertyPath: m_followingControlPointPosition.x
-      value: 1334.4469
+      value: -29615.68
       objectReference: {fileID: 0}
     - target: {fileID: 1480573331388611412, guid: ba4bdb8a621454545a4472d5f4eb62fd,
         type: 3}
@@ -7497,7 +7497,7 @@ PrefabInstance:
     - target: {fileID: 1480573332341920717, guid: ba4bdb8a621454545a4472d5f4eb62fd,
         type: 3}
       propertyPath: m_position.x
-      value: 1678.127
+      value: -29272
       objectReference: {fileID: 0}
     - target: {fileID: 1480573332341920717, guid: ba4bdb8a621454545a4472d5f4eb62fd,
         type: 3}
@@ -7512,7 +7512,7 @@ PrefabInstance:
     - target: {fileID: 1480573332341920717, guid: ba4bdb8a621454545a4472d5f4eb62fd,
         type: 3}
       propertyPath: m_precedingControlPointPosition.x
-      value: 1334.4469
+      value: -29615.68
       objectReference: {fileID: 0}
     - target: {fileID: 1480573332341920717, guid: ba4bdb8a621454545a4472d5f4eb62fd,
         type: 3}
@@ -7527,7 +7527,7 @@ PrefabInstance:
     - target: {fileID: 1480573332341920717, guid: ba4bdb8a621454545a4472d5f4eb62fd,
         type: 3}
       propertyPath: m_followingControlPointPosition.x
-      value: 2021.807
+      value: -28928.32
       objectReference: {fileID: 0}
     - target: {fileID: 1480573332341920717, guid: ba4bdb8a621454545a4472d5f4eb62fd,
         type: 3}

@@ -46,7 +46,7 @@ public class SC_KoaID_operator_display : MonoBehaviour
 
     IEnumerator ChangeTextFont()
     {
-        Debug.Log("bawai");
+
         txt.text = "scanningKoa";
         yield return new WaitForSeconds(delayLetter);
         txt.text = "gettingInfo";
