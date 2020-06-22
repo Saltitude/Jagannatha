@@ -4901,6 +4901,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd9bf6414390c2c41b38a3744f7dd054, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  delayLetter: 0.01
+  sanskritFont: {fileID: 11400000, guid: 72eaa0435cf79ff4eb484c218ed0ade1, type: 2}
+  voiceFont: {fileID: 11400000, guid: f254d3ab903532946addd2c496d7ba8d, type: 2}
 --- !u!33 &4361587349142280283
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -5047,7 +5050,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &8747738454246278320
 Transform:
   m_ObjectHideFlags: 0
@@ -5277,7 +5280,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 100010, guid: 9fa7f99eba4357441b8f320b2e74c71e, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 9fa7f99eba4357441b8f320b2e74c71e, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x

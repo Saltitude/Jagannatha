@@ -284,31 +284,7 @@ public class SC_KoaSettingsOP : MonoBehaviour, IF_KoaForOperator, IF_Hover
                 break;
         }
 
-        //if(newSelection != koaSelection.Selected)
-        //{
 
-        //    if (!bSelected)
-        //    {
-        //        textDisplay.SetTextActive(false);
-        //        GetComponent<MeshRenderer>().material = Tab_mat[(int)newSelection];
-
-        //    }
-        //}
-        //else
-        //{
-        //    textDisplay.SetTextActive();
-
-        //    GetComponent<MeshRenderer>().material = Tab_mat[(int)newSelection];
-        //}
-        //if(newSelection == koaSelection.Selected)
-        //{
-
-        //    boolCTA = false;
-        //    if(PSInstantiate && PS_CTA != null)
-        //    {
-        //        Destroy(PS_CTA);
-        //    }
-        //}
         setMeshColor();
     }
 
