@@ -3,23 +3,36 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
-//SUR LA MAP
+ 
 public class SC_KoaID_operator_display : MonoBehaviour
 {
 
     SC_KoaSettingsOP sc_koa;
 
-    TextMesh txt;
+    TextMeshPro txt;
 
+    [SerializeField]
+    float delayLetter;
+
+    [SerializeField]
+    TMPro.TMP_FontAsset sanskritFont;
+    [SerializeField]
+    TMPro.TMP_FontAsset voiceFont;
+
+    bool isScanned = false;
+
+    
+    string koaID;
     // Start is called before the first frame update
     void Start()
     {
         sc_koa = transform.parent.GetComponent<SC_KoaSettingsOP>();
-        txt = this.GetComponent<TextMesh>();
+        txt = this.GetComponent<TextMeshPro>();
+        txt.font = sanskritFont;
+        SetTextActive(false);
     }
 
     // Update is called once per frame
-
 
     public void SetTextActive(bool active = true)
     {
@@ -59,6 +72,4 @@ public class SC_KoaID_operator_display : MonoBehaviour
         isScanned = true;
         StopAllCoroutines();
     }
-
-
 }

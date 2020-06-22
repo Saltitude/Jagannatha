@@ -19,6 +19,10 @@ public class SC_KoaSettingsOP : MonoBehaviour, IF_KoaForOperator, IF_Hover
 
     [SerializeField]
     Material[] Tab_mat;
+
+    [SerializeField]
+    Mesh[] meshByType;
+
     [SerializeField]
     Color32[] Tab_color;
     [SerializeField]
@@ -26,6 +30,7 @@ public class SC_KoaSettingsOP : MonoBehaviour, IF_KoaForOperator, IF_Hover
 
     [SerializeField]
     Color32 colorCTA;
+
 
     public bool bSelected;
 
@@ -58,7 +63,7 @@ public class SC_KoaSettingsOP : MonoBehaviour, IF_KoaForOperator, IF_Hover
 
     GameObject PS_CTA;
 
-
+    SC_KoaID_operator_display textDisplay;
     public enum koaState
     {
         Spawn = 0,
@@ -69,6 +74,14 @@ public class SC_KoaSettingsOP : MonoBehaviour, IF_KoaForOperator, IF_Hover
     }
 
     koaState currentState;
+
+
+    void Start()
+    {
+        textDisplay = GetComponentInChildren<SC_KoaID_operator_display>();
+      
+    }
+
 
     public void SetSensibility(Vector3 sensibility)
     {
@@ -87,6 +100,7 @@ public class SC_KoaSettingsOP : MonoBehaviour, IF_KoaForOperator, IF_Hover
     public void SetKoaType(int type)
     {
         this.type = type;
+        SetMesh();
         setMeshColor();
     }
 
@@ -109,6 +123,8 @@ public class SC_KoaSettingsOP : MonoBehaviour, IF_KoaForOperator, IF_Hover
             vfx.GetComponent<ParticleSystem>().startColor = Tab_color[type];
             vfx.GetComponent<ParticleSystemRenderer>().trailMaterial.color = Tab_color[type];
             vfx.GetComponent<ParticleSystem>().Play();
+            textDisplay.SetTextActive(false);
+
         }
     }
     public void SetKoaState(int curState)
@@ -231,11 +247,9 @@ public class SC_KoaSettingsOP : MonoBehaviour, IF_KoaForOperator, IF_Hover
 
     public void SetMaterial(koaSelection newSelection)
     {
-        if(newSelection != koaSelection.Selected)
+
+        switch (newSelection)
         {
-<<<<<<< Updated upstream
-            if(!bSelected)
-=======
             case koaSelection.None:
 
                 if (!bSelected)
@@ -248,21 +262,30 @@ public class SC_KoaSettingsOP : MonoBehaviour, IF_KoaForOperator, IF_Hover
             case koaSelection.Selected:
                 
                 textDisplay.SetTextActive();
->>>>>>> Stashed changes
+
                 GetComponent<MeshRenderer>().material = Tab_mat[(int)newSelection];
+                boolCTA = false;
+                if (PSInstantiate && PS_CTA != null)
+                {
+                    Destroy(PS_CTA);
+                }
+
+                break;
+            case koaSelection.Hover:
+
+                if (!bSelected)
+                {
+                    textDisplay.SetTextActive(false);
+                    GetComponent<MeshRenderer>().material = Tab_mat[(int)newSelection];
+
+                }
+
+                break;
+            default:
+                break;
         }
-        else
-        {
-            GetComponent<MeshRenderer>().material = Tab_mat[(int)newSelection];
-        }
-        if(newSelection == koaSelection.Selected)
-        {
-            boolCTA = false;
-            if(PSInstantiate && PS_CTA != null)
-            {
-                Destroy(PS_CTA);
-            }
-        }
+
+
         setMeshColor();
     }
 
@@ -297,4 +320,10 @@ public class SC_KoaSettingsOP : MonoBehaviour, IF_KoaForOperator, IF_Hover
         OutAction();
     }
 
+    void SetMesh()
+    {
+
+        if(meshByType[type] != null) 
+        GetComponent<MeshFilter>().mesh = meshByType[type];
+    }
 }
