@@ -36,8 +36,8 @@ public class SC_UI_Display_MapInfos_KoaState : MonoBehaviour
 
     [SerializeField]
     Text koaStateTxt;
-    //[SerializeField]
-    //Text optiWeapon;
+    [SerializeField]
+    Text curDmgOutPutPerCent;
 
     [SerializeField]
     Font VoiceActivated;
@@ -254,6 +254,8 @@ public class SC_UI_Display_MapInfos_KoaState : MonoBehaviour
                 barOpti[i].enabled = false;
             }
         }
+
+        curDmgOutPutPerCent.text = GetOptiPerCent().ToString() + "%";
     }
 
     float ratio(float inputValue, float inputMax, float outputMax, float inputMin = 0.0f, float outputMin = 0.0f)
