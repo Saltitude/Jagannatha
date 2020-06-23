@@ -106,7 +106,7 @@ public class SC_WaveManager : MonoBehaviour
     #region Initialize New Wave
     public void InitializeWave(WaveSettings newWaveSettings)
     {
-        SFX_NewWave = CustomSoundManager.Instance.PlaySound(gameObject, "SFX_newWave", false, 1f, false);
+        //SFX_NewWave = CustomSoundManager.Instance.PlaySound(gameObject, "SFX_newWave", false, 1f, false);
         resetVariables();
         _curWaveSettings = newWaveSettings;
 
