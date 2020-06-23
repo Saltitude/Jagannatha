@@ -6,10 +6,10 @@ using UnityEngine.UI;
 //[ExecuteInEditMode]
 public class SC_GradientImages : MonoBehaviour
 {
-    //[SerializeField]
+    [SerializeField]
     Color32 startColor = new Color32(204,61,00, 255);
 
-    //[SerializeField]
+    [SerializeField]
 
     Color32 endColor = new Color32(253,255,185, 255);
 

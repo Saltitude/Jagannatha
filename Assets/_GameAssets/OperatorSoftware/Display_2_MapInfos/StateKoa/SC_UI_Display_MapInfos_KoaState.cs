@@ -60,9 +60,11 @@ public class SC_UI_Display_MapInfos_KoaState : MonoBehaviour
 
     [SerializeField]
     Image[] barOpti = new Image[4];
-
+    [SerializeField]
+    float speedBar;
 
     public float optiPercent;
+    float ratioPerCent;
 
     public float fKoaLife = 100;
     public float curfKoaLife = 100;
@@ -227,8 +229,11 @@ public class SC_UI_Display_MapInfos_KoaState : MonoBehaviour
     void displayOptiBar()
     {
         
-        float ratioPerCent = ratio(GetOptiPerCent(), 100f,barOpti.Length,0f,0f);
+        ratioPerCent = Mathf.Lerp(ratioPerCent, ratio(GetOptiPerCent(), 100f,barOpti.Length,0f,0f), Time.deltaTime * speedBar);
+
         int ratioValue = Mathf.RoundToInt(ratioPerCent);
+
+        
 
         Debug.Log("powerperCent " + GetOptiPerCent());
         Debug.Log("ratioValue " + ratioValue);
