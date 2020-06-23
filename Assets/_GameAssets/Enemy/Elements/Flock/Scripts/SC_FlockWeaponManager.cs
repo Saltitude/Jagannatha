@@ -52,6 +52,11 @@ public class SC_FlockWeaponManager : MonoBehaviour
     bool laserBoss;
 
     bool canFire = true;
+
+    float damageFactor = 1f;
+
+    bool bigDamage = true;
+    int bigDamageCount = 0;
     ////////////////////////////////////////////////////////
 
 
@@ -112,6 +117,25 @@ public class SC_FlockWeaponManager : MonoBehaviour
         {
             emissiveAnimator.SetBool("LaserCharge", true);
 
+        }
+        if (isBoss)
+        {
+            if (bigDamage) damageFactor = 2; else damageFactor = 1;
+
+            if (flockSettings.bossAttackType != FlockSettings.BossAttackType.Both)
+            {
+                bigDamage = !bigDamage;
+            }
+            else
+            {
+                bigDamageCount++;
+                if(bigDamageCount == 2)
+                {
+                    bigDamageCount = 0;
+                    bigDamage = !bigDamage;
+
+                }
+            }
         }
     }
 
@@ -324,9 +348,12 @@ public class SC_FlockWeaponManager : MonoBehaviour
         //noise
         Vector3 dir = new Vector3(transform.forward.x , transform.forward.y , transform.forward.z);
 
-        bulletPool[n_CurBullet].GetComponent<SC_BulletFlock>().b_IsFire = true;
-        bulletPool[n_CurBullet].GetComponent<SC_BulletFlock>().b_ReactionFire = superBullet;
-        bulletPool[n_CurBullet].GetComponent<SC_BulletFlock>().flockSettings = flockSettings;
+        SC_BulletFlock sc_bulletFlock = bulletPool[n_CurBullet].GetComponent<SC_BulletFlock>();
+
+        sc_bulletFlock.b_IsFire = true;
+        sc_bulletFlock.b_ReactionFire = superBullet;
+        sc_bulletFlock.flockSettings = flockSettings;
+        sc_bulletFlock.damageFactor = damageFactor;
 
         rb.AddForce(dir * 24000);
 
@@ -429,7 +456,9 @@ public class SC_FlockWeaponManager : MonoBehaviour
             Sc_ScreenShake.Instance.ShakeIt(0.025f, flockSettings.activeDuration);
             SC_CockpitShake.Instance.ShakeIt(0.025f, flockSettings.activeDuration);
             //SC_HitDisplay.Instance.Hit(transform.position);
-            SC_MainBreakDownManager.Instance.CauseDamageOnSystem(flockSettings.attackFocus, flockSettings.damageOnSystem);
+            int damage = Mathf.RoundToInt(flockSettings.damageOnSystem * damageFactor);
+            Debug.Log(damage); 
+            SC_MainBreakDownManager.Instance.CauseDamageOnSystem(flockSettings.attackFocus, damage);
 
             startLaser = false;
         }
