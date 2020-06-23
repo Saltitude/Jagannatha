@@ -10,17 +10,19 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2f853b98b2e469d4682403b69d26ee96, type: 3}
-  m_Name: Boss_P3
+  m_Name: WaveBoss_P1
   m_EditorClassIdentifier: 
   initialSpawnFlock:
-  - {fileID: 11400000, guid: 3f15450fb22fdbb44903911f7230c111, type: 2}
+  - {fileID: 11400000, guid: 1d3c6364421a76640ae4654f29fd9f56, type: 2}
   initialSpawnPosition: 00000000
   OrientedSpawnPosition: 00000000
   timeBetweenSpawnInitial: 0
-  backup: 0
-  backupSpawnFlock: []
-  backupSpawnPosition: 
-  timeBeforeBackup: 0
-  flockLeftBeforeBackup: 0
+  backup: 1
+  backupSpawnFlock:
+  - {fileID: 11400000, guid: 859557ef49baa114f935772a691c8036, type: 2}
+  - {fileID: 11400000, guid: 859557ef49baa114f935772a691c8036, type: 2}
+  backupSpawnPosition: 0100000007000000
+  timeBeforeBackup: 10
+  flockLeftBeforeBackup: -1
   timeBetweenSpawnBackup: 0
   timeBeforeNextWave: 0

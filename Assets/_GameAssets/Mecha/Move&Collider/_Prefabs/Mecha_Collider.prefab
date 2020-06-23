@@ -302,7 +302,7 @@ MonoBehaviour:
   CoroDir: 3
   f_RotationSpeedZ: 1
   f_LerpRotZ: 1
-  TypeRotationZ: 3
+  TypeRotationZ: 0
   CurImpulse: 0
   n_JoyNumToUse: 0
   tab_TorqueAxes: 

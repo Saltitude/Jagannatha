@@ -30,6 +30,7 @@ public class SC_KoaID_operator_display : MonoBehaviour
         txt = this.GetComponent<TextMeshPro>();
         txt.font = sanskritFont;
         SetTextActive(false);
+        
     }
 
     // Update is called once per frame
@@ -39,9 +40,11 @@ public class SC_KoaID_operator_display : MonoBehaviour
         if(sc_koa != null)
             koaID = sc_koa.GetKoaID();
         txt.enabled = active;
-        if (!isScanned && active)
-            StartCoroutine(ChangeTextFont());
-        
+        if (sc_koa.GetKoaType() != 4)
+        {
+            if (!isScanned && active)
+                StartCoroutine(ChangeTextFont());
+        }
     }
 
     IEnumerator ChangeTextFont()
@@ -66,6 +69,7 @@ public class SC_KoaID_operator_display : MonoBehaviour
         txt.text = "tktfratelol";
         yield return new WaitForSeconds(delayLetter);
         txt.text = "bijourjesap";
+
 
         txt.text = koaID;
         txt.font = voiceFont;

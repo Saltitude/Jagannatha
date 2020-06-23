@@ -44,7 +44,7 @@ public class SC_UI_Display_MapInfos_KoaState : MonoBehaviour
     [SerializeField]
     Font sanskritFont;
 
-    string[] StringState = { "Spawning", "Roaming", "Attacking", "Death", "Fleeing", "Absorbing" };
+    string[] StringState = { "Spawning", "Roaming", "Attacking", "Death", "Fleeing", "Absorbing"," Fleeing"};
     public enum KoaState
     {
         Spawning = 0,

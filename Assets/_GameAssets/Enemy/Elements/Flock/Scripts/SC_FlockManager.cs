@@ -210,9 +210,10 @@ public class SC_FlockManager : MonoBehaviour
         if (isActive && _curBoidSetting != null)
             transform.Rotate(new Vector3(_curBoidSetting.axisRotationSpeed.x, _curBoidSetting.axisRotationSpeed.y, _curBoidSetting.axisRotationSpeed.z));
 
-        if ((isSpawning && !isActive) || curtype == PathType.bossFlight)
+        if (isSpawning && !isActive)
         {
             bezierWalkerTime.Execute(Time.deltaTime);
+       
         }
 
         if (isActive && isSpawning)
@@ -268,15 +269,18 @@ public class SC_FlockManager : MonoBehaviour
         if (isActive && !isSpawning && curtype != PathType.Death)
         {
 
-            AttackUpdate();
-            ReactionUpdate();
+            if (curtype != PathType.bossFlight)
+            {
+                AttackUpdate();
+                ReactionUpdate();
+            }
             //Si le flock est split, déplace les guides
             if (_splited)
                 MultiGuideMovement();
 
 
             //Si le flock n'est pas fusionné, déplace le main guide selon la spline actuel      
-            if (curtype != PathType.ReactionHit && curtype != PathType.AttackPlayer && curtype != PathType.bossFlight)
+            if (curtype != PathType.ReactionHit && curtype != PathType.AttackPlayer)
                 bezierWalkerSpeed.Execute(Time.deltaTime);
 
 
@@ -383,7 +387,7 @@ public class SC_FlockManager : MonoBehaviour
                 {
                     if (_splineTab[i] != null)
                     {
-                        if (i != 4)
+                        if (i != 4 && i != 6)
                             _splineTab[i].transform.position = transform.position;
                     }
                 }
@@ -521,13 +525,13 @@ public class SC_FlockManager : MonoBehaviour
 
                     KoaMainAnimator.SetBool("Flight", false);
                     KoaEmissiveAnimator.SetBool("Flight", false);
-                    KoaMainAnimator.SetBool("Deploy", true);
-                    KoaEmissiveAnimator.SetBool("Deploy", true);
+
+                    KoaMainAnimator.SetBool("Flight", true);
+                    KoaEmissiveAnimator.SetBool("Flight", true);
 
                     KoaMainAnimator.SetFloat("SpeedFactor", 1);
                     KoaEmissiveAnimator.SetFloat("SpeedFactor", 1);
 
-                    Invoke("DestroyKoa", flockSettings.fleeingTime);
                 }
 
 
@@ -579,13 +583,16 @@ public class SC_FlockManager : MonoBehaviour
         curSettingsIndex = 0;
         _curSpline = _splineTab[behaviorIndex];
         if (curtype != PathType.bossFlight)
+        {
             bezierWalkerSpeed.SetNewSpline(_curSpline);
+        }
         else
         {
-            bezierWalkerSpeed.SetNewSpline(null);
-            bezierWalkerTime.SetNewSpline(_curSpline);
-            bezierWalkerTime.travelMode = BezierSolution.TravelMode.Once;
-            bezierWalkerTime.n_travelTime = flockSettings.fleeingTime;
+            Invoke("DestroyKoa", flockSettings.fleeingTime);
+            _curSpline.transform.position = transform.position;
+            bezierWalkerSpeed.SetNewSpline(_curSpline);
+            bezierWalkerSpeed.travelMode = BezierSolution.TravelMode.Once;
+            
         }
 
         if (curtype == PathType.AttackPlayer && flockSettings.attackType == FlockSettings.FlockType.Boss)
@@ -603,7 +610,6 @@ public class SC_FlockManager : MonoBehaviour
                 settings[1] = attackSettings[2];
             }
             StartCoroutine(SwitchSettings(settings));
-
         }
         else
             StartCoroutine(SwitchSettings(_BoidSettings[behaviorIndex]));
@@ -615,25 +621,28 @@ public class SC_FlockManager : MonoBehaviour
         while (true)
         {
 
-            if (curtype != PathType.bossFlight)
+      
+            if (curtype == PathType.Death)
             {
-                if (curtype == PathType.Death)
-                {
-                    bezierWalkerSpeed.speed = 0;
-                    yield return new WaitForSeconds(1.3f);
-                }
+                bezierWalkerSpeed.speed = 0;
+                yield return new WaitForSeconds(1.3f);
+            }
 
-                _curBoidSetting = settings[curSettingsIndex];
+            _curBoidSetting = settings[curSettingsIndex];
+
+            if(curtype != PathType.bossFlight)
+            {
 
                 int rnd = Random.Range(0, 2);
                 if (rnd == 0)
                     bezierWalkerSpeed.speed = _curBoidSetting.speedOnSpline;
                 else
                     bezierWalkerSpeed.speed = -_curBoidSetting.speedOnSpline;
-
             }
-
-
+            else
+            {
+                bezierWalkerSpeed.speed = 150;
+            }
 
             Reassemble();
             if (_curBoidSetting.split)
@@ -752,10 +761,10 @@ public class SC_FlockManager : MonoBehaviour
     {
         if (pathType == PathType.bossFlight)
         {
+            if (curtype != PathType.bossFlight)
             StartNewPath(pathType);
         }
-
-        if (curtype != PathType.AttackPlayer && curtype != PathType.Death)
+        else if (curtype != PathType.AttackPlayer && curtype != PathType.Death)
         {
             StartNewPath(pathType);
         }

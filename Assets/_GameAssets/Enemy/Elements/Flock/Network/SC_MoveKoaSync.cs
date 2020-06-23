@@ -109,7 +109,7 @@ public class SC_MoveKoaSync : NetworkBehaviour
     }
 
     [ClientRpc]
-    public void RpcSendStartInfo(GameObject Target, Vector3 vt3_Sensibility, int timeBeforeSpawn,string KoaID,float curLife, float maxLife,int type)
+    public void RpcSendStartInfo(GameObject Target, Vector3 vt3_Sensibility, int timeBeforeSpawn,string KoaID,float curLife, float maxLife,int type, bool spawnScale)
     {
         this.KoaID = KoaID;
         if (!isServer)
@@ -120,7 +120,7 @@ public class SC_MoveKoaSync : NetworkBehaviour
             sc_KoaSettings.SetKoaID(KoaID);
             sc_KoaSettings.SetKoaLife(curLife);
             sc_KoaSettings.SetKoamaxLife(maxLife);
-            sc_KoaSettings.SetKoaType(type);
+            sc_KoaSettings.SetKoaType(type, spawnScale);
             
 
         }
@@ -156,11 +156,11 @@ public class SC_MoveKoaSync : NetworkBehaviour
     }
 
 
-    public void InitOPKoaSettings(Vector3 sensibility, int timeBeforeSpawn, string KoaID,float curLife, float maxLife, int type, Transform guide)
+    public void InitOPKoaSettings(Vector3 sensibility, int timeBeforeSpawn, string KoaID,float curLife, float maxLife, int type, Transform guide, bool spawnScale)
     {
         if (isServer)
         {
-            RpcSendStartInfo(gameObject, sensibility, timeBeforeSpawn, KoaID, curLife, maxLife, type);
+            RpcSendStartInfo(gameObject, sensibility, timeBeforeSpawn, KoaID, curLife, maxLife, type, spawnScale);
             this.guide = guide;
         }
     }

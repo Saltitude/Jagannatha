@@ -54,7 +54,7 @@ public class SC_KoaManager : MonoBehaviour
     Color32 AmenoColor;
 
     public GameObject Explosion;
-    bool changeSensitivity = false;
+    //bool changeSensitivity = false;
     /// <summary>
     /// Current BoidSettings
     /// </summary>
@@ -133,13 +133,11 @@ public class SC_KoaManager : MonoBehaviour
 
                 koaCharID = "Boss";
                 type = 4;
-                changeSensitivity = true;
                 break;
         }
 
 
-        if (flockSettings.attackType == FlockSettings.FlockType.Boss)
-
+        if (type == 4)
         {
             koaID = koaCharID;
             KoaLife = flockSettings.startingLife;
@@ -159,7 +157,8 @@ public class SC_KoaManager : MonoBehaviour
 
         //Récupération du comportement initial
         curBoidSettings = newSettings;
-        if (SC_EnemyManager.Instance.curPhaseIndex != 0) sensitivity = newSensitivity;
+        
+        if (SC_EnemyManager.Instance.curPhaseIndex != 0 && flockSettings.attackType != FlockSettings.FlockType.Boss) sensitivity = newSensitivity;
         else sensitivity = SC_WaveManager.Instance.GenerateSensitivityP();
         //Ajout du premier guide a la liste
         _guideList.Add(newGuide);
@@ -186,13 +185,13 @@ public class SC_KoaManager : MonoBehaviour
             syncVarKoa = _koa.GetComponent<SC_MoveKoaSync>();
             flockManager.moveKoaSync = syncVarKoa;
 
-            syncVarKoa.InitOPKoaSettings(sensitivity, flockSettings.spawnTimer, koaID, KoaLife, maxLife, type, newGuide);
+            bool spawnScale = true;
+            if (type == 4) spawnScale = flockSettings.spanwScale;
+
+            syncVarKoa.InitOPKoaSettings(sensitivity, flockSettings.spawnTimer, koaID, KoaLife, maxLife, type, newGuide, spawnScale);
             syncVarKoa.curboidNumber = spawnCount;
             syncVarKoa.curboidNumber = flockSettings.maxBoid;
-            //if (flockSettings.attackType == FlockSettings.AttackType.Boss)
-            //    syncVarKoa.SetBiggerMeshBoss(2);
         }
-
     }
 
 
@@ -474,12 +473,12 @@ public class SC_KoaManager : MonoBehaviour
 
                 }
 
-                if (KoaLife <= 5 && changeSensitivity)
-                {
-                    changeSensitivity = false;
-                    sensitivity = SC_WaveManager.Instance.GenerateSensitivityP();
-                    syncVarKoa.SetNewSensitivity(sensitivity);
-                }
+                //if (KoaLife <= 5 && changeSensitivity)
+                //{
+                //    changeSensitivity = false;
+                //    sensitivity = SC_WaveManager.Instance.GenerateSensitivityP();
+                //    syncVarKoa.SetNewSensitivity(sensitivity);
+                //}
             }
 
             if (powerPerCent >= curFlockSettings.flightReactionMinSensibility)
@@ -509,12 +508,12 @@ public class SC_KoaManager : MonoBehaviour
                 {
                     AnimDestroy();
                 }
-                if (KoaLife <= 5 && changeSensitivity)
-                {
-                    changeSensitivity = false;
-                    sensitivity = SC_WaveManager.Instance.GenerateSensitivityP();
-                    syncVarKoa.SetNewSensitivity(sensitivity);
-                }
+                //if (KoaLife <= 5 && changeSensitivity)
+                //{
+                //    changeSensitivity = false;
+                //    sensitivity = SC_WaveManager.Instance.GenerateSensitivityP();
+                //    syncVarKoa.SetNewSensitivity(sensitivity);
+                //}
             }
         }
 
