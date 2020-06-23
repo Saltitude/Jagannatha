@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d89286e30a111f14cbdde113f04bc4aa, type: 3}
-  m_Name: Boss
+  m_Name: Boss_P1
   m_EditorClassIdentifier: 
   attackType: 3
   attackFocus: 0
-  damageOnSystem: 2
+  damageOnSystem: 20
   timeBetweenAttacks: 7
   timeBeforeFirstAttack: 1
   fireRate: 2
@@ -29,8 +29,13 @@ MonoBehaviour:
   attackFocusHitReaction: 0
   damageOnSystemHitReaction: 5
   laserDurationHitReaction: 1
+  bossAttackType: 1
+  startingLife: 10
+  fleeingLife: 5
+  fleeingTime: 10
+  spanwScale: 1
   spawnSettings:
-  - {fileID: 11400000, guid: e296a302f05e8a343841bc22be4c0709, type: 2}
+  - {fileID: 11400000, guid: c51c494377abd2a4eb492892260091d9, type: 2}
   roamSettings:
   - {fileID: 11400000, guid: 1046108c5fa4ff244bdfd5f731d7ee88, type: 2}
   attackSettings:
@@ -43,6 +48,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: f67cf1b0c782c94409e9ddcb032844c0, type: 2}
   hitReactionSettings:
   - {fileID: 11400000, guid: ee712d4740f201d4da7d91c136b5b6f8, type: 2}
+  BossFlightSettings:
+  - {fileID: 11400000, guid: 33d81318840ac8341b5086560141ff1a, type: 2}
   splines:
   - {fileID: 0}
   - {fileID: 8158630672628145991, guid: 8ea37c0b91aaf30478085ced69bac832, type: 3}
@@ -50,8 +57,9 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 7590711955548368644, guid: 2d80bbddcfd75f74b968524747323c54, type: 3}
   - {fileID: 0}
-  spawnTimer: 5
+  - {fileID: 5403209340746542586, guid: 6a11dcca73afa2545ae3507a7fbba235, type: 3}
+  spawnTimer: 10
   boidSpawn: 500
   maxBoid: 500
   regenerationRate: 99999
-  damageMultiplicator: 0.01
+  damageMultiplicator: 0.02

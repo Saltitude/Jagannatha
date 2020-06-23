@@ -54,7 +54,7 @@ public class SC_KoaManager : MonoBehaviour
     Color32 AmenoColor;
 
     public GameObject Explosion;
-    bool changeSensitivity = false;
+    //bool changeSensitivity = false;
     /// <summary>
     /// Current BoidSettings
     /// </summary>
@@ -105,42 +105,42 @@ public class SC_KoaManager : MonoBehaviour
 
         switch (flockSettings.attackType)
         {
-            case FlockSettings.AttackType.none:
+            case FlockSettings.FlockType.none:
 
                 koaCharID = "Neutral";
                 type = 0;
                 break;
 
-            case FlockSettings.AttackType.Bullet:
+            case FlockSettings.FlockType.Bullet:
 
                 koaCharID = "Bullet";
                 type = 1;
                 break;
 
-            case FlockSettings.AttackType.Laser:
+            case FlockSettings.FlockType.Laser:
 
                 koaCharID = "Laser";
                 type = 2;
                 break;
 
-            case FlockSettings.AttackType.Kamikaze:
+            case FlockSettings.FlockType.Kamikaze:
 
                 koaCharID = "Kamikaze";
                 type = 3;
                 break;
 
-            case FlockSettings.AttackType.Boss:
+            case FlockSettings.FlockType.Boss:
 
                 koaCharID = "Boss";
                 type = 4;
-                changeSensitivity = true;
                 break;
         }
 
 
-        if (flockSettings.attackType == FlockSettings.AttackType.Boss)
+        if (type == 4)
         {
             koaID = koaCharID;
+            KoaLife = flockSettings.startingLife;
         }
 
         else
@@ -157,7 +157,8 @@ public class SC_KoaManager : MonoBehaviour
 
         //Récupération du comportement initial
         curBoidSettings = newSettings;
-        if (SC_EnemyManager.Instance.curPhaseIndex != 0) sensitivity = newSensitivity;
+        
+        if (SC_EnemyManager.Instance.curPhaseIndex != 0 && flockSettings.attackType != FlockSettings.FlockType.Boss) sensitivity = newSensitivity;
         else sensitivity = SC_WaveManager.Instance.GenerateSensitivityP();
         //Ajout du premier guide a la liste
         _guideList.Add(newGuide);
@@ -165,7 +166,7 @@ public class SC_KoaManager : MonoBehaviour
         respawnTimer = 0;
         if (_koaPrefab != null)
         {
-            if (flockSettings.attackType == FlockSettings.AttackType.Boss)
+            if (flockSettings.attackType == FlockSettings.FlockType.Boss)
             {
                 _koa = NetPSpawnKoa.SpawnKoa(true);
             }
@@ -184,13 +185,13 @@ public class SC_KoaManager : MonoBehaviour
             syncVarKoa = _koa.GetComponent<SC_MoveKoaSync>();
             flockManager.moveKoaSync = syncVarKoa;
 
-            syncVarKoa.InitOPKoaSettings(sensitivity, flockSettings.spawnTimer, koaID, KoaLife, maxLife, type, newGuide);
+            bool spawnScale = true;
+            if (type == 4) spawnScale = flockSettings.spanwScale;
+
+            syncVarKoa.InitOPKoaSettings(sensitivity, flockSettings.spawnTimer, koaID, KoaLife, maxLife, type, newGuide, spawnScale);
             syncVarKoa.curboidNumber = spawnCount;
             syncVarKoa.curboidNumber = flockSettings.maxBoid;
-            //if (flockSettings.attackType == FlockSettings.AttackType.Boss)
-            //    syncVarKoa.SetBiggerMeshBoss(2);
         }
-
     }
 
 
@@ -472,12 +473,12 @@ public class SC_KoaManager : MonoBehaviour
 
                 }
 
-                if (KoaLife <= 5 && changeSensitivity)
-                {
-                    changeSensitivity = false;
-                    sensitivity = SC_WaveManager.Instance.GenerateSensitivityP();
-                    syncVarKoa.SetNewSensitivity(sensitivity);
-                }
+                //if (KoaLife <= 5 && changeSensitivity)
+                //{
+                //    changeSensitivity = false;
+                //    sensitivity = SC_WaveManager.Instance.GenerateSensitivityP();
+                //    syncVarKoa.SetNewSensitivity(sensitivity);
+                //}
             }
 
             if (powerPerCent >= curFlockSettings.flightReactionMinSensibility)
@@ -489,6 +490,15 @@ public class SC_KoaManager : MonoBehaviour
                 flockManager.ReactionFlock(SC_FlockManager.PathType.ReactionHit);
             }
 
+            if(curFlockSettings.attackType == FlockSettings.FlockType.Boss)
+            {
+                if(KoaLife <= curFlockSettings.fleeingLife)
+                {
+                    KoaLife = curFlockSettings.fleeingLife;
+                    flockManager.ReactionFlock(SC_FlockManager.PathType.bossFlight);
+                }
+            }
+
             ///DEBUG
             if (gunSensitivity.x == 100)
             {
@@ -498,19 +508,19 @@ public class SC_KoaManager : MonoBehaviour
                 {
                     AnimDestroy();
                 }
-                if (KoaLife <= 5 && changeSensitivity)
-                {
-                    changeSensitivity = false;
-                    sensitivity = SC_WaveManager.Instance.GenerateSensitivityP();
-                    syncVarKoa.SetNewSensitivity(sensitivity);
-                }
+                //if (KoaLife <= 5 && changeSensitivity)
+                //{
+                //    changeSensitivity = false;
+                //    sensitivity = SC_WaveManager.Instance.GenerateSensitivityP();
+                //    syncVarKoa.SetNewSensitivity(sensitivity);
+                //}
             }
         }
 
 
     }
 
-    void AnimDestroy()
+    public void AnimDestroy()
     {
         SFX_Explosion = CustomSoundManager.Instance.PlaySound(_koa.gameObject, "SFX_Explosion_Flock", false, 1f, false);
         flockManager.AnimDestroy();

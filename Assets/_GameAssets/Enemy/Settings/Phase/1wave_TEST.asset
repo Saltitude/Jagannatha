@@ -13,14 +13,7 @@ MonoBehaviour:
   m_Name: 1wave_TEST
   m_EditorClassIdentifier: 
   waves:
-  - {fileID: 11400000, guid: 1350303a0e1abb64881851decb52fa5b, type: 2}
-  - {fileID: 11400000, guid: 1350303a0e1abb64881851decb52fa5b, type: 2}
-  - {fileID: 11400000, guid: 1350303a0e1abb64881851decb52fa5b, type: 2}
-  - {fileID: 11400000, guid: 1350303a0e1abb64881851decb52fa5b, type: 2}
-  - {fileID: 11400000, guid: 1350303a0e1abb64881851decb52fa5b, type: 2}
-  - {fileID: 11400000, guid: 1350303a0e1abb64881851decb52fa5b, type: 2}
-  - {fileID: 11400000, guid: 1350303a0e1abb64881851decb52fa5b, type: 2}
-  - {fileID: 11400000, guid: 1350303a0e1abb64881851decb52fa5b, type: 2}
-  - {fileID: 11400000, guid: 1350303a0e1abb64881851decb52fa5b, type: 2}
-  - {fileID: 11400000, guid: 1350303a0e1abb64881851decb52fa5b, type: 2}
-  WavesOrientation: 00000000000000000000000000000000000000000000000000000000000000000000000000000000
+  - {fileID: 11400000, guid: 756cfec65d96c074d9bcf287e4b830ac, type: 2}
+  - {fileID: 11400000, guid: f44373db56c847f4196f5a69c66c375a, type: 2}
+  - {fileID: 11400000, guid: 5510bea6f08acb840b5b276664e3de76, type: 2}
+  WavesOrientation: 000000000000000000000000

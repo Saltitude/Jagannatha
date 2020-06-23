@@ -44,7 +44,7 @@ public class SC_UI_Display_MapInfos_KoaState : MonoBehaviour
     [SerializeField]
     Font sanskritFont;
 
-    string[] StringState = { "Spawning", "Roaming", "Attacking", "Death", "Fleeing", "Absorbing" };
+    string[] StringState = { "Spawning", "Roaming", "Attacking", "Death", "Fleeing", "Absorbing"," Fleeing"};
     public enum KoaState
     {
         Spawning = 0,
@@ -65,6 +65,7 @@ public class SC_UI_Display_MapInfos_KoaState : MonoBehaviour
 
     public float optiPercent;
     float ratioPerCent;
+    int oldValuePerCent;
 
     public float fKoaLife = 100;
     public float curfKoaLife = 100;
@@ -230,7 +231,7 @@ public class SC_UI_Display_MapInfos_KoaState : MonoBehaviour
     {
         
         ratioPerCent = Mathf.Lerp(ratioPerCent, ratio(GetOptiPerCent(), 100f,barOpti.Length,0f,0f), Time.deltaTime * speedBar);
-
+        
         int ratioValue = Mathf.RoundToInt(ratioPerCent);
 
         if (ratioValue != 0)
@@ -250,7 +251,11 @@ public class SC_UI_Display_MapInfos_KoaState : MonoBehaviour
             }
         }
 
-        curDmgOutPutPerCent.text = GetOptiPerCent().ToString() + "%";
+
+        int curValue = GetOptiPerCent();
+        curValue = (int)Mathf.Lerp(oldValuePerCent, curValue, Time.deltaTime * 100 / Mathf.Abs(GetOptiPerCent() - oldValuePerCent));
+        oldValuePerCent = curValue;
+        curDmgOutPutPerCent.text = curValue.ToString() + "%";
     }
 
     float ratio(float inputValue, float inputMax, float outputMax, float inputMin = 0.0f, float outputMin = 0.0f)

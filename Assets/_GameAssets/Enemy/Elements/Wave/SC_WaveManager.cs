@@ -49,6 +49,9 @@ public class SC_WaveManager : MonoBehaviour
     Vector3Int sensitivityC = new Vector3Int(0, 0, 0);
     Vector3Int sensitivityD = new Vector3Int(0, 0, 0);
 
+
+    bool bBoss;
+
     #endregion
     //---------------------------------------------------------------------//
 
@@ -131,6 +134,7 @@ public class SC_WaveManager : MonoBehaviour
     }
     IEnumerator SpawnInitialFlock()
     {
+        if(bBoss)
         _FlockList.Clear();
 
         for (int i = 0; i < _curWaveSettings.initialSpawnFlock.Length; i++)
@@ -266,28 +270,28 @@ public class SC_WaveManager : MonoBehaviour
 
         switch(flockSettings.attackType)
         {
-            case FlockSettings.AttackType.none:
+            case FlockSettings.FlockType.none:
 
                 baseSensitivity = sensitivityA;
 
                 break;
 
 
-            case FlockSettings.AttackType.Bullet:
+            case FlockSettings.FlockType.Bullet:
 
                 baseSensitivity = sensitivityB;
 
                 break;
 
 
-            case FlockSettings.AttackType.Laser:
+            case FlockSettings.FlockType.Laser:
 
                 baseSensitivity = sensitivityC;
 
                 break;     
             
             
-            case FlockSettings.AttackType.Kamikaze:
+            case FlockSettings.FlockType.Kamikaze:
 
                 baseSensitivity = sensitivityD;
 

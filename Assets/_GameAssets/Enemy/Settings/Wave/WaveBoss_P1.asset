@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2f853b98b2e469d4682403b69d26ee96, type: 3}
+  m_Name: WaveBoss_P1
+  m_EditorClassIdentifier: 
+  initialSpawnFlock:
+  - {fileID: 11400000, guid: 1d3c6364421a76640ae4654f29fd9f56, type: 2}
+  initialSpawnPosition: 00000000
+  OrientedSpawnPosition: 00000000
+  timeBetweenSpawnInitial: 0
+  backup: 1
+  backupSpawnFlock:
+  - {fileID: 11400000, guid: 859557ef49baa114f935772a691c8036, type: 2}
+  - {fileID: 11400000, guid: 859557ef49baa114f935772a691c8036, type: 2}
+  backupSpawnPosition: 0100000007000000
+  timeBeforeBackup: 10
+  flockLeftBeforeBackup: -1
+  timeBetweenSpawnBackup: 0
+  timeBeforeNextWave: 0

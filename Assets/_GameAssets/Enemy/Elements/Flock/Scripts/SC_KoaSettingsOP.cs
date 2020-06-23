@@ -45,6 +45,9 @@ public class SC_KoaSettingsOP : MonoBehaviour, IF_KoaForOperator, IF_Hover
     float speedFactor;
     bool chargeLaser;
 
+
+    bool spawnScale;
+
     public enum koaSelection
     {
         None,
@@ -64,6 +67,7 @@ public class SC_KoaSettingsOP : MonoBehaviour, IF_KoaForOperator, IF_Hover
     bool boolCTA = true;
     bool PSInstantiate = false;
 
+    float totalscale;
     GameObject PS_CTA;
 
     SC_KoaID_operator_display textDisplay;
@@ -82,7 +86,8 @@ public class SC_KoaSettingsOP : MonoBehaviour, IF_KoaForOperator, IF_Hover
     void Start()
     {
         textDisplay = GetComponentInChildren<SC_KoaID_operator_display>();
-      
+
+        totalscale = initialScale.x;
     }
 
 
@@ -100,9 +105,10 @@ public class SC_KoaSettingsOP : MonoBehaviour, IF_KoaForOperator, IF_Hover
     }
 
 
-    public void SetKoaType(int type)
+    public void SetKoaType(int type, bool spawnScale)
     {
         this.type = type;
+        this.spawnScale = spawnScale;
         SetMesh();
         setMeshColor();
     }
@@ -214,16 +220,27 @@ public class SC_KoaSettingsOP : MonoBehaviour, IF_KoaForOperator, IF_Hover
     {
         return type;
     }
+
     void Update()
     {
         if(!spawn)
         {
-          
 
-            float scale = ((initialScale.x*factor / timeBeforeSpawn) * Time.deltaTime);
-            float radius = ((initialRadius / factor / timeBeforeSpawn) * Time.deltaTime);
-            transform.localScale += new Vector3(scale, scale, scale);
-            transform.GetComponent<SphereCollider>().radius -= radius;
+            if(spawnScale)
+            {
+                float scale = ((initialScale.x * factor / timeBeforeSpawn) * Time.deltaTime);
+                float radius = ((initialRadius / factor / timeBeforeSpawn) * Time.deltaTime);
+                transform.localScale += new Vector3(scale, scale, scale);
+                transform.GetComponent<SphereCollider>().radius -= radius;
+                if(type == 4 && transform.localScale.x >= initialScale.x * factor)
+                transform.localScale = new Vector3(initialScale.x * factor, initialScale.x * factor, initialScale.x * factor);
+
+            }
+            else
+            {
+                transform.localScale = new Vector3(initialScale.x * factor, initialScale.x * factor, initialScale.x * factor);
+            }
+  
             timer += Time.deltaTime;
             if (timer >= timeBeforeSpawn)
             {
@@ -271,6 +288,7 @@ public class SC_KoaSettingsOP : MonoBehaviour, IF_KoaForOperator, IF_Hover
                     selectedNumb += 1;
                 }
                 textDisplay.SetTextActive();
+
                 GetComponent<MeshRenderer>().material = Tab_mat[(int)newSelection];
                 boolCTA = false;
                 if (PSInstantiate && PS_CTA != null)

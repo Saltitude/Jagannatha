@@ -4841,7 +4841,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6089972395467275274}
   m_LocalRotation: {x: 0.4688163, y: 0.52935004, z: 0.46881613, w: 0.52934986}
-  m_LocalPosition: {x: 0, y: 0, z: 1.002}
+  m_LocalPosition: {x: 0, y: 0, z: 1.3}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 8747738454246278320}
@@ -4849,7 +4849,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 90.00001, z: 83.059006}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.63, y: -1.978}
+  m_AnchoredPosition: {x: 0.63, y: -2.76}
   m_SizeDelta: {x: 2.5, y: 0.5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!23 &7946763210748985446
@@ -4869,7 +4869,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 21159276106309786, guid: f254d3ab903532946addd2c496d7ba8d, type: 2}
+  - {fileID: 21625163986888402, guid: 72eaa0435cf79ff4eb484c218ed0ade1, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -4938,10 +4938,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Kamikaze #2015'
+  m_text: lenigrosfdplapute
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: f254d3ab903532946addd2c496d7ba8d, type: 2}
-  m_sharedMaterial: {fileID: 21159276106309786, guid: f254d3ab903532946addd2c496d7ba8d,
+  m_fontAsset: {fileID: 11400000, guid: 72eaa0435cf79ff4eb484c218ed0ade1, type: 2}
+  m_sharedMaterial: {fileID: 21625163986888402, guid: 72eaa0435cf79ff4eb484c218ed0ade1,
     type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -4967,7 +4967,7 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 2.6
+  m_fontSize: 3
   m_fontSizeBase: 7.64
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -5005,13 +5005,13 @@ MonoBehaviour:
   m_firstVisibleCharacter: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_margin: {x: -0.5748798, y: 0, z: -0.32558402, w: -0.39505652}
   m_textInfo:
     textComponent: {fileID: 9062589598033270753}
-    characterCount: 14
+    characterCount: 17
     spriteCount: 0
-    spaceCount: 1
-    wordCount: 2
+    spaceCount: 0
+    wordCount: 1
     linkCount: 0
     lineCount: 1
     pageCount: 1
@@ -5060,7 +5060,7 @@ Transform:
   m_GameObject: {fileID: 7406684084623344483}
   m_LocalRotation: {x: 0.5, y: 0.5, z: 0.5, w: -0.5}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 13, y: 13, z: 13}
+  m_LocalScale: {x: 20, y: 20, z: 20}
   m_Children:
   - {fileID: 6975213052446198629}
   m_Father: {fileID: 2568608992375402328}
