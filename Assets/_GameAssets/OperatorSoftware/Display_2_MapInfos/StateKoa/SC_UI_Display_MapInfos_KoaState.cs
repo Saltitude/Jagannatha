@@ -36,8 +36,8 @@ public class SC_UI_Display_MapInfos_KoaState : MonoBehaviour
 
     [SerializeField]
     Text koaStateTxt;
-    //[SerializeField]
-    //Text optiWeapon;
+    [SerializeField]
+    Text curDmgOutPutPerCent;
 
     [SerializeField]
     Font VoiceActivated;
@@ -60,9 +60,11 @@ public class SC_UI_Display_MapInfos_KoaState : MonoBehaviour
 
     [SerializeField]
     Image[] barOpti = new Image[4];
-
+    [SerializeField]
+    float speedBar;
 
     public float optiPercent;
+    float ratioPerCent;
 
     public float fKoaLife = 100;
     public float curfKoaLife = 100;
@@ -89,6 +91,8 @@ public class SC_UI_Display_MapInfos_KoaState : MonoBehaviour
         Mng_SyncVar = GameObject.FindGameObjectWithTag("Mng_SyncVar");
         GetReferences();
         activated = false;
+
+
     }
 
     public void SetNewKoaSettings(SC_KoaSettingsOP newSettings)
@@ -225,37 +229,34 @@ public class SC_UI_Display_MapInfos_KoaState : MonoBehaviour
     void displayOptiBar()
     {
         
-        if (GetOptiPerCent() > 0)
+        ratioPerCent = Mathf.Lerp(ratioPerCent, ratio(GetOptiPerCent(), 100f,barOpti.Length,0f,0f), Time.deltaTime * speedBar);
+
+        int ratioValue = Mathf.RoundToInt(ratioPerCent);
+
+        if (ratioValue != 0)
         {
-            barOpti[0].enabled = true;
+
+
+            for (int i = ratioValue - 1; i >= 0; i--)
+            {
+                barOpti[i].enabled = true;
+            }
         }
-        else
+        if (ratioValue != barOpti.Length )
         {
-            barOpti[0].enabled = false;
+            for (int i = barOpti.Length-1; i >= ratioValue ; i--)
+            {
+                barOpti[i].enabled = false;
+            }
         }
-        if (GetOptiPerCent() >= 25)
-        {
-            barOpti[1].enabled = true;
-        }
-        else
-        {
-            barOpti[1].enabled = false;
-        }
-        if (GetOptiPerCent() >= 50)
-        {
-            barOpti[2].enabled = true;
-        }
-        else
-        {
-            barOpti[2].enabled = false;
-        }
-        if (GetOptiPerCent() >= 75)
-        {
-            barOpti[3].enabled = true;
-        }
-        else
-        {
-            barOpti[3].enabled = false;
-        }
+
+        curDmgOutPutPerCent.text = GetOptiPerCent().ToString() + "%";
+    }
+
+    float ratio(float inputValue, float inputMax, float outputMax, float inputMin = 0.0f, float outputMin = 0.0f)
+    {
+        float product = (inputValue - inputMin) / (inputMax - inputMin);
+        float output = ((outputMax - outputMin) * product) + outputMin;
+        return output;
     }
 }
