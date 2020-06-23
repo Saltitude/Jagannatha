@@ -233,11 +233,6 @@ public class SC_UI_Display_MapInfos_KoaState : MonoBehaviour
 
         int ratioValue = Mathf.RoundToInt(ratioPerCent);
 
-        
-
-        Debug.Log("powerperCent " + GetOptiPerCent());
-        Debug.Log("ratioValue " + ratioValue);
-
         if (ratioValue != 0)
         {
 
