@@ -1506,7 +1506,6 @@ MonoBehaviour:
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
-  m_RootOrder: 3
 --- !u!1 &2066276998616875426
 GameObject:
   m_ObjectHideFlags: 0
