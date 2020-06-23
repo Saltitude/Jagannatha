@@ -263,7 +263,7 @@ MonoBehaviour:
   n_BreakDownLvl: 0
   CurBrokenDir: 1
   b_UseCoroutine: 1
-  f_Duration: 1.2
+  f_Duration: 1
   Acceleration:
     serializedVersion: 2
     m_Curve:
@@ -300,8 +300,8 @@ MonoBehaviour:
   CurDir: 0
   TargetDir: 0
   CoroDir: 3
-  f_RotationSpeedZ: 5
-  f_LerpRotZ: 2
+  f_RotationSpeedZ: 1
+  f_LerpRotZ: 1
   TypeRotationZ: 3
   CurImpulse: 0
   n_JoyNumToUse: 0
