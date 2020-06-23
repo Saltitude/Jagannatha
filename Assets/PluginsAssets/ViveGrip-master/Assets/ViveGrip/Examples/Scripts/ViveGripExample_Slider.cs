@@ -40,7 +40,7 @@ public class ViveGripExample_Slider : MonoBehaviour, IInteractible {
     private SC_SyncVar_BreakdownDisplay sc_syncvar;
 
     [SerializeField]
-    bool isFLUX = false;
+    public bool isFLUX = false;
 
     //SoundDesign
     GameObject SFX_Flux;
@@ -65,6 +65,12 @@ public class ViveGripExample_Slider : MonoBehaviour, IInteractible {
 
      }
      */
+     void Awake()
+    {
+        sc_syncvar = SC_SyncVar_BreakdownDisplay.Instance;
+
+    }
+
     void Start ()
     {
         oldX = transform.position.x;
@@ -80,7 +86,7 @@ public class ViveGripExample_Slider : MonoBehaviour, IInteractible {
         if (Mng_SyncVar == null)
             Mng_SyncVar = GameObject.FindGameObjectWithTag("Mng_SyncVar");
         if (Mng_SyncVar != null && sc_syncvar == null)
-            sc_syncvar = Mng_SyncVar.GetComponent<SC_SyncVar_BreakdownDisplay>();
+            sc_syncvar = SC_SyncVar_BreakdownDisplay.Instance;
     }
 
     void ViveGripGrabStart(ViveGrip_GripPoint gripPoint)

@@ -8,8 +8,19 @@ public class SC_SyncVar_BreakdownDisplay : NetworkBehaviour, IF_SyncVar_Sliders
     /// <summary>
     /// //////////////////////////////////List struct des Sliders
     /// </summary>
+    /// 
 
-        //nombre de sliders pour l'init
+
+    #region Singleton
+
+    private static SC_SyncVar_BreakdownDisplay _instance;
+    public static SC_SyncVar_BreakdownDisplay Instance { get { return _instance; } }
+
+    #endregion
+
+
+
+    //nombre de sliders pour l'init
     public int slidersNb = 6;
 
     public struct Slider
@@ -108,29 +119,42 @@ public class SC_SyncVar_BreakdownDisplay : NetworkBehaviour, IF_SyncVar_Sliders
 
 
 
-        /*
-    [SyncVar]
-    public float potar1value = 0;
-    [SyncVar]
-    public float potar1valueWanted = 0;
-    [SyncVar]
-    public bool potar1isEnPanne = false;
+    /*
+[SyncVar]
+public float potar1value = 0;
+[SyncVar]
+public float potar1valueWanted = 0;
+[SyncVar]
+public bool potar1isEnPanne = false;
 
-    [SyncVar]
-    public float potar2value = 0;
-    [SyncVar]
-    public float potar2valueWanted = 0;
-    [SyncVar]
-    public bool potar2isEnPanne = false;
+[SyncVar]
+public float potar2value = 0;
+[SyncVar]
+public float potar2valueWanted = 0;
+[SyncVar]
+public bool potar2isEnPanne = false;
 
-    [SyncVar]
-    public float potar3value = 0;
-    [SyncVar]
-    public float potar3valueWanted = 0;
-    [SyncVar]
-    public bool potar3isEnPanne = false;
-    */
+[SyncVar]
+public float potar3value = 0;
+[SyncVar]
+public float potar3valueWanted = 0;
+[SyncVar]
+public bool potar3isEnPanne = false;
+*/
 
+    void Awake()
+    {
+
+        if (_instance != null && _instance != this)
+        {
+            Destroy(gameObject);
+        }
+        else
+        {
+            _instance = this;
+        }
+
+    }
 
     void Start()
     {

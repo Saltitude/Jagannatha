@@ -3733,6 +3733,11 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 0.21957956
       objectReference: {fileID: 0}
+    - target: {fileID: 3247520730078726010, guid: 41c650aeb33755a409328243629ed028,
+        type: 3}
+      propertyPath: LocalBreakdownMng
+      value: 
+      objectReference: {fileID: 4077517945183357751}
     - target: {fileID: 4810773184695967814, guid: 41c650aeb33755a409328243629ed028,
         type: 3}
       propertyPath: LocalBreakdownMng
@@ -3855,6 +3860,11 @@ PrefabInstance:
       propertyPath: m_StaticEditorFlags
       value: 4294967295
       objectReference: {fileID: 0}
+    - target: {fileID: 1795339269582670075, guid: 6664ff07623a3af4ea5842af17a6983f,
+        type: 3}
+      propertyPath: LocalBreakdownMng
+      value: 
+      objectReference: {fileID: 4077517945183357751}
     - target: {fileID: 3318517326145213509, guid: 6664ff07623a3af4ea5842af17a6983f,
         type: 3}
       propertyPath: _freezeAlongX
@@ -3975,6 +3985,11 @@ PrefabInstance:
       propertyPath: m_StaticEditorFlags
       value: 4294967295
       objectReference: {fileID: 0}
+    - target: {fileID: 1795339269582670075, guid: 6664ff07623a3af4ea5842af17a6983f,
+        type: 3}
+      propertyPath: LocalBreakdownMng
+      value: 
+      objectReference: {fileID: 4077517945183357751}
     - target: {fileID: 3318517326145213509, guid: 6664ff07623a3af4ea5842af17a6983f,
         type: 3}
       propertyPath: _freezeAlongX
@@ -5461,6 +5476,11 @@ PrefabInstance:
       propertyPath: m_StaticEditorFlags
       value: 4294967295
       objectReference: {fileID: 0}
+    - target: {fileID: 1795339269582670075, guid: 6664ff07623a3af4ea5842af17a6983f,
+        type: 3}
+      propertyPath: LocalBreakdownMng
+      value: 
+      objectReference: {fileID: 4077517945183357751}
     - target: {fileID: 3318517326145213509, guid: 6664ff07623a3af4ea5842af17a6983f,
         type: 3}
       propertyPath: probability
