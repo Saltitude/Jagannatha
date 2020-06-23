@@ -80,16 +80,11 @@ public class SC_BreakdownDisplayManager : MonoBehaviour, IF_BreakdownManager
     {
         ViveGripExample_Slider[] slidersTab = new ViveGripExample_Slider[4];
         slidersTab = FindObjectsOfType<ViveGripExample_Slider>();
-        Debug.Log(slidersTab[0].isFLUX);
-        Debug.Log(slidersTab[1].isFLUX);
-        Debug.Log(slidersTab[2].isFLUX);
-        Debug.Log(slidersTab[3].isFLUX);
-        
+
         for (int i = 0; i < slidersTab.Length; i++)
         {
             if (slidersTab[i].isFLUX)
             {
-                Debug.Log("BABAR");
                 slidersTab[i].ChangeDesired();
                 CurNbOfBreakdown++;
                 //on met en panne un écran
@@ -106,9 +101,6 @@ public class SC_BreakdownDisplayManager : MonoBehaviour, IF_BreakdownManager
         {
             int rand = Random.Range(0, 4);
 
-            counterDebug++;
-            Debug.Log(counterDebug);
-
             if (!slidersTab[rand].isFLUX)
             {
                 slidersTab[rand].ChangeDesired();
@@ -119,16 +111,10 @@ public class SC_BreakdownDisplayManager : MonoBehaviour, IF_BreakdownManager
                 sc_screens_controller.CurNbOfScreenBreak++;
                 oneSliderBreakdownee = true;
             }
-
-            if (counterDebug > 50)
-                break;
         }
         
-        
-
         StartNewBreakdown(interactible.Length);
         sc_screens_controller.PanneAll();
-
     }
 
     #endregion Init
