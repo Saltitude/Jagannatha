@@ -83,8 +83,15 @@ public class SC_PhaseManager : MonoBehaviour
         {
             if (SC_WaveManager.Instance.b_nextWave == true)
             {
+                while(waves[curWaveIndex].initialSpawnFlock.Length == 0)
+                {
+                    curWaveIndex++;
+                }
+
                 SC_WaveManager.Instance.InitializeWave(waves[curWaveIndex]);
                 //SC_EnemyManager.Instance.Progress.value = curWaveIndex * 10f;
+                PlayAmbiance(curWaveIndex);
+                SC_SyncVar_DisplaySystem.Instance.curWave = curWaveIndex;
             }
             else
             {
@@ -95,6 +102,36 @@ public class SC_PhaseManager : MonoBehaviour
         {
 
             SC_EnemyManager.Instance.EndPhase();
+        }
+    }
+
+    void PlayAmbiance(int waveIndex)
+    {
+        switch(waveIndex)
+        {
+            case 3:
+                SC_AmbiancePilot.Instance.PlayAmbiance(SC_AmbiancePilot.Ambiance.Rising1);
+            break;
+
+            case 6:
+                SC_AmbiancePilot.Instance.PlayAmbiance(SC_AmbiancePilot.Ambiance.Rising2);
+            break;
+
+            case 11:
+                SC_AmbiancePilot.Instance.PlayAmbiance(SC_AmbiancePilot.Ambiance.Climax1);
+            break;
+
+            case 12:
+                SC_AmbiancePilot.Instance.PlayAmbiance(SC_AmbiancePilot.Ambiance.Slow1);
+            break;
+
+            case 13:
+                SC_AmbiancePilot.Instance.PlayAmbiance(SC_AmbiancePilot.Ambiance.Rising3);
+            break;
+
+            case 14:
+                SC_AmbiancePilot.Instance.PlayAmbiance(SC_AmbiancePilot.Ambiance.ClimaxMaxMax);
+            break;
         }
     }
 

@@ -14,10 +14,14 @@ public class SC_CockpitShake : MonoBehaviour
     // Transform of the camera to shake. Grabs the gameObject's transform
     // if null.
     public Transform screenTransform;
-
+    GameObject SFX_DamageTaken;
+    int SoundSourceNumb = 0;
     // How long the object should shake for.
     public float shakeDuration = 0f;
+    public float soundDuration = 0f;
 
+    float maxShakeDuration = 2f;
+    bool maxShakeReach = false;
     // Amplitude of the shake. A larger value shakes the camera harder.
     public float shakeAmount = 0.7f;
     public float decreaseFactor = 1.0f;
@@ -45,14 +49,42 @@ public class SC_CockpitShake : MonoBehaviour
         originalPos = screenTransform.localPosition;
     }
 
-    public void ShakeIt(float amplitude, float duration)
+    public void ShakeIt(float amplitude, float duration, bool playSound = true)
     {
-        shakeAmount = amplitude;
-        shakeDuration = shakeDuration + duration;
-    }
+        float newShakeDuration = shakeDuration + duration;
+    
+        if (newShakeDuration < maxShakeDuration && !maxShakeReach)
+        {
 
+            shakeAmount = amplitude;
+            shakeDuration = shakeDuration + duration;
+
+            //if(playSound)
+            //{
+            //    SFX_DamageTaken = CustomSoundManager.Instance.PlaySound(gameObject, "SFX_p_DamageTaken2", false, 0.3f);
+            //    SoundSourceNumb += 1;
+            //    soundDuration = 0.4f;
+            //}
+        }
+        else
+        {
+            maxShakeReach = true;
+        }
+        
+        if(shakeDuration <= 0)
+        {
+            maxShakeReach = false;
+        }
+
+
+
+    }
     void Update()
     {
+        if (shakeDuration > 0.4f)
+        {
+            soundDuration = shakeDuration;
+        }
         if (shakeDuration > 0)
         {
             screenTransform.localPosition = originalPos + Random.insideUnitSphere * shakeAmount;
@@ -64,6 +96,17 @@ public class SC_CockpitShake : MonoBehaviour
             shakeDuration = 0f;
             screenTransform.localPosition = originalPos;
         }
-
+        if(soundDuration >= 0)
+        {
+            soundDuration -= Time.deltaTime;
+        }
+        else if(soundDuration <= 0)
+        {
+            if (SFX_DamageTaken != null && SFX_DamageTaken.GetComponent<AudioSource>().isPlaying)
+            {
+                SFX_DamageTaken.GetComponent<AudioSource>().Stop();
+               // SoundSourceNumb = 0;
+            }
+        }
     }
 }

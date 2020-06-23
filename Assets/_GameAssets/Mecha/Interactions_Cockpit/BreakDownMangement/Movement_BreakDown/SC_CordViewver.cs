@@ -16,6 +16,8 @@ public class SC_CordViewver : MonoBehaviour
     [Header("References")]
     [SerializeField]
     RectTransform[] tab_CordBars;
+    [SerializeField]
+    GameObject[] tab_CordCursor;
 
     [Header("Bars Parameters")]
     [SerializeField]
@@ -125,6 +127,38 @@ public class SC_CordViewver : MonoBehaviour
         tab_CordBars[1].SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, TargetSize02);
         tab_CordBars[2].SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, TargetSize03);
 
+    }
+
+    public void ShowSelection()
+    {
+        switch (SC_SyncVar_MovementSystem.Instance.CurSelectedCord)
+        {
+
+            default:
+                tab_CordCursor[0].SetActive(false);
+                tab_CordCursor[1].SetActive(false);
+                tab_CordCursor[2].SetActive(false);
+                break;
+
+            case 1:
+                tab_CordCursor[0].SetActive(true);
+                tab_CordCursor[1].SetActive(false);
+                tab_CordCursor[2].SetActive(false);
+                break;
+
+            case 2:
+                tab_CordCursor[0].SetActive(false);
+                tab_CordCursor[1].SetActive(true);
+                tab_CordCursor[2].SetActive(false);
+                break;
+
+            case 3:
+                tab_CordCursor[0].SetActive(false);
+                tab_CordCursor[1].SetActive(false);
+                tab_CordCursor[2].SetActive(true);
+                break;
+
+        }
     }
 
 }

@@ -28,8 +28,13 @@ public class SC_UI_Update_SliderSolo : MonoBehaviour
     [SerializeField]
     int[] wireIndex;
 
-    private Color _orange = new Color(255, 159, 0);
-    private Color _red = new Color(255, 0, 0);
+    public Material Red;
+    public Material Orange;
+
+    [SerializeField]
+    GameObject sparkle;
+    //private Color _orange = new Color(255, 159, 0);
+    //private Color _red = new Color(255, 0, 0);
 
     //pour forcer la première update
     bool firstUpdate = false;
@@ -69,9 +74,9 @@ public class SC_UI_Update_SliderSolo : MonoBehaviour
                 textWanted.text = Mathf.FloorToInt(ratio(sc_syncvar.SL_sliders[index].valueWanted, 0.45f, 10, -0.45f, 1)).ToString();
 
                 if(isBreakdown)
-                    textWanted.color = _red;
+                    textWanted.material = Red;
                 else
-                    textWanted.color = _orange;
+                    textWanted.material = Orange;
 
             }
 
@@ -100,15 +105,17 @@ public class SC_UI_Update_SliderSolo : MonoBehaviour
 
 
             textWanted.text = Mathf.FloorToInt(ratio(sc_syncvar.SL_sliders[index].valueWanted, 0.45f, 10, -0.45f, 1)).ToString();
-            textWanted.color = _red;
-
+            textWanted.material = Red;
+            sparkle.SetActive(false);
+            // Debug.Log("u are red bitch");
         }
         else
         {
             //textWanted.enabled = false;
 
             textWanted.text = Mathf.FloorToInt(ratio(sc_syncvar.SL_sliders[index].valueWanted, 0.45f, 10, -0.45f, 1)).ToString();
-            textWanted.color = _orange;
+            textWanted.material = Orange;
+            sparkle.SetActive(true);
 
         }
 

@@ -1,0 +1,56 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &4785537653817413474
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5776592697962889496}
+  - component: {fileID: 5735427094725218705}
+  m_Layer: 0
+  m_Name: Mng_ambiance
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5776592697962889496
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4785537653817413474}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.25, y: 1.616, z: 0.389}
+  m_LocalScale: {x: 0.9999999, y: 0.9999999, z: 0.9999999}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5735427094725218705
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4785537653817413474}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 48256460137deb64a9a2f37cbf4141bd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  source: {fileID: 4785537653817413474}
+  ambianceVolume: 0.2
+  fadeSpeed: 0.2
+  Ambiance1: 04000000060000000b000000
+  Ambiance2: 04000000060000000b00000007000000
+  Ambiance3: 04000000060000000b000000070000000900000000000000
+  Ambiance4: 04000000050000000a000000130000000800000012000000060000000b000000070000000900000000000000
+  Ambiance5: 04000000060000000b000000070000000900000000000000050000000a00000013000000080000001200000002000000030000000f00000014000000
+  Ambiance6: 060000000b0000000700000009000000050000000a000000080000000f00000010000000
+  Ambiance7: 02000000030000000c0000000e00000012000000000000001400000004000000060000000b0000000700000009000000050000000a000000080000000f00000010000000
+  Ambiance8: 000000000100000002000000030000000400000005000000060000000700000008000000090000000a0000000b0000000c0000000d0000000e0000000f0000001000000011000000120000001300000014000000

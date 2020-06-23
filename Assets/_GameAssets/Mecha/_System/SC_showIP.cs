@@ -16,7 +16,7 @@ public class SC_showIP : MonoBehaviour
     {
         if(_SC_IPManager.localComputerIP != null)
         {
-            textContainer.text = "Address : " + _SC_IPManager.GetLocalIPAddress();
+            textContainer.text = "Address : " + _SC_IPManager.GetIP();
             //Debug.Log(_SC_IPManager.GetLocalIPAddress());
         }
         

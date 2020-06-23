@@ -12,10 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d89286e30a111f14cbdde113f04bc4aa, type: 3}
   m_Name: FlockNeutral_v2
   m_EditorClassIdentifier: 
-  attackType: 3
+  attackType: 4
   attackFocus: 0
   damageOnSystem: 0
   timeBetweenAttacks: 0
+  timeBeforeFirstAttack: -1
   fireRate: 0
   nbBulletToShoot: 0
   chargingAttackTime: 0

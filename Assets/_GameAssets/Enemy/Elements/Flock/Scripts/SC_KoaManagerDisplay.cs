@@ -73,19 +73,19 @@ public class SC_KoaManagerDisplay : MonoBehaviour
         Player = GameObject.FindGameObjectWithTag("Player");
         switch (flockSettings.attackType)
         {
-            case FlockSettings.AttackType.none:
+            case FlockSettings.FlockType.none:
 
                 koaCharID = 'A';
 
                 break;
 
-            case FlockSettings.AttackType.Bullet:
+            case FlockSettings.FlockType.Bullet:
 
                 koaCharID = 'B';
 
                 break;  
 
-            case FlockSettings.AttackType.Laser:
+            case FlockSettings.FlockType.Laser:
 
                 koaCharID = 'C';
 

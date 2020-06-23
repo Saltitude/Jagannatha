@@ -13,8 +13,9 @@ MonoBehaviour:
   m_Name: Wave_Chain_bullets_no_reCalibr
   m_EditorClassIdentifier: 
   initialSpawnFlock:
-  - {fileID: 11400000, guid: e2539410742a3654494ab6ce864428da, type: 2}
+  - {fileID: 11400000, guid: 3bddde137ffe43f4486d4250b33a9092, type: 2}
   initialSpawnPosition: 00000000
+  OrientedSpawnPosition: 
   timeBetweenSpawnInitial: 1
   backup: 1
   backupSpawnFlock:

@@ -164,6 +164,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Koa: {fileID: 248730177783554223, guid: 4e70025bb9670db4395a8903d7695907, type: 3}
+  KoaBoss: {fileID: 248730177783554223, guid: 274457cd3e58d03499b7c2fe7d9a282f, type: 3}
 --- !u!114 &114527038320127134
 MonoBehaviour:
   m_ObjectHideFlags: 0

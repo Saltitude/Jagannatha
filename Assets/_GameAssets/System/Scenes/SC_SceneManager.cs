@@ -31,7 +31,18 @@ public class SC_SceneManager : NetworkBehaviour
 
     [SerializeField]
     SC_passwordLock _SC_PasswordLock;
-  
+
+    /*
+    [SerializeField]
+    Scene LobbyPilot;
+    [SerializeField]
+    Scene LobbyOpe;
+    [SerializeField]
+    Scene GamePilot;
+    [SerializeField]
+    Scene GameOpe;
+    */
+
     private void Awake()
     {
         if (_instance != null && _instance != this)
@@ -98,11 +109,19 @@ public class SC_SceneManager : NetworkBehaviour
 
         AsyncOperation asyncOperation = null;
 
+        /*
         if (SceneManager.GetActiveScene().buildIndex == 1)
             asyncOperation = SceneManager.LoadSceneAsync(3);
 
         else if (SceneManager.GetActiveScene().buildIndex == 2)
             asyncOperation = SceneManager.LoadSceneAsync(4);
+        */
+
+        if (SceneManager.GetActiveScene().name == "Lobby")
+            asyncOperation = SceneManager.LoadSceneAsync("Tuto_Pilot");
+
+        else if (SceneManager.GetActiveScene().name == "Lobby Opé")
+            asyncOperation = SceneManager.LoadSceneAsync("Tuto_Operator");
 
         asyncOperation.allowSceneActivation = false;
 
@@ -114,6 +133,9 @@ public class SC_SceneManager : NetworkBehaviour
 
             //Debug.Log("notDone");
 
+            if (asyncOperation.progress < 0.9f)
+                //Debug.LogError("f_LoadingProgress = " +  f_LoadingProgress);
+
             //Output the current progress (In Inspector)
             f_LoadingProgress = asyncOperation.progress;
 
@@ -121,10 +143,12 @@ public class SC_SceneManager : NetworkBehaviour
             if (asyncOperation.progress >= 0.9f && n_ConnectionsCount >= 2)
             {
 
-                if (SceneManager.GetActiveScene().buildIndex == 1 && !b_PilotReadyToLoad)
+                //Debug.LogError("Progress >= 0.9");
+
+                if (SceneManager.GetActiveScene().name == "Lobby" && !b_PilotReadyToLoad)
                     b_PilotReadyToLoad = true;
 
-                else if (SceneManager.GetActiveScene().buildIndex == 2 && !b_OperatorReadyToLoad)
+                else if (SceneManager.GetActiveScene().name == "Lobby Opé" && !b_OperatorReadyToLoad)
                     SendReadyOP();
 
                 //Activate the Scene
@@ -140,12 +164,14 @@ public class SC_SceneManager : NetworkBehaviour
 
     void SendReadyOP()
     {
+        //Debug.LogError("SendReadyOP");
         Mng_CheckList.GetComponent<SC_CheckList>().NetworkPlayerPilot.GetComponent<SC_NetScene>().CmdSendReadyOP();
     }
 
     [ClientRpc]
     void RpcAllowChangeScene()
     {
+        //Debug.LogError("RpcAllowChangeScene");
         b_LoadingAllowed = true;
     }
 

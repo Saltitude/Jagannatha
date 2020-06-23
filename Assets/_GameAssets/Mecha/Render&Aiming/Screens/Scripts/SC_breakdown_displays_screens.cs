@@ -32,6 +32,8 @@ public class SC_breakdown_displays_screens : MonoBehaviour
     public int curNbPanne = 0;
     public int CurNbOfScreenBreak = 0;
 
+    GameObject SFX_ScreenStart;
+
     [SerializeField]
     GameObject sphereReturnCacheMisere;
 
@@ -118,6 +120,7 @@ public class SC_breakdown_displays_screens : MonoBehaviour
             StartCoroutine(BlinkScreen(i));
             rnd = Random.Range(0.1f, 0.5f);
             yield return new WaitForSeconds(rnd);
+            CustomSoundManager.Instance.PlaySound(gameObject, "SFX_p_ScreenStart", false, 1f, false, 0.3f);
         }
         yield return new WaitForSeconds(1);
         StopAllCoroutines();
@@ -133,8 +136,6 @@ public class SC_breakdown_displays_screens : MonoBehaviour
         changeScreenMat(ScreenState.Tuto, index);
         yield return new WaitForSeconds(0.1f);
         changeScreenMat(ScreenState.TutoDisplayRepared, index);
-
-
     }
 
 
@@ -267,9 +268,10 @@ public class SC_breakdown_displays_screens : MonoBehaviour
             CustomSoundManager.Instance.PlaySound(gameObject, "SFX_p_ScreenActivated", false, 0.1f);
         }
 
-        else
+        else if (SC_GameStates.Instance.CurState != SC_GameStates.GameState.GameEnd)
             PannePartielleDisplay();
 
+        if (SC_GameStates.Instance.CurState != SC_GameStates.GameState.GameEnd)
         for (int i = 0; i < tab_screens_renderers.Length; i++)
         {
             SetScreenState(i, false);
@@ -301,18 +303,18 @@ public class SC_breakdown_displays_screens : MonoBehaviour
     {
         if (state == true && tab_screens_renderers[index].enabled != state)
         {
-            Debug.Log("TINTIN : " + tab_screens_renderers[index].enabled + " | " + state);
+            //Debug.Log("TINTIN : " + tab_screens_renderers[index].enabled + " | " + state);
             curNbPanne++;
         }
 
 
         else if (state == false && tab_screens_renderers[index].enabled != state)
         {
-            Debug.Log("ENCORE VOUS : " + tab_screens_renderers[index].enabled + " | " + state);
+            //Debug.Log("ENCORE VOUS : " + tab_screens_renderers[index].enabled + " | " + state);
             curNbPanne--;
         }
 
-
+        
         tab_screens_renderers[index].enabled = state;
     }
 

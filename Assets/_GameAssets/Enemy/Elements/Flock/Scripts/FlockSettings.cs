@@ -6,15 +6,22 @@ using UnityEngine;
 public class FlockSettings : ScriptableObject
 {
     [Header("General Attack Settings")]
-    public AttackType attackType;
+    public FlockType attackType;
 
-    public enum AttackType
+    public enum FlockType
     {
         Bullet,
         Laser,
         Kamikaze,
+        Boss,
 
         none
+    }
+    public enum BossAttackType
+    {
+        Bullet,
+        Laser,
+        Both
     }
 
     public AttackFocus attackFocus ;
@@ -30,6 +37,9 @@ public class FlockSettings : ScriptableObject
 
     [Tooltip("in Second")]
     public int timeBetweenAttacks;
+
+    [Tooltip("in Second")]
+    public int timeBeforeFirstAttack = -1;
 
 
     [Header("Bullet")]
@@ -66,6 +76,17 @@ public class FlockSettings : ScriptableObject
     public float laserDurationHitReaction = 2;
 
 
+    [Header("Boss Specifics")]
+
+    public BossAttackType bossAttackType;
+    public float startingLife = 10;
+    public float fleeingLife = 0;
+
+    public float fleeingTime = 2f;
+
+    public bool spanwScale = true;
+
+
     [Header("Boids")]
 
 
@@ -76,15 +97,16 @@ public class FlockSettings : ScriptableObject
     public BoidSettings[] destructionSettings;
     public BoidSettings[] getAwaySettings;
     public BoidSettings[] hitReactionSettings;
+    public BoidSettings[] BossFlightSettings;
 
     public BezierSolution.BezierSpline[] splines;
 
     public int spawnTimer = 10;
 
-    [Range(10,200)]
+    [Range(10,1000)]
     public int boidSpawn;
 
-    [Range(10,200)]
+    [Range(10,1000)]
     public int maxBoid;
 
     [Tooltip("boids per min")]

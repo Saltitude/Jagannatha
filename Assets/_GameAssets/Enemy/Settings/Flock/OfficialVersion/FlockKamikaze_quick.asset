@@ -15,16 +15,17 @@ MonoBehaviour:
   attackType: 2
   attackFocus: 2
   damageOnSystem: 10
-  timeBetweenAttacks: 5
+  timeBetweenAttacks: 8
+  timeBeforeFirstAttack: -1
   fireRate: 0
   nbBulletToShoot: 0
   chargingAttackTime: 0
   activeDuration: 0
   speedToTarget: 0.7
   flightDuration: 3
-  flightReactionMinSensibility: 75
+  flightReactionMinSensibility: 101
   hitReactionDelay: 3
-  hitReactionMaxSensibility: 50
+  hitReactionMaxSensibility: 0
   attackFocusHitReaction: 0
   damageOnSystemHitReaction: 0
   laserDurationHitReaction: 2

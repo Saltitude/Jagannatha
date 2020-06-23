@@ -15,7 +15,8 @@ MonoBehaviour:
   attackType: 1
   attackFocus: 1
   damageOnSystem: 10
-  timeBetweenAttacks: 20
+  timeBetweenAttacks: 15
+  timeBeforeFirstAttack: 4
   fireRate: 3
   nbBulletToShoot: 0
   chargingAttackTime: 4

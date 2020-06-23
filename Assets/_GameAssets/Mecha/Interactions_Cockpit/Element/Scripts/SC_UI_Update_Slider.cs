@@ -21,6 +21,11 @@ public class SC_UI_Update_Slider : MonoBehaviour
     Image barretteValueWanted2;
 
     [SerializeField]
+    Image flecheHaut;
+    [SerializeField]
+    Image flecheBas;
+
+    [SerializeField]
     GameObject warning;
     [SerializeField]
     GameObject sparkle;
@@ -41,6 +46,8 @@ public class SC_UI_Update_Slider : MonoBehaviour
     {
         Mng_SyncVar = GameObject.FindGameObjectWithTag("Mng_SyncVar");
         GetReferences();
+        flecheBas.enabled = false;
+        flecheHaut.enabled = false;
     }
 
     void GetReferences()
@@ -94,6 +101,19 @@ public class SC_UI_Update_Slider : MonoBehaviour
             barrettePanne.gameObject.transform.localPosition = new Vector3(barrettePanne.gameObject.transform.localPosition.x, posY, barrettePanne.gameObject.transform.localPosition.z);
             barretteValueWanted.color = new Color32(255, 0, 0,255);
             barretteValueWanted2.color = new Color32(255, 0, 0,255);
+
+            if (sc_syncvar.SL_sliders[index].value > sc_syncvar.SL_sliders[index].valueWanted)
+            {
+                flecheBas.enabled = true;
+                flecheHaut.enabled = false;
+            }
+            else
+            {
+                flecheHaut.enabled = true;
+                flecheBas.enabled = false;
+            }
+                
+
         }
         else
         {
@@ -102,6 +122,10 @@ public class SC_UI_Update_Slider : MonoBehaviour
             sparkle.SetActive(true);
             barretteValueWanted.color = new Color32(255, 255, 255, 255);
             barretteValueWanted2.color = new Color32(255, 255, 255, 255);
+
+
+            flecheBas.enabled = false;
+            flecheHaut.enabled = false;
         }
 
         for(int i = 0; i < wireIndex.Length;i++)

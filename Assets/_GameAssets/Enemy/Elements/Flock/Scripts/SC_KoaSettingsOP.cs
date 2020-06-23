@@ -19,10 +19,21 @@ public class SC_KoaSettingsOP : MonoBehaviour, IF_KoaForOperator, IF_Hover
 
     [SerializeField]
     Material[] Tab_mat;
+
+    [SerializeField]
+    Mesh[] meshByType;
+
     [SerializeField]
     Color32[] Tab_color;
     [SerializeField]
     Color32[] Tab_colorSpawn;
+
+    [SerializeField]
+    Color32 colorCTA;
+
+    GameObject SFX_KoaOpDead;
+    GameObject SFX_KoaSelected;
+    int selectedNumb = 0;
 
     public bool bSelected;
 
@@ -33,6 +44,9 @@ public class SC_KoaSettingsOP : MonoBehaviour, IF_KoaForOperator, IF_Hover
     bool laser;
     float speedFactor;
     bool chargeLaser;
+
+
+    bool spawnScale;
 
     public enum koaSelection
     {
@@ -45,7 +59,18 @@ public class SC_KoaSettingsOP : MonoBehaviour, IF_KoaForOperator, IF_Hover
 
     [SerializeField]
     GameObject VFX_koadeath;
- 
+    [SerializeField]
+    GameObject VFX_clicOnMe;
+    [SerializeField]
+    float timeBeforeCallToAction = 2;
+    float timerCTA = 0;
+    bool boolCTA = true;
+    bool PSInstantiate = false;
+
+    float totalscale;
+    GameObject PS_CTA;
+
+    SC_KoaID_operator_display textDisplay;
     public enum koaState
     {
         Spawn = 0,
@@ -56,6 +81,15 @@ public class SC_KoaSettingsOP : MonoBehaviour, IF_KoaForOperator, IF_Hover
     }
 
     koaState currentState;
+
+
+    void Start()
+    {
+        textDisplay = GetComponentInChildren<SC_KoaID_operator_display>();
+
+        totalscale = initialScale.x;
+    }
+
 
     public void SetSensibility(Vector3 sensibility)
     {
@@ -71,9 +105,11 @@ public class SC_KoaSettingsOP : MonoBehaviour, IF_KoaForOperator, IF_Hover
     }
 
 
-    public void SetKoaType(int type)
+    public void SetKoaType(int type, bool spawnScale)
     {
         this.type = type;
+        this.spawnScale = spawnScale;
+        SetMesh();
         setMeshColor();
     }
 
@@ -84,9 +120,10 @@ public class SC_KoaSettingsOP : MonoBehaviour, IF_KoaForOperator, IF_Hover
 
     public void SetKoaLife(float curLife)
     {
+        //this.curKoaLife = Mathf.Round(curLife);
+        this.curKoaLife = curLife;
 
-        this.curKoaLife = Mathf.Round(curLife);
-        if(curLife <= 0)
+        if (curLife <= 0)
         {
 
             //https://www.youtube.com/watch?v=VUjn2Vs65Z8
@@ -95,6 +132,9 @@ public class SC_KoaSettingsOP : MonoBehaviour, IF_KoaForOperator, IF_Hover
             vfx.GetComponent<ParticleSystem>().startColor = Tab_color[type];
             vfx.GetComponent<ParticleSystemRenderer>().trailMaterial.color = Tab_color[type];
             vfx.GetComponent<ParticleSystem>().Play();
+            textDisplay.SetTextActive(false);
+            SFX_KoaOpDead = CustomSoundManager.Instance.PlaySound(gameObject, "SFX_KoaDeathOperator", false, 0.5f, false);
+
         }
     }
     public void SetKoaState(int curState)
@@ -176,14 +216,31 @@ public class SC_KoaSettingsOP : MonoBehaviour, IF_KoaForOperator, IF_Hover
         return chargeLaser;
     }
 
+    public int GetKoaType()
+    {
+        return type;
+    }
+
     void Update()
     {
         if(!spawn)
         {
-            float scale = ((initialScale.x*factor / timeBeforeSpawn) * Time.deltaTime);
-            float radius = ((initialRadius / factor / timeBeforeSpawn) * Time.deltaTime);
-            transform.localScale += new Vector3(scale, scale, scale);
-            transform.GetComponent<SphereCollider>().radius -= radius;
+
+            if(spawnScale)
+            {
+                float scale = ((initialScale.x * factor / timeBeforeSpawn) * Time.deltaTime);
+                float radius = ((initialRadius / factor / timeBeforeSpawn) * Time.deltaTime);
+                transform.localScale += new Vector3(scale, scale, scale);
+                transform.GetComponent<SphereCollider>().radius -= radius;
+                if(type == 4 && transform.localScale.x >= initialScale.x * factor)
+                transform.localScale = new Vector3(initialScale.x * factor, initialScale.x * factor, initialScale.x * factor);
+
+            }
+            else
+            {
+                transform.localScale = new Vector3(initialScale.x * factor, initialScale.x * factor, initialScale.x * factor);
+            }
+  
             timer += Time.deltaTime;
             if (timer >= timeBeforeSpawn)
             {
@@ -191,19 +248,70 @@ public class SC_KoaSettingsOP : MonoBehaviour, IF_KoaForOperator, IF_Hover
                 spawn = true;
             }           
         }
+        if (type == 0)
+        {
+            timerCTA += Time.deltaTime;
+            if (timerCTA > timeBeforeCallToAction && boolCTA)
+            {
+                if (!PSInstantiate)
+                {
+                    PSInstantiate = true;
+                    PS_CTA = Instantiate(VFX_clicOnMe,this.transform);
+                    PS_CTA.GetComponent<ParticleSystem>().startColor = colorCTA;
+                    PS_CTA.GetComponent<ParticleSystem>().Play();
+                }
+               
+
+            }
+        }
     }
 
-    public void SetMaterial(koaSelection newSelction)
+    public void SetMaterial(koaSelection newSelection)
     {
-        if(newSelction != koaSelection.Selected)
+
+        switch (newSelection)
         {
-            if(!bSelected)
-                GetComponent<MeshRenderer>().material = Tab_mat[(int)newSelction];
+            case koaSelection.None:
+                selectedNumb = 0;
+                if (!bSelected)
+                {
+                    textDisplay.SetTextActive(false);
+                    GetComponent<MeshRenderer>().material = Tab_mat[(int)newSelection];
+                }
+
+                break;
+            case koaSelection.Selected:
+
+                if(selectedNumb == 0)
+                {
+                    SFX_KoaSelected = CustomSoundManager.Instance.PlaySound(gameObject, "SFX_SelectionKoa", false, 1f, false);
+                    selectedNumb += 1;
+                }
+                textDisplay.SetTextActive();
+
+                GetComponent<MeshRenderer>().material = Tab_mat[(int)newSelection];
+                boolCTA = false;
+                if (PSInstantiate && PS_CTA != null)
+                {
+                    Destroy(PS_CTA);
+                }
+
+                break;
+            case koaSelection.Hover:
+
+                if (!bSelected)
+                {
+                    textDisplay.SetTextActive(false);
+                    GetComponent<MeshRenderer>().material = Tab_mat[(int)newSelection];
+
+                }
+
+                break;
+            default:
+                break;
         }
-        else
-        {
-            GetComponent<MeshRenderer>().material = Tab_mat[(int)newSelction];
-        }
+
+
         setMeshColor();
     }
 
@@ -238,4 +346,10 @@ public class SC_KoaSettingsOP : MonoBehaviour, IF_KoaForOperator, IF_Hover
         OutAction();
     }
 
+    void SetMesh()
+    {
+
+        if(meshByType[type] != null) 
+        GetComponent<MeshFilter>().mesh = meshByType[type];
+    }
 }

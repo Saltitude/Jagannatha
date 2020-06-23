@@ -21,17 +21,20 @@ public class ViveGripExample_Hand : MonoBehaviour {
 
   void ViveGripTouchStart() {
         //GetComponent<MeshFilter>().mesh = primed;
-        restHand.SetActive(false);
-        primedHand.SetActive(true);
+        if(restHand != null)
+            restHand.SetActive(false);
+        if (primedHand != null)
+            primedHand.SetActive(true);
   }
 
   void ViveGripTouchStop(ViveGrip_GripPoint gripPoint) {
     // We might move out of touch range but still be holding something
     if (!gripPoint.HoldingSomething()) {
             //GetComponent<MeshFilter>().mesh = rest;
-
-            restHand.SetActive(true);
-            primedHand.SetActive(false);
+            if (restHand != null)
+                restHand.SetActive(true);
+            if (primedHand != null)
+                primedHand.SetActive(false);
 
         }
   }

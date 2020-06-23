@@ -40,12 +40,17 @@ public class SC_WaveManager : MonoBehaviour
     float curBackupTimer = 0;
     bool backupSend;
 
+    GameObject SFX_NewWave;
+
 
 
     Vector3Int sensitivityA = new Vector3Int(0, 0, 0);
     Vector3Int sensitivityB = new Vector3Int(0, 0, 0);
     Vector3Int sensitivityC = new Vector3Int(0, 0, 0);
     Vector3Int sensitivityD = new Vector3Int(0, 0, 0);
+
+
+    bool bBoss;
 
     #endregion
     //---------------------------------------------------------------------//
@@ -101,6 +106,7 @@ public class SC_WaveManager : MonoBehaviour
     #region Initialize New Wave
     public void InitializeWave(WaveSettings newWaveSettings)
     {
+        SFX_NewWave = CustomSoundManager.Instance.PlaySound(gameObject, "SFX_newWave", false, 1f, false);
         resetVariables();
         _curWaveSettings = newWaveSettings;
 
@@ -128,6 +134,7 @@ public class SC_WaveManager : MonoBehaviour
     }
     IEnumerator SpawnInitialFlock()
     {
+        if(bBoss)
         _FlockList.Clear();
 
         for (int i = 0; i < _curWaveSettings.initialSpawnFlock.Length; i++)
@@ -229,9 +236,10 @@ public class SC_WaveManager : MonoBehaviour
                 _FlockList.RemoveAt(i);
                 if (SC_GameStates.Instance.CurState == SC_GameStates.GameState.Game)
                 {
-
-                    SC_EnemyManager.Instance.Progress.value += 100 * 1f / SC_KoaSpawn.Instance.nb_totalFlock;
-                    SC_EnemyManager.Instance.sendToSynchVar(SC_EnemyManager.Instance.Progress.value);
+                    //Debug.Log(SC_EnemyManager.Instance.Progress.value);
+                    //SC_EnemyManager.Instance.Progress.value += 100 * 1f / SC_KoaSpawn.Instance.nb_totalFlock;
+                    //Debug.Log(SC_EnemyManager.Instance.Progress.value += 100 * 1f / SC_KoaSpawn.Instance.nb_totalFlock);
+                    SC_EnemyManager.Instance.StartCoroutine("ProgressUpdate",SC_EnemyManager.Instance.Progress.value + 100 * 1f / SC_KoaSpawn.Instance.nb_totalFlock);
                 }
 
             }
@@ -262,28 +270,28 @@ public class SC_WaveManager : MonoBehaviour
 
         switch(flockSettings.attackType)
         {
-            case FlockSettings.AttackType.none:
+            case FlockSettings.FlockType.none:
 
                 baseSensitivity = sensitivityA;
 
                 break;
 
 
-            case FlockSettings.AttackType.Bullet:
+            case FlockSettings.FlockType.Bullet:
 
                 baseSensitivity = sensitivityB;
 
                 break;
 
 
-            case FlockSettings.AttackType.Laser:
+            case FlockSettings.FlockType.Laser:
 
                 baseSensitivity = sensitivityC;
 
                 break;     
             
             
-            case FlockSettings.AttackType.Kamikaze:
+            case FlockSettings.FlockType.Kamikaze:
 
                 baseSensitivity = sensitivityD;
 
@@ -403,7 +411,7 @@ public class SC_WaveManager : MonoBehaviour
         float z = Mathf.Abs(newValue.z - pilotValue.z);
 
         float ecart = x + y + z;
-        if (ecart <= 3)
+        if (ecart <= 6)
         {
             newValue = GenerateSensitivityP();
         }

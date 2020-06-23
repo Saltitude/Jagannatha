@@ -20,19 +20,49 @@ public class SC_UI_Reboot_btn : MonoBehaviour
     [SerializeField]
     Material breakdownMat;
     [SerializeField]
+    Material curLotusMat;
+    [SerializeField]
     GameObject warning;
     [SerializeField]
-    GameObject sparkle;
+    ParticleSystem sparkle;
     [SerializeField]
     TextMeshProUGUI SReboot;
     bool bBlink = false;
     bool CorouIsRunning = false;
 
+    [SerializeField]
+    Image[] img_ToBreakDown;
+    bool[] IndexToActivate;
+    Material[] wireSafe;
+    [SerializeField]
+    Material wireBreakdown;
+
+    [SerializeField]
+    Image LotusUpImg;
+    [SerializeField]
+    Image LotusDownImg;
+
+
+    bool firstReboot = false;
+
+    bool curReboot = false;
     // Start is called before the first frame update
     void Start()
     {
         Mng_SyncVar = GameObject.FindGameObjectWithTag("Mng_SyncVar");
         GetReferences();
+        wireSafe = new Material[img_ToBreakDown.Length];
+        IndexToActivate = new bool[img_ToBreakDown.Length];
+
+        for (int i = 0; i < wireSafe.Length; i++)
+        {
+            wireSafe[i] = img_ToBreakDown[i].material;
+        }
+        //StartCoroutine(RedWireCoro());
+        if (sc_syncvar != null)
+        {
+            curReboot = sc_syncvar.mustReboot;
+        }
     }
 
     // Update is called once per frame
@@ -43,27 +73,50 @@ public class SC_UI_Reboot_btn : MonoBehaviour
 
         if (sc_syncvar != null)
         {
-            if(sc_syncvar.mustReboot)
+            if(curReboot != sc_syncvar.mustReboot)
             {
-                //Debug.Log("OP : Must Reboot");
-                stateInterrupteur.material = breakdownMat;
-                warning.SetActive(true);
-                sparkle.SetActive(false);
-                bBlink = true;
-                if (!CorouIsRunning)
-                    StartCoroutine(BlinkSystem());
-               
-                
+                if (sc_syncvar.mustReboot)
+                {
+                    //Debug.Log("OP : Must Reboot");
+                    stateInterrupteur.material = breakdownMat;
+                    //warning.SetActive(true);
+                    sparkle.Stop();
+
+                    LotusUpImg.material = breakdownMat;
+                    LotusDownImg.material = breakdownMat;
+                    bBlink = true;
+                    if (SC_GameStates.Instance.CurState == SC_GameStates.GameState.Game)
+                        SetBreakDown(0, true);
+                    if (!CorouIsRunning)
+                        StartCoroutine(BlinkSystem());
+
+
+                }
+                else
+                {
+                    //Debug.Log(" OP : No need reboot");
+                    stateInterrupteur.material = curMat;
+                    //warning.SetActive(false);
+                    if (firstReboot == false && SC_GameStates.Instance.CurTutoState >= SC_GameStates.TutorialState.Reboot)
+                    {
+                        firstReboot = true;
+                        sparkle.gameObject.SetActive(true);
+                    }
+                    if (firstReboot)
+                    {
+                        sparkle.Stop();
+                        sparkle.Play();
+                    }
+                    bBlink = false;
+                    CorouIsRunning = false;
+                    SetBreakDown(0, false);
+                    LotusUpImg.material = curLotusMat;
+                    LotusDownImg.material = curLotusMat;
+                }
+                curReboot = sc_syncvar.mustReboot;
+
             }
-            else
-            {
-                //Debug.Log(" OP : No need reboot");
-                stateInterrupteur.material = curMat;
-                warning.SetActive(false);
-                sparkle.SetActive(true);
-                bBlink = false;
-                CorouIsRunning = false;
-            }
+
 
         }
     }
@@ -78,10 +131,11 @@ public class SC_UI_Reboot_btn : MonoBehaviour
 
     IEnumerator BlinkSystem()
     {
+        StartCoroutine(RedWireCoro());
         CorouIsRunning = true;
         while (bBlink == true)
         {
-            SReboot.SetText("SYSTEM");
+            SReboot.SetText("PILOT");
             yield return new WaitForSeconds(0.5f);
             SReboot.SetText(" ");
             yield return new WaitForSeconds(0.5f);
@@ -91,6 +145,82 @@ public class SC_UI_Reboot_btn : MonoBehaviour
             yield return new WaitForSeconds(0.5f);
         }
         SReboot.SetText("SYSTEM");
-        StopAllCoroutines();
+        StopCoroutine(BlinkSystem());
+        StopCoroutine(RedWireCoro());
+    }
+
+    IEnumerator RedWireCoro()
+    {
+        float animTime = 0.5f;
+        float maxOpacity = 1;
+        float minOpacity = 0f;
+        float ratePerSec = ((maxOpacity - minOpacity) / animTime);
+        float curOpacity;
+        bool Add = true;
+        float t = 0;
+
+        Vector4 ColorTampon = Color.white;
+        curOpacity = minOpacity;
+
+        while (true)
+        {
+            if (t < animTime)
+            {
+                t += Time.deltaTime;
+                if (Add)
+                {
+
+                    if (curOpacity < maxOpacity)
+                        curOpacity = Mathf.Lerp(curOpacity, maxOpacity, ratePerSec * Time.deltaTime);
+                }
+                else
+                {
+
+                    if (curOpacity > minOpacity)
+                        curOpacity = Mathf.Lerp(curOpacity, minOpacity, ratePerSec * Time.deltaTime);
+
+                }
+
+                for (int i = 0; i < img_ToBreakDown.Length; i++)
+                {
+                    if (IndexToActivate[i])
+                        img_ToBreakDown[i].color = new Vector4(ColorTampon.x, ColorTampon.y, ColorTampon.z, curOpacity);
+                }
+
+            }
+            else
+            {
+                Add = !Add;
+                t = 0;
+            }
+            yield return 0;
+        }
+
+    }
+    void EndCoroutine(int index)
+    {
+        img_ToBreakDown[index].material = wireSafe[index];
+        img_ToBreakDown[index].color = Color.white;
+    }
+    void SetBreakDown(int index, bool activate)
+    {
+
+        if (activate)
+        {
+
+            if (!IndexToActivate[index])
+            {
+                img_ToBreakDown[index].material = wireBreakdown;
+            }
+
+        }
+        else
+        {
+            if (IndexToActivate[index])
+                EndCoroutine(index);
+
+        }
+        IndexToActivate[index] = activate;
+
     }
 }

@@ -12,7 +12,7 @@ public class SC_UI_Display_MapInfos_KoaState : MonoBehaviour
 
     #endregion
 
-    SC_KoaSettingsOP curKoaScriptKoaSettings;
+    public SC_KoaSettingsOP curKoaScriptKoaSettings;
 
     GameObject Mng_SyncVar = null;
     SC_SyncVar_calibr sc_syncvar;
@@ -36,12 +36,16 @@ public class SC_UI_Display_MapInfos_KoaState : MonoBehaviour
 
     [SerializeField]
     Text koaStateTxt;
-    //[SerializeField]
-    //Text optiWeapon;
+    [SerializeField]
+    Text curDmgOutPutPerCent;
 
+    [SerializeField]
+    Font VoiceActivated;
+    [SerializeField]
+    Font sanskritFont;
 
-    string[] StringState = { "Spawning", "Roaming", "Attacking", "Death", "Fleeing", "Absorbing" };
-    enum KoaState
+    string[] StringState = { "Spawning", "Roaming", "Attacking", "Death", "Fleeing", "Absorbing"," Fleeing"};
+    public enum KoaState
     {
         Spawning = 0,
         Roam = 1,
@@ -51,14 +55,17 @@ public class SC_UI_Display_MapInfos_KoaState : MonoBehaviour
         Absorbtion = 5
     }
 
-    KoaState curState;
+    public KoaState curState;
 
 
     [SerializeField]
     Image[] barOpti = new Image[4];
-
+    [SerializeField]
+    float speedBar;
 
     public float optiPercent;
+    float ratioPerCent;
+    int oldValuePerCent;
 
     public float fKoaLife = 100;
     public float curfKoaLife = 100;
@@ -85,12 +92,13 @@ public class SC_UI_Display_MapInfos_KoaState : MonoBehaviour
         Mng_SyncVar = GameObject.FindGameObjectWithTag("Mng_SyncVar");
         GetReferences();
         activated = false;
+
+
     }
 
     public void SetNewKoaSettings(SC_KoaSettingsOP newSettings)
     {
         curKoaScriptKoaSettings = newSettings;
-        koaSensibility = new Vector3(curKoaScriptKoaSettings.GetSensibility().x, curKoaScriptKoaSettings.GetSensibility().y, curKoaScriptKoaSettings.GetSensibility().z);
         boidSettings = fixedData.GetBoidSettings(curKoaScriptKoaSettings.GetBoidSettingsIndex());
         activated = true;
     }
@@ -119,6 +127,8 @@ public class SC_UI_Display_MapInfos_KoaState : MonoBehaviour
         {
             if (activated)
             {
+                koaSensibility = new Vector3(curKoaScriptKoaSettings.GetSensibility().x, curKoaScriptKoaSettings.GetSensibility().y, curKoaScriptKoaSettings.GetSensibility().z);
+
                 curfKoaLife = fKoaLife;
 
                 //_triangle.b_Init = true;
@@ -134,7 +144,8 @@ public class SC_UI_Display_MapInfos_KoaState : MonoBehaviour
 
                 _triangle.b_Init = false;
 
-                fKoaLife = (curKoaScriptKoaSettings.GetCurKoaLife() / curKoaScriptKoaSettings.GetMaxKoaLife()) * 100;
+                //fKoaLife = (curKoaScriptKoaSettings.GetCurKoaLife() / curKoaScriptKoaSettings.GetMaxKoaLife()) * 100;
+                fKoaLife = Mathf.Round(curKoaScriptKoaSettings.GetCurKoaLife() * 10);
 
                 koaLife.text = fKoaLife.ToString();
                 life.simpleValue = fKoaLife/100;
@@ -142,14 +153,36 @@ public class SC_UI_Display_MapInfos_KoaState : MonoBehaviour
                 gunSensibility = new Vector3(sc_syncvar.CalibrInts[0], sc_syncvar.CalibrInts[1], sc_syncvar.CalibrInts[2]);
 
                 displayOptiBar();
-                type.text = "Type " + curKoaScriptKoaSettings.GetKoaID().ToString();
+                if(curKoaScriptKoaSettings.GetKoaType() == 4)
+                {
+                    type.font = sanskritFont;
+                    type.text = "lenigrosfdplapute";
+
+                    SC_TargetMap.Instance.SetFont(SC_TargetMap.FontList.Sanskri);
+                    SC_TargetMap.Instance.SetText("lenigrosfdplapute");
+                }
+                else
+                {
+                    type.font = VoiceActivated;
+                    type.text = "Type " + curKoaScriptKoaSettings.GetKoaID();
+
+                    SC_TargetMap.Instance.SetFont(SC_TargetMap.FontList.VoiceActivated);
+                    SC_TargetMap.Instance.SetText(type.text);
+                }
+
+
                 koaStateTxt.text = StringState[curKoaScriptKoaSettings.GetKoaState()].ToUpper();
+                curState = (KoaState)curKoaScriptKoaSettings.GetKoaState();
                 //koaStateTxt.text = curState.ToString().ToUpper();
 
                 if (curfKoaLife != fKoaLife)
                 {
 
                     SC_UI_Display_MapInfos_KOAShake.Instance.ShakeIt(5f,0.5f);
+                    SC_UI_Display_MapInfos_StateManager.Instance.checkState();
+                }
+                else if (curfKoaLife <= 0)
+                {
                     SC_UI_Display_MapInfos_StateManager.Instance.checkState();
                 }
 
@@ -197,38 +230,38 @@ public class SC_UI_Display_MapInfos_KoaState : MonoBehaviour
     void displayOptiBar()
     {
         
-        if (GetOptiPerCent() > 0)
+        ratioPerCent = Mathf.Lerp(ratioPerCent, ratio(GetOptiPerCent(), 100f,barOpti.Length,0f,0f), Time.deltaTime * speedBar);
+        
+        int ratioValue = Mathf.RoundToInt(ratioPerCent);
+
+        if (ratioValue != 0)
         {
-            barOpti[0].enabled = true;
+
+
+            for (int i = ratioValue - 1; i >= 0; i--)
+            {
+                barOpti[i].enabled = true;
+            }
         }
-        else
+        if (ratioValue != barOpti.Length )
         {
-            barOpti[0].enabled = false;
+            for (int i = barOpti.Length-1; i >= ratioValue ; i--)
+            {
+                barOpti[i].enabled = false;
+            }
         }
-        if (GetOptiPerCent() >= 25)
-        {
-            barOpti[1].enabled = true;
-        }
-        else
-        {
-            barOpti[1].enabled = false;
-        }
-        if (GetOptiPerCent() >= 50)
-        {
-            barOpti[2].enabled = true;
-        }
-        else
-        {
-            barOpti[2].enabled = false;
-        }
-        if (GetOptiPerCent() >= 75)
-        {
-            barOpti[3].enabled = true;
-        }
-        else
-        {
-            barOpti[3].enabled = false;
-        }
+
+
+        int curValue = GetOptiPerCent();
+        curValue = (int)Mathf.Lerp(oldValuePerCent, curValue, Time.deltaTime * 100 / Mathf.Abs(GetOptiPerCent() - oldValuePerCent));
+        oldValuePerCent = curValue;
+        curDmgOutPutPerCent.text = curValue.ToString() + "%";
     }
 
+    float ratio(float inputValue, float inputMax, float outputMax, float inputMin = 0.0f, float outputMin = 0.0f)
+    {
+        float product = (inputValue - inputMin) / (inputMax - inputMin);
+        float output = ((outputMax - outputMin) * product) + outputMin;
+        return output;
+    }
 }

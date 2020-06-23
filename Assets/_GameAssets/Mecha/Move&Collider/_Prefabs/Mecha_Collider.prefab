@@ -263,38 +263,51 @@ MonoBehaviour:
   n_BreakDownLvl: 0
   CurBrokenDir: 1
   b_UseCoroutine: 1
-  f_Duration: 0.5
-  CurDir: 0
-  TargetDir: 0
-  CoroDir: 3
+  f_Duration: 1.2
   Acceleration:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 2
-      outSlope: 2
+      time: -0.029270172
+      value: 0.44110313
+      inSlope: 3.5011878
+      outSlope: 3.5011878
       tangentMode: 0
       weightedMode: 0
       inWeight: 0
-      outWeight: 0
+      outWeight: 0.06412502
+    - serializedVersion: 3
+      time: 0.33096462
+      value: 0.92516565
+      inSlope: 0.3326423
+      outSlope: 0.3326423
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.22437032
     - serializedVersion: 3
       time: 1
       value: 1
-      inSlope: 0
-      outSlope: 0
+      inSlope: -0.0013842568
+      outSlope: -0.0013842568
       tangentMode: 0
       weightedMode: 0
-      inWeight: 0
+      inWeight: 0.19703776
       outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  f_RotationSpeedZ: 1
-  f_LerpRotZ: 1
-  TypeRotationZ: 0
+  CurDir: 0
+  TargetDir: 0
+  CoroDir: 3
+  f_RotationSpeedZ: 5
+  f_LerpRotZ: 2
+  TypeRotationZ: 3
   CurImpulse: 0
+  n_JoyNumToUse: 0
+  tab_TorqueAxes: 
+  f_TorqueImpulseZ: 0
+  EnableVerticalMovement: 0
   b_InvertAxe: 1
   TargetTRS: {fileID: 1283266316766246386}
   f_RotationSpeedX: 0.5

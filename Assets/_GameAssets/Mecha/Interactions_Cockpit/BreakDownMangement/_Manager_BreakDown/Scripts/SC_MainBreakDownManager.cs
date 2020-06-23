@@ -56,6 +56,7 @@ public class SC_MainBreakDownManager : MonoBehaviour, IF_BreakdownManager
     [SerializeField]
     int NbOfBreakWeapon = 0;
 
+
     [Header("Movement System Infos")]
     [SerializeField, Range(0, 10)]
     int MovementLife = 10;
@@ -189,11 +190,13 @@ public class SC_MainBreakDownManager : MonoBehaviour, IF_BreakdownManager
             {
                 SC_WaveManager.Instance.b_nextWave = false;
                 SC_BreakdownOnBreakdownAlert.Instance.LaunchGlobalAlert();
+                SC_AmbiancePilot.Instance.StopAmbiance();
+
                 SC_FogBreakDown.Instance.BreakDownDensity();
                 SC_LightAlarm.Instance.BreakDownLight();
                 if (SoundSourceNumb == 0)
                 {
-                    BreakDownAudioSource = CustomSoundManager.Instance.PlaySound(gameObject, "SFX_p_breackdown_alarm", true, 0.1f);
+                    BreakDownAudioSource = CustomSoundManager.Instance.PlaySound(gameObject, "SFX_p_RaggaMantra", true, 0.1f);
                     SoundSourceNumb += 1;
                 }
             }
@@ -247,11 +250,25 @@ public class SC_MainBreakDownManager : MonoBehaviour, IF_BreakdownManager
 
                     if (SC_GameStates.Instance.CurState == SC_GameStates.GameState.Game)
                     {
-                        if (BreakDownAudioSource.GetComponent<AudioSource>() != null && BreakDownAudioSource.GetComponent<AudioSource>().isPlaying)
+                        
+                        if (BreakDownAudioSource != null)
                         {
-                            //Debug.Log(BreakDownAudioSource.GetComponent<AudioClip>().name);
-                            BreakDownAudioSource.GetComponent<AudioSource>().Stop();
-                            SoundSourceNumb = 0; 
+
+                            if (BreakDownAudioSource.GetComponent<AudioSource>() != null)
+                            {
+                                if (BreakDownAudioSource.GetComponent<AudioSource>().isPlaying)
+                                {
+                                    //Debug.Log(BreakDownAudioSource.GetComponent<AudioClip>().name);
+                                    BreakDownAudioSource.GetComponent<AudioSource>().Stop();
+                                    SoundSourceNumb = 0;
+                                }
+                   
+                            }
+                        }
+                        else
+                        {
+                            Debug.LogError("BreakDownAudioSource est null ;)");
+
                         }
 
                         SC_BreakdownOnBreakdownAlert.Instance.StopGlobalAlert();
@@ -360,7 +377,7 @@ public class SC_MainBreakDownManager : MonoBehaviour, IF_BreakdownManager
                     if (MovementLife <= 0)
                     {
                         SC_MovementBreakdown.Instance.StartNewBreakdown(1);
-                        MovementLife = 10;
+                        StartCoroutine(resetLifeMovement());
                     }
 
                     break;
@@ -382,8 +399,9 @@ public class SC_MainBreakDownManager : MonoBehaviour, IF_BreakdownManager
                     if (WeaponLife <= 0)
                     {
                         SC_WeaponBreakdown.Instance.StartNewBreakdown(1);
-                        WeaponLife = 10;
+                        StartCoroutine(resetLifeWeapon());
                     }
+
 
                     break;
 
@@ -393,6 +411,19 @@ public class SC_MainBreakDownManager : MonoBehaviour, IF_BreakdownManager
 
         CheckBreakdown();
 
+    }
+
+    IEnumerator resetLifeWeapon ()
+    {
+        yield return 0;
+        WeaponLife = 10;
+        SyncSystemsLifes();
+    }
+    IEnumerator resetLifeMovement()
+    {
+        yield return 0;
+        MovementLife = 10;
+        SyncSystemsLifes();
     }
 
     /// <summary>
