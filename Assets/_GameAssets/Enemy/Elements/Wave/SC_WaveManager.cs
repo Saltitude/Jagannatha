@@ -40,6 +40,8 @@ public class SC_WaveManager : MonoBehaviour
     float curBackupTimer = 0;
     bool backupSend;
 
+    GameObject SFX_NewWave;
+
 
 
     Vector3Int sensitivityA = new Vector3Int(0, 0, 0);
@@ -104,6 +106,7 @@ public class SC_WaveManager : MonoBehaviour
     #region Initialize New Wave
     public void InitializeWave(WaveSettings newWaveSettings)
     {
+        SFX_NewWave = CustomSoundManager.Instance.PlaySound(gameObject, "SFX_newWave", false, 1f, false);
         resetVariables();
         _curWaveSettings = newWaveSettings;
 

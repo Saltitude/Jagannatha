@@ -78,9 +78,43 @@ public class SC_BreakdownDisplayManager : MonoBehaviour, IF_BreakdownManager
 
     void Demarage()
     {
+        ViveGripExample_Slider[] slidersTab = new ViveGripExample_Slider[4];
+        slidersTab = FindObjectsOfType<ViveGripExample_Slider>();
+
+        for (int i = 0; i < slidersTab.Length; i++)
+        {
+            if (slidersTab[i].isFLUX)
+            {
+                slidersTab[i].ChangeDesired();
+                CurNbOfBreakdown++;
+                //on met en panne un écran
+                sc_screens_controller.PutOneEnPanne();
+                sc_screens_controller.CurNbOfScreenBreak++;
+
+            }
+        }
+       
+        
+        bool oneSliderBreakdownee = false;
+        int counterDebug = 0;
+        while (!oneSliderBreakdownee)
+        {
+            int rand = Random.Range(0, 4);
+
+            if (!slidersTab[rand].isFLUX)
+            {
+                slidersTab[rand].ChangeDesired();
+                //on itere le nombre de pannes total
+                CurNbOfBreakdown++;
+                //on met en panne un écran
+                sc_screens_controller.PutOneEnPanne();
+                sc_screens_controller.CurNbOfScreenBreak++;
+                oneSliderBreakdownee = true;
+            }
+        }
+        
         StartNewBreakdown(interactible.Length);
         sc_screens_controller.PanneAll();
-
     }
 
     #endregion Init

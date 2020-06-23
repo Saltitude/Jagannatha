@@ -31,6 +31,9 @@ public class SC_KoaSettingsOP : MonoBehaviour, IF_KoaForOperator, IF_Hover
     [SerializeField]
     Color32 colorCTA;
 
+    GameObject SFX_KoaOpDead;
+    GameObject SFX_KoaSelected;
+    int selectedNumb = 0;
 
     public bool bSelected;
 
@@ -130,6 +133,7 @@ public class SC_KoaSettingsOP : MonoBehaviour, IF_KoaForOperator, IF_Hover
             vfx.GetComponent<ParticleSystemRenderer>().trailMaterial.color = Tab_color[type];
             vfx.GetComponent<ParticleSystem>().Play();
             textDisplay.SetTextActive(false);
+            SFX_KoaOpDead = CustomSoundManager.Instance.PlaySound(gameObject, "SFX_KoaDeathOperator", false, 0.5f, false);
 
         }
     }
@@ -268,7 +272,7 @@ public class SC_KoaSettingsOP : MonoBehaviour, IF_KoaForOperator, IF_Hover
         switch (newSelection)
         {
             case koaSelection.None:
-
+                selectedNumb = 0;
                 if (!bSelected)
                 {
                     textDisplay.SetTextActive(false);
@@ -277,7 +281,12 @@ public class SC_KoaSettingsOP : MonoBehaviour, IF_KoaForOperator, IF_Hover
 
                 break;
             case koaSelection.Selected:
-                
+
+                if(selectedNumb == 0)
+                {
+                    SFX_KoaSelected = CustomSoundManager.Instance.PlaySound(gameObject, "SFX_SelectionKoa", false, 1f, false);
+                    selectedNumb += 1;
+                }
                 textDisplay.SetTextActive();
 
                 GetComponent<MeshRenderer>().material = Tab_mat[(int)newSelection];
