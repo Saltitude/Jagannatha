@@ -45,4 +45,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _koaPrefab: {fileID: 248730177783554223, guid: 8737a873f1229d643beb7a9f49bddfa8,
     type: 3}
+  _koa: {fileID: 0}
   isActive: 0
+  regenerationRate: 9000

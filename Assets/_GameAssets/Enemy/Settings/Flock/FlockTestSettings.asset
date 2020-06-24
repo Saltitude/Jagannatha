@@ -16,6 +16,7 @@ MonoBehaviour:
   attackFocus: 3
   damageOnSystem: 0
   timeBetweenAttacks: 0
+  timeBeforeFirstAttack: -1
   fireRate: 5
   nbBulletToShoot: 50
   chargingAttackTime: 1
@@ -28,6 +29,12 @@ MonoBehaviour:
   attackFocusHitReaction: 0
   damageOnSystemHitReaction: 5
   laserDurationHitReaction: 2
+  bossAttackType: 0
+  startingLife: 10
+  fleeingLife: 0
+  fleeingTime: 2
+  spanwScale: 1
+  bossPhase: 0
   spawnSettings:
   - {fileID: 11400000, guid: a4b11c1104243ec49a2b9be25c09ae2b, type: 2}
   - {fileID: 11400000, guid: e296a302f05e8a343841bc22be4c0709, type: 2}
@@ -44,8 +51,10 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 62b4e09d19efe5b449cf908138a9bddc, type: 2}
   getAwaySettings: []
   hitReactionSettings: []
+  BossFlightSettings: []
   splines: []
   spawnTimer: 1
-  boidSpawn: 50
-  maxBoid: 100
-  regenerationRate: 800
+  boidSpawn: 1000
+  maxBoid: 1000
+  regenerationRate: 900
+  damageMultiplicator: 1

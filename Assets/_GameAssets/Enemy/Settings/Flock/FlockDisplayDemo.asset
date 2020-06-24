@@ -16,6 +16,7 @@ MonoBehaviour:
   attackFocus: 0
   damageOnSystem: 0
   timeBetweenAttacks: 0
+  timeBeforeFirstAttack: -1
   fireRate: 5
   nbBulletToShoot: 50
   chargingAttackTime: 1
@@ -28,14 +29,22 @@ MonoBehaviour:
   attackFocusHitReaction: 0
   damageOnSystemHitReaction: 5
   laserDurationHitReaction: 2
+  bossAttackType: 0
+  startingLife: 10
+  fleeingLife: 0
+  fleeingTime: 2
+  spanwScale: 1
+  bossPhase: 0
   spawnSettings: []
   roamSettings: []
   attackSettings: []
   destructionSettings: []
   getAwaySettings: []
   hitReactionSettings: []
+  BossFlightSettings: []
   splines: []
   spawnTimer: 1
-  boidSpawn: 2
+  boidSpawn: 200
   maxBoid: 200
-  regenerationRate: 800
+  regenerationRate: 9000
+  damageMultiplicator: 1
