@@ -74,7 +74,7 @@ public class Sc_LaserFeedBack : MonoBehaviour
         if (SFX_LaserBeam != null && !SFX_LaserBeam.isPlaying)
         {
             //Debug.Log("is not playing no null");
-            //Debug.Log(SoundSourceNumb);
+           // Debug.Log(SoundSourceNumb);
             //SFX_LaserBeam.transform.position = new Vector3(Laser.transform.position.x, -1000, Laser.transform.position.z);
             //Debug.Log(SFX_LaserBeam.transform.position);
         }
@@ -99,7 +99,7 @@ public class Sc_LaserFeedBack : MonoBehaviour
         if(SFX_LaserBeam != null && SFX_LaserBeam.isPlaying/*&& SFX_LaserBeam.GetComponent<AudioSource>().isPlaying*/)
         {
             //SFX_LaserBeam.GetComponent<AudioSource>().Stop();
-            //Debug.Log("DisableLaser");
+           // Debug.Log("DisableLaser");
             StopAllCoroutines();
             StartCoroutine(StopLaserSound());
         }
@@ -110,6 +110,7 @@ public class Sc_LaserFeedBack : MonoBehaviour
     IEnumerator PlayLaserSound()
     {
         SFX_LaserBeam.clip = LaserStart;
+        SFX_LaserBeam.volume = 0.2f;
         SFX_LaserBeam.Play();
         //Debug.Log("PlayStart");
         yield return new WaitForSeconds(SFX_LaserBeam.clip.length);
@@ -121,12 +122,13 @@ public class Sc_LaserFeedBack : MonoBehaviour
     }
         IEnumerator StopLaserSound()
     {
-        //SFX_LaserBeam.loop = false;
+        SFX_LaserBeam.loop = false;
         SFX_LaserBeam.clip = LaserEnd;
         SFX_LaserBeam.Play();
         //Debug.Log("PlayStop");
-        yield return new WaitForSeconds(SFX_LaserBeam.clip.length);
-        SFX_LaserBeam.Stop();
+        yield return null;
+        //yield return new WaitForSeconds(SFX_LaserBeam.clip.length - 1f);
+        //SFX_LaserBeam.Stop();
         //Debug.Log("Stop");
     }
 

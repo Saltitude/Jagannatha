@@ -96,7 +96,9 @@ MonoBehaviour:
   - {fileID: 8300000, guid: fa989cca81efb8d49a2abf1755c47023, type: 3}
   - {fileID: 8300000, guid: e887062fb54c216409c723bd682b1575, type: 3}
   - {fileID: 8300000, guid: 2957091317e80ec448cc0622a64b21fe, type: 3}
-  - {fileID: 8300000, guid: 2aaea6f0af469a4449ee4b16fe240445, type: 3}
+  - {fileID: 8300000, guid: b9b3b3ea45ef02547999ad3a81578fa0, type: 3}
+  - {fileID: 8300000, guid: ffa4d15800f4d31429991416037855d9, type: 3}
+  - {fileID: 8300000, guid: aa6061d1fe0ad994ba390c987f7591a2, type: 3}
   tAmbiancePilot:
   - {fileID: 8300000, guid: 34c39b93b3310684185cd4eb2c5fc768, type: 3}
   - {fileID: 8300000, guid: 375fd8e85d1d344418e5d5716b3fb908, type: 3}

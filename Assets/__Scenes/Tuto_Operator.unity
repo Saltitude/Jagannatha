@@ -8090,6 +8090,11 @@ PrefabInstance:
       propertyPath: m_SizeDelta.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8114334239877127468, guid: 5868590ac89dbe244a183448a01ec422,
+        type: 3}
+      propertyPath: ambianceVolume
+      value: 0.4
+      objectReference: {fileID: 0}
     - target: {fileID: 8130765284035562172, guid: 5868590ac89dbe244a183448a01ec422,
         type: 3}
       propertyPath: m_AnchorMin.y
