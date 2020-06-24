@@ -466,8 +466,8 @@ public class SC_JoystickMove : MonoBehaviour, IF_BreakdownSystem
         }
         else
         {
-            f_TorqueImpulseZ = 0 * f_CurRotationSpeedZ;
-            f_TransImpulseZ = 0 * f_CurRotationSpeedZ;
+            //f_TorqueImpulseZ = 0 * f_CurRotationSpeedZ;
+            //f_TransImpulseZ = 0 * f_CurRotationSpeedZ;
         }
 
         //Vertical Impulse
