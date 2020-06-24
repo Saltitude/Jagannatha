@@ -464,11 +464,13 @@ public class SC_JoystickMove : MonoBehaviour, IF_BreakdownSystem
             f_TorqueImpulseZ = 1 * f_CurRotationSpeedZ;
             f_TransImpulseZ = 1 * f_CurRotationSpeedZ;
         }
+        /*
         else
         {
-            //f_TorqueImpulseZ = 0 * f_CurRotationSpeedZ;
-            //f_TransImpulseZ = 0 * f_CurRotationSpeedZ;
+            f_TorqueImpulseZ = 0 * f_CurRotationSpeedZ;
+            f_TransImpulseZ = 0 * f_CurRotationSpeedZ;
         }
+        */
 
         //Vertical Impulse
         if (Input.GetKey(KeyCode.Z) || Input.GetKey(KeyCode.O))
