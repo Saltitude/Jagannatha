@@ -6455,7 +6455,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   simpleValue: 0
-  speedBar: 10
+  speedBar: 5
   bufferCounter: 0
   bufferIsRunning: 0
   koaSettings: {fileID: 0}
