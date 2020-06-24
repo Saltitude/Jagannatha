@@ -14,7 +14,7 @@ public class SC_BulletFlock : NetworkBehaviour
     float f_Scale_OP = 2f;
     Vector3 ScaleOP;
 
-
+    public float damageFactor = 1;
 
     void Start()
     {
@@ -45,7 +45,8 @@ public class SC_BulletFlock : NetworkBehaviour
                 }
                 else
                 {
-                    SC_MainBreakDownManager.Instance.CauseDamageOnSystem(flockSettings.attackFocus, flockSettings.damageOnSystem);
+                    int damage = Mathf.RoundToInt(flockSettings.damageOnSystem * damageFactor);
+                    SC_MainBreakDownManager.Instance.CauseDamageOnSystem(flockSettings.attackFocus, damage);
                 }
             }
 

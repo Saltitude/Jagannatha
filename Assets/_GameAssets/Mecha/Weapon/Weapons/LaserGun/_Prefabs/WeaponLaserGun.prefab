@@ -231,9 +231,9 @@ MonoBehaviour:
   MainLaserScript: {fileID: 2210348525288903360}
   FirePoint: {fileID: 7460222069811358692}
   SFX_LaserBeam: {fileID: 521360237943054545}
-  LaserStart: {fileID: 8300000, guid: a5b5c101fe4547442925a3b95037e73d, type: 3}
-  LaserLoop: {fileID: 8300000, guid: ac84e3a3769aab94298dba5765a32132, type: 3}
-  LaserEnd: {fileID: 8300000, guid: 8f5d62319d7459849b2f0b8f5e44a7be, type: 3}
+  LaserStart: {fileID: 8300000, guid: ffa4d15800f4d31429991416037855d9, type: 3}
+  LaserLoop: {fileID: 8300000, guid: b9b3b3ea45ef02547999ad3a81578fa0, type: 3}
+  LaserEnd: {fileID: 8300000, guid: aa6061d1fe0ad994ba390c987f7591a2, type: 3}
   CurColor: {r: 0, g: 0, b: 0, a: 0}
   Laser: {fileID: 9061922979539864453}
   Laser1: {fileID: 2453929113917406823}

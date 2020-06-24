@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackType: 2
   attackFocus: 0
-  damageOnSystem: 1
+  damageOnSystem: 10
   timeBetweenAttacks: 10
   timeBeforeFirstAttack: 5
   fireRate: 1
@@ -54,7 +54,7 @@ MonoBehaviour:
   - {fileID: 7590711955548368644, guid: 2d80bbddcfd75f74b968524747323c54, type: 3}
   - {fileID: 0}
   - {fileID: 0}
-  spawnTimer: 1
+  spawnTimer: 6
   boidSpawn: 50
   maxBoid: 50
   regenerationRate: 0
