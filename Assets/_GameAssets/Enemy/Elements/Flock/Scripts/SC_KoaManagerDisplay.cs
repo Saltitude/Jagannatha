@@ -329,6 +329,7 @@ public class SC_KoaManagerDisplay : MonoBehaviour
 
     void AnimDestroy()
     {
+        
         CustomSoundManager.Instance.PlaySound(_koa.gameObject, "SFX_Explosion_Flock", false, 0.1f,false);
 
 
