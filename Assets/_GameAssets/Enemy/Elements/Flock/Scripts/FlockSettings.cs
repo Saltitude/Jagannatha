@@ -85,7 +85,7 @@ public class FlockSettings : ScriptableObject
     public float fleeingTime = 2f;
 
     public bool spanwScale = true;
-
+    public int bossPhase = 0;
 
     [Header("Boids")]
 

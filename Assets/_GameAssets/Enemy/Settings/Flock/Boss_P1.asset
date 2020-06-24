@@ -34,6 +34,7 @@ MonoBehaviour:
   fleeingLife: 5
   fleeingTime: 10
   spanwScale: 1
+  bossPhase: 1
   spawnSettings:
   - {fileID: 11400000, guid: c51c494377abd2a4eb492892260091d9, type: 2}
   roamSettings:
