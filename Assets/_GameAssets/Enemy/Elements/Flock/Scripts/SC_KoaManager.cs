@@ -495,6 +495,7 @@ public class SC_KoaManager : MonoBehaviour
                 if(KoaLife <= curFlockSettings.fleeingLife)
                 {
                     KoaLife = curFlockSettings.fleeingLife;
+                    SFX_Explosion = CustomSoundManager.Instance.PlaySound(_koa.gameObject, "SFX_Boss_Flee", false, 1f, false);
                     flockManager.ReactionFlock(SC_FlockManager.PathType.bossFlight);
                 }
             }
@@ -522,7 +523,9 @@ public class SC_KoaManager : MonoBehaviour
 
     public void AnimDestroy()
     {
+        if(curFlockSettings.attackType != FlockSettings.FlockType.Boss || curFlockSettings.bossPhase == 3)
         SFX_Explosion = CustomSoundManager.Instance.PlaySound(_koa.gameObject, "SFX_Explosion_Flock", false, 1f, false);
+
         flockManager.AnimDestroy();
         //SetBehavior(DeathSettings);
         foreach (Boid b in _boidsTab) b.DestroyBoid(Boid.DestructionType.Massive);
