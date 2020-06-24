@@ -43,8 +43,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 48256460137deb64a9a2f37cbf4141bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  source: {fileID: 4785537653817413474}
-  ambianceVolume: 0.2
+  ambianceVolume: 0.5
   fadeSpeed: 0.2
   Ambiance1: 04000000060000000b000000
   Ambiance2: 04000000060000000b00000007000000
