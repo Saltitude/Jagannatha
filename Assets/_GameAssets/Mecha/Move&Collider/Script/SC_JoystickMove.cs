@@ -466,10 +466,10 @@ public class SC_JoystickMove : MonoBehaviour, IF_BreakdownSystem
             f_TransImpulseZ = 1 * f_CurRotationSpeedZ;
         }
         
-        else
+        else if (Input.GetKeyUp(KeyCode.D) || Input.GetKeyUp(KeyCode.M))
         {
-            //f_TorqueImpulseZ = 0 * f_CurRotationSpeedZ;
-            //f_TransImpulseZ = 0 * f_CurRotationSpeedZ;
+            f_TorqueImpulseZ = 0 * f_CurRotationSpeedZ;
+            f_TransImpulseZ = 0 * f_CurRotationSpeedZ;
         }
         
 
