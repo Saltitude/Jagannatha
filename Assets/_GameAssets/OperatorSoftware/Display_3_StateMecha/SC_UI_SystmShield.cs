@@ -20,6 +20,8 @@ public class SC_UI_SystmShield : MonoBehaviour
     public bool bufferIsRunning = false;
 
     Image[] tabImage;
+
+    [SerializeField] SC_KoaSettingsOP koaSettings;
     // Start is called before the first frame update
     void Start()
     {
@@ -41,7 +43,9 @@ public class SC_UI_SystmShield : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(bufferIsRunning == false)
+        if(koaSettings != null)
+        simpleValue = ratio(koaSettings.GetCurKoaLife(),10,1);
+        if (bufferIsRunning == false)
             displayBar();
     }
 
