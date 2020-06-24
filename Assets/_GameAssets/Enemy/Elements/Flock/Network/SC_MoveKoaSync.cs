@@ -122,6 +122,7 @@ public class SC_MoveKoaSync : NetworkBehaviour
             sc_KoaSettings.SetKoamaxLife(maxLife);
             sc_KoaSettings.SetKoaType(type, spawnScale);
             
+            
 
         }
     }

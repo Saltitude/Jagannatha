@@ -24,6 +24,8 @@ public class SC_Movement_MechState : MonoBehaviour
     Image[] arcR;
     [SerializeField]
     Image[] arcL;
+
+
     [SerializeField]
     Color32 validColor;
     [SerializeField]
@@ -124,6 +126,13 @@ public class SC_Movement_MechState : MonoBehaviour
 
                 DisconnectedState.SetActive(true);
 
+                for (int i = 0; i < arcR.Length; i++)
+                {
+                    arcL[i].enabled = false;
+                    arcR[i].enabled = false;
+                }
+
+
                 break;
 
             case SystemState.Connected:
@@ -134,6 +143,11 @@ public class SC_Movement_MechState : MonoBehaviour
 
                 SC_TutorialUIManager.Instance.ActivateSystem(SC_TutorialUIManager.System.Motion, false);
 
+                for (int i = 0; i < arcR.Length; i++)
+                {
+                    arcL[i].enabled = true;
+                    arcR[i].enabled = true;
+                }
                 ConnectedOffState.SetActive(false);
                 InitializeOffState.SetActive(true);
                 LaunchedOffState.SetActive(true);
@@ -171,6 +185,7 @@ public class SC_Movement_MechState : MonoBehaviour
             case SystemState.Initialize:
                 SC_TutorialUIManager.Instance.ActivateSystem(SC_TutorialUIManager.System.Motion, true);
 
+   
                 DisconnectedState.SetActive(false);
 
                 InitializeOffState.SetActive(false);
@@ -179,13 +194,22 @@ public class SC_Movement_MechState : MonoBehaviour
 
                 GeneralOffState.SetActive(false);
                 InitializedState.SetActive(true);
+                for (int i = 0; i < arcR.Length; i++)
+                {
+                    arcL[i].enabled = true;
+                    arcR[i].enabled = true;
+                }
                 break;
 
             case SystemState.Launched:
                 SC_TutorialUIManager.Instance.ActivateSystem(SC_TutorialUIManager.System.Motion, true);
                 SC_TutorialUIManager.Instance.ActivateBlink(SC_TutorialUIManager.System.Motion, false);
 
-
+                for (int i = 0; i < arcR.Length; i++)
+                {
+                    arcL[i].enabled = true;
+                    arcR[i].enabled = true;
+                }
                 DisconnectedState.SetActive(false);
                 LaunchedOffState.SetActive(false);
                 ConnectedOffState.SetActive(false);

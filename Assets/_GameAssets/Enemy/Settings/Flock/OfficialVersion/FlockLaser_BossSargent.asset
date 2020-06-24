@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: FlockLaser_BossSargent
   m_EditorClassIdentifier: 
   attackType: 1
-  attackFocus: 0
-  damageOnSystem: 10
+  attackFocus: 1
+  damageOnSystem: 5
   timeBetweenAttacks: 20
   timeBeforeFirstAttack: 7
   fireRate: 3

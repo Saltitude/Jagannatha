@@ -21,6 +21,9 @@ public class SC_KoaID_operator_display : MonoBehaviour
 
     bool isScanned = false;
 
+    [SerializeField]
+    GameObject lifeBar;
+
     
     string koaID;
     // Start is called before the first frame update
@@ -40,6 +43,7 @@ public class SC_KoaID_operator_display : MonoBehaviour
         if(sc_koa != null)
             koaID = sc_koa.GetKoaID();
         txt.enabled = active;
+        lifeBar.SetActive(active);
         if (sc_koa.GetKoaType() != 4)
         {
             if (!isScanned && active)
