@@ -13,14 +13,20 @@ private float VIBRATION_STRENGTH = 2f;
     int index;
     [SerializeField]
     GameObject HumptyTheBoss;
+    [SerializeField]
+    GameObject Drake;
     Vector3  InitPos;
     Quaternion  InitRot;
+    Vector3  InitPosD;
+    Quaternion  InitRotD;
 
     void Start () {
         if (index == 1)
         {
             InitPos = HumptyTheBoss.transform.position;
             InitRot = HumptyTheBoss.transform.rotation;
+            InitPosD = Drake.transform.position;
+            InitRotD = Drake.transform.rotation;
         }
         ResetDistance();
          
@@ -46,6 +52,8 @@ private float VIBRATION_STRENGTH = 2f;
         {
             HumptyTheBoss.transform.position = InitPos;
             HumptyTheBoss.transform.rotation = InitRot;
+            Drake.transform.position = InitPosD;
+            Drake.transform.rotation = InitRotD;
         }
 
         while (distance > 0)
