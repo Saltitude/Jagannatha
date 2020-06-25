@@ -472,8 +472,12 @@ public class SC_FlockManager : MonoBehaviour
                 KoaEmissiveAnimator.SetBool("Flight", false);
 
                 if (flockSettings.attackType == FlockSettings.FlockType.Boss)
+                {
                     laserBoss = !laserBoss;
-                flockWeaponManager.StartFire(true, laserBoss);
+                    flockWeaponManager.StartFire(true, laserBoss);
+                }
+                else
+                    flockWeaponManager.StartFire();
 
                 break;
 

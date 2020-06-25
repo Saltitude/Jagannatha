@@ -109,6 +109,13 @@ public class SC_KoaSettingsOP : MonoBehaviour, IF_KoaForOperator, IF_Hover
     {
         this.type = type;
         this.spawnScale = spawnScale;
+        if (SC_SyncVar_DisplaySystem.Instance.curWave == 0)
+            timeBeforeCallToAction = 2;
+        else if (SC_SyncVar_DisplaySystem.Instance.curWave <= 3)
+            timeBeforeCallToAction = 15;
+        else
+            boolCTA = false;
+
         SetMesh();
         setMeshColor();
     }
@@ -179,7 +186,7 @@ public class SC_KoaSettingsOP : MonoBehaviour, IF_KoaForOperator, IF_Hover
 
     public int GetKoaState()
     {
-        return (int) currentState;
+        return (int)currentState;
     }
 
     public void SetBoolAnimation(bool deploy, bool flight, bool bullet, bool laser, float speedFactor, bool chargeLaser)
@@ -210,7 +217,7 @@ public class SC_KoaSettingsOP : MonoBehaviour, IF_KoaForOperator, IF_Hover
     public float GetSpeedFactor()
     {
         return speedFactor;
-    } 
+    }
     public bool GetChargeLaser()
     {
         return chargeLaser;
@@ -223,46 +230,45 @@ public class SC_KoaSettingsOP : MonoBehaviour, IF_KoaForOperator, IF_Hover
 
     void Update()
     {
-        if(!spawn)
+        if (!spawn)
         {
 
-            if(spawnScale)
+            if (spawnScale)
             {
                 float scale = ((initialScale.x * factor / timeBeforeSpawn) * Time.deltaTime);
                 float radius = ((initialRadius / factor / timeBeforeSpawn) * Time.deltaTime);
                 transform.localScale += new Vector3(scale, scale, scale);
                 transform.GetComponent<SphereCollider>().radius -= radius;
-                if(type == 4 && transform.localScale.x >= initialScale.x * factor)
-                transform.localScale = new Vector3(initialScale.x * factor, initialScale.x * factor, initialScale.x * factor);
+                if (type == 4 && transform.localScale.x >= initialScale.x * factor)
+                    transform.localScale = new Vector3(initialScale.x * factor, initialScale.x * factor, initialScale.x * factor);
 
             }
             else
             {
                 transform.localScale = new Vector3(initialScale.x * factor, initialScale.x * factor, initialScale.x * factor);
             }
-  
+
             timer += Time.deltaTime;
             if (timer >= timeBeforeSpawn)
             {
                 setMeshColor();
                 spawn = true;
-            }           
-        }
-        if (type == 0)
-        {
-            timerCTA += Time.deltaTime;
-            if (timerCTA > timeBeforeCallToAction && boolCTA)
-            {
-                if (!PSInstantiate)
-                {
-                    PSInstantiate = true;
-                    PS_CTA = Instantiate(VFX_clicOnMe,this.transform);
-                    PS_CTA.GetComponent<ParticleSystem>().startColor = colorCTA;
-                    PS_CTA.GetComponent<ParticleSystem>().Play();
-                }
-               
-
             }
+        }
+
+        timerCTA += Time.deltaTime;
+        if (timerCTA > timeBeforeCallToAction && boolCTA)
+        {
+            if (!PSInstantiate)
+            {
+                PSInstantiate = true;
+                PS_CTA = Instantiate(VFX_clicOnMe, this.transform);
+                PS_CTA.GetComponent<ParticleSystem>().startColor = colorCTA;
+                PS_CTA.GetComponent<ParticleSystem>().Play();
+            }
+
+
+
         }
     }
 
@@ -282,7 +288,7 @@ public class SC_KoaSettingsOP : MonoBehaviour, IF_KoaForOperator, IF_Hover
                 break;
             case koaSelection.Selected:
 
-                if(selectedNumb == 0)
+                if (selectedNumb == 0)
                 {
                     SFX_KoaSelected = CustomSoundManager.Instance.PlaySound(gameObject, "SFX_SelectionKoa", false, 1f, false);
                     selectedNumb += 1;
@@ -349,7 +355,7 @@ public class SC_KoaSettingsOP : MonoBehaviour, IF_KoaForOperator, IF_Hover
     void SetMesh()
     {
 
-        if(meshByType[type] != null) 
-        GetComponent<MeshFilter>().mesh = meshByType[type];
+        if (meshByType[type] != null)
+            GetComponent<MeshFilter>().mesh = meshByType[type];
     }
 }
