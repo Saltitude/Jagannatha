@@ -189,7 +189,7 @@ public class ViveGripExample_Slider : MonoBehaviour, IInteractible {
     {
 
         desiredValue = Random.Range(-limit, limit);
-        while (gameObject.transform.localPosition.x >= desiredValue - precision && gameObject.transform.localPosition.x <= desiredValue + precision)
+        while (gameObject.transform.localPosition.x >= desiredValue - (precision+precision/3) && gameObject.transform.localPosition.x <= desiredValue + (precision + precision / 3))
         {
             desiredValue = Random.Range(-limit, limit);
         }
@@ -198,6 +198,10 @@ public class ViveGripExample_Slider : MonoBehaviour, IInteractible {
 
         sc_syncvar.SliderChangeValueWanted(index, -Mathf.Round(Ratio(desiredValue, limit, 0.45f, -limit, -0.45f) * 100) / 100);
         sc_syncvar.SliderChangeIsPanne(index, true);
+
+        Debug.Log("Slider Index" + index);
+        Debug.Log("Value : " + curValue);
+        Debug.Log("ValueWanted : " + desiredValue);
         
 
     }

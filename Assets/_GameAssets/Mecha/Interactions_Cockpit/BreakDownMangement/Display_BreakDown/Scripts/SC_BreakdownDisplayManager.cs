@@ -85,7 +85,7 @@ public class SC_BreakdownDisplayManager : MonoBehaviour, IF_BreakdownManager
         {
             if (slidersTab[i].isFLUX)
             {
-                slidersTab[i].ChangeDesired();
+                slidersTab[i].GetComponent<IInteractible>().ChangeDesired();
                 CurNbOfBreakdown++;
                 //on met en panne un écran
                 sc_screens_controller.PutOneEnPanne();
@@ -94,7 +94,7 @@ public class SC_BreakdownDisplayManager : MonoBehaviour, IF_BreakdownManager
             }
         }
        
-        
+        /*
         bool oneSliderBreakdownee = false;
         int counterDebug = 0;
         while (!oneSliderBreakdownee)
@@ -112,7 +112,7 @@ public class SC_BreakdownDisplayManager : MonoBehaviour, IF_BreakdownManager
                 oneSliderBreakdownee = true;
             }
         }
-        
+        */
         StartNewBreakdown(interactible.Length);
         sc_screens_controller.PanneAll();
     }
