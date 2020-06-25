@@ -52,6 +52,7 @@ public class SC_SyncVar_DisplaySystem : NetworkBehaviour
     [SyncVar(hook = "OnChangeWave")]
     public int curWave = 0;
 
+
     public void OnChangeWave(int newValue)
     {
         curWave = newValue;

@@ -15,7 +15,7 @@ MonoBehaviour:
   attackType: 2
   attackFocus: 2
   damageOnSystem: 10
-  timeBetweenAttacks: 8
+  timeBetweenAttacks: 15
   timeBeforeFirstAttack: -1
   fireRate: 0
   nbBulletToShoot: 0
@@ -29,6 +29,12 @@ MonoBehaviour:
   attackFocusHitReaction: 0
   damageOnSystemHitReaction: 0
   laserDurationHitReaction: 2
+  bossAttackType: 0
+  startingLife: 10
+  fleeingLife: 0
+  fleeingTime: 2
+  spanwScale: 1
+  bossPhase: 0
   spawnSettings:
   - {fileID: 11400000, guid: 8241a6c65e4b8e4488218c6992d4efdb, type: 2}
   roamSettings:
@@ -41,6 +47,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 8241a6c65e4b8e4488218c6992d4efdb, type: 2}
   hitReactionSettings:
   - {fileID: 11400000, guid: 8241a6c65e4b8e4488218c6992d4efdb, type: 2}
+  BossFlightSettings: []
   splines:
   - {fileID: 0}
   - {fileID: 0}
