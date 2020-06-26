@@ -263,7 +263,7 @@ MonoBehaviour:
   n_BreakDownLvl: 0
   CurBrokenDir: 1
   b_UseCoroutine: 1
-  f_Duration: 1
+  f_Duration: 2
   Acceleration:
     serializedVersion: 2
     m_Curve:
