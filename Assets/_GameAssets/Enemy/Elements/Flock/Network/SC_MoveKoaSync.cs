@@ -8,6 +8,8 @@ public class SC_MoveKoaSync : NetworkBehaviour
 
     public GameObject mr_P;
     public GameObject mr_OP;
+    public GameObject mr_Boss;
+
     Transform guide;
     [SyncVar]
     public int curboidNumber = 0;
@@ -37,7 +39,7 @@ public class SC_MoveKoaSync : NetworkBehaviour
             {
                 mr_P.transform.GetChild(i).GetComponent<MeshRenderer>().enabled = false;
             }
-            
+            if (mr_Boss) mr_Boss.SetActive(false);
             mr_OP.SetActive(true);
         }         
     }

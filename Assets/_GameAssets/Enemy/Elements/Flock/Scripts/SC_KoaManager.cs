@@ -169,6 +169,7 @@ public class SC_KoaManager : MonoBehaviour
             if (flockSettings.attackType == FlockSettings.FlockType.Boss)
             {
                 _koa = NetPSpawnKoa.SpawnKoa(true);
+                flockManager.BossAuxAnimator = _koa.transform.GetChild(3).GetComponent<Animator>();
             }
             else _koa = NetPSpawnKoa.SpawnKoa(false);
 
@@ -178,6 +179,7 @@ public class SC_KoaManager : MonoBehaviour
 
             flockManager.KoaMainAnimator = _koa.transform.GetChild(0).GetComponent<Animator>();
             koaEmissiveAnimator = _koa.transform.GetChild(0).GetChild(0).GetComponent<Animator>();
+            
             flockManager.KoaEmissiveAnimator = koaEmissiveAnimator;
 
             vfx_Hit = _koa.GetComponent<ParticleSystem>();

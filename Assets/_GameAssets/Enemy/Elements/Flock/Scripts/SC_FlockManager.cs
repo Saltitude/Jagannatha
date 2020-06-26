@@ -42,6 +42,7 @@ public class SC_FlockManager : MonoBehaviour
     int curSettingsIndex;
     public Animator KoaMainAnimator;
     public Animator KoaEmissiveAnimator;
+    public Animator BossAuxAnimator;
 
 
     BoidSettings _curBoidSetting; //Contient le settings actuel
