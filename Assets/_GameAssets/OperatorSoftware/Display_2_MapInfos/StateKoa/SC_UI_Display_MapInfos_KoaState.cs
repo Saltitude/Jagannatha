@@ -26,6 +26,15 @@ public class SC_UI_Display_MapInfos_KoaState : MonoBehaviour
     Text type;
 
     [SerializeField]
+    Color32[] Tab_color;
+
+    [SerializeField]
+    Sprite[] Tab_image_Logo_Koa;
+
+    [SerializeField]
+    Image imageLogo;
+
+    [SerializeField]
     Text koaLife;
 
     [SerializeField]
@@ -157,20 +166,25 @@ public class SC_UI_Display_MapInfos_KoaState : MonoBehaviour
                 {
                     type.font = sanskritFont;
                     type.text = "lenigrosfdplapute";
-
+                    imageLogo.GetComponent<RectTransform>().sizeDelta = new Vector2(110, 110);
                     SC_TargetMap.Instance.SetFont(SC_TargetMap.FontList.Sanskri);
                     SC_TargetMap.Instance.SetText("lenigrosfdplapute");
+
                 }
                 else
                 {
                     type.font = VoiceActivated;
-                    type.text = "Type " + curKoaScriptKoaSettings.GetKoaID();
+                    type.text = curKoaScriptKoaSettings.GetKoaID();
 
+
+                    imageLogo.GetComponent<RectTransform>().sizeDelta = new Vector2(75, 75);
                     SC_TargetMap.Instance.SetFont(SC_TargetMap.FontList.VoiceActivated);
                     SC_TargetMap.Instance.SetText(type.text);
                 }
 
-
+                imageLogo.color = Tab_color[curKoaScriptKoaSettings.GetKoaType()];
+                imageLogo.sprite = Tab_image_Logo_Koa[curKoaScriptKoaSettings.GetKoaType()];
+                
                 koaStateTxt.text = StringState[curKoaScriptKoaSettings.GetKoaState()].ToUpper();
                 curState = (KoaState)curKoaScriptKoaSettings.GetKoaState();
                 //koaStateTxt.text = curState.ToString().ToUpper();
@@ -199,7 +213,7 @@ public class SC_UI_Display_MapInfos_KoaState : MonoBehaviour
             }
             else
             {
-                
+                imageLogo.color = Color.white;
                 _triangle.b_Init = true;
             }
 
