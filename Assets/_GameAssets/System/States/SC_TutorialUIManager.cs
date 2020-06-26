@@ -39,7 +39,8 @@ public class SC_TutorialUIManager : MonoBehaviour
 
     List<Image> img_Blink;
 
-    
+    [SerializeField]
+    ParticleSystem[] PS_RipleTuto;
 
     public enum System
     {
@@ -87,6 +88,11 @@ public class SC_TutorialUIManager : MonoBehaviour
         imageState[0] = displayState.GetComponentsInChildren<Image>();
         imageState[1] = weaponState.GetComponentsInChildren<Image>();
         imageState[2] = motionState.GetComponentsInChildren<Image>();
+
+        for (int i = 0; i < PS_RipleTuto.Length; i++)
+        {
+            PS_RipleTuto[i].Stop();
+        }
 
     }
 
@@ -158,6 +164,8 @@ public class SC_TutorialUIManager : MonoBehaviour
             else
                 EndBlink(imageBlink[(int)syst][i]);
         }
+
+        CTA(syst, blink);
     }
 
 
@@ -209,5 +217,21 @@ public class SC_TutorialUIManager : MonoBehaviour
 
     }
 
+
+    public void CTA(System syst,bool activate, bool btnReturn = false)
+    {
+        int index = (int)syst;
+        if (btnReturn) index += 3;
+
+        //Debug.Log(index);
+        //Debug.Log(activate);
+
+        PS_RipleTuto[index].Stop();
+
+        if (activate)
+        {
+            PS_RipleTuto[index].Play();
+        }
+    }
 
 }
