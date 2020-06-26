@@ -29,7 +29,7 @@ public class SC_UI_Display_MapInfos_KoaState : MonoBehaviour
     Color32[] Tab_color;
 
     [SerializeField]
-    Image[] Tab_image_Logo_Koa;
+    Sprite[] Tab_image_Logo_Koa;
 
     [SerializeField]
     Image imageLogo;
@@ -166,7 +166,7 @@ public class SC_UI_Display_MapInfos_KoaState : MonoBehaviour
                 {
                     type.font = sanskritFont;
                     type.text = "lenigrosfdplapute";
-
+                    imageLogo.GetComponent<RectTransform>().sizeDelta = new Vector2(110, 110);
                     SC_TargetMap.Instance.SetFont(SC_TargetMap.FontList.Sanskri);
                     SC_TargetMap.Instance.SetText("lenigrosfdplapute");
 
@@ -175,14 +175,16 @@ public class SC_UI_Display_MapInfos_KoaState : MonoBehaviour
                 {
                     type.font = VoiceActivated;
                     type.text = curKoaScriptKoaSettings.GetKoaID();
-                    
 
 
+                    imageLogo.GetComponent<RectTransform>().sizeDelta = new Vector2(75, 75);
                     SC_TargetMap.Instance.SetFont(SC_TargetMap.FontList.VoiceActivated);
                     SC_TargetMap.Instance.SetText(type.text);
                 }
 
                 imageLogo.color = Tab_color[curKoaScriptKoaSettings.GetKoaType()];
+                imageLogo.sprite = Tab_image_Logo_Koa[curKoaScriptKoaSettings.GetKoaType()];
+                
                 koaStateTxt.text = StringState[curKoaScriptKoaSettings.GetKoaState()].ToUpper();
                 curState = (KoaState)curKoaScriptKoaSettings.GetKoaState();
                 //koaStateTxt.text = curState.ToString().ToUpper();
