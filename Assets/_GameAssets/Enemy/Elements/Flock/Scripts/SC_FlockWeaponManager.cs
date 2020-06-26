@@ -368,6 +368,7 @@ public class SC_FlockWeaponManager : MonoBehaviour
 
     void FireBullet(bool superBullet)
     {
+        CustomSoundManager.Instance.PlaySound(gameObject, "SFX_koa_Bullet", false, 0.2f);
         Rigidbody rb = bulletPool[n_CurBullet].GetComponent<Rigidbody>();
 
         if (bulletPool[n_CurBullet] != null && mainAnimator != null)
@@ -431,7 +432,7 @@ public class SC_FlockWeaponManager : MonoBehaviour
             laserFire = true;
             if (startLaser)
             {
-
+                CustomSoundManager.Instance.PlaySound(gameObject, "SFX_koa_Laser", false, 0.2f);
                 Sc_ScreenShake.Instance.ShakeIt(0.025f, flockSettings.laserDurationHitReaction);
                 SC_CockpitShake.Instance.ShakeIt(0.025f, flockSettings.laserDurationHitReaction);
                 //SC_HitDisplay.Instance.Hit(transform.position);
@@ -486,6 +487,7 @@ public class SC_FlockWeaponManager : MonoBehaviour
         laserFire = true;
         if(startLaser)
         {
+            CustomSoundManager.Instance.PlaySound(gameObject, "SFX_koa_Laser", false, 0.2f);
             Sc_ScreenShake.Instance.ShakeIt(0.025f, flockSettings.activeDuration);
             SC_CockpitShake.Instance.ShakeIt(0.025f, flockSettings.activeDuration);
             //SC_HitDisplay.Instance.Hit(transform.position);

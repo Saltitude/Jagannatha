@@ -240,6 +240,8 @@ public class SC_GameStates : NetworkBehaviour
                     SC_instruct_op_manager.Instance.ChangeMaterial(SC_instruct_op_manager.ChangeMat.ReturnWeapon);
 
                 }
+                else
+                    CustomSoundManager.Instance.PlaySound(gameObject, "SFX_p_weaponRepar", false, 0.3f);
                 ChangeTutoGameState(TutorialState.StartRepairMotion);
 
                 break;
