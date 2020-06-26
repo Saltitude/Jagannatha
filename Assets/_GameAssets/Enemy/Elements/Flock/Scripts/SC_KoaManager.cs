@@ -499,7 +499,7 @@ public class SC_KoaManager : MonoBehaviour
                 if(KoaLife <= curFlockSettings.fleeingLife)
                 {
                     KoaLife = curFlockSettings.fleeingLife;
-                    SFX_Explosion = CustomSoundManager.Instance.PlaySound(_koa.gameObject, "SFX_Boss_Flee", false, 0.4f, false);
+                    SFX_Explosion = CustomSoundManager.Instance.PlaySound(_koa.gameObject, "SFX_Boss_Flee", false, 0.6f, false);
                     flockManager.ReactionFlock(SC_FlockManager.PathType.bossFlight);
                 }
             }
