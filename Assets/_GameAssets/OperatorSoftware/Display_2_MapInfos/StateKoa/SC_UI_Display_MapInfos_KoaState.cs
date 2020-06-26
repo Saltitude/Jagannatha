@@ -165,10 +165,10 @@ public class SC_UI_Display_MapInfos_KoaState : MonoBehaviour
                 if(curKoaScriptKoaSettings.GetKoaType() == 4)
                 {
                     type.font = sanskritFont;
-                    type.text = "lenigrosfdplapute";
+                    type.text = "romainfodev";
                     imageLogo.GetComponent<RectTransform>().sizeDelta = new Vector2(110, 110);
                     SC_TargetMap.Instance.SetFont(SC_TargetMap.FontList.Sanskri);
-                    SC_TargetMap.Instance.SetText("lenigrosfdplapute");
+                    SC_TargetMap.Instance.SetText("romainfodev");
 
                 }
                 else
