@@ -15,12 +15,13 @@ MonoBehaviour:
   attackType: 2
   attackFocus: 0
   damageOnSystem: 10
-  timeBetweenAttacks: 10
-  timeBeforeFirstAttack: 5
+  timeBetweenAttacks: 20
+  timeBeforeFirstAttack: -1
   fireRate: 1
-  nbBulletToShoot: 10
+  nbBulletToShoot: 0
   chargingAttackTime: 4
   activeDuration: 2
+  nbFireBeforeFalloff: 2
   speedToTarget: 0.7
   flightDuration: 3
   flightReactionMinSensibility: 101
@@ -34,6 +35,7 @@ MonoBehaviour:
   fleeingLife: 0
   fleeingTime: 2
   spanwScale: 1
+  bossPhase: 0
   spawnSettings:
   - {fileID: 11400000, guid: 8241a6c65e4b8e4488218c6992d4efdb, type: 2}
   roamSettings:

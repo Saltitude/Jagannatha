@@ -151,44 +151,6 @@ public class SC_JoystickMove : MonoBehaviour, IF_BreakdownSystem
                 break;
 
         }
-        
-        //Other Method
-        /*
-        f_TorqueImpulseZ = 0;
-
-        for (int i = 0; i < tab_TorqueAxes.Length; i++)
-        {
-
-            if (tab_TorqueAxes[i])
-            {
-
-                switch (i)
-                {
-
-                    case 0:
-                        f_TorqueImpulseZ += Input.GetAxis("Torque_01");
-                        break;
-
-                    case 1:
-                        f_TorqueImpulseZ += Input.GetAxis("Torque_02");
-                        break;
-
-                    case 2:
-                        f_TorqueImpulseZ += Input.GetAxis("Torque_03");
-                        break;
-
-                    case 3:
-                        f_TorqueImpulseZ += Input.GetAxis("Torque_04");
-                        break;
-
-                }
-
-            }                
-
-        }
-
-        f_TorqueImpulseZ *= f_CurRotationSpeedZ;
-        */
 
     }
 
@@ -388,15 +350,14 @@ public class SC_JoystickMove : MonoBehaviour, IF_BreakdownSystem
         {
 
             t += Time.deltaTime * rate;
-            float Lerp = Acceleration.Evaluate(t); 
+            float Lerp = Acceleration.Evaluate(t);
 
-            transform.rotation = Quaternion.Slerp(StartRot, TargetRotY, Lerp);
+            //transform.rotation = Quaternion.Slerp(StartRot, TargetRotY, Lerp);
+            transform.rotation = Quaternion.Slerp(transform.rotation, TargetRotY, Lerp);
 
             yield return 0;
 
         }
-
-        
 
         CoroDir = Dir.Off;
 
