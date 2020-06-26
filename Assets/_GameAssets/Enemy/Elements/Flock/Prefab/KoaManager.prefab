@@ -54,4 +54,7 @@ MonoBehaviour:
   sensitivity: {x: 0, y: 0, z: 0}
   PS_KoaExplosion: {fileID: 1584633936938735772, guid: 7b76416fbd21ac6448f4780fe05367b3,
     type: 3}
+  PS_BossExplosion: {fileID: 1584633936938735772, guid: e98763fd72c03744ca17f97d750223da,
+    type: 3}
+  Explosion: {fileID: 0}
   isActive: 0

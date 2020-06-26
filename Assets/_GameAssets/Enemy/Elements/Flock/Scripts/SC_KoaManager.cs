@@ -48,6 +48,8 @@ public class SC_KoaManager : MonoBehaviour
     [SerializeField]
     GameObject PS_KoaExplosion;
     [SerializeField]
+    GameObject PS_BossExplosion;
+ 
     GameObject curExplosion;
     [SerializeField]
     ParticleSystem.MainModule curExplosionPS;
@@ -169,7 +171,7 @@ public class SC_KoaManager : MonoBehaviour
             if (flockSettings.attackType == FlockSettings.FlockType.Boss)
             {
                 _koa = NetPSpawnKoa.SpawnKoa(true);
-                flockManager.BossAuxAnimator = _koa.transform.GetChild(3).GetComponent<Animator>();
+                flockManager.BossAux = _koa.transform.GetChild(3).gameObject;
             }
             else _koa = NetPSpawnKoa.SpawnKoa(false);
 
@@ -525,23 +527,65 @@ public class SC_KoaManager : MonoBehaviour
 
     public void AnimDestroy()
     {
-        if(curFlockSettings.attackType != FlockSettings.FlockType.Boss || curFlockSettings.bossPhase == 3)
-        SFX_Explosion = CustomSoundManager.Instance.PlaySound(_koa.gameObject, "SFX_Explosion_Flock", false, 1f, false);
+        float timeBeforeDestroyFlock = 3f;
 
-        flockManager.AnimDestroy();
+        if (type != 4)
+        {
+            SFX_Explosion = CustomSoundManager.Instance.PlaySound(_koa.gameObject, "SFX_Explosion_Flock", false, 1f, false);
+
+        }
+
+        if (type == 4 && curFlockSettings.bossPhase == 3)
+        {
+            SFX_Explosion = CustomSoundManager.Instance.PlaySound(_koa.gameObject, "SFX_BossDeath", false, 1f, false);
+            flockManager.BossAuxAnimator.SetBool("Pos", false);
+            flockManager.BossAuxAnimator.SetBool("FullShield", false);
+            flockManager.BossAuxAnimator.SetBool("Spike", false);
+            flockManager.BossAuxAnimator.SetBool("Cube", false);
+            flockManager.BossAuxAnimator.SetBool("Death", false);
+            flockManager.BossAuxAnimator.SetBool("Death", true);
+            timeBeforeDestroyFlock = 4f;
+        }
+        else if(type == 4 && curFlockSettings.bossPhase != 3)
+        {
+            flockManager.BossAuxAnimator.SetBool("Pos", false);
+            flockManager.BossAuxAnimator.SetBool("FullShield", false);
+            flockManager.BossAuxAnimator.SetBool("Spike", false);
+            flockManager.BossAuxAnimator.SetBool("Cube", false);
+            flockManager.BossAuxAnimator.SetBool("Death", false);
+            flockManager.BossAuxAnimator.SetBool("Death", true);
+            timeBeforeDestroyFlock = 0f;
+        }
+
+
         //SetBehavior(DeathSettings);
         foreach (Boid b in _boidsTab) b.DestroyBoid(Boid.DestructionType.Massive);
         isActive = false;
         deathAnimation = true;
         //Destroy(_koa.gameObject);
-        curExplosion = Instantiate(PS_KoaExplosion, _koa.transform);
-        SetColor();
-        syncVarKoa.HideOPMesh();
-        Invoke("HideTheKoa", 1.3f);
-        Invoke("DestroyFlock", 3f);
+        if(type != 4)
+        {
+            flockManager.AnimDestroy();
+            curExplosion = Instantiate(PS_KoaExplosion, _koa.transform);
+            SetVFXColor();
+
+            syncVarKoa.HideOPMesh();
+            Invoke("HideTheKoa", 1.3f);
+            Invoke("DestroyFlock", timeBeforeDestroyFlock);
+
+        }
+        else
+        {
+            flockManager.StopAttack();
+
+            syncVarKoa.HideOPMesh();
+            Invoke("DestroyBoss", timeBeforeDestroyFlock);
+        }
+
+
     }
 
-    public void SetColor()
+    public void SetVFXColor()
     {
         AmenoColor = SC_UI_Cockpit_FrequenceLine.Instance.Color1;
         Gradient gradiend = new Gradient();
@@ -613,11 +657,36 @@ public class SC_KoaManager : MonoBehaviour
 
     void DestroyFlock()
     {
+ 
+
         deathAnimation = false;
 
         Destroy(_koa.gameObject);
         flockManager.DestroyFlock();
         Destroy(this.gameObject);
+    }
+
+    void DestroyBoss()
+    {
+        if(curFlockSettings.bossPhase == 3)
+        {
+            curExplosion = Instantiate(PS_BossExplosion, _koa.transform);
+            SetVFXColor();
+            Invoke("DestroyFlock", 3f);
+            SFX_Explosion = CustomSoundManager.Instance.PlaySound(_koa.gameObject, "SFX_Explosion_Flock", false, 1f, false);
+            flockManager.AnimDestroy();
+            Invoke("HideTheKoa", 1.3f);
+
+
+        }
+        else
+        {
+            HideTheKoa();
+            flockManager.AnimDestroy();
+
+            DestroyFlock();
+        }
+
     }
 
 

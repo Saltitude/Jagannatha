@@ -175,6 +175,7 @@ MonoBehaviour:
   - {fileID: 2100000, guid: d3fa3610ba930c049b34933b908d9f19, type: 2}
   - {fileID: 2100000, guid: 8b0eacbfbf3331c498772f132dbf7aca, type: 2}
   - {fileID: 2100000, guid: 2bd846d1deba15f45b85a7ce1282ac2a, type: 2}
+  bossMat: {fileID: 2100000, guid: 16d63535ffc3b164c820d3a00e1c8516, type: 2}
   position: {x: 0, y: 0, z: 0}
   forward: {x: 0, y: 0, z: 0}
   avgFlockHeading: {x: 0, y: 0, z: 0}

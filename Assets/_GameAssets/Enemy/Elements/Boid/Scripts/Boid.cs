@@ -13,6 +13,7 @@ public class Boid : MonoBehaviour {
     float curTimer;
     int TotalFlick =1;
     int curFlick;
+    int type;
     
 
     SC_KoaManager koaManager;
@@ -25,6 +26,9 @@ public class Boid : MonoBehaviour {
     [SerializeField]
     Material[] M_tabHit;
     MeshRenderer meshRenderer;
+
+    [SerializeField]
+    Material bossMat;
 
     Vector3 deathPos;
     int life = 2;
@@ -93,8 +97,10 @@ public class Boid : MonoBehaviour {
         velocity = transform.forward * startSpeed; //Stockage de la vélocité selon la vitesse de départ
         destructionTimer = 3f;
         curTimer = 0;
-        meshRenderer.material = baseMat;
+        if (type == 4) meshRenderer.material = bossMat;
+        else meshRenderer.material = baseMat;
         isActive = true;
+        this.type = type;
     }
     /// <summary>
     /// Changer la couleur de chaque boid |
@@ -326,29 +332,33 @@ public class Boid : MonoBehaviour {
 
     IEnumerator ImpactFrame()
     {
-        while(true)
+        if(type != 4)
         {
-            if (curFlick % 2 == 0)
+            while (true)
             {
-                meshRenderer.material = M_tabHit[1];
+                if (curFlick % 2 == 0)
+                {
+                    meshRenderer.material = M_tabHit[1];
+                }
+                else
+                {
+
+                    meshRenderer.material = M_tabHit[0];
+                }
+
+
+                if (curFlick == TotalFlick)
+                {
+
+                    StopCoroutine(ImpactFrame());
+                    break;
+                }
+
+
+                curFlick++;
+                yield return new WaitForSeconds(0.1f);
             }
-            else
-            {
-
-                meshRenderer.material = M_tabHit[0];
-            }
-
-
-            if (curFlick == TotalFlick)
-            {
-                
-                StopCoroutine(ImpactFrame());
-                break;
-            }
-
-
-            curFlick++;
-            yield return new WaitForSeconds(0.1f);
         }
+      
     }
 }
