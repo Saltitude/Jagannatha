@@ -45,36 +45,40 @@ public class SC_UI_Display_MapInfos_StateManager : MonoBehaviour
 
     public void checkState()
     {
-        if (scriptRaycast.objectOnclic == null || SC_UI_Display_MapInfos_KoaState.Instance.curState == SC_UI_Display_MapInfos_KoaState.KoaState.Death)
+        if(SC_GameStates.Instance.CurState >= SC_GameStates.GameState.Tutorial2)
         {
-            curState = StateOfCanvas.neutral;
-            checkChild(0);
-            SC_UI_Display_MapInfos_KoaState.Instance.activated = false;
-            SC_UI_Display_Flock.Instance.desactivateRender();
-
-            //patch de la gruge de l'infini de ta mère pour effacer le koa en memoire et permettre la discrimination des conditions
-            SC_UI_Display_MapInfos_KoaState.Instance.curState = SC_UI_Display_MapInfos_KoaState.KoaState.Spawning;
-            scriptRaycast.objectOnclic = null;
-            SC_TargetMap.Instance.SetFont(SC_TargetMap.FontList.VoiceActivated);
-            SC_TargetMap.Instance.SetText("No Target Selected");
-
-            return;
-        }
-
-
-        if (scriptRaycast.objectOnclic != null)
-        {
-            if (scriptRaycast.objectOnclic.tag == "Koa")
+            if (scriptRaycast.objectOnclic == null || SC_UI_Display_MapInfos_KoaState.Instance.curState == SC_UI_Display_MapInfos_KoaState.KoaState.Death)
             {
-                curState = StateOfCanvas.koaView;
-                checkChild(1);
-                SC_UI_Display_MapInfos_KoaState.Instance.activated = true;
-                SC_UI_Display_Flock.Instance.activateRender();
+                curState = StateOfCanvas.neutral;
+                checkChild(0);
+                SC_UI_Display_MapInfos_KoaState.Instance.activated = false;
+                SC_UI_Display_Flock.Instance.desactivateRender();
 
-                /* if (SC_GameStates.Instance.CurTutoState == SC_GameStates.TutorialState.StartTutorial2)
-                     SC_CheckList.Instance.NetworkPlayerPilot.GetComponent<SC_Net_Player_TutoState>().CmdChangeTutoState(SC_GameStates.TutorialState.Tutorial2_2);*/
+                //patch de la gruge de l'infini de ta mère pour effacer le koa en memoire et permettre la discrimination des conditions
+                SC_UI_Display_MapInfos_KoaState.Instance.curState = SC_UI_Display_MapInfos_KoaState.KoaState.Spawning;
+                scriptRaycast.objectOnclic = null;
+                SC_TargetMap.Instance.SetFont(SC_TargetMap.FontList.VoiceActivated);
+                SC_TargetMap.Instance.SetText("No Target Selected");
+
+                return;
+            }
+
+
+            if (scriptRaycast.objectOnclic != null)
+            {
+                if (scriptRaycast.objectOnclic.tag == "Koa")
+                {
+                    curState = StateOfCanvas.koaView;
+                    checkChild(1);
+                    SC_UI_Display_MapInfos_KoaState.Instance.activated = true;
+                    SC_UI_Display_Flock.Instance.activateRender();
+
+                    /* if (SC_GameStates.Instance.CurTutoState == SC_GameStates.TutorialState.StartTutorial2)
+                         SC_CheckList.Instance.NetworkPlayerPilot.GetComponent<SC_Net_Player_TutoState>().CmdChangeTutoState(SC_GameStates.TutorialState.Tutorial2_2);*/
+                }
             }
         }
+      
     }
 
     void checkChild(int indexToActivate)
