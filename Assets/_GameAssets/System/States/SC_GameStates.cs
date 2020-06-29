@@ -306,6 +306,7 @@ public class SC_GameStates : NetworkBehaviour
                     SC_instruct_op_manager.Instance.ActivateImage(3);
 
                     SC_instruct_op_manager.Instance.Activate(17);
+                    SC_instruct_op_manager.Instance.Activate(19);
                     SC_instruct_op_manager.Instance.Deactivate(18);
 
                     SC_TutorialUIManager.Instance.ActivateBlink(SC_TutorialUIManager.System.Reboot, false);
