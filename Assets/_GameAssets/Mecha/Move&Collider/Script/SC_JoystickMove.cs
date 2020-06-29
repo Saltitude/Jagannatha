@@ -48,7 +48,7 @@ public class SC_JoystickMove : MonoBehaviour, IF_BreakdownSystem
     [SerializeField]
     float f_LerpRotZ = 1f;
     [SerializeField]
-    float f_ModLerpRotZ = 1f;
+    float f_ModLerpRotZ = 0.5f;
     public enum RotationMode { TSR, Torque, Normalize, Higher, Clamp }
     public RotationMode TypeRotationZ;
     float f_TransImpulseZ;    
