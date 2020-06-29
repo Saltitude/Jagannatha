@@ -46,12 +46,15 @@ public class SC_JoystickMove : MonoBehaviour, IF_BreakdownSystem
     float f_RotationSpeedZ = 1.0f;
     float f_CurRotationSpeedZ = 1.0f;
     [SerializeField]
-    float f_LerpRotZ = 1f;  
+    float f_LerpRotZ = 1f;
+    [SerializeField]
+    float f_ModLerpRotZ = 1f;
     public enum RotationMode { TSR, Torque, Normalize, Higher, Clamp }
     public RotationMode TypeRotationZ;
     float f_TransImpulseZ;    
     Quaternion TargetRotY;
     public float CurImpulse = 0;
+
 
     [Header("Horizontal Rotation Infos")]
     [SerializeField]
@@ -99,6 +102,9 @@ public class SC_JoystickMove : MonoBehaviour, IF_BreakdownSystem
     // Update is called once per frame
     void FixedUpdate()
     {
+
+        ModifyLerp();
+
         if (!b_BreakEngine)
         {
             GetImpulses();
@@ -112,6 +118,15 @@ public class SC_JoystickMove : MonoBehaviour, IF_BreakdownSystem
     }
 
     #region Moves
+
+    void ModifyLerp()
+    {
+        if (Input.GetKeyDown(KeyCode.RightShift))
+            f_ModLerpRotZ += 0.1f;
+        if (Input.GetKeyDown(KeyCode.RightControl))
+            f_ModLerpRotZ -= 0.1f;
+        Debug.LogError("f_ModLerpRotZ = " + f_ModLerpRotZ);
+    }
 
     void CheckTorqueAxis()
     {
@@ -283,8 +298,11 @@ public class SC_JoystickMove : MonoBehaviour, IF_BreakdownSystem
                 }      
                 
                 else if (!b_UseCoroutine || (CoroDir == Dir.Off && CurDir == TargetDir))
-                    transform.rotation = Quaternion.Slerp(transform.rotation, TargetRotY, f_LerpRotZ);
-
+                {
+                    //transform.rotation = Quaternion.Slerp(transform.rotation, TargetRotY, f_LerpRotZ);
+                    transform.rotation = Quaternion.Slerp(transform.rotation, TargetRotY, f_ModLerpRotZ);
+                }
+                    
             }        
 
         }
