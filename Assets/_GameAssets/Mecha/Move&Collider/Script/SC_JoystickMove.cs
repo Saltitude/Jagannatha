@@ -122,9 +122,9 @@ public class SC_JoystickMove : MonoBehaviour, IF_BreakdownSystem
     void ModifyLerp()
     {
         if (Input.GetKeyDown(KeyCode.RightShift))
-            f_ModLerpRotZ += 0.1f;
+            f_ModLerpRotZ += 0.05f;
         if (Input.GetKeyDown(KeyCode.RightControl))
-            f_ModLerpRotZ -= 0.1f;
+            f_ModLerpRotZ -= 0.05f;
         Debug.LogError("f_ModLerpRotZ = " + f_ModLerpRotZ);
     }
 
@@ -283,8 +283,12 @@ public class SC_JoystickMove : MonoBehaviour, IF_BreakdownSystem
                     CheckDir();
                 }
                     
-                else if ( ( !b_UseCoroutine || ( CoroDir == Dir.Off && CurDir == TargetDir ) ) && n_BreakDownLvl < 2 )
-                    transform.rotation = Quaternion.Slerp(transform.rotation, TargetRotY, f_LerpRotZ);
+                else if ( ( !b_UseCoroutine || ( CoroDir == Dir.Off && CurDir == TargetDir ) ) && n_BreakDownLvl < 2)
+                {
+                    //transform.rotation = Quaternion.Slerp(transform.rotation, TargetRotY, f_LerpRotZ);
+                    transform.rotation = Quaternion.Slerp(transform.rotation, TargetRotY, f_ModLerpRotZ);
+                }
+                    
 
             }
 
