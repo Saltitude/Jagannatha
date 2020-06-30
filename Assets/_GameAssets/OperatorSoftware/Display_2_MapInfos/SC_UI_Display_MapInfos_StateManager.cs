@@ -45,8 +45,6 @@ public class SC_UI_Display_MapInfos_StateManager : MonoBehaviour
 
     public void checkState()
     {
-        if(SC_GameStates.Instance.CurState >= SC_GameStates.GameState.Tutorial)
-        {
             if (scriptRaycast.objectOnclic == null || SC_UI_Display_MapInfos_KoaState.Instance.curState == SC_UI_Display_MapInfos_KoaState.KoaState.Death)
             {
                 curState = StateOfCanvas.neutral;
@@ -80,7 +78,7 @@ public class SC_UI_Display_MapInfos_StateManager : MonoBehaviour
                          SC_CheckList.Instance.NetworkPlayerPilot.GetComponent<SC_Net_Player_TutoState>().CmdChangeTutoState(SC_GameStates.TutorialState.Tutorial2_2);*/
                 }
             }
-        }
+        
       
     }
 
