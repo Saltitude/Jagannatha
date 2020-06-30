@@ -155,7 +155,7 @@ public class SC_BreakdownDisplayManager : MonoBehaviour, IF_BreakdownManager
                     i--;
                 }
 
-                else
+                else if (!(rnd == 0 && SC_GameStates.Instance.CurState != SC_GameStates.GameState.Game))
                 {
 
                     interactible[rnd].GetComponent<IInteractible>().ChangeDesired();
@@ -171,6 +171,8 @@ public class SC_BreakdownDisplayManager : MonoBehaviour, IF_BreakdownManager
                         newBreakdown = false;
 
                 }
+                else
+                    i--;
 
             }
 
