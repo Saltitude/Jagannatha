@@ -83,7 +83,7 @@ public class SC_DeviceManager : MonoBehaviour
     //Notes pour corriger le bug du Torque
     //Recuper l'index du JS dans le tableau et utilisé un axes avec un joynum correspondant
     //preparer les axes
-    void GetJoyStickToUse()
+    public void GetJoyStickToUse()
     {
 
         tab_Device = Input.GetJoystickNames();

@@ -90,8 +90,15 @@ public class SC_SceneManager : NetworkBehaviour
         {
 
             //si pas Server on load la scène opérateur
-            if (!isServer && _SC_PasswordLock != null)          
+            if (!isServer && _SC_PasswordLock != null)
+            {
+
+                if (SC_DeviceManager.Instance != null)
+                    SC_DeviceManager.Instance.GetJoyStickToUse();
+
                 _SC_PasswordLock.validatePassword();
+
+            }                        
 
             if (isServer && b_OperatorReadyToLoad && b_PilotReadyToLoad && !b_LoadingAllowed)
                 RpcAllowChangeScene();
