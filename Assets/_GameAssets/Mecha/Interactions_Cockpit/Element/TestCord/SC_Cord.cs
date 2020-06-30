@@ -174,7 +174,7 @@ public class SC_Cord : MonoBehaviour
             if (controller != null)
                 controller.Vibrate(_vibrationMilliSec * 5, _vibrationStrength * 100);
 
-            ReleaseObject();
+            //ReleaseObject();
 
         }
 
@@ -234,16 +234,18 @@ public class SC_Cord : MonoBehaviour
 
     public void CreateFixedJoint()
     {
-
+        /*
         //Debug.Log("CreateFixedJoint");
 
         SC_SyncVar_MovementSystem.Instance.CurSelectedCord = n_Index;
 
         GameObject RightHand = SC_GetRightController.Instance.getGameObject();
 
+
+
         CurJoint = AddFixedJoint(RightHand);
         CurJoint.connectedBody = Rb;
-
+        */
     }
 
     public void DeleteFixedJoint()
