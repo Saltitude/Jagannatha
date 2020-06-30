@@ -125,7 +125,7 @@ public class SC_JoystickMove : MonoBehaviour, IF_BreakdownSystem
             f_ModLerpRotZ += 0.05f;
         if (Input.GetKeyDown(KeyCode.RightControl))
             f_ModLerpRotZ -= 0.05f;
-        Debug.LogError("f_ModLerpRotZ = " + f_ModLerpRotZ);
+        //Debug.LogError("f_ModLerpRotZ = " + f_ModLerpRotZ);
     }
 
     void CheckTorqueAxis()
