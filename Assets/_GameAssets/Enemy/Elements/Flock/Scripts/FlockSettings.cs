@@ -48,13 +48,15 @@ public class FlockSettings : ScriptableObject
     [Range(0f,5f)]
     public float fireRate = 0;
     [Tooltip("nb total de bullet a tirer avant de retourner en roam")]
-    public float nbBulletToShoot = 0;
+    public int nbBulletToShoot = 0;
 
     [Header("Laser")]
     [Tooltip("in Second")]
     public float chargingAttackTime = 0;
     [Tooltip("in Second, avant de retourner en roam")]
     public float activeDuration = 0;
+
+    public int nbFireBeforeFalloff = 2;
 
     [Header("Kamikaze")]
     public float speedToTarget;
@@ -85,7 +87,7 @@ public class FlockSettings : ScriptableObject
     public float fleeingTime = 2f;
 
     public bool spanwScale = true;
-
+    public int bossPhase = 0;
 
     [Header("Boids")]
 

@@ -55,8 +55,16 @@ public class SC_FlockWeaponManager : MonoBehaviour
 
     float damageFactor = 1f;
 
+
+    int nbBulletToShoot;
+    int nbFireBeforeFalloff;
+    int curNbFire = 0;
+
     bool bigDamage = true;
     int bigDamageCount = 0;
+
+
+
     ////////////////////////////////////////////////////////
 
 
@@ -79,6 +87,7 @@ public class SC_FlockWeaponManager : MonoBehaviour
         {
             case FlockSettings.FlockType.Bullet: //Bullet
                 InitBulletPool();
+                nbBulletToShoot = flockSettings.nbBulletToShoot;
                 break;
 
             case FlockSettings.FlockType.none: //Bullet
@@ -97,6 +106,8 @@ public class SC_FlockWeaponManager : MonoBehaviour
         }
         this.mainAnimator = mainAnimator;
         this.emissiveAnimator = emissiveAnimator;
+        this.nbFireBeforeFalloff = curFlockSettings.nbFireBeforeFalloff;
+
     }
 
     void GetReferences()
@@ -155,10 +166,26 @@ public class SC_FlockWeaponManager : MonoBehaviour
         if(isFiring)
         {
 
+            bool lowerDamage = false;
+            if(flockSettings.attackType != FlockSettings.FlockType.Boss)
+            {
+                if(curNbFire >= nbFireBeforeFalloff)
+                {
+                    curNbFire = 0;
+                    lowerDamage = true;
+                }
+            }
+
             timer += Time.deltaTime;
             switch (flockSettings.attackType)
             {
                 case FlockSettings.FlockType.Bullet: //Bullet
+
+                    if(lowerDamage)
+                    {
+                     
+                        nbBulletToShoot = (int)(nbBulletToShoot / 2);
+                    }
 
                     if(emissiveAnimator != null)
                         emissiveAnimator.SetBool("Bullet", true);
@@ -168,10 +195,12 @@ public class SC_FlockWeaponManager : MonoBehaviour
 
                     if (timer >= 1/flockSettings.fireRate )
                     {
+                        
                         FireBullet(false);
                         timer = 0;
-                        if(nbBulletFire >= flockSettings.nbBulletToShoot)
+                        if(nbBulletFire >= nbBulletToShoot)
                         {
+                            curNbFire++;
                             EndOfAttack();
                         }
                     }
@@ -179,7 +208,12 @@ public class SC_FlockWeaponManager : MonoBehaviour
 
                 case FlockSettings.FlockType.Laser: //Laser
 
-                    
+                    if(lowerDamage)
+                    {
+                        damageFactor = damageFactor/2;
+                    }
+
+
                     if(timer >= flockSettings.chargingAttackTime -1f)
                     {
                         if(!animation)
@@ -334,6 +368,7 @@ public class SC_FlockWeaponManager : MonoBehaviour
 
     void FireBullet(bool superBullet)
     {
+        CustomSoundManager.Instance.PlaySound(gameObject, "SFX_koa_Bullet", false, 0.06f,false,1.5f);
         Rigidbody rb = bulletPool[n_CurBullet].GetComponent<Rigidbody>();
 
         if (bulletPool[n_CurBullet] != null && mainAnimator != null)
@@ -397,7 +432,7 @@ public class SC_FlockWeaponManager : MonoBehaviour
             laserFire = true;
             if (startLaser)
             {
-
+                CustomSoundManager.Instance.PlaySound(gameObject, "SFX_koa_Laser", false, 0.4f,false);
                 Sc_ScreenShake.Instance.ShakeIt(0.025f, flockSettings.laserDurationHitReaction);
                 SC_CockpitShake.Instance.ShakeIt(0.025f, flockSettings.laserDurationHitReaction);
                 //SC_HitDisplay.Instance.Hit(transform.position);
@@ -452,14 +487,14 @@ public class SC_FlockWeaponManager : MonoBehaviour
         laserFire = true;
         if(startLaser)
         {
-
+            CustomSoundManager.Instance.PlaySound(gameObject, "SFX_koa_Laser", false, 0.4f,false);
             Sc_ScreenShake.Instance.ShakeIt(0.025f, flockSettings.activeDuration);
             SC_CockpitShake.Instance.ShakeIt(0.025f, flockSettings.activeDuration);
             //SC_HitDisplay.Instance.Hit(transform.position);
             int damage = Mathf.RoundToInt(flockSettings.damageOnSystem * damageFactor);
-            Debug.Log(damage); 
-            SC_MainBreakDownManager.Instance.CauseDamageOnSystem(flockSettings.attackFocus, damage);
+            curNbFire++;
 
+            SC_MainBreakDownManager.Instance.CauseDamageOnSystem(flockSettings.attackFocus, damage);
             startLaser = false;
         }
 

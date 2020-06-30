@@ -110,7 +110,7 @@ public class Sc_LaserFeedBack : MonoBehaviour
     IEnumerator PlayLaserSound()
     {
         SFX_LaserBeam.clip = LaserStart;
-        SFX_LaserBeam.volume = 0.5f;
+        SFX_LaserBeam.volume = 0.2f;
         SFX_LaserBeam.Play();
         //Debug.Log("PlayStart");
         yield return new WaitForSeconds(SFX_LaserBeam.clip.length);

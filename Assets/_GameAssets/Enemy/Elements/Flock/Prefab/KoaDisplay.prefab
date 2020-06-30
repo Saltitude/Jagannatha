@@ -27,7 +27,7 @@ Transform:
   m_GameObject: {fileID: 248730177783554223}
   m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 7325792938854803520}
   m_Father: {fileID: 0}
@@ -4731,6 +4731,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   color: {r: 1, g: 1, b: 1, a: 1}
+  boss: 0
 --- !u!1001 &7325792938855199434
 PrefabInstance:
   m_ObjectHideFlags: 0

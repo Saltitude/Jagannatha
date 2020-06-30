@@ -219,7 +219,9 @@ public class SC_GameStates : NetworkBehaviour
                 {
                     //Fin Display
                     SC_TutorialUIManager.Instance.ActivateBlink(SC_TutorialUIManager.System.Display, false);
+                    SC_TutorialUIManager.Instance.CTA(SC_TutorialUIManager.System.Display, true,true);
                     SC_instruct_op_manager.Instance.ChangeMaterial(SC_instruct_op_manager.ChangeMat.ReturnDisplay);
+
                 }
                 ChangeTutoGameState(TutorialState.StartRepairWeapon);
                 
@@ -229,6 +231,7 @@ public class SC_GameStates : NetworkBehaviour
             case TutorialState.StartRepairWeapon:
                 if(!isServer)
                 {
+
                     //Debut Weapon
                 }
                 break;
@@ -236,10 +239,16 @@ public class SC_GameStates : NetworkBehaviour
             case TutorialState.EndRepairWeapon:
                 if (!isServer)
                 {
+                    SC_TutorialUIManager.Instance.CTA(SC_TutorialUIManager.System.Display, false, true);
+
+
                     SC_TutorialUIManager.Instance.ActivateBlink(SC_TutorialUIManager.System.Weapon, false);
+                    SC_TutorialUIManager.Instance.CTA(SC_TutorialUIManager.System.Weapon, true, true);
                     SC_instruct_op_manager.Instance.ChangeMaterial(SC_instruct_op_manager.ChangeMat.ReturnWeapon);
 
                 }
+                else
+                    CustomSoundManager.Instance.PlaySound(gameObject, "SFX_p_weaponRepar", false, 0.3f);
                 ChangeTutoGameState(TutorialState.StartRepairMotion);
 
                 break;
@@ -255,7 +264,11 @@ public class SC_GameStates : NetworkBehaviour
             case TutorialState.EndRepairMotion:
                 if (!isServer)
                 {
+                    SC_TutorialUIManager.Instance.CTA(SC_TutorialUIManager.System.Weapon, false, true);
+
+
                     SC_TutorialUIManager.Instance.ActivateBlink(SC_TutorialUIManager.System.Motion, false);
+                    SC_TutorialUIManager.Instance.CTA(SC_TutorialUIManager.System.Motion, true, true);
                     SC_instruct_op_manager.Instance.ChangeMaterial(SC_instruct_op_manager.ChangeMat.ReturnMotion);
 
                 }
@@ -268,6 +281,7 @@ public class SC_GameStates : NetworkBehaviour
                 if(!isServer)
                 {
                     SC_TutorialUIManager.Instance.ActivateBlink(SC_TutorialUIManager.System.Reboot, true);
+
                 }
                 break;
 
@@ -282,6 +296,8 @@ public class SC_GameStates : NetworkBehaviour
                 }
                 if (!isServer)
                 {
+                    SC_TutorialUIManager.Instance.CTA(SC_TutorialUIManager.System.Motion, false, true);
+
                     SC_instruct_op_manager.Instance.ChangeUIOnMat();
 
                     SC_instruct_op_manager.Instance.ActivateImage(0);
@@ -290,6 +306,7 @@ public class SC_GameStates : NetworkBehaviour
                     SC_instruct_op_manager.Instance.ActivateImage(3);
 
                     SC_instruct_op_manager.Instance.Activate(17);
+                    SC_instruct_op_manager.Instance.Activate(19);
                     SC_instruct_op_manager.Instance.Deactivate(18);
 
                     SC_TutorialUIManager.Instance.ActivateBlink(SC_TutorialUIManager.System.Reboot, false);

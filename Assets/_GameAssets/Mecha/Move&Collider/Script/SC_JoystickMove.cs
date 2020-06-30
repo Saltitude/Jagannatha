@@ -46,12 +46,15 @@ public class SC_JoystickMove : MonoBehaviour, IF_BreakdownSystem
     float f_RotationSpeedZ = 1.0f;
     float f_CurRotationSpeedZ = 1.0f;
     [SerializeField]
-    float f_LerpRotZ = 1f;  
+    float f_LerpRotZ = 1f;
+    [SerializeField]
+    float f_ModLerpRotZ = 0.5f;
     public enum RotationMode { TSR, Torque, Normalize, Higher, Clamp }
     public RotationMode TypeRotationZ;
     float f_TransImpulseZ;    
     Quaternion TargetRotY;
     public float CurImpulse = 0;
+
 
     [Header("Horizontal Rotation Infos")]
     [SerializeField]
@@ -99,6 +102,9 @@ public class SC_JoystickMove : MonoBehaviour, IF_BreakdownSystem
     // Update is called once per frame
     void FixedUpdate()
     {
+
+        ModifyLerp();
+
         if (!b_BreakEngine)
         {
             GetImpulses();
@@ -112,6 +118,15 @@ public class SC_JoystickMove : MonoBehaviour, IF_BreakdownSystem
     }
 
     #region Moves
+
+    void ModifyLerp()
+    {
+        if (Input.GetKeyDown(KeyCode.RightShift))
+            f_ModLerpRotZ += 0.05f;
+        if (Input.GetKeyDown(KeyCode.RightControl))
+            f_ModLerpRotZ -= 0.05f;
+        //Debug.LogError("f_ModLerpRotZ = " + f_ModLerpRotZ);
+    }
 
     void CheckTorqueAxis()
     {
@@ -151,44 +166,6 @@ public class SC_JoystickMove : MonoBehaviour, IF_BreakdownSystem
                 break;
 
         }
-        
-        //Other Method
-        /*
-        f_TorqueImpulseZ = 0;
-
-        for (int i = 0; i < tab_TorqueAxes.Length; i++)
-        {
-
-            if (tab_TorqueAxes[i])
-            {
-
-                switch (i)
-                {
-
-                    case 0:
-                        f_TorqueImpulseZ += Input.GetAxis("Torque_01");
-                        break;
-
-                    case 1:
-                        f_TorqueImpulseZ += Input.GetAxis("Torque_02");
-                        break;
-
-                    case 2:
-                        f_TorqueImpulseZ += Input.GetAxis("Torque_03");
-                        break;
-
-                    case 3:
-                        f_TorqueImpulseZ += Input.GetAxis("Torque_04");
-                        break;
-
-                }
-
-            }                
-
-        }
-
-        f_TorqueImpulseZ *= f_CurRotationSpeedZ;
-        */
 
     }
 
@@ -306,8 +283,12 @@ public class SC_JoystickMove : MonoBehaviour, IF_BreakdownSystem
                     CheckDir();
                 }
                     
-                else if ( ( !b_UseCoroutine || ( CoroDir == Dir.Off && CurDir == TargetDir ) ) && n_BreakDownLvl < 2 )
-                    transform.rotation = Quaternion.Slerp(transform.rotation, TargetRotY, f_LerpRotZ);
+                else if ( ( !b_UseCoroutine || ( CoroDir == Dir.Off && CurDir == TargetDir ) ) && n_BreakDownLvl < 2)
+                {
+                    //transform.rotation = Quaternion.Slerp(transform.rotation, TargetRotY, f_LerpRotZ);
+                    transform.rotation = Quaternion.Slerp(transform.rotation, TargetRotY, f_ModLerpRotZ);
+                }
+                    
 
             }
 
@@ -321,8 +302,11 @@ public class SC_JoystickMove : MonoBehaviour, IF_BreakdownSystem
                 }      
                 
                 else if (!b_UseCoroutine || (CoroDir == Dir.Off && CurDir == TargetDir))
-                    transform.rotation = Quaternion.Slerp(transform.rotation, TargetRotY, f_LerpRotZ);
-
+                {
+                    //transform.rotation = Quaternion.Slerp(transform.rotation, TargetRotY, f_LerpRotZ);
+                    transform.rotation = Quaternion.Slerp(transform.rotation, TargetRotY, f_ModLerpRotZ);
+                }
+                    
             }        
 
         }
@@ -388,15 +372,14 @@ public class SC_JoystickMove : MonoBehaviour, IF_BreakdownSystem
         {
 
             t += Time.deltaTime * rate;
-            float Lerp = Acceleration.Evaluate(t); 
+            float Lerp = Acceleration.Evaluate(t);
 
-            transform.rotation = Quaternion.Slerp(StartRot, TargetRotY, Lerp);
+            //transform.rotation = Quaternion.Slerp(StartRot, TargetRotY, Lerp);
+            transform.rotation = Quaternion.Slerp(transform.rotation, TargetRotY, Lerp);
 
             yield return 0;
 
         }
-
-        
 
         CoroDir = Dir.Off;
 
@@ -459,11 +442,19 @@ public class SC_JoystickMove : MonoBehaviour, IF_BreakdownSystem
             f_TorqueImpulseZ = -1 * f_CurRotationSpeedZ;
             f_TransImpulseZ = -1 * f_CurRotationSpeedZ;
         }
+
         else if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.M))
         {
             f_TorqueImpulseZ = 1 * f_CurRotationSpeedZ;
             f_TransImpulseZ = 1 * f_CurRotationSpeedZ;
         }
+        
+        else if (Input.GetKeyUp(KeyCode.D) || Input.GetKeyUp(KeyCode.M))
+        {
+            f_TorqueImpulseZ = 0 * f_CurRotationSpeedZ;
+            f_TransImpulseZ = 0 * f_CurRotationSpeedZ;
+        }
+        
 
         //Vertical Impulse
         if (Input.GetKey(KeyCode.Z) || Input.GetKey(KeyCode.O))

@@ -42,6 +42,9 @@ public class SC_FlockManager : MonoBehaviour
     int curSettingsIndex;
     public Animator KoaMainAnimator;
     public Animator KoaEmissiveAnimator;
+    public Animator BossAuxAnimator;
+    public GameObject BossAux;
+
 
 
     BoidSettings _curBoidSetting; //Contient le settings actuel
@@ -63,6 +66,8 @@ public class SC_FlockManager : MonoBehaviour
     bool isActive;
     bool isSpawning;
     bool startSpawning = true;
+    bool bossDying = false;
+
 
     Vector3 spawnPos;
 
@@ -190,8 +195,8 @@ public class SC_FlockManager : MonoBehaviour
         {
             startAttackTimer = flockSettings.timeBetweenAttacks - flockSettings.timeBeforeFirstAttack;
         }
-
-
+        if(BossAux)
+        BossAuxAnimator = BossAux.GetComponent<Animator>();
 
 
         Invoke("ActivateFlock", flockSettings.spawnTimer);
@@ -269,7 +274,7 @@ public class SC_FlockManager : MonoBehaviour
         if (isActive && !isSpawning && curtype != PathType.Death)
         {
 
-            if (curtype != PathType.bossFlight)
+            if (curtype != PathType.bossFlight && !bossDying)
             {
                 AttackUpdate();
                 ReactionUpdate();
@@ -372,6 +377,8 @@ public class SC_FlockManager : MonoBehaviour
 
         if (KoaMainAnimator != null)
             KoaMainAnimator.transform.LookAt(_Player.transform);
+        if (BossAux != null)
+            BossAux.transform.LookAt(_Player.transform);
 
     }
 
@@ -463,6 +470,18 @@ public class SC_FlockManager : MonoBehaviour
 
         switch (pathType)
         {
+            case PathType.Roam:
+
+                if (flockSettings.attackType == FlockSettings.FlockType.Boss)
+                {
+                    BossAuxAnimator.SetBool("Cube", false);
+                    BossAuxAnimator.SetBool("FullShield", false);
+                    BossAuxAnimator.SetBool("Spike", false);
+                    BossAuxAnimator.SetBool("Pos", true);
+
+                }
+
+                break;
 
             case PathType.AttackPlayer:
                 KoaMainAnimator.SetBool("Deploy", false);
@@ -471,9 +490,20 @@ public class SC_FlockManager : MonoBehaviour
                 KoaMainAnimator.SetBool("Flight", false);
                 KoaEmissiveAnimator.SetBool("Flight", false);
 
+
                 if (flockSettings.attackType == FlockSettings.FlockType.Boss)
+                {
+                    BossAuxAnimator.SetBool("FullShield", false);
+                    BossAuxAnimator.SetBool("Spike", false);
+                    BossAuxAnimator.SetBool("Pos", false);
+                    BossAuxAnimator.SetBool("Cube", true);
+
+
                     laserBoss = !laserBoss;
-                flockWeaponManager.StartFire(true, laserBoss);
+                    flockWeaponManager.StartFire(true, laserBoss);
+                }
+                else
+                    flockWeaponManager.StartFire();
 
                 break;
 
@@ -531,6 +561,12 @@ public class SC_FlockManager : MonoBehaviour
 
                     KoaMainAnimator.SetFloat("SpeedFactor", 1);
                     KoaEmissiveAnimator.SetFloat("SpeedFactor", 1);
+
+
+                    BossAuxAnimator.SetBool("Spike", false);
+                    BossAuxAnimator.SetBool("Pos", false);
+                    BossAuxAnimator.SetBool("Cube", false);
+                    BossAuxAnimator.SetBool("FullShield", true);
 
                 }
 
@@ -769,6 +805,11 @@ public class SC_FlockManager : MonoBehaviour
             StartNewPath(pathType);
         }
 
+    }
+
+    public void StopAttack()
+    {
+        bossDying = true;
     }
 
     public void EndAttack()

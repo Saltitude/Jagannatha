@@ -40,8 +40,7 @@ public class SC_instruct_op_manager : MonoBehaviour
     Material matUIOn;
     [SerializeField]
     Material matUIInizialized;
-
-
+    
     List<Image> initialized_img;
     
     void Awake()
@@ -96,8 +95,6 @@ public class SC_instruct_op_manager : MonoBehaviour
             instruc_Go[index].SetActive(false);
 
         }
-
-
     }
 
 
@@ -136,6 +133,7 @@ public class SC_instruct_op_manager : MonoBehaviour
                 {
                     returnDisplay.GetChild(i).GetComponent<MeshRenderer>().material = matLogoReturn;
                 }
+                
 
                 break;   
             

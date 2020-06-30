@@ -29,6 +29,13 @@ public class SC_UI_Display_KoaManager : MonoBehaviour
     int spawnCount;
     public bool isActive;
 
+    [SerializeField]
+    int regenerationRate;
+
+    
+    
+    float respawnTimer;
+
     /// <summary>
     /// Avant le start, instanciation
     /// </summary>
@@ -80,8 +87,40 @@ public class SC_UI_Display_KoaManager : MonoBehaviour
             {
                 KoaBehavior();
             }
+
+            respawnTimer += Time.deltaTime;
+
+            if (respawnTimer > (60f / regenerationRate))
+            {
+                respawnTimer = 0;
+                GenerateNewBoid();
+            }
+
+
         }
 
+    }
+
+    void GenerateNewBoid()
+    {
+
+        for (int i = 0; i < spawnCount; i++)
+        {
+            if (!_boidsTab[i].isActive)
+            {
+                _boidsTab[i].transform.position = _koa.transform.position; //Déplacement à la position
+                _boidsTab[i].transform.forward = Random.insideUnitSphere; //Rotation random
+                int rnd = 0;
+                if (_guideList.Count > 1)
+                {
+                    rnd = Random.Range(1, _guideList.Count);
+                }
+
+                SC_KoaManager s = null;
+                _boidsTab[i].Initialize(curBoidSettings, _guideList[0], new Vector3Int(100, 100, 100), s, 0);
+                return;
+            }
+        }
     }
 
     void KoaBehavior()
