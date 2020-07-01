@@ -45,8 +45,6 @@ public class SC_UI_Display_MapInfos_StateManager : MonoBehaviour
 
     public void checkState()
     {
-        if(SC_GameStates.Instance.CurState >= SC_GameStates.GameState.Tutorial2)
-        {
             if (scriptRaycast.objectOnclic == null || SC_UI_Display_MapInfos_KoaState.Instance.curState == SC_UI_Display_MapInfos_KoaState.KoaState.Death)
             {
                 curState = StateOfCanvas.neutral;
@@ -57,8 +55,11 @@ public class SC_UI_Display_MapInfos_StateManager : MonoBehaviour
                 //patch de la gruge de l'infini de ta mère pour effacer le koa en memoire et permettre la discrimination des conditions
                 SC_UI_Display_MapInfos_KoaState.Instance.curState = SC_UI_Display_MapInfos_KoaState.KoaState.Spawning;
                 scriptRaycast.objectOnclic = null;
-                SC_TargetMap.Instance.SetFont(SC_TargetMap.FontList.VoiceActivated);
-                SC_TargetMap.Instance.SetText("No Target Selected");
+                if(SC_GameStates.Instance.CurState >= SC_GameStates.GameState.Tutorial2)
+                {
+                    SC_TargetMap.Instance.SetFont(SC_TargetMap.FontList.VoiceActivated);
+                    SC_TargetMap.Instance.SetText("No Target Selected");
+                }
 
                 return;
             }
@@ -77,7 +78,7 @@ public class SC_UI_Display_MapInfos_StateManager : MonoBehaviour
                          SC_CheckList.Instance.NetworkPlayerPilot.GetComponent<SC_Net_Player_TutoState>().CmdChangeTutoState(SC_GameStates.TutorialState.Tutorial2_2);*/
                 }
             }
-        }
+        
       
     }
 
