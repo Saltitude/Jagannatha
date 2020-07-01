@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEditor;
+
 
 public class SC_JoystickMove : MonoBehaviour, IF_BreakdownSystem
 {
@@ -80,6 +82,8 @@ public class SC_JoystickMove : MonoBehaviour, IF_BreakdownSystem
     public float f_ImpulseX;
     Quaternion xQuaternion;
 
+    //SerializedProperty axisArray;
+
     #endregion Variables
 
     void Awake()
@@ -102,6 +106,8 @@ public class SC_JoystickMove : MonoBehaviour, IF_BreakdownSystem
     // Update is called once per frame
     void FixedUpdate()
     {
+
+        ReadAxes();
 
         ModifyLerp();
 
@@ -130,8 +136,32 @@ public class SC_JoystickMove : MonoBehaviour, IF_BreakdownSystem
 
     void CheckTorqueAxis()
     {
+        SC_DeviceManager.Instance.GetJoyStickToUse();
         n_JoyNumToUse = SC_DeviceManager.Instance.n_JoyNumToUse;
         tab_TorqueAxes = SC_DeviceManager.Instance.tab_TorqueAxesToUse;
+    }
+
+    public static void ReadAxes()
+    {
+
+        var inputManager = AssetDatabase.LoadAllAssetsAtPath("ProjectSettings/InputManager.asset")[0];
+
+        SerializedObject obj = new SerializedObject(inputManager);
+
+        SerializedProperty axisArray = obj.FindProperty("m_Axes");
+
+        if (axisArray.arraySize == 0)
+            Debug.Log("No Axes");
+
+        for (int i = 0; i < axisArray.arraySize; ++i)
+        {
+            var axis = axisArray.GetArrayElementAtIndex(i);
+
+            if (Input.GetAxis(axis.FindPropertyRelative("m_Name").stringValue) != 0)
+                Debug.Log("Cur Axis = " + axis.FindPropertyRelative("m_Name").stringValue);
+
+        }
+
     }
 
     void GetImpulses()
@@ -141,7 +171,7 @@ public class SC_JoystickMove : MonoBehaviour, IF_BreakdownSystem
         f_ImpulseX = Input.GetAxis("Vertical") * f_RotationSpeedX;
 
         //Horizontal Impulses
-        f_TransImpulseZ = Input.GetAxis("Horizontal") * f_CurRotationSpeedZ;
+        //f_TransImpulseZ = Input.GetAxis("Horizontal") * f_CurRotationSpeedZ;
 
         if(n_JoyNumToUse == null || n_JoyNumToUse == 0)
             n_JoyNumToUse = SC_DeviceManager.Instance.n_JoyNumToUse;
@@ -151,18 +181,22 @@ public class SC_JoystickMove : MonoBehaviour, IF_BreakdownSystem
 
             case 1:
                 f_TorqueImpulseZ = Input.GetAxis("Torque_01") * f_CurRotationSpeedZ;
+                f_TransImpulseZ = (Input.GetAxis("Horizontal_01") + Input.GetAxis("Horizontal")) * f_CurRotationSpeedZ;
                 break;
 
             case 2:
                 f_TorqueImpulseZ = Input.GetAxis("Torque_02") * f_CurRotationSpeedZ;
+                f_TransImpulseZ = (Input.GetAxis("Horizontal_02") + Input.GetAxis("Horizontal")) * f_CurRotationSpeedZ;
                 break;
 
             case 3:
                 f_TorqueImpulseZ = Input.GetAxis("Torque_03") * f_CurRotationSpeedZ;
+                f_TransImpulseZ = (Input.GetAxis("Horizontal_03") + Input.GetAxis("Horizontal")) * f_CurRotationSpeedZ;
                 break;
 
             case 4:
                 f_TorqueImpulseZ = Input.GetAxis("Torque_04") * f_CurRotationSpeedZ;
+                f_TransImpulseZ = (Input.GetAxis("Horizontal_04") + Input.GetAxis("Horizontal")) * f_CurRotationSpeedZ;
                 break;
 
         }
@@ -246,13 +280,13 @@ public class SC_JoystickMove : MonoBehaviour, IF_BreakdownSystem
                     break;
 
                 case RotationMode.Normalize:
-                    MixImpulseZ = (Input.GetAxis("Rotation") + Input.GetAxis("Horizontal")) / 2 * f_RotationSpeedZ;
+                    MixImpulseZ = (f_TorqueImpulseZ + f_TransImpulseZ) / 2 * f_RotationSpeedZ;
                     zQuaternion = Quaternion.AngleAxis(MixImpulseZ, Vector3.up);
                     CurImpulse = MixImpulseZ;
                     break;
 
                 case RotationMode.Clamp:
-                    MixImpulseZ = Input.GetAxis("Rotation") + Input.GetAxis("Horizontal");
+                    MixImpulseZ = f_TorqueImpulseZ + f_TransImpulseZ;
                     if (MixImpulseZ > 1)
                         MixImpulseZ = 1;
                     MixImpulseZ *= f_RotationSpeedZ;

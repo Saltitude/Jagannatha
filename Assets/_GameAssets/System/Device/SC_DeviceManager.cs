@@ -30,6 +30,7 @@ public class SC_DeviceManager : MonoBehaviour
     public int n_JoyNumToUse;
 
     public bool[] tab_TorqueAxesToUse;
+    public bool[] tab_HorizontalAxesToUse;
 
     void Awake()
     {
@@ -89,9 +90,14 @@ public class SC_DeviceManager : MonoBehaviour
         tab_Device = Input.GetJoystickNames();
 
         tab_TorqueAxesToUse = new bool[tab_Device.Length];
+        tab_HorizontalAxesToUse = new bool[tab_Device.Length];
 
         for (int i = 0; i < tab_TorqueAxesToUse.Length; i++)
+        {
             tab_TorqueAxesToUse[i] = false;
+            tab_HorizontalAxesToUse[i] = false;
+
+        }
 
         for (int i = 0; i < tab_Device.Length; i++)
         {
@@ -100,6 +106,7 @@ public class SC_DeviceManager : MonoBehaviour
                 //Debug.Log("Use Device " + i + " Joynum = " + i + 1);
                 n_JoyNumToUse = i+1;
                 tab_TorqueAxesToUse[i] = true;
+                tab_HorizontalAxesToUse[i] = true;
             }
                 
         }
