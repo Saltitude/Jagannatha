@@ -101,7 +101,13 @@ public class SC_DeviceManager : MonoBehaviour
 
         for (int i = 0; i < tab_Device.Length; i++)
         {
-            if (!tab_Device[i].Contains("OpenVR") && !tab_Device[i].Contains("UMDF Virtual hidmini device Product string"))
+
+            bool isBlank = false;
+
+            if (tab_Device[i] == "")
+                isBlank = true;
+
+            if (!tab_Device[i].Contains("OpenVR") && !tab_Device[i].Contains("UMDF Virtual hidmini device Product string") && !isBlank)
             {
                 //Debug.Log("Use Device " + i + " Joynum = " + i + 1);
                 n_JoyNumToUse = i+1;
