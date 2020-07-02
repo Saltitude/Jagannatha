@@ -175,7 +175,53 @@ public class SC_JoystickMove : MonoBehaviour, IF_BreakdownSystem
 
         if(n_JoyNumToUse == null || n_JoyNumToUse == 0)
             n_JoyNumToUse = SC_DeviceManager.Instance.n_JoyNumToUse;
-     
+
+        float f_TorqueImpulse = 0;
+        float f_TransImpulse = 0;
+
+        if(SC_DeviceManager.Instance != null)
+        {
+
+            for (int i = 0; i < SC_DeviceManager.Instance.tab_TorqueAxesToUse.Length; i++)
+            {
+                if(SC_DeviceManager.Instance.tab_TorqueAxesToUse[0])
+                    f_TorqueImpulse += Input.GetAxis("Torque_0" + (i+1));
+            }
+
+            for (int i = 0; i < SC_DeviceManager.Instance.tab_HorizontalAxesToUse.Length; i++)
+            {
+                if (SC_DeviceManager.Instance.tab_HorizontalAxesToUse[0])
+                    f_TransImpulse += Input.GetAxis("Horizontal_0" + (i+1).ToString());
+            }
+
+            f_TorqueImpulseZ = f_TorqueImpulse * f_CurRotationSpeedZ;
+            f_TransImpulseZ = (f_TransImpulse + Input.GetAxis("Horizontal")) * f_CurRotationSpeedZ;
+
+            /*
+            if (SC_DeviceManager.Instance.tab_HorizontalAxesToUse[0])
+            {
+                f_TorqueImpulse += Input.GetAxis("Torque_01");
+                f_TransImpulse += Input.GetAxis("Horizontal_01");
+            }
+            if (SC_DeviceManager.Instance.tab_HorizontalAxesToUse[1])
+            {
+                f_TorqueImpulse += Input.GetAxis("Torque_01");
+                f_TransImpulse += Input.GetAxis("Horizontal_01");
+            }
+            if (SC_DeviceManager.Instance.tab_HorizontalAxesToUse[2])
+            {
+                f_TorqueImpulse += Input.GetAxis("Torque_01");
+                f_TransImpulse += Input.GetAxis("Horizontal_01");
+            }
+            if (SC_DeviceManager.Instance.tab_HorizontalAxesToUse[3])
+            {
+                f_TorqueImpulse += Input.GetAxis("Torque_01");
+                f_TransImpulse += Input.GetAxis("Horizontal_01");
+            }
+            */
+        }
+
+        /*
         switch (n_JoyNumToUse)
         {
 
@@ -200,7 +246,7 @@ public class SC_JoystickMove : MonoBehaviour, IF_BreakdownSystem
                 break;
 
         }
-
+        */
     }
 
     void VerticalRot()
