@@ -195,8 +195,8 @@ public class SC_JoystickMove : MonoBehaviour, IF_BreakdownSystem
             }
 
             f_TorqueImpulseZ = f_TorqueImpulse * f_CurRotationSpeedZ;
-            //f_TransImpulseZ = (f_TransImpulse + Input.GetAxis("Horizontal")) * f_CurRotationSpeedZ;
-            f_TransImpulseZ = f_TransImpulse * f_CurRotationSpeedZ;
+            f_TransImpulseZ = (f_TransImpulse + Input.GetAxis("Horizontal")) * f_CurRotationSpeedZ;
+            //f_TransImpulseZ = f_TransImpulse * f_CurRotationSpeedZ;
 
             /*
             if (SC_DeviceManager.Instance.tab_HorizontalAxesToUse[0])
