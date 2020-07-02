@@ -139,15 +139,11 @@ public class SC_UI_OngletContainer : MonoBehaviour
     {
         this.GetComponent<Animator>().SetBool("Display", true);
         CamAnimator.SetBool("DisplayCam", true);
-        CamAnimator.SetBool("WeaponCam", false);
-        CamAnimator.SetBool("MoveCam", false);
     }
     public void DisplayOut()
     {
         this.GetComponent<Animator>().SetBool("Display", false);
         CamAnimator.SetBool("DisplayCam", false);
-        CamAnimator.SetBool("WeaponCam", false);
-        CamAnimator.SetBool("MoveCam", false);
     }
     public void WeaponIn()
     {

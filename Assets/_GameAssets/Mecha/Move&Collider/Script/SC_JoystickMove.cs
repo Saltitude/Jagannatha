@@ -107,7 +107,7 @@ public class SC_JoystickMove : MonoBehaviour, IF_BreakdownSystem
     void FixedUpdate()
     {
 
-        ReadAxes();
+        //ReadAxes();
 
         ModifyLerp();
 
@@ -141,28 +141,28 @@ public class SC_JoystickMove : MonoBehaviour, IF_BreakdownSystem
         tab_TorqueAxes = SC_DeviceManager.Instance.tab_TorqueAxesToUse;
     }
 
-    public static void ReadAxes()
-    {
+    //public static void ReadAxes()
+    //{
 
-        var inputManager = AssetDatabase.LoadAllAssetsAtPath("ProjectSettings/InputManager.asset")[0];
+    //    var inputManager = AssetDatabase.LoadAllAssetsAtPath("ProjectSettings/InputManager.asset")[0];
 
-        SerializedObject obj = new SerializedObject(inputManager);
+    //    SerializedObject obj = new SerializedObject(inputManager);
 
-        SerializedProperty axisArray = obj.FindProperty("m_Axes");
+    //    SerializedProperty axisArray = obj.FindProperty("m_Axes");
 
-        if (axisArray.arraySize == 0)
-            Debug.Log("No Axes");
+    //    if (axisArray.arraySize == 0)
+    //        Debug.Log("No Axes");
 
-        for (int i = 0; i < axisArray.arraySize; ++i)
-        {
-            var axis = axisArray.GetArrayElementAtIndex(i);
+    //    for (int i = 0; i < axisArray.arraySize; ++i)
+    //    {
+    //        var axis = axisArray.GetArrayElementAtIndex(i);
 
-            if (Input.GetAxis(axis.FindPropertyRelative("m_Name").stringValue) != 0)
-                Debug.Log("Cur Axis = " + axis.FindPropertyRelative("m_Name").stringValue);
+    //        if (Input.GetAxis(axis.FindPropertyRelative("m_Name").stringValue) != 0)
+    //            Debug.Log("Cur Axis = " + axis.FindPropertyRelative("m_Name").stringValue);
 
-        }
+    //    }
 
-    }
+    //}
 
     void GetImpulses()
     {

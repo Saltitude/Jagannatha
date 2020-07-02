@@ -54,13 +54,8 @@ public class SC_UI_Debug_NoBuild : MonoBehaviour
 
         //Debug.Log(_SC_passwordLock.cheatCode);
     }
-    
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+  
+  
 
     void Activate(GameObject objet)
     {

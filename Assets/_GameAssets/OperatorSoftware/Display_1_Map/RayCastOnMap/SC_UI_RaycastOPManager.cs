@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-
+using UnityEditor;
 public class SC_UI_RaycastOPManager : MonoBehaviour
 {
     #region Singleton
@@ -66,7 +66,7 @@ public class SC_UI_RaycastOPManager : MonoBehaviour
         }
 
 
-     
+#if UNITY_EDITOR
         #region CheatChode
 
         if (Input.GetKeyDown(KeyCode.F5))
@@ -87,7 +87,7 @@ public class SC_UI_RaycastOPManager : MonoBehaviour
         }
 
         #endregion
+#endif
 
     }
-
 }
