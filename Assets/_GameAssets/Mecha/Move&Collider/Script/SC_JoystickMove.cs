@@ -53,7 +53,7 @@ public class SC_JoystickMove : MonoBehaviour, IF_BreakdownSystem
     float f_ModLerpRotZ = 0.5f;
     public enum RotationMode { TSR, Torque, Normalize, Higher, Clamp }
     public RotationMode TypeRotationZ;
-    float f_TransImpulseZ;
+    public float f_TransImpulseZ;
     Quaternion TargetRotY;
     public float CurImpulse = 0;
 

@@ -39,6 +39,13 @@ public class SC_JoystickRenderMove : MonoBehaviour
         f_ImpulseX = Input.GetAxis("Vertical");
         f_TorqueImpulseZ = SC_JoystickMove.Instance.f_TorqueImpulseZ;
 
+        if(SC_JoystickMove.Instance != null)
+        {
+            f_TransImpulseZ = SC_JoystickMove.Instance.f_TransImpulseZ;
+            f_ImpulseX = Input.GetAxis("Vertical");
+            f_TorqueImpulseZ = SC_JoystickMove.Instance.f_TorqueImpulseZ;
+        }
+
         f_CurRotH = (Mathf.Abs(f_TransImpulseZ) * f_MaxRotH / 1) * Mathf.Sign(f_TransImpulseZ);
         f_CurRotT = (Mathf.Abs(f_TorqueImpulseZ) * f_MaxRotT / 1) * Mathf.Sign(f_TorqueImpulseZ);
         f_CurRotV = (Mathf.Abs(f_ImpulseX) * f_MaxRotV / 1) * Mathf.Sign(f_ImpulseX);
