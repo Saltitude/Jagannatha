@@ -184,13 +184,13 @@ public class SC_JoystickMove : MonoBehaviour, IF_BreakdownSystem
 
             for (int i = 0; i < SC_DeviceManager.Instance.tab_TorqueAxesToUse.Length; i++)
             {
-                if(SC_DeviceManager.Instance.tab_TorqueAxesToUse[0])
+                if(SC_DeviceManager.Instance.tab_TorqueAxesToUse[i])
                     f_TorqueImpulse += Input.GetAxis("Torque_0" + (i+1).ToString());
             }
 
             for (int i = 0; i < SC_DeviceManager.Instance.tab_HorizontalAxesToUse.Length; i++)
             {
-                if (SC_DeviceManager.Instance.tab_HorizontalAxesToUse[0])
+                if (SC_DeviceManager.Instance.tab_HorizontalAxesToUse[i])
                     f_TransImpulse += Input.GetAxis("Horizontal_0" + (i+1).ToString());
             }
 
