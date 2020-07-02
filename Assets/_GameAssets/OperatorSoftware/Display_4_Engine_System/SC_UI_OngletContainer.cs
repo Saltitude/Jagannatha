@@ -70,6 +70,7 @@ public class SC_UI_OngletContainer : MonoBehaviour
 
     }
 
+    public bool canGoBack = true;
 
     void Start()
     {
@@ -98,18 +99,18 @@ public class SC_UI_OngletContainer : MonoBehaviour
     public void playDisplayTabAlert(bool state)
     {
         onglet[0].GetComponent<SC_UI_OngletSelection>().isBreakdownSystem(state);
-   
+
     }
 
     public void playWeaponTabAlert(bool state)
     {
         onglet[1].GetComponent<SC_UI_OngletSelection>().isBreakdownSystem(state);
-     
+
     }
     public void playMovementTabAlert(bool state)
     {
         onglet[2].GetComponent<SC_UI_OngletSelection>().isBreakdownSystem(state);
- 
+
 
     }
 
@@ -138,16 +139,21 @@ public class SC_UI_OngletContainer : MonoBehaviour
     {
         this.GetComponent<Animator>().SetBool("Display", true);
         CamAnimator.SetBool("DisplayCam", true);
+        CamAnimator.SetBool("WeaponCam", false);
+        CamAnimator.SetBool("MoveCam", false);
     }
     public void DisplayOut()
     {
         this.GetComponent<Animator>().SetBool("Display", false);
         CamAnimator.SetBool("DisplayCam", false);
+        CamAnimator.SetBool("WeaponCam", false);
+        CamAnimator.SetBool("MoveCam", false);
     }
     public void WeaponIn()
     {
         this.GetComponent<Animator>().SetBool("Weapon", true);
         CamAnimator.SetBool("WeaponCam", true);
+
     }
     public void WeaponOut()
     {
@@ -166,6 +172,18 @@ public class SC_UI_OngletContainer : MonoBehaviour
         CamAnimator.SetBool("MoveCam", false);
     }
 
+    public void SetBack(bool value)
+    {
+        if (value == true)
+            Invoke("BackInvoke", .75f);
+        else
+            canGoBack = false;
+    }
+
+    void BackInvoke()
+    {
+        canGoBack = true;
+    }
     #endregion
 
     #region ZoomFromHub
@@ -187,14 +205,14 @@ public class SC_UI_OngletContainer : MonoBehaviour
 
 
         float t = 0;
-        while(t < ZoomInHubDuration_1)
+        while (t < ZoomInHubDuration_1)
         {
             t += Time.deltaTime;
 
-            system[hubIndex].transform.localPosition += (dPosPerSec *Time.deltaTime);
+            system[hubIndex].transform.localPosition += (dPosPerSec * Time.deltaTime);
             system[hubIndex].transform.localScale += (dScalePerSec * Time.deltaTime);
 
-            if(t > ZoomInHubDuration_1-0.5f && !zoom2Started)
+            if (t > ZoomInHubDuration_1 - 0.5f && !zoom2Started)
             {
                 system[WindowIndex].transform.localScale = Vector3.zero;
                 system[WindowIndex].transform.localPosition = Vector3.zero;
@@ -205,10 +223,10 @@ public class SC_UI_OngletContainer : MonoBehaviour
             yield return 0;
         }
 
-        
+
         system[hubIndex].transform.localScale = Vector3.zero;
         system[hubIndex].transform.localPosition = Vector3.zero;
-      
+
 
 
     }
