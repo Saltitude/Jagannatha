@@ -60,7 +60,7 @@ public class SC_SceneManager : NetworkBehaviour
 
         IsCheck();
 
-        if (SceneManager.GetActiveScene().buildIndex == 2 || SceneManager.GetActiveScene().buildIndex == 1)
+        if (SceneManager.GetActiveScene().name == "Lobby" || SceneManager.GetActiveScene().name == "Lobby Opé" || SceneManager.GetActiveScene().name == "Lobby Opé 1 screen")
             StartCoroutine(PreLoadScene());
 
     }
@@ -74,7 +74,7 @@ public class SC_SceneManager : NetworkBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (SceneManager.GetActiveScene().buildIndex == 2 || SceneManager.GetActiveScene().buildIndex == 1)
+        if (SceneManager.GetActiveScene().name == "Lobby Opé" || SceneManager.GetActiveScene().name == "Lobby" || SceneManager.GetActiveScene().name == "Lobby Opé 1 screen")
             LobbyUpdate();
     }
 
@@ -129,6 +129,8 @@ public class SC_SceneManager : NetworkBehaviour
 
         else if (SceneManager.GetActiveScene().name == "Lobby Opé")
             asyncOperation = SceneManager.LoadSceneAsync("Tuto_Operator");
+        else if(SceneManager.GetActiveScene().name == "Lobby Opé 1 screen")
+            asyncOperation = SceneManager.LoadSceneAsync("Tuto_Operator_1_screen");
 
         asyncOperation.allowSceneActivation = false;
 
@@ -155,7 +157,7 @@ public class SC_SceneManager : NetworkBehaviour
                 if (SceneManager.GetActiveScene().name == "Lobby" && !b_PilotReadyToLoad)
                     b_PilotReadyToLoad = true;
 
-                else if (SceneManager.GetActiveScene().name == "Lobby Opé" && !b_OperatorReadyToLoad)
+                else if ((SceneManager.GetActiveScene().name == "Lobby Opé" || SceneManager.GetActiveScene().name == "Lobby Opé 1 screen") && !b_OperatorReadyToLoad)
                     SendReadyOP();
 
                 //Activate the Scene
@@ -184,16 +186,22 @@ public class SC_SceneManager : NetworkBehaviour
 
     #region OldMethods
 
-    void LoadTutoLobby()
+    public void LoadTutoLobby()
     {
-        SceneManager.LoadScene(1);
+        SceneManager.LoadScene("Lobby");
     }
 
-    void LoadTutoLobbyOpe()
+    public void LoadTutoLobbyOpe()
     {
-        SceneManager.LoadScene(2);
+        SceneManager.LoadScene("Lobby Opé");
         //SC_NetPlayerInit_OP.Instance.CmdSendForceUpdate();
-        Mng_CheckList.GetComponent<SC_CheckList>().NetworkPlayerOperator.GetComponent<SC_NetPlayerInit_OP>().CmdSendForceUpdate();
+        //Mng_CheckList.GetComponent<SC_CheckList>().NetworkPlayerOperator.GetComponent<SC_NetPlayerInit_OP>().CmdSendForceUpdate();
+    }
+    public void LoadTutoLobbyOpe1Screen()
+    {
+        SceneManager.LoadScene("Lobby Opé 1 screen");
+        //SC_NetPlayerInit_OP.Instance.CmdSendForceUpdate();
+        //Mng_CheckList.GetComponent<SC_CheckList>().NetworkPlayerOperator.GetComponent<SC_NetPlayerInit_OP>().CmdSendForceUpdate();
     }
 
     void LoadTutoPilot()

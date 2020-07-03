@@ -1764,6 +1764,11 @@ PrefabInstance:
       propertyPath: m_TargetTexture
       value: 
       objectReference: {fileID: 8400000, guid: c297998f05f1cdf42b56c575d4a4336d, type: 2}
+    - target: {fileID: 1280220214639394411, guid: 5868590ac89dbe244a183448a01ec422,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1280220214639394412, guid: 5868590ac89dbe244a183448a01ec422,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1823,6 +1828,11 @@ PrefabInstance:
         type: 3}
       propertyPath: orthographic size
       value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 1280220214889821268, guid: 5868590ac89dbe244a183448a01ec422,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1280220215060846438, guid: 5868590ac89dbe244a183448a01ec422,
         type: 3}
@@ -1903,6 +1913,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalPosition.z
       value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 1280220215499520683, guid: 5868590ac89dbe244a183448a01ec422,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1280220215600159998, guid: 5868590ac89dbe244a183448a01ec422,
         type: 3}
@@ -6052,6 +6067,11 @@ PrefabInstance:
     - target: {fileID: 5353012989470210683, guid: 5868590ac89dbe244a183448a01ec422,
         type: 3}
       propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5371511484232613545, guid: 5868590ac89dbe244a183448a01ec422,
+        type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5379251366787607824, guid: 5868590ac89dbe244a183448a01ec422,

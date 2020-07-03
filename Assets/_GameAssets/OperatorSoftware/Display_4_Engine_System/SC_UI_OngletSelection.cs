@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class SC_UI_OngletSelection : MonoBehaviour, IF_clicableAction, IF_Hover
 {
@@ -34,10 +35,13 @@ public class SC_UI_OngletSelection : MonoBehaviour, IF_clicableAction, IF_Hover
             additionalAnimator = additionalAnimated.GetComponent<Animator>();
         wireBlink = GetComponentInParent<SC_UI_WireBlink>();
 #if UNITY_EDITOR
-        if (index == 3 || index == 4 || index == 5)
+        if(SceneManager.GetActiveScene().name == "Tuto_Operator")
         {
-            this.GetComponent<BoxCollider>().center = new Vector3(-11.49976f, 4.058487f, -22.14557f);
-            this.GetComponent<BoxCollider>().size = new Vector3(162.1187f, 163.5854f, 54.29114f);
+            if (index == 3 || index == 4 || index == 5)
+            {
+                this.GetComponent<BoxCollider>().center = new Vector3(-11.49976f, 4.058487f, -22.14557f);
+                this.GetComponent<BoxCollider>().size = new Vector3(162.1187f, 163.5854f, 54.29114f);
+            }
         }
 
 #endif
