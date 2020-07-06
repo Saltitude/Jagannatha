@@ -21,42 +21,20 @@ public class SC_IPManager : NetworkBehaviour
     [SerializeField]
     bool hamachiUsed = false;
     [SerializeField]
+    bool EthernetFind = false;
+    [SerializeField]
+    bool noNameFind = false;
+    [SerializeField]
     string EthernetIpv4;
     [SerializeField]
     string HamachiIpv4;
+    [SerializeField]
+    string OtherIpv4;
+
+    [SerializeField]
+    List<string> list_AllIpv4;
 
     public string localComputerIP = "0.0.0.0";
-    // Start is called before the first frame update
-    void Start()
-    {
-        //        if(isLocalHostBuild)
-        //            _NetworkManager.networkAddress = "localhost";
-
-        //        else
-        //            _NetworkManager.networkAddress = "192.168.151.116";
-
-        //#if UNITY_EDITOR
-        //        if (isLocalHostEditor)
-        //        {
-        //            _NetworkManager.networkAddress = "localhost";
-        //        }
-        //        else
-        //        {
-        //            _NetworkManager.networkAddress = "192.168.151.116";
-        //        }
-
-
-
-        //#endif
-        //localComputerIP = GetLocalIPAddress();
-        //Debug.Log("Current IP is : " + localComputerIP);
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
 
     public string GetLocalIPAddress()
     {
@@ -79,12 +57,17 @@ public class SC_IPManager : NetworkBehaviour
 
     public string GetIP()
     {
+
+        int i = 0;
+
         foreach (NetworkInterface item in NetworkInterface.GetAllNetworkInterfaces())
         {
             foreach (UnicastIPAddressInformation ip in item.GetIPProperties().UnicastAddresses)
             {             
                 if (ip.Address.AddressFamily == System.Net.Sockets.AddressFamily.InterNetwork)
                 {
+
+                    list_AllIpv4.Add(ip.Address.ToString());
 
                     //Debug.Log("Find Ipv4 : " + item.Name + " | " + ip.Address.ToString());
 
@@ -97,7 +80,14 @@ public class SC_IPManager : NetworkBehaviour
                     //else if (item.Name == "Ethernet")
                     else if (item.Name.Contains("Ethernet"))
                     {
+                        EthernetFind = true;
                         EthernetIpv4 = ip.Address.ToString();
+                    }
+
+                    else
+                    {
+                        noNameFind = true;
+                        OtherIpv4 = ip.Address.ToString();
                     }
 
                 }               
@@ -108,8 +98,10 @@ public class SC_IPManager : NetworkBehaviour
 
         if (hamachiUsed)
             IpToUsed = HamachiIpv4;
-        else
+        else if (EthernetFind)
             IpToUsed = EthernetIpv4;
+        else
+            IpToUsed = OtherIpv4;
 
         return IpToUsed;
 
