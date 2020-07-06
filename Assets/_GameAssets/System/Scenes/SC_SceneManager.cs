@@ -76,6 +76,7 @@ public class SC_SceneManager : NetworkBehaviour
     {
         if (SceneManager.GetActiveScene().name == "Lobby Opé" || SceneManager.GetActiveScene().name == "Lobby" || SceneManager.GetActiveScene().name == "Lobby Opé 1 screen")
             LobbyUpdate();
+
     }
 
     void LobbyUpdate()

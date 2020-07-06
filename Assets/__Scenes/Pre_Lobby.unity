@@ -202,7 +202,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &132386622
 RectTransform:
   m_ObjectHideFlags: 0
@@ -265,7 +265,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 974916912}
+      - m_Target: {fileID: 795156136}
         m_MethodName: LoadTutoLobbyOpe1Screen
         m_Mode: 1
         m_Arguments:
@@ -405,7 +405,7 @@ RectTransform:
   - {fileID: 132386622}
   - {fileID: 1546476208}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -959,6 +959,52 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 667694243}
   m_CullTransparentMesh: 0
+--- !u!1 &795156135
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 795156137}
+  - component: {fileID: 795156136}
+  m_Layer: 0
+  m_Name: CheckVr
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &795156136
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 795156135}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 83a63c9fbe510a04fbc6b86b05032bf4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  FourScreen: {fileID: 1546476209}
+  Btn4: {fileID: 1546476207}
+  Btn1: {fileID: 132386621}
+--- !u!4 &795156137
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 795156135}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.25515378, y: -998.76044, z: 0.4132002}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &904512182
 GameObject:
   m_ObjectHideFlags: 0
@@ -1103,87 +1149,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 923218266}
   m_CullTransparentMesh: 0
---- !u!1001 &974916911
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 2435564864144326894, guid: 4f04ba815ddd2ff41b76ec1876a78e61,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -5.6758385
-      objectReference: {fileID: 0}
-    - target: {fileID: 2435564864144326894, guid: 4f04ba815ddd2ff41b76ec1876a78e61,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 5.0018744
-      objectReference: {fileID: 0}
-    - target: {fileID: 2435564864144326894, guid: 4f04ba815ddd2ff41b76ec1876a78e61,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -1.9479465
-      objectReference: {fileID: 0}
-    - target: {fileID: 2435564864144326894, guid: 4f04ba815ddd2ff41b76ec1876a78e61,
-        type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2435564864144326894, guid: 4f04ba815ddd2ff41b76ec1876a78e61,
-        type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2435564864144326894, guid: 4f04ba815ddd2ff41b76ec1876a78e61,
-        type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2435564864144326894, guid: 4f04ba815ddd2ff41b76ec1876a78e61,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2435564864144326894, guid: 4f04ba815ddd2ff41b76ec1876a78e61,
-        type: 3}
-      propertyPath: m_RootOrder
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2435564864144326894, guid: 4f04ba815ddd2ff41b76ec1876a78e61,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2435564864144326894, guid: 4f04ba815ddd2ff41b76ec1876a78e61,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2435564864144326894, guid: 4f04ba815ddd2ff41b76ec1876a78e61,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3862204870209781278, guid: 4f04ba815ddd2ff41b76ec1876a78e61,
-        type: 3}
-      propertyPath: m_Name
-      value: Mng_Scene
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 4f04ba815ddd2ff41b76ec1876a78e61, type: 3}
---- !u!114 &974916912 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 6854942957186536285, guid: 4f04ba815ddd2ff41b76ec1876a78e61,
-    type: 3}
-  m_PrefabInstance: {fileID: 974916911}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1439955113}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3f93accfe6d220a469fe9f8f44871763, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1397304458
 GameObject:
   m_ObjectHideFlags: 0
@@ -1243,7 +1208,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 974916912}
+      - m_Target: {fileID: 795156136}
         m_MethodName: LoadTutoLobby
         m_Mode: 1
         m_Arguments:
@@ -1309,27 +1274,6 @@ RectTransform:
   m_AnchoredPosition: {x: 788, y: 450}
   m_SizeDelta: {x: 200, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!1 &1439955113 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3862204870209781278, guid: 4f04ba815ddd2ff41b76ec1876a78e61,
-    type: 3}
-  m_PrefabInstance: {fileID: 974916911}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1439955114
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1439955113}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 83a63c9fbe510a04fbc6b86b05032bf4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  FourScreen: {fileID: 1546476209}
-  Btn4: {fileID: 1546476207}
-  Btn1: {fileID: 132386621}
 --- !u!1 &1546476207
 GameObject:
   m_ObjectHideFlags: 0
@@ -1348,7 +1292,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1546476208
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1414,7 +1358,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 974916912}
+      - m_Target: {fileID: 795156136}
         m_MethodName: LoadTutoLobbyOpe
         m_Mode: 1
         m_Arguments:
@@ -1596,7 +1540,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2046452803
 GameObject:

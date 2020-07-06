@@ -16,11 +16,16 @@ public class SC_CheckVr : MonoBehaviour
     // Start is called before the first frame update
     private void Awake()
     {
+
+    }
+
+    private void Start()
+    {
         if (SceneManager.GetActiveScene().name == "Pre_Lobby")
         {
             if (XRSettings.isDeviceActive)
             {
-                SC_SceneManager.Instance.LoadTutoLobby();
+                LoadTutoLobby();
             }
             else
             {
@@ -33,16 +38,21 @@ public class SC_CheckVr : MonoBehaviour
             }
         }
     }
-    void Start()
+    public void LoadTutoLobby()
     {
-
-
-
+        SceneManager.LoadScene("Lobby");
     }
 
-    // Update is called once per frame
-    void Update()
+    public void LoadTutoLobbyOpe()
     {
-        
+        SceneManager.LoadScene("Lobby Opé");
+        //SC_NetPlayerInit_OP.Instance.CmdSendForceUpdate();
+        //Mng_CheckList.GetComponent<SC_CheckList>().NetworkPlayerOperator.GetComponent<SC_NetPlayerInit_OP>().CmdSendForceUpdate();
+    }
+    public void LoadTutoLobbyOpe1Screen()
+    {
+        SceneManager.LoadScene("Lobby Opé 1 screen");
+        //SC_NetPlayerInit_OP.Instance.CmdSendForceUpdate();
+        //Mng_CheckList.GetComponent<SC_CheckList>().NetworkPlayerOperator.GetComponent<SC_NetPlayerInit_OP>().CmdSendForceUpdate();
     }
 }
