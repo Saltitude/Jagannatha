@@ -59,6 +59,7 @@ public class SC_IPManager : NetworkBehaviour
     {
 
         int i = 0;
+        bool b_otherIpIsSet = false;
 
         foreach (NetworkInterface item in NetworkInterface.GetAllNetworkInterfaces())
         {
@@ -84,8 +85,9 @@ public class SC_IPManager : NetworkBehaviour
                         EthernetIpv4 = ip.Address.ToString();
                     }
 
-                    else
+                    else if(!b_otherIpIsSet)
                     {
+                        b_otherIpIsSet = true;
                         noNameFind = true;
                         OtherIpv4 = ip.Address.ToString();
                     }
