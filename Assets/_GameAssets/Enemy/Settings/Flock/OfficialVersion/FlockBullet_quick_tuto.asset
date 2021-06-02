@@ -21,7 +21,7 @@ MonoBehaviour:
   nbBulletToShoot: 4
   chargingAttackTime: 0
   activeDuration: 0
-  nbFireBeforeFalloff: 3
+  nbFireBeforeFalloff: 1
   speedToTarget: 0
   flightDuration: 3
   flightReactionMinSensibility: 75

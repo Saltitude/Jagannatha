@@ -21,6 +21,7 @@ MonoBehaviour:
   nbBulletToShoot: 50
   chargingAttackTime: 1
   activeDuration: 1
+  nbFireBeforeFalloff: 1
   speedToTarget: 0.7
   flightDuration: 3
   flightReactionMinSensibility: 101
@@ -29,6 +30,12 @@ MonoBehaviour:
   attackFocusHitReaction: 0
   damageOnSystemHitReaction: 0
   laserDurationHitReaction: 2
+  bossAttackType: 0
+  startingLife: 10
+  fleeingLife: 0
+  fleeingTime: 2
+  spanwScale: 1
+  bossPhase: 0
   spawnSettings:
   - {fileID: 11400000, guid: 8241a6c65e4b8e4488218c6992d4efdb, type: 2}
   roamSettings:
@@ -41,6 +48,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 8241a6c65e4b8e4488218c6992d4efdb, type: 2}
   hitReactionSettings:
   - {fileID: 11400000, guid: 8241a6c65e4b8e4488218c6992d4efdb, type: 2}
+  BossFlightSettings: []
   splines:
   - {fileID: 0}
   - {fileID: 0}

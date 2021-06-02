@@ -18,10 +18,10 @@ MonoBehaviour:
   timeBetweenAttacks: 8
   timeBeforeFirstAttack: 5
   fireRate: 1
-  nbBulletToShoot: 4
+  nbBulletToShoot: 3
   chargingAttackTime: 0
   activeDuration: 0
-  nbFireBeforeFalloff: 3
+  nbFireBeforeFalloff: 1
   speedToTarget: 0
   flightDuration: 3
   flightReactionMinSensibility: 75
