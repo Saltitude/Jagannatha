@@ -100,13 +100,23 @@ public class SC_Cord : MonoBehaviour
     void ViveGripGrabStart(ViveGrip_GripPoint gripPoint)
     {
         controller = gripPoint.controller;
+
     }
 
     //appelé quand lache l'objet
     void ViveGripGrabStop(ViveGrip_GripPoint gripPoint)
     {
         controller = null;
+
+        //Bugfix à la con pour les tirettes qui restaient figées dans l'air;
+        // L'event de fin de grab HandGrab sur la tirette appelle déjà la fonction qui enleve kinematic (sais pas pk);
+        //Etant donné que quand l'objet est libéré du bug quand on active/desactive kinematic et que l'event se fait après ça;
+        //On met en kinematic à ce stade, pour que l'event le débloque à chaque usage;
+        // =X
+        GetComponent<Rigidbody>().isKinematic = true;
+
     }
+
 
 
 
