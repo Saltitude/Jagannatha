@@ -17,8 +17,10 @@ public class SC_TutorialUIManager : MonoBehaviour
     Image[][] imageBlink;
 
     [SerializeField]
-    Image[][] imageState;  
-    
+    Image[][] imageState;
+
+    Material[,] imageMaterial;
+
     [SerializeField]
     Image[] displayHub;
     [SerializeField]
@@ -35,7 +37,10 @@ public class SC_TutorialUIManager : MonoBehaviour
     GameObject weaponState; 
     [SerializeField]
     GameObject motionState;
-    
+
+
+    [SerializeField]
+    Material matBreakdown;
 
     List<Image> img_Blink;
 
@@ -77,13 +82,23 @@ public class SC_TutorialUIManager : MonoBehaviour
         img_Blink = new List<Image>();
         imageBlink = new Image[4][];
         imageState = new Image[3][];
-
+        imageMaterial = new Material[4,2];
 
         imageBlink[0] = displayHub;
         imageBlink[1] = weaponHub;
         imageBlink[2] = motionHub;
-        imageBlink[3] = rebootHub;
+        imageBlink[3] = rebootHub;  
+        
+        
 
+        for (int i = 0; i < imageBlink.GetLength(0); i++)
+        {
+            for (int j = 0; j < imageBlink[i].Length; j++)
+            {
+                imageMaterial[i,j] = imageBlink[i][j].material;
+
+            }
+        }
 
         imageState[0] = displayState.GetComponentsInChildren<Image>();
         imageState[1] = weaponState.GetComponentsInChildren<Image>();
@@ -112,6 +127,7 @@ public class SC_TutorialUIManager : MonoBehaviour
     void ActivateBlink(Image image)
     {
         img_Blink.Add(image);
+        image.material = matBreakdown;
     }
 
     void EndBlink(Image image)
@@ -121,6 +137,16 @@ public class SC_TutorialUIManager : MonoBehaviour
             if(i == image)
             {
                 i.color = new Color(i.color.r, i.color.g, i.color.b, 1);
+
+                for (int u = 0; u < imageBlink.GetLength(0); u++)
+                {
+                    for (int v = 0; v < imageBlink[u].Length; v++)
+                    {
+                        if(imageBlink[u][v] == i)
+                        imageBlink[u][v].material = imageMaterial[u,v];
+                    }
+                }
+
                 img_Blink.Remove(i);
                 break;
             }
@@ -150,12 +176,8 @@ public class SC_TutorialUIManager : MonoBehaviour
 
     public void ActivateBlink(System syst, bool blink)
     {
-        for (int i = 0; i < imageBlink[(int)syst].Length; i++)
-        {
-            if (blink)
-                ActivateImage(imageBlink[(int)syst][i]);
 
-        }
+
         for (int i = 0; i < imageBlink[(int)syst].Length; i++)
         {
             if (blink)
