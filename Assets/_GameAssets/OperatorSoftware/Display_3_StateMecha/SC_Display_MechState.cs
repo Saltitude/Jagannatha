@@ -183,7 +183,7 @@ public class SC_Display_MechState : MonoBehaviour
 
             case SystemState.Launched:
                 SC_TutorialUIManager.Instance.ActivateSystem(SC_TutorialUIManager.System.Display, true);
-                //SC_TutorialUIManager.Instance.ActivateBlink(SC_TutorialUIManager.System.Display, false);
+                SC_TutorialUIManager.Instance.ActivateBlink(SC_TutorialUIManager.System.Display, false);
 
                 DisconnectedState.SetActive(false);
                 LaunchedOffState.SetActive(false);
