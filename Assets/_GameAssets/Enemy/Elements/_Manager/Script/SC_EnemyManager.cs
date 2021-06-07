@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 /// <summary>
 /// Script gerant l'enchainement des Phases
@@ -22,6 +23,12 @@ public class SC_EnemyManager : MonoBehaviour
     public Slider Progress;
     public  int curPhaseIndex;
     GameObject Mng_SyncVar = null;
+    [SerializeField]
+    TextMeshProUGUI textUpload;
+    [SerializeField]
+    Image fillBarUpload;
+    [SerializeField]
+    Material fillBarMaterialEnd;
     SC_SyncVar_DisplaySystem sc_syncvar;
 
     void Awake()
@@ -40,7 +47,8 @@ public class SC_EnemyManager : MonoBehaviour
     public void Initialize()
     {
         InitNewPhase(0);
-        Progress = GameObject.FindGameObjectWithTag("ProgressBar").GetComponent<Slider>();
+        Progress = GameObject.FindGameObjectWithTag("ProgressBar").GetComponentInChildren<Slider>();
+        textUpload = GameObject.FindGameObjectWithTag("ProgressBar").GetComponentInChildren<TextMeshProUGUI>();
         Progress.value = 0;
         sendToSynchVar(Progress.value);
     }
@@ -63,7 +71,11 @@ public class SC_EnemyManager : MonoBehaviour
         {
             SC_GameStates.Instance.ChangeGameState(SC_GameStates.GameState.GameEnd);
             Progress.value = 100f;
+            fillBarUpload.material = fillBarMaterialEnd;
             sendToSynchVar(Progress.value);
+            textUpload.text = "Buddah Uploaded";
+            textUpload.color = new Color32(0, 0, 0, 255);
+
         }
         else
          InitNewPhase(curPhaseIndex);
@@ -117,6 +129,12 @@ public class SC_EnemyManager : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.F12))
         {
             SC_breakdown_displays_screens.Instance.EndScreenDisplay();
+            fillBarUpload.material = fillBarMaterialEnd;
+            textUpload.text = "Buddah Uploaded";
+            Progress.value = 100f;
+            textUpload.color = new Color32(0,0,0,255);
         }
+
+
     }
 }
