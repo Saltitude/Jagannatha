@@ -30,6 +30,8 @@ public class SC_Display_MechState : MonoBehaviour
     public enum SystemState { Disconnected, Connected, Initialize, Launched }
     public SystemState CurState;
 
+    float counterStart = 0;
+
     void Awake()
     {
 
@@ -41,6 +43,7 @@ public class SC_Display_MechState : MonoBehaviour
         {
             _instance = this;
         }
+
 
     }
 
@@ -55,22 +58,36 @@ public class SC_Display_MechState : MonoBehaviour
 
     #region States
 
+    private void Update()
+    {
+        if(counterStart <2)
+            counterStart += Time.deltaTime;
+    }
+
     void CheckState()
     {
+
+        
+
+
         SystemState newState;
         if ((SC_GameStates.Instance.CurState == SC_GameStates.GameState.Tutorial && (int)SC_GameStates.Instance.CurTutoState >= (int)SC_GameStates.TutorialState.StartRepairDisplay) || (SC_GameStates.Instance.CurState != SC_GameStates.GameState.Tutorial && !SC_SyncVar_DisplaySystem.Instance.b_BreakEngine) )
         {
-
             newState = SystemState.Connected;
 
             if((SC_GameStates.Instance.CurState == SC_GameStates.GameState.Tutorial && SC_SyncVar_DisplaySystem.Instance.f_CurNbOfBd == 0) || (SC_GameStates.Instance.CurState != SC_GameStates.GameState.Tutorial && !SC_SyncVar_DisplaySystem.Instance.b_MaxBreakdown))
             {
-                newState = SystemState.Initialize;
-
-                if (SC_SyncVar_DisplaySystem.Instance.b_IsLaunch)
+                if (counterStart >= 2)
                 {
-                    newState = SystemState.Launched;
+                    newState = SystemState.Initialize;
+
+                    if (SC_SyncVar_DisplaySystem.Instance.b_IsLaunch)
+                    {
+                        newState = SystemState.Launched;
+                    }
                 }
+
+                
 
             }
 
@@ -95,6 +112,7 @@ public class SC_Display_MechState : MonoBehaviour
     IEnumerator ApplyState()
     {
 
+        Debug.Log(CurState);
         switch (CurState)
         {
 
@@ -107,6 +125,7 @@ public class SC_Display_MechState : MonoBehaviour
 
             case SystemState.Connected:
 
+                
 
                 SC_TutorialUIManager.Instance.ActivateSystem(SC_TutorialUIManager.System.Display, false);
 
@@ -136,6 +155,7 @@ public class SC_Display_MechState : MonoBehaviour
                 DisconnectedState.SetActive(true);
 
                 yield return new WaitForSeconds(0.1f);
+
                 SC_TutorialUIManager.Instance.ActivateSystem(SC_TutorialUIManager.System.Display, true);
                 SC_TutorialUIManager.Instance.ActivateBlink(SC_TutorialUIManager.System.Display, true);
                 DisconnectedState.SetActive(false);
@@ -143,7 +163,11 @@ public class SC_Display_MechState : MonoBehaviour
                 break;
 
             case SystemState.Initialize:
+
+
+
                 SC_TutorialUIManager.Instance.ActivateSystem(SC_TutorialUIManager.System.Display, true);
+                SC_TutorialUIManager.Instance.ActivateBlink(SC_TutorialUIManager.System.Display, false);
 
                 DisconnectedState.SetActive(false);
 
@@ -160,7 +184,6 @@ public class SC_Display_MechState : MonoBehaviour
             case SystemState.Launched:
                 SC_TutorialUIManager.Instance.ActivateSystem(SC_TutorialUIManager.System.Display, true);
                 SC_TutorialUIManager.Instance.ActivateBlink(SC_TutorialUIManager.System.Display, false);
-
 
                 DisconnectedState.SetActive(false);
                 LaunchedOffState.SetActive(false);

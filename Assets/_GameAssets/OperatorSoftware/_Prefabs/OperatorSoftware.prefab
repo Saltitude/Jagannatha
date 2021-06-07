@@ -1830,6 +1830,7 @@ MonoBehaviour:
   displayState: {fileID: 2026635642809839458}
   weaponState: {fileID: 7452157756086251964}
   motionState: {fileID: 5839367521486041887}
+  matBreakdown: {fileID: 2100000, guid: 88ce785e5a9aa354d975291f072728a5, type: 2}
   PS_RipleTuto:
   - {fileID: 107298908800048544}
   - {fileID: 2598883297283651500}
@@ -11672,92 +11673,92 @@ PrefabInstance:
     - target: {fileID: 7326605314190189556, guid: 5317c8a22e6e4f04cabb839b9748a9ec,
         type: 3}
       propertyPath: m_position.x
-      value: -948.3665
+      value: -891.94244
       objectReference: {fileID: 0}
     - target: {fileID: 7326605314190189556, guid: 5317c8a22e6e4f04cabb839b9748a9ec,
         type: 3}
       propertyPath: m_position.y
-      value: -386.7554
+      value: -369.4372
       objectReference: {fileID: 0}
     - target: {fileID: 7326605314190189556, guid: 5317c8a22e6e4f04cabb839b9748a9ec,
         type: 3}
       propertyPath: m_position.z
-      value: -16.451046
+      value: -15.247692
       objectReference: {fileID: 0}
     - target: {fileID: 7326605314190189556, guid: 5317c8a22e6e4f04cabb839b9748a9ec,
         type: 3}
       propertyPath: m_precedingControlPointPosition.x
-      value: -948.3665
+      value: -891.94244
       objectReference: {fileID: 0}
     - target: {fileID: 7326605314190189556, guid: 5317c8a22e6e4f04cabb839b9748a9ec,
         type: 3}
       propertyPath: m_precedingControlPointPosition.y
-      value: -386.7554
+      value: -369.4372
       objectReference: {fileID: 0}
     - target: {fileID: 7326605314190189556, guid: 5317c8a22e6e4f04cabb839b9748a9ec,
         type: 3}
       propertyPath: m_precedingControlPointPosition.z
-      value: 17.882618
+      value: 16.574543
       objectReference: {fileID: 0}
     - target: {fileID: 7326605314190189556, guid: 5317c8a22e6e4f04cabb839b9748a9ec,
         type: 3}
       propertyPath: m_followingControlPointPosition.x
-      value: -948.3665
+      value: -891.94244
       objectReference: {fileID: 0}
     - target: {fileID: 7326605314190189556, guid: 5317c8a22e6e4f04cabb839b9748a9ec,
         type: 3}
       propertyPath: m_followingControlPointPosition.y
-      value: -386.75537
+      value: -369.4372
       objectReference: {fileID: 0}
     - target: {fileID: 7326605314190189556, guid: 5317c8a22e6e4f04cabb839b9748a9ec,
         type: 3}
       propertyPath: m_followingControlPointPosition.z
-      value: -50.784725
+      value: -47.069897
       objectReference: {fileID: 0}
     - target: {fileID: 7326605315145075565, guid: 5317c8a22e6e4f04cabb839b9748a9ec,
         type: 3}
       propertyPath: m_position.x
-      value: -925.63184
+      value: -870.8708
       objectReference: {fileID: 0}
     - target: {fileID: 7326605315145075565, guid: 5317c8a22e6e4f04cabb839b9748a9ec,
         type: 3}
       propertyPath: m_position.y
-      value: -386.7554
+      value: -369.4372
       objectReference: {fileID: 0}
     - target: {fileID: 7326605315145075565, guid: 5317c8a22e6e4f04cabb839b9748a9ec,
         type: 3}
       propertyPath: m_position.z
-      value: -16.451046
+      value: -15.247692
       objectReference: {fileID: 0}
     - target: {fileID: 7326605315145075565, guid: 5317c8a22e6e4f04cabb839b9748a9ec,
         type: 3}
       propertyPath: m_precedingControlPointPosition.x
-      value: -925.63184
+      value: -870.8708
       objectReference: {fileID: 0}
     - target: {fileID: 7326605315145075565, guid: 5317c8a22e6e4f04cabb839b9748a9ec,
         type: 3}
       propertyPath: m_precedingControlPointPosition.y
-      value: -386.75537
+      value: -369.4372
       objectReference: {fileID: 0}
     - target: {fileID: 7326605315145075565, guid: 5317c8a22e6e4f04cabb839b9748a9ec,
         type: 3}
       propertyPath: m_precedingControlPointPosition.z
-      value: -50.784725
+      value: -47.069897
       objectReference: {fileID: 0}
     - target: {fileID: 7326605315145075565, guid: 5317c8a22e6e4f04cabb839b9748a9ec,
         type: 3}
       propertyPath: m_followingControlPointPosition.x
-      value: -925.63184
+      value: -870.8708
       objectReference: {fileID: 0}
     - target: {fileID: 7326605315145075565, guid: 5317c8a22e6e4f04cabb839b9748a9ec,
         type: 3}
       propertyPath: m_followingControlPointPosition.y
-      value: -386.7554
+      value: -369.4372
       objectReference: {fileID: 0}
     - target: {fileID: 7326605315145075565, guid: 5317c8a22e6e4f04cabb839b9748a9ec,
         type: 3}
       propertyPath: m_followingControlPointPosition.z
-      value: 17.882618
+      value: 16.574543
       objectReference: {fileID: 0}
     - target: {fileID: 7393730238618761584, guid: 5317c8a22e6e4f04cabb839b9748a9ec,
         type: 3}

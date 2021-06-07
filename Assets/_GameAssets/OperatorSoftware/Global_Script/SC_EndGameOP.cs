@@ -35,16 +35,16 @@ public class SC_EndGameOP : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
-    {
+    //void Update()
+    //{
 
-        if (Input.GetKeyDown(KeyCode.F11))
-            InGameDisplay();
+    //    //if (Input.GetKeyDown(KeyCode.F11))
+    //    //    InGameDisplay();
 
-        if (Input.GetKeyDown(KeyCode.F12))
-            EndGameDisplay();
+    //    //if (Input.GetKeyDown(KeyCode.F12))
+    //    //    EndGameDisplay();
 
-    }
+    //}
 
     public void InGameDisplay()
     {
@@ -73,6 +73,8 @@ public class SC_EndGameOP : MonoBehaviour
         {
             tab_InGame[i].SetActive(false);
         }
+
+        SC_UI_OngletContainer.Instance.EndScreenUnzoom();
 
     }  
 

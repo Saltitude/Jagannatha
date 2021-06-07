@@ -89,6 +89,9 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 3c32cc2eb2c41ce4c929bec14f6a46b7, type: 2}
   Progress: {fileID: 0}
   curPhaseIndex: 0
+  textUpload: {fileID: 0}
+  fillBarUpload: {fileID: 0}
+  fillBarMaterialEnd: {fileID: 2100000, guid: ac313af3f0f1c4a4ab1c3b7719a98465, type: 2}
 --- !u!114 &7258514576438775
 MonoBehaviour:
   m_ObjectHideFlags: 0
