@@ -16,8 +16,8 @@ public class SC_UI_OngletContainer : MonoBehaviour
     //[SerializeField]
     public GameObject[] system;
 
-    [SerializeField]
-    Camera camHub;
+    //[SerializeField]
+    //Camera camHub;
 
     Transform camHubTransformStart;
     public enum Window
@@ -80,7 +80,7 @@ public class SC_UI_OngletContainer : MonoBehaviour
     {
         particleFB = particleFB.GetComponent<RectTransform>();
 
-        camHubTransformStart = camHub.transform;
+        //camHubTransformStart = camHub.transform;
 
     }
 
